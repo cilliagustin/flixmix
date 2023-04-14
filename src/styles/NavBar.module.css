@@ -1,0 +1,107 @@
+.NavBar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    max-width: 40px;
+    background: red;
+    transition: .8s all ease-in-out;
+}
+
+.Open{
+    max-width: 100vw;
+}
+
+.LogoContainer{
+    position: absolute;
+    z-index: 3;
+    top: -40px;
+    left: -40px;
+    width: 92px;
+    height: 92px;
+    background: orange;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    border-radius: 0 0% 50% 0%;
+    overflow: hidden;
+}
+
+.LogoContainer img{
+    width: 40px;
+    height: 40px;
+    margin: 0  6px 6px 0;
+}
+
+.ButtonContainer{
+    position: absolute;
+    z-index: 2;
+    top: 56px;
+    left: -4px;
+    width: 56px;
+    height: 52px;
+    background: purple;
+    border-radius: 0 50% 50% 0%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.ButtonContainer button{
+    height: 40px;
+    width: 40px;
+    border: none;
+    background: pink;
+    position: relative;
+    margin-right: 6px;
+}
+
+.ButtonContainer button:focus-visible{
+    outline-width: 0;
+}
+
+.ButtonContainer button span{
+    position: absolute;
+    background: white;
+    left: 10px;
+    top: 8px;
+    height: 4px;
+    width: 20px;
+    border-radius: 3px;
+    transition: .5s all ease-in;
+}
+
+.ButtonContainer button span:nth-child(2){
+    top: 18px;
+    left: 5px;
+    width: 30px;
+}
+
+.ButtonContainer button span:last-child{
+    top: 28px;
+}
+
+.Open .ButtonContainer button span:first-child{
+    transform: rotate(-45deg);
+    top: 14px;
+    width: 10px;
+    left: 18px;
+}
+
+.Open .ButtonContainer button span:nth-child(2){
+    transform: rotate(45deg);
+    top: 18px;
+    width: 20px;
+    left: 10px;
+}
+
+.Open .ButtonContainer button span:last-child{
+    transform: rotate(-45deg);
+    top: 21px;
+    width: 10px;
+    left: 11px;
+}
+
+

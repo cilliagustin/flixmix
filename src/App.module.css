@@ -1,4 +1,9 @@
 .App{
+    /* Temporary style */
     height: 200vh;
-    background-color: linear-gradient(#d7e664, #91e5a0 , #37326d);
+    background: linear-gradient(#d7e664, #91e5a0 , #37326d);
+}
+
+.Main{
+    background: red;
 }
