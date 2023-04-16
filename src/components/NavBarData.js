@@ -48,7 +48,7 @@ export const NavBarData = [
         iconSubNav:<i className={'fa-solid fa-angle-down'}></i>,
         subNav:[
             {
-                title: 'movie',
+                title: 'you',
                 path: '/activity',
             },
             {

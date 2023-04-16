@@ -23,10 +23,14 @@
     overflow: hidden;
 }
 
-.LogoContainer img{
+.LogoContainer img:first-child{
     width: 40px;
     height: 40px;
     margin: 0  6px 6px 0;
+}
+
+.FullLogoContainer{
+    display: none;
 }
 
 .ButtonContainer{
@@ -42,6 +46,11 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    transition: var(--transition-08s);
+}
+
+.ButtonContainerHide{
+    left: -70px;
 }
 
 .ButtonContainer button{
@@ -104,6 +113,7 @@
     width: 0px;
     overflow: hidden;
     transition: var(--transition-08s);
+    position: relative;
 }
 .SubmenuWrapper > div{
     padding: 40px 0;
@@ -125,4 +135,60 @@
 }
 
 
+@media only screen and (min-width: 768px){
 
+    .LogoContainer{
+        z-index: 2;
+        top: 10px;
+        left: 12px;
+        width: auto;
+        height: auto;
+        display: inline;
+        border-radius: 0;
+    }
+    .LogoContainer img{
+        margin: 0;
+    }
+
+    .FullLogoContainer{
+        display: inline;
+        position: absolute;
+        top: 10px;
+        left: 13vw;
+    }
+
+    .FullLogoContainer img{
+       width: 16vw;
+       height: auto;
+    }
+
+    .SubmenuWrapper{
+        width: 72px;
+    }
+
+    .ButtonContainer{
+        left: 42px;
+        top: 4px;
+        border-radius: 50%;
+        justify-content: center;
+        z-index: 3;
+        transform: scale(.7);
+    }
+
+    .ButtonContainer button{
+        margin: 0;
+    }
+
+    .Open .ButtonContainer{
+        left: calc(40vw - 28px);
+    }
+
+    .SubmenuWrapper > div{
+        width: 40vw;
+        padding-top: 55px;
+    }
+
+    .Open .SubmenuWrapper{
+        width: 40vw;
+    }
+}

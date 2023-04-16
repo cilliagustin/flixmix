@@ -20,20 +20,25 @@ const NavBarSubMenu = ({ item }) => {
     <>
       <NavLink
         className={`${styles.Link} ${submenu && styles.Open}`}
+        activeClassName={styles.Active}
+        exact
         to={item.path}
-        onClick={showSubMenu}
+        onClick={item.subNav && showSubMenu}
       >
         <div className={styles.MainLink}>
           {item.icon}
           <span>{item.title}</span>
           {item.iconSubNav}
         </div>
+      </NavLink>
         <div className={`${styles.Dropdown} ${submenu && styles.Open}`}>
           {item.subNav?.map((el, idx) => {
             return (
               <NavLink
+                exact
                 key={idx}
                 className={styles.DropdownLink}
+                activeClassName={styles.DropdownLinkActive}
                 to={el.path}
                 onClick={(e) => handleLinkClick(e)}
               >
@@ -42,7 +47,6 @@ const NavBarSubMenu = ({ item }) => {
             )
           })}
         </div>
-      </NavLink>
     </>
   )
 }
