@@ -2,6 +2,8 @@ import styles from './App.module.css';
 import NavBar from './components/NavBar'
 import { Route, Switch } from "react-router-dom";
 import Container from "react-bootstrap/Container";
+import './api/axiosDefaults';
+import LogInRegister from './pages/auth/LogInRegister';
 
 
 
@@ -20,8 +22,9 @@ function App() {
           <Route exact path="/activity" render={() => <h1>your activity</h1>} />
           <Route exact path="/activity/followed" render={() => <h1>followed activity</h1>} />
           <Route exact path="/profile" render={() => <h1>profile</h1>} />
-          <Route exact path="/log_in_register" render={() => <h1>Log in register</h1>} />
+          <Route exact path="/log_in_register" render={() => <LogInRegister />} />
           <Route exact path="/log_out" render={() => <h1>Log out</h1>} />
+          <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>
     </div>

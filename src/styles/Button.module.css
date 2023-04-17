@@ -1,0 +1,13 @@
+.Button{
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 120px;
+    border-radius: 20px;
+    background: linear-gradient(to left, var(--purple-2), var(--purple-4));
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--white);
+}

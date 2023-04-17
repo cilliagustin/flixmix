@@ -1,0 +1,40 @@
+.FormContainer{
+    background: pink;
+    min-height: 100vh;
+    max-width: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.Forms{
+    width: 100%;
+    background: green;
+    min-height: 400px;
+    position: relative;
+}
+
+.FormCard{
+    width: 100%;
+    height: 100%;
+    background-color: yellow;
+    position: absolute;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.Form{
+    width: 100%;
+    height: 100%;
+    background: red;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+@media only screen and (min-width: 768px){
+    
+}
