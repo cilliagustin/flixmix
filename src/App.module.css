@@ -11,11 +11,16 @@
 }
 
 .App{
+    min-height: 100vh;
+    font-family: "Open Sans", sans-serif;
     /* Temporary style */
-    height: 200vh;
     background: linear-gradient(#d7e664, #91e5a0 , #37326d);
 }
 
-.Main{
-    background: red;
+
+
+@media only screen and (min-width: 768px){
+    .Main {
+        padding-left: 72px;
+      }
 }
