@@ -1,7 +1,6 @@
 .FormContainer{
-    background: pink;
     min-height: 100vh;
-    max-width: 700px;
+    max-width: 540px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,31 +9,199 @@
 
 .Forms{
     width: 100%;
-    background: green;
-    min-height: 400px;
+    min-height: 500px;
     position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.Forms h2{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    padding: 20px 0 30px;
+    font-size: 2.8rem;
+    color: var(--black);
 }
 
 .FormCard{
     width: 100%;
     height: 100%;
-    background-color: yellow;
+    padding: 5px 0;
+    background-color: var(--white-1);
     position: absolute;
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
     align-items: center;
 }
+
 .Form{
     width: 100%;
     height: 100%;
-    background: red;
     display: flex;
     flex-flow: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 }
 
+.FormGroup{
+    width: 70%;
+}
+
+.Input {
+    background: var(--white-2);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.Form button{
+    margin: auto 0 10px;
+}
+
+.FormCard span{
+    color: var(--grey-1);
+    font-weight: 500;
+    text-align: center;
+    margin: 20px 0 40px;
+}
+
+.FormCardRegister{
+    position: absolute;
+    z-index: 2;
+    transition: var(--transition-08s);
+    right: -100%;
+    background: var(--gradient);
+}
+
+.ShowRegister .FormCardRegister{
+    right: 0%;
+}
+
+.FormCardRegister h2{
+    color: var(--white-1);
+}
+
+.FormCardRegister .Form button{
+    background: none;
+    border: 2px solid var(--white-1);
+    color: var(--white-1);
+}
+
+.FormCardRegister span{
+    color: var(--white-1);
+}
+
+.FormCardRegister span button{
+    font-weight: 500;
+}
+
+.Overlay{
+    display: none;
+}
+
 @media only screen and (min-width: 768px){
+    .FormCard,
+    .FormCardRegister{
+        width: 50%;
+        background: var(--white-1);
+    }
+
     
+    .FormCardRegister{
+        right: 0%;
+    }
+    
+    .Forms h2{
+        margin: 30px 0 ;
+        color: var(--black);
+    }
+
+    .Form{
+        padding-bottom: 40px;
+    }
+    
+    .FormCardRegister .Form button{
+        border: none;
+        background: linear-gradient(to left, var(--purple-2), var(--purple-4));
+        color: var(--white-1)
+    }
+
+    .FormCard span{
+        display: none;
+    }
+
+    .Overlay{
+        background: var(--gradient);
+        height: 100%;
+        width: 51%;
+        position: absolute;
+        z-index: 3;
+        display: flex;
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: center;
+        left: 50%;
+        animation: hideRegisterAnimation 1.1s forwards;
+        text-align: center;
+        padding-bottom: 55px;
+    }
+
+    .Overlay h3{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 2.8rem;
+        color: var(--white-1);
+        padding: 50px 0 65px;
+    }
+
+    .Overlay p{
+        color: var(--white-1);
+        padding: 0 15px;
+    }
+
+    .Overlay p:nth-child(3){
+        margin-bottom: auto;
+    }
+
+    .ShowRegister .Overlay{
+        animation: showRegisterAnimation .8s forwards;
+    }
+}
+
+
+@keyframes showRegisterAnimation{
+    0%{
+        left: 50%; 
+    }
+    50%{
+        left: 0%;
+        width: 100%; 
+    }
+    60%{
+        left: 0%;
+        width: 100%; 
+    }
+    100%{
+        width: 50%;
+        left: 0%;}
+}
+
+@keyframes hideRegisterAnimation{
+    0%{
+        left: 0%; 
+    }
+    50%{
+        left: 0%;
+        width: 100%; 
+    }
+    60%{
+        left: 0%;
+        width: 100%; 
+    }
+    100%{
+        width: 50%;
+        left: 50%;}
 }

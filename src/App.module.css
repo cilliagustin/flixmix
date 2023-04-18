@@ -4,17 +4,23 @@
     --purple-3: rgb(148, 145, 246);
     --purple-4: rgb(152, 149, 237);
     --purple-5: rgb(187, 186, 243);
-    --white: rgb(245, 245, 245);
+    --white-1: rgb(245, 245, 245);
+    --white-2: rgb(238, 238, 238);
     --black: rgb(18,18,18);
+    --grey-1: rgb(116,116,116);
 
     --transition-08s:.8s all ease-in-out;
+    --shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    --gradient: 
+        linear-gradient(to right bottom, rgba(141, 177, 255, 0.7), rgba(217, 141, 255, 0.29)),
+        linear-gradient(to right top, rgba(255, 141, 255, 0.4), rgba(255, 141, 145, 0.1) 40%),
+        linear-gradient(to right, var(--purple-3), var(--purple-3));
 }
 
 .App{
     min-height: 100vh;
     font-family: "Open Sans", sans-serif;
-    /* Temporary style */
-    background: linear-gradient(#d7e664, #91e5a0 , #37326d);
+    background: var(--white-2);
 }
 
 

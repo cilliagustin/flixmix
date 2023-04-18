@@ -9,5 +9,23 @@
     background: linear-gradient(to left, var(--purple-2), var(--purple-4));
     text-transform: uppercase;
     font-weight: 500;
-    color: var(--white);
+    color: var(--white-1);
+}
+
+.Inverted{
+    background: none;
+    border: 2px solid var(--white-1);
+    color: var(--white-1);
+}
+
+.ButtonLink{
+    height: auto;
+    width: auto;
+    background: none;
+    border: none;
+    text-decoration: underline;
+    color: inherit;
+    font-weight: 700;
+    padding: 0;
+    margin: 0;
 }
