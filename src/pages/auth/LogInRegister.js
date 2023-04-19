@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
 import { handleInputChange } from '../../utils/utils';
 import styles from '../../styles/LogInRegister.module.css'
 import btnStyles from '../../styles/Button.module.css'
@@ -15,9 +14,30 @@ const LogInRegister = () => {
   const changeForm  = () => {
     setShowRegister(!showRegister)
     setTimeout(()=>{
-      setRegisterData({registerUsername: "",registerPassword1: "",registerPassword2: "",})
+      setRegisterData({registerUsername: "",registerPassword1: "",registerPassword2: ""})
+      setLogInData({logInUsername: "", logInPassword: ""})
     },800)
   };
+
+  //handle Login form
+  const [logInData, setLogInData] = useState({
+    logInUsername: "",
+    logInPassword: "",
+  });
+  const { logInUsername, logInPassword } = logInData;
+  const [logInErrors, setLogInErrors] = useState({});
+  const handleLogInSubmit = async (event) => {
+    event.preventDefault();
+    const logInSubmitObj = {username: logInUsername, password: logInPassword}
+    console.log(logInSubmitObj)
+    try {
+      await axios.post("/dj-rest-auth/login/", logInSubmitObj);
+      history.push("/");
+    } catch (err) {
+      setLogInErrors(err.response?.data);
+      console.log(logInErrors)
+    }
+  }
 
   //handle register form
   const [registerData, setRegisterData] = useState({
@@ -63,31 +83,50 @@ const LogInRegister = () => {
           <div className={`${styles.Forms} ${showRegister && styles.ShowRegister}`}>
             <div className={styles.FormCard}>
               <h2>Log In</h2>
-              <Form className={styles.Form}>
-                <Form.Group className={styles.FormGroup} controlId="log_in_username">
+              <Form className={styles.Form} onSubmit={handleLogInSubmit}>
+                <Form.Group className={styles.FormGroup} controlId="logInUsername">
                   <Form.Label className="d-none">username</Form.Label>
                   <Form.Control
                     className={styles.Input}
                     type="text"
                     placeholder="Username"
-                    name="log_in_username"
+                    name="logInUsername"
+                    value={logInUsername}
+                    onChange={(event) => handleInputChange(event, logInData, setLogInData)}
                   />
                 </Form.Group>
-                <Form.Group className={styles.FormGroup} controlId="log_in_password1">
+                {logInErrors.username?.map((message, idx) => (
+                  <Alert variant="warning" key={idx}>
+                    {message}
+                  </Alert>
+                ))}
+                <Form.Group className={styles.FormGroup} controlId="logInPassword">
                   <Form.Label className="d-none">Password</Form.Label>
                   <Form.Control
                     className={styles.Input}
                     type="password"
                     placeholder="Password"
-                    name="log_in_password1"
+                    name="logInPassword"
+                    value={logInPassword}
+                    onChange={(event) => handleInputChange(event, logInData, setLogInData)}
                   />
                 </Form.Group>
+                {logInErrors.password?.map((message, idx) => (
+                  <Alert variant="warning" key={idx}>
+                    {message}
+                  </Alert>
+                ))}
                 <button
                   className={`${btnStyles.Button}`}
                   type="submit"
                 >
                   submit
                 </button>
+                {logInErrors.non_field_errors?.map((message, idx) => (
+                  <Alert variant="warning" key={idx}>
+                    {message}
+                  </Alert>
+                ))}
               </Form>
               <span>You don´t have an account yet?<br></br>Click <button onClick={changeForm} className={btnStyles.ButtonLink}>here</button> to register</span>
             </div>
