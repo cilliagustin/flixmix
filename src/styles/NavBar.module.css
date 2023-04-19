@@ -18,7 +18,7 @@
     left: -40px;
     width: 92px;
     height: 92px;
-    background: var(--purple-1);
+    background: var(--purple-3);
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
@@ -43,7 +43,7 @@
     left: -4px;
     width: 56px;
     height: 52px;
-    background: var(--purple-1);
+    background: var(--purple-3);
     border-radius: 0 50% 50% 0%;
     overflow: hidden;
     display: flex;
@@ -90,6 +90,10 @@
     top: 28px;
 }
 
+.Open .ButtonContainer{
+    transform: rotate(180deg);
+}
+
 .Open .ButtonContainer button span:first-child{
     transform: rotate(-45deg);
     top: 14px;
@@ -121,7 +125,7 @@
 .SubmenuWrapper > div{
     padding: 40px 0;
     height: 100%;
-    background: var(--purple-1);
+    background: var(--gradient-2);
     width: 100vw;
     display: flex;
     justify-content: flex-start;

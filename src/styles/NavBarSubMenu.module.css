@@ -18,7 +18,7 @@
 .MainLink:hover,
 .Open .MainLink,
 .Active{
-    background: var(--purple-2);
+    background: rgba(101, 101, 101, 0.1);
 }
 
 .MainLink *{
