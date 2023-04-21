@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import logo from '../assets/logo_placeholder.png';
 import logo2 from '../assets/logo_placeholder2.png';
 import { NavLink } from 'react-router-dom'
@@ -6,11 +6,11 @@ import styles from '../styles/NavBar.module.css'
 import {NavBarData} from './NavBarData'
 import NavBarSubMenu from './NavBarSubMenu';
 import UseScrollDirection from './UseScrollDirection';
-import { CurrentUserContext } from '../App';
+import { useCurrentUser } from '../contexts/CurrentUserContext';
 
 const NavBar = () => {
 
-  const currentUser = useContext(CurrentUserContext)
+  const currentUser = useCurrentUser()
   console.log(currentUser)
 
   const generalLinks = NavBarData.map((item,index)=>{

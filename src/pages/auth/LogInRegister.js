@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { handleInputChange } from '../../utils/utils';
 import styles from '../../styles/LogInRegister.module.css'
 import btnStyles from '../../styles/Button.module.css'
@@ -6,11 +6,11 @@ import { Form, Col, Row, Container } from "react-bootstrap";
 import Alert from '../../components/Alert';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { SetCurrentUserContext } from '../../App';
+import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
 
 const LogInRegister = () => {
   //user context
-  const setCurrentUser = useContext(SetCurrentUserContext)
+  const setCurrentUser = useSetCurrentUser()
 
 
   //history
