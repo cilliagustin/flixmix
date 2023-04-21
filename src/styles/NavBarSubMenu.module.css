@@ -6,13 +6,13 @@
 
 .MainLink{
     height: 45px;
-    width: 60vw;
+    width: 65vw;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     transition: var(--transition-08s);
-    border-bottom: 3px solid var(--white-1);
+
 }
 
 .MainLink:hover,
@@ -83,13 +83,6 @@
 @media only screen and (min-width: 768px){
     .MainLink{
         width: 40vw;
-        border-bottom: none;
-        /* height: 45px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        transition: var(--transition-08s);*/
     }
 
     .MainLink i:first-child{

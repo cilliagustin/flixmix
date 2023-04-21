@@ -39,9 +39,9 @@
 .ButtonContainer{
     position: absolute;
     z-index: 12;
-    top: 56px;
-    left: -4px;
-    width: 56px;
+    top: 0px;
+    left: 15px;
+    width: 80px;
     height: 52px;
     background: var(--purple-3);
     border-radius: 0 50% 50% 0%;
@@ -56,6 +56,10 @@
     left: -70px;
 }
 
+.Open .ButtonContainerHide{
+    left: 15px;
+}
+
 .ButtonContainer button{
     height: 40px;
     width: 40px;
@@ -63,6 +67,7 @@
     background: none;
     position: relative;
     margin-right: 6px;
+    transition: var(--transition-08s);
 }
 
 .ButtonContainer button:focus-visible{
@@ -91,6 +96,10 @@
 }
 
 .Open .ButtonContainer{
+    background: none;
+}
+
+.Open .ButtonContainer button{
     transform: rotate(180deg);
 }
 
@@ -123,10 +132,10 @@
     position: relative;
 }
 .SubmenuWrapper > div{
-    padding: 40px 0;
+    padding: 60px 0;
     height: 100%;
     background: var(--gradient-2);
-    width: 100vw;
+    width: 65vw;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -139,6 +148,13 @@
 
 .Open .SubmenuWrapper{
     width: 100vw;
+}
+
+.Profile{
+    position: absolute;
+    z-index: 100;
+    bottom: 12px;
+    left: 12px;
 }
 
 
@@ -174,7 +190,8 @@
     }
 
     .ButtonContainer{
-        left: 42px;
+        width: 52px;
+        left: 46px;
         top: 4px;
         border-radius: 50%;
         justify-content: center;
@@ -188,6 +205,7 @@
 
     .Open .ButtonContainer{
         left: calc(40vw - 28px);
+        background: var(--purple-3);
     }
 
     .SubmenuWrapper > div{
