@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from '../styles/Alert.module.css'
 
 function getAlertData(alertType) {
@@ -16,34 +16,14 @@ function getAlertData(alertType) {
     }
   }
 
-const Alert = ({type, errors }) => {
+const Alert = ({type, errors, active }) => {
     const { class: alertClass, title: alertTitle, icon: alertIcon } = getAlertData(type);
-    const [activeAlert, setActiveAlert] = useState(false);
-    const [alertCount, setAlertCount] = useState(0);
+    const hasDefinedMessage = errors.some((error) => error.message !== undefined);
 
-    useEffect(() => {
-      const hasDefinedMessage = errors.some((error) => error.message !== undefined);
-      if (hasDefinedMessage) {
-        setAlertCount((prevCount) => prevCount + 1);
-        const currentAlertCount = alertCount;
-        setActiveAlert(true);
-        const timeout = setTimeout(() => {
-          if (alertCount === currentAlertCount) {
-            setActiveAlert(false);
-          }
-        }, 5000);
-  
-        return () => {
-          clearTimeout(timeout);
-        };
-      } else {
-        setActiveAlert(false);
-      }
-    }, [errors]);
 
   return (
     <>
-    {activeAlert && (
+    {active && hasDefinedMessage && (
         <div className={`${styles.AlertContainer} ${styles[alertClass]}`}>
             <div className={styles.Content}>
                 <h4>{alertIcon}{alertTitle}</h4>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { handleInputChange } from '../../utils/utils';
 import styles from '../../styles/LogInRegister.module.css'
 import btnStyles from '../../styles/Button.module.css'
@@ -6,8 +6,14 @@ import { Form, Col, Row, Container } from "react-bootstrap";
 import Alert from '../../components/Alert';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { SetCurrentUserContext } from '../../App';
 
 const LogInRegister = () => {
+  //user context
+  const setCurrentuser = useContext(SetCurrentUserContext)
+
+
+  //history
   const history = useHistory()
 
   //handle Login form
@@ -23,10 +29,12 @@ const LogInRegister = () => {
     setRegisterErrors({});
     const logInSubmitObj = { username: logInUsername, password: logInPassword }
     try {
-      await axios.post("/dj-rest-auth/login/", logInSubmitObj);
+      const {data} = await axios.post("/dj-rest-auth/login/", logInSubmitObj);
+      console.log(data.user)
       history.push("/");
     } catch (err) {
       setLogInErrors(err.response?.data);
+      createAlert()
     }
   }
 
@@ -48,6 +56,7 @@ const LogInRegister = () => {
       changeForm();
     } catch (err) {
       setRegisterErrors(err.response?.data);
+      createAlert()
     }
   }
 
@@ -76,7 +85,9 @@ const LogInRegister = () => {
     <button onClick={changeForm} className={`${btnStyles.Button} ${btnStyles.Inverted}`}>Log In</button>
   </>
 
-  //Errors
+  //Errors and alert
+  const [timeout, setTimeoutId] = useState(null);
+  const [activeAlert, setActiveAlert] = useState(false);
   const allErrors = [
     {title: "registration form username", message: registerErrors.username}, 
     {title: "registration form password", message: registerErrors.password1}, 
@@ -86,12 +97,23 @@ const LogInRegister = () => {
     {title: "log in form password", message: logInErrors.password}, 
     {title: "log in form", message: logInErrors.non_field_errors}
   ]
+  const createAlert = () => {
+    if (timeout) {
+      clearTimeout(timeout);
+      setTimeoutId(null);
+    }
+    setActiveAlert(true);
+    const newTimeout = setTimeout(() => {
+      setActiveAlert(false);
+    }, 5000);
+    setTimeoutId(newTimeout);
+  };
 
 
 
   return (
     <>
-      <Alert type="warning" errors={allErrors} />
+      <Alert type="warning" errors={allErrors} active={activeAlert} />
       <Row>
         <Col className='my-auto' xs={{ span: 10, offset: 1 }}>
           <Container className={styles.FormContainer}>
