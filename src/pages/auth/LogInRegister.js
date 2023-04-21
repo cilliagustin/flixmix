@@ -78,10 +78,10 @@ const LogInRegister = () => {
 
   //Errors
   const allErrors = [
-    {title: "register form username", message: registerErrors.username}, 
-    {title: "register form password", message: registerErrors.password1}, 
-    {title: "register form confirm password", message: registerErrors.password2}, 
-    {title: "register form", message: registerErrors.non_field_errors},  
+    {title: "registration form username", message: registerErrors.username}, 
+    {title: "registration form password", message: registerErrors.password1}, 
+    {title: "registration form password confirmation", message: registerErrors.password2}, 
+    {title: "registration form", message: registerErrors.non_field_errors},  
     {title: "log in form username", message: logInErrors.username}, 
     {title: "log in form password", message: logInErrors.password}, 
     {title: "log in form", message: logInErrors.non_field_errors}
