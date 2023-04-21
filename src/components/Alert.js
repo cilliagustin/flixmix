@@ -19,23 +19,27 @@ function getAlertData(alertType) {
 const Alert = ({type, errors }) => {
     const { class: alertClass, title: alertTitle, icon: alertIcon } = getAlertData(type);
     const [activeAlert, setActiveAlert] = useState(false);
+    const [alertCount, setAlertCount] = useState(0);
 
-    useEffect(()=>{
-        const hasDefinedMessage = errors.some((error) => error.message !== undefined);
-        hasDefinedMessage
-        ? (() => {
-            setActiveAlert(true);
-            const timeout = setTimeout(() => {
-                setActiveAlert(false);
-            }, 5000);
-
-            return () => {
-                clearTimeout(timeout);
-            };
-            })()
-        : setActiveAlert(false);
-        
-    },[errors])
+    useEffect(() => {
+      const hasDefinedMessage = errors.some((error) => error.message !== undefined);
+      if (hasDefinedMessage) {
+        setAlertCount((prevCount) => prevCount + 1);
+        const currentAlertCount = alertCount;
+        setActiveAlert(true);
+        const timeout = setTimeout(() => {
+          if (alertCount === currentAlertCount) {
+            setActiveAlert(false);
+          }
+        }, 5000);
+  
+        return () => {
+          clearTimeout(timeout);
+        };
+      } else {
+        setActiveAlert(false);
+      }
+    }, [errors]);
 
   return (
     <>
