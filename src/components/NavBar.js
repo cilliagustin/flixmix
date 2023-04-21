@@ -7,10 +7,12 @@ import {NavBarData} from './NavBarData'
 import NavBarSubMenu from './NavBarSubMenu';
 import UseScrollDirection from './UseScrollDirection';
 import { useCurrentUser } from '../contexts/CurrentUserContext';
+import Avatar from './Avatar';
 
 const NavBar = () => {
 
   const currentUser = useCurrentUser()
+  console.log(currentUser?.profile_image)
   console.log(currentUser)
 
   const generalLinks = NavBarData.map((item,index)=>{
@@ -60,7 +62,7 @@ const NavBar = () => {
         
         <div className={`
           ${styles.ButtonContainer}
-          ${!scrollUp && styles.ButtonContainerHide}
+          ${scrollUp && styles.ButtonContainerHide}
         `}>
           <button onClick={showNavBar}>
             <span></span>
@@ -70,13 +72,23 @@ const NavBar = () => {
         </div>
         <div className={styles.SubmenuWrapper}>
             <NavLink to="/">
-            <div className={styles.FullLogoContainer}>
-              <img src={logo2} alt="Brand full name logo"></img>
-            </div>
-          </NavLink>
+              <div className={styles.FullLogoContainer}>
+                <img src={logo2} alt="Brand full name logo"></img>
+              </div>
+            </NavLink>
           <div>
             {generalLinks}
             {currentUser ? loggedInLinks : loggedOutLinks}
+            <div className={styles.Profile}>
+              <NavLink to={`/profiles/${currentUser?.profile_id}`}>
+                <Avatar 
+                  src={currentUser?.profile_image} 
+                  height={45}
+                  id={currentUser?.profile_id}
+                  username={null}
+                />
+              </NavLink>
+            </div>
           </div>
         </div>
       </nav>
