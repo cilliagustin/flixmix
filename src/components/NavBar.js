@@ -79,16 +79,17 @@ const NavBar = () => {
           <div>
             {generalLinks}
             {currentUser ? loggedInLinks : loggedOutLinks}
+            {currentUser && 
             <div className={styles.Profile}>
-              <NavLink to={`/profiles/${currentUser?.profile_id}`}>
                 <Avatar 
                   src={currentUser?.profile_image} 
                   height={45}
                   id={currentUser?.profile_id}
                   username={null}
                 />
-              </NavLink>
             </div>
+            }
+
           </div>
         </div>
       </nav>

@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom'
 import styles from '../styles/NavBarSubMenu.module.css'
+import axios from 'axios';
+import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 
 const NavBarSubMenu = ({ item, last }) => {
+
+  const currentUser = useCurrentUser()
+  const setCurrentUser = useSetCurrentUser();
 
   const [submenu, setSubMenu] = useState(false);
 
@@ -16,6 +21,17 @@ const NavBarSubMenu = ({ item, last }) => {
     }
   }
 
+  const handleSignOut = async () => {
+    try {
+      await axios.post("dj-rest-auth/logout/");
+      setCurrentUser(null);
+      console.log(currentUser)
+    } catch (err) {
+      console.log(currentUser)
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <NavLink
@@ -23,7 +39,13 @@ const NavBarSubMenu = ({ item, last }) => {
         activeClassName={styles.Active}
         exact
         to={item.path}
-        onClick={item.subNav && showSubMenu}
+        onClick={() => {
+          if (item.subNav) {
+            showSubMenu();
+          } else if (item.authIconLink && item.loggedInRequired) {
+            handleSignOut();
+          }
+        }}
       >
         <div className={styles.MainLink}>
           {item.icon}
