@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import logo from '../assets/logo_placeholder.png';
 import logo2 from '../assets/logo_placeholder2.png';
 import { NavLink } from 'react-router-dom'
@@ -6,8 +6,41 @@ import styles from '../styles/NavBar.module.css'
 import {NavBarData} from './NavBarData'
 import NavBarSubMenu from './NavBarSubMenu';
 import UseScrollDirection from './UseScrollDirection';
+import { CurrentUserContext } from '../App';
 
 const NavBar = () => {
+
+  const currentUser = useContext(CurrentUserContext)
+  console.log(currentUser)
+
+  const generalLinks = NavBarData.map((item,index)=>{
+    if(item.generalLink === true){
+      return <NavBarSubMenu 
+                item={item} 
+                key={index} 
+              />
+    }
+  })
+
+  const loggedInLinks = NavBarData.map((item,index)=>{
+    if(item.loggedInRequired === true){
+      return <NavBarSubMenu 
+                item={item} 
+                key={index} 
+                last={item.authIconLink === true}
+              />
+    }
+  })
+
+  const loggedOutLinks = NavBarData.map((item,index)=>{
+    if(item.loggedInRequired === false){
+      return <NavBarSubMenu 
+                item={item} 
+                key={index}
+                last={item.authIconLink === true}
+              />
+    }
+  })
 
   const [hidden, setHidden] = useState(true);
 
@@ -42,12 +75,8 @@ const NavBar = () => {
             </div>
           </NavLink>
           <div>
-            {NavBarData.map((item,index)=>{
-              return <NavBarSubMenu 
-                        item={item} 
-                        key={index} 
-                      />
-            })}
+            {generalLinks}
+            {currentUser ? loggedInLinks : loggedOutLinks}
           </div>
         </div>
       </nav>

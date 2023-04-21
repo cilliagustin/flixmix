@@ -26,6 +26,11 @@
     color: var(--white-1);
 }
 
+.AuthLink{
+    background: red!important;
+    margin-top: auto;
+}
+
 .MainLink span{
     text-transform: capitalize;
     margin-left: 10px;

@@ -10,7 +10,7 @@ import { SetCurrentUserContext } from '../../App';
 
 const LogInRegister = () => {
   //user context
-  const setCurrentuser = useContext(SetCurrentUserContext)
+  const setCurrentUser = useContext(SetCurrentUserContext)
 
 
   //history
@@ -30,7 +30,7 @@ const LogInRegister = () => {
     const logInSubmitObj = { username: logInUsername, password: logInPassword }
     try {
       const {data} = await axios.post("/dj-rest-auth/login/", logInSubmitObj);
-      console.log(data.user)
+      setCurrentUser(data.user)
       history.push("/");
     } catch (err) {
       setLogInErrors(err.response?.data);

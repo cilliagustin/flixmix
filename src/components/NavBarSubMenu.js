@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom'
 import styles from '../styles/NavBarSubMenu.module.css'
 
-const NavBarSubMenu = ({ item }) => {
+const NavBarSubMenu = ({ item, last }) => {
 
   const [submenu, setSubMenu] = useState(false);
 
@@ -19,7 +19,7 @@ const NavBarSubMenu = ({ item }) => {
   return (
     <>
       <NavLink
-        className={`${styles.Link} ${submenu && styles.Open}`}
+        className={`${styles.Link} ${submenu && styles.Open} ${last && styles.AuthLink}`}
         activeClassName={styles.Active}
         exact
         to={item.path}
