@@ -9,6 +9,13 @@
     color: var(--white-1);
 }
 
+.BigButton{
+    width: 191px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .Inverted{
     background: none;
     border: 2px solid var(--white-1);
