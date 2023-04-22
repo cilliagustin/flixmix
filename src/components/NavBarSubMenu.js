@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom'
 import styles from '../styles/NavBarSubMenu.module.css'
 import axios from 'axios';
-import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
+import { useSetCurrentUser } from '../contexts/CurrentUserContext';
 
 const NavBarSubMenu = ({ item, last }) => {
 
-  const currentUser = useCurrentUser()
   const setCurrentUser = useSetCurrentUser();
 
   const [submenu, setSubMenu] = useState(false);
@@ -25,9 +24,7 @@ const NavBarSubMenu = ({ item, last }) => {
     try {
       await axios.post("dj-rest-auth/logout/");
       setCurrentUser(null);
-      console.log(currentUser)
     } catch (err) {
-      console.log(currentUser)
       console.log(err);
     }
   };

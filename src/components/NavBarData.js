@@ -82,7 +82,7 @@ export const NavBarData = [
     },
     {
         title: 'log out',
-        path: '/log_out',
+        path: '/',
         icon: <i className={'fa-solid fa-arrow-right-from-bracket'}></i>,
         loggedInRequired: true,
         authIconLink: true

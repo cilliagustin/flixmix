@@ -12,8 +12,6 @@ import Avatar from './Avatar';
 const NavBar = () => {
 
   const currentUser = useCurrentUser()
-  console.log(currentUser?.profile_image)
-  console.log(currentUser)
 
   const generalLinks = NavBarData.map((item,index)=>{
     if(item.generalLink === true){
