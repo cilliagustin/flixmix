@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import './api/axiosDefaults';
 import LogInRegister from './pages/auth/LogInRegister';
+import MovieCreateForm from './pages/movies/MovieCreateForm';
 
 function App() {
   
@@ -18,7 +19,7 @@ function App() {
               <Route exact path="/search/movie" render={() => <h1>search movie</h1>} />
               <Route exact path="/search/review" render={() => <h1>search review</h1>} />
               <Route exact path="/search/list" render={() => <h1>search list</h1>} />
-              <Route exact path="/add/movie" render={() => <h1>add movie</h1>} />
+              <Route exact path="/add/movie" render={() => <MovieCreateForm />} />
               <Route exact path="/add/list" render={() => <h1>add list</h1>} />
               <Route exact path="/activity" render={() => <h1>your activity</h1>} />
               <Route exact path="/activity/followed" render={() => <h1>followed activity</h1>} />

@@ -8,6 +8,7 @@
     --white-2: rgb(238, 238, 238);
     --black: rgb(18,18,18);
     --grey-1: rgb(116,116,116);
+    --grey-2:rgb(50, 49, 49);
 
     --transition-08s:.8s all ease-in-out;
     --shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -28,6 +29,9 @@
     min-height: 200vh;
 }
 
+.TextArea{
+    resize: none;
+}
 
 
 @media only screen and (min-width: 768px){

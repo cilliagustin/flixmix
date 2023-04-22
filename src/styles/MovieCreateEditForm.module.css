@@ -1,0 +1,19 @@
+.Container {
+    min-height: 343px;
+}
+
+.ColContainer{
+    background: var(--white);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: var(--shadow);
+    height: 100%;
+}
+
+.Input{
+    background: var(--white-2);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
