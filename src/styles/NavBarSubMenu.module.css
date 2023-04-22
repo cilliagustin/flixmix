@@ -46,7 +46,7 @@
 }
 
 .Dropdown{
-    width: 60vw;
+    width: 65vw;
     height: auto;
     max-height: 0px;
     transition: max-height 0.8s ease-out;

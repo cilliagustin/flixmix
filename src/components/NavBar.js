@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import logo from '../assets/logo_placeholder.png';
-import logo2 from '../assets/logo_placeholder2.png';
+import logo from '../assets/logo.png';
+import logo2 from '../assets/flixmix.png';
 import { NavLink } from 'react-router-dom'
 import styles from '../styles/NavBar.module.css'
 import {NavBarData} from './NavBarData'

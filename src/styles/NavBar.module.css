@@ -40,8 +40,8 @@
     position: absolute;
     z-index: 12;
     top: 0px;
-    left: 15px;
-    width: 80px;
+    left: 5px;
+    width: 95px;
     height: 52px;
     background: var(--purple-3);
     border-radius: 0 50% 50% 0%;
@@ -176,12 +176,12 @@
     .FullLogoContainer{
         display: inline;
         position: absolute;
-        top: 10px;
-        left: 13vw;
+        top: 12px;
+        left: 14vw;
     }
 
     .FullLogoContainer img{
-       width: 16vw;
+       width: 14vw;
        height: auto;
     }
 
