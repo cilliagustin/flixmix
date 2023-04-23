@@ -1,5 +1,5 @@
 .AlertContainer{
-    position: absolute;
+    position: fixed;
     top: 20px;
     left: calc(50vw - 140px);
     z-index: 20;
