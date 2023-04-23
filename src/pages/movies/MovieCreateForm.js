@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+
+import { axiosReq } from '../../api/axiosDefaults'
 
 import { Form, Col, Row, Container } from "react-bootstrap";
 
@@ -8,10 +10,10 @@ import styles from "../../styles/MovieCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import Alert from "../../components/Alert";
 
 function MovieCreateForm() {
-
-    const [errors, setErrors] = useState({});
 
     const [movieData, setMovieData] = useState({
         title: "",
@@ -24,22 +26,77 @@ function MovieCreateForm() {
     });
     const { title, synopsis, directors, main_cast, release_year, movie_genre, image } = movieData;
 
-    const handleChange = (event) => {
-        URL.revokeObjectURL(image)
-        setMovieData({
-          ...movieData,
-          [event.target.name]: event.target.value,
-        });
-      };
+    const imageInput = useRef(null)
+    const history = useHistory()
 
-      const handleChangeImage = (event) => {
-        if(event.target.files.length){
+    const handleChange = (event) => {
+        setMovieData({
+            ...movieData,
+            [event.target.name]: event.target.value,
+        });
+    };
+
+    const handleChangeImage = (event) => {
+        if (event.target.files.length) {
+            URL.revokeObjectURL(image);
             setMovieData({
                 ...movieData,
-                image: URL.createObjectURL(event.target.files[0])
-            })
+                image: URL.createObjectURL(event.target.files[0]),
+            });
         }
-      }
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const formData = new FormData();
+
+        formData.append('title', title);
+        formData.append('synopsis', synopsis);
+        formData.append('directors', directors);
+        formData.append('main_cast', main_cast);
+        formData.append('release_year', release_year);
+        formData.append('movie_genre', movie_genre);
+        formData.append("poster", imageInput.current.files[0]);
+
+
+        try {
+            const { data } = await axiosReq.post("/movies/", formData);
+            history.push(`/movies/${data.id}`);
+        } catch (err) {
+            console.log(err)
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data);
+                createAlert()
+            }
+        }
+    }
+
+    
+    //Errors and alert
+    const [errors, setErrors] = useState({});
+    const [timeout, setTimeoutId] = useState(null);
+    const [activeAlert, setActiveAlert] = useState(false);
+    const allErrors = [
+        { title: "Movie title", message: errors.title },
+        { title: "Movie synopsis", message: errors.synopsis },
+        { title: "Movie director", message: errors.directors },
+        { title: "Movie cast", message: errors.main_cast },
+        { title: "Movie release year", message: errors.release_year },
+        { title: "Movie genre", message: errors.movie_genre },
+        { title: "Movie image", message: errors.poster },
+    ]
+    const createAlert = () => {
+        if (timeout) {
+          clearTimeout(timeout);
+          setTimeoutId(null);
+          setActiveAlert(false);
+        }
+        setActiveAlert(true);
+        const newTimeout = setTimeout(() => {
+          setActiveAlert(false);
+        }, 5000);
+        setTimeoutId(newTimeout);
+      };
 
     const textFields = (
         <div className={`text-center`}>
@@ -127,7 +184,7 @@ function MovieCreateForm() {
 
             <button
                 className={`${btnStyles.Button} mx-1`}
-                onClick={() => { }}
+                onClick={() => { history.goBack() }}
             >
                 cancel
             </button>
@@ -139,7 +196,8 @@ function MovieCreateForm() {
 
     return (
         <>
-            <Form>
+        <Alert  type="warning" errors={allErrors} active={activeAlert} />
+            <Form onSubmit={handleSubmit}>
                 <Row>
                     <Col className="py-2 p-0 p-md-2" md={{ span: 7, order: 2 }}>
                         <Container
@@ -147,33 +205,34 @@ function MovieCreateForm() {
                         >
                             <Form.Group className="text-center h-100">
                                 {image ? (
-                                        <div className={`${styles.SelectedImageContainer} p4`}>
-                                            <div className={styles.ImageContainer}>
-                                                <img src={image}></img>
-                                            </div>
-                                            <div className={styles.ButtonContainer}>
-                                                <Form.Label
+                                    <div className={`${styles.SelectedImageContainer} p4`}>
+                                        <div className={styles.ImageContainer}>
+                                            <img src={image}></img>
+                                        </div>
+                                        <div className={styles.ButtonContainer}>
+                                            <Form.Label
                                                 className={`${btnStyles.Button} ${btnStyles.BigButton}`}
                                                 htmlFor="image-upload"
-                                                >
+                                            >
                                                 Change the image
-                                                </Form.Label>
-                                            </div>
+                                            </Form.Label>
                                         </div>
+                                    </div>
                                 ) : (
-                                <Form.Label
-                                    className="d-flex justify-content-center"
-                                    htmlFor="image-upload"
-                                >
-                                    <Asset src={Upload} message={"Click or tap to upload an image"} />
-                                </Form.Label>
+                                    <Form.Label
+                                        className="d-flex justify-content-center"
+                                        htmlFor="image-upload"
+                                    >
+                                        <Asset src={Upload} message={"Click or tap to upload an image"} />
+                                    </Form.Label>
                                 )}
-                                
-                                <Form.File 
-                                    id="image-upload" 
-                                    accept="image/" 
+
+                                <Form.File
+                                    id="image-upload"
+                                    accept="image/"
                                     onChange={handleChangeImage}
                                     className="d-none"
+                                    ref={imageInput}
                                 />
 
                             </Form.Group>
