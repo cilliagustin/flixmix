@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import './api/axiosDefaults';
 import LogInRegister from './pages/auth/LogInRegister';
 import MovieCreateForm from './pages/movies/MovieCreateForm';
+import MoviePage from './pages/movies/MoviePage';
 
 function App() {
   
@@ -21,6 +22,7 @@ function App() {
               <Route exact path="/search/list" render={() => <h1>search list</h1>} />
               <Route exact path="/add/movie" render={() => <MovieCreateForm />} />
               <Route exact path="/add/list" render={() => <h1>add list</h1>} />
+              <Route exact path="/movies/:id" render={() => <MoviePage />} />
               <Route exact path="/activity" render={() => <h1>your activity</h1>} />
               <Route exact path="/activity/followed" render={() => <h1>followed activity</h1>} />
               <Route exact path="/profile" render={() => <h1>profile</h1>} />
