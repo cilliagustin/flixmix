@@ -8,6 +8,7 @@ import Container from "react-bootstrap/Container";
 
 import appStyles from "../../App.module.css";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import Movie from "./Movie";
 
 function MoviePage() {
     const { id } = useParams()
@@ -33,7 +34,7 @@ function MoviePage() {
   return (
     <Row className="h-100">
       <Col>
-        <p>Post component</p>
+        <Movie {...movie.results[0]} setMovies={setMovie} />
         <Container className={appStyles.Content}>
           Comments
         </Container>

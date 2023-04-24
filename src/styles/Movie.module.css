@@ -1,0 +1,86 @@
+.Movie{
+    background: red;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.Header{
+    margin-top: 50px;
+    width: 100%;
+    background: var(--gradient-3);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.PosterContainer{
+    width: 40%;
+    padding: 15px;
+    transition: var(--transition-08s);
+}
+
+.FullScreen{
+    background: yellow;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+}
+
+.PosterContainer img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 5px;
+    mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
+    cursor: pointer;
+}
+
+.InfoContainer{
+    width: 60%;
+    padding: 15px;
+    color: var(--white);
+}
+
+.InfoContainer h1{
+    font-family: 'Work Sans', sans-serif;
+    font-size: clamp(16px, 6vw, 80px);
+}
+
+.InfoContainer h1::first-letter{
+    text-transform: capitalize;
+}
+
+.InfoContainer p{
+    font-size: clamp(.8rem, 6vw, 1.1rem);
+    color: var(--translucid-white);
+    font-weight: 600;
+}
+
+.InfoContainer p span{
+    font-weight: 300;
+    text-transform: capitalize;
+}
+
+
+@media only screen and (min-width: 768px){
+
+    .Header{
+        padding: 20px 0;
+    }
+
+    .PosterContainer img{
+        max-height: 400px;
+    }
+
+    .InfoContainer p{
+        font-size: 1.3rem;
+    }
+}

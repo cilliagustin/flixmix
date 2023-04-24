@@ -6,6 +6,7 @@
     --purple-5: rgb(187, 186, 243);
     --white-1: rgb(245, 245, 245);
     --white-2: rgb(238, 238, 238);
+    --translucid-white: rgba(238, 238, 238, 0.8);
     --black: rgb(18,18,18);
     --grey-1: rgb(116,116,116);
     --grey-2:rgb(50, 49, 49);
@@ -19,6 +20,11 @@
     --gradient-2: 
         linear-gradient(to bottom, var(--purple-3) 70px, rgba(148, 145, 246, 0) 150px),
         var(--gradient);
+    --gradient-3: 
+    radial-gradient(at bottom left , rgba(158, 255, 141, 0.2), rgba(141, 255, 236, 0.1) 50%, rgba(141, 255, 236, 0) 80%),
+    linear-gradient(to right bottom, rgba(141, 177, 255, 0.7), rgba(217, 141, 255, 0.29)),
+    radial-gradient(at top right , rgba(255, 141, 255, 0.4), rgba(255, 141, 145, 0.1) 40%),
+    linear-gradient(to right, var(--purple-2), var(--purple-2));
 }
 
 .App{
