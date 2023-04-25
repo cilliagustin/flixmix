@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 import styles from '../../styles/Movie.module.css'
 
 const Movie = (props) => {
+
+    const [fullScreen, setFullScreen] = useState(false);
+
+    const handleFullScreen = ()=> setFullScreen(!fullScreen)
 
     const { 
         id,
@@ -36,8 +40,12 @@ const Movie = (props) => {
   return (
     <>
         <div className={`${styles.Header} d-flex`}>
-            <div className={`${styles.PosterContainer} d-flex align-items-center justify-content-center`}> 
-                <img src={poster} alt={`${title} movie poster`} />
+            <div className={`${styles.PosterContainer} ${fullScreen && styles.FullScreen} d-flex align-items-center justify-content-center`}> 
+                <img 
+                src={poster} 
+                alt={`${title} movie poster`} 
+                onClick={handleFullScreen}
+            />
             </div>
             <div className={styles.InfoContainer}> 
                 <h1>{title}</h1>

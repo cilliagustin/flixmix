@@ -9,49 +9,53 @@
 }
 
 .Header{
-    margin-top: 50px;
     width: 100%;
     background: var(--gradient-3);
-    border-radius: 10px;
+    border-radius:0 0 10px 10px;
     overflow: hidden;
     box-shadow: var(--shadow);
+    flex-wrap: wrap;
 }
 
 .PosterContainer{
-    width: 40%;
-    padding: 15px;
+    width: 100vw;
+    position: relative;
+    height: 120vw;
+    overflow: hidden;
     transition: var(--transition-08s);
 }
 
-.FullScreen{
-    background: yellow;
-    position: fixed;
-    top: 0;
+.PosterContainer:before{
+    position: absolute;
+    content: "";
+    bottom: 0;
     left: 0;
-    z-index: 100;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 30%;
+    z-index: 1;
+    background: linear-gradient(to top, var(--purple-3) 20%, rgba(148, 145, 246, 0));
 }
 
+
+
 .PosterContainer img{
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
+    width: 100%;
+    position: absolute;
+    top: 0;
     overflow: hidden;
-    border-radius: 5px;
-    mask-image: linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,1) 30%);
     cursor: pointer;
 }
 
 .InfoContainer{
-    width: 60%;
+    width: 100%;
     padding: 15px;
     color: var(--white);
+    background: var(--gradient-4);
 }
 
 .InfoContainer h1{
     font-family: 'Work Sans', sans-serif;
-    font-size: clamp(16px, 6vw, 80px);
+    font-size: clamp(60px, 6vw, 80px);
 }
 
 .InfoContainer h1::first-letter{
@@ -59,13 +63,13 @@
 }
 
 .InfoContainer p{
-    font-size: clamp(.8rem, 6vw, 1.1rem);
+    font-size: clamp(1.1rem, 6vw, 1.1rem);
     color: var(--translucid-white);
     font-weight: 600;
 }
 
 .InfoContainer p span{
-    font-weight: 300;
+    font-weight: 500;
     text-transform: capitalize;
 }
 
@@ -73,14 +77,64 @@
 @media only screen and (min-width: 768px){
 
     .Header{
-        padding: 20px 0;
+        margin: 50px auto 0px auto;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        padding: 20px;
+        max-width: 1000px;
+        width: calc(100% - 20px);
+        flex-wrap: nowrap;
+    }
+
+    .PosterContainer{
+        width: fit-content;
+        height: auto;
+    }
+    .PosterContainer:before{
+        display: none;
     }
 
     .PosterContainer img{
-        max-height: 400px;
+        height: 100%;
+        position: relative;
+        border-radius: 5px;
+        width: auto;
+    }
+
+    .InfoContainer{
+        width: 100%;
+        padding-left: 10px;
+        background: none;
     }
 
     .InfoContainer p{
         font-size: 1.3rem;
     }
+}
+
+
+.FullScreen{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background: var(--gradient-3);
+    padding: 5px;
+    transition: all 0s;
+
+}
+
+.FullScreen::before{
+    display: none;
+}
+
+.FullScreen img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    position: relative;
+    border-radius: 5px;
 }

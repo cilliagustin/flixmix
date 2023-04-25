@@ -32,8 +32,8 @@ function MoviePage() {
 
 
   return (
-    <Row className="h-100">
-      <Col>
+    <Row className="h-100 mx-0">
+      <Col className="p-0">
         <Movie {...movie.results[0]} setMovies={setMovie} />
         <Container className={appStyles.Content}>
           Comments
