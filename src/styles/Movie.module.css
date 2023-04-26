@@ -1,5 +1,4 @@
 .Movie{
-    background: red;
     width: 100%;
     height: 100%;
     display: flex;
@@ -51,11 +50,18 @@
     padding: 15px;
     color: var(--white);
     background: var(--gradient-4);
+    display: flex;
+    flex-flow: column;
 }
 
 .InfoContainer h1{
     font-family: 'Work Sans', sans-serif;
     font-size: clamp(60px, 6vw, 80px);
+}
+
+.InfoContainer h1 span{
+    color: var(--translucid-white);
+    font-size: clamp(45px, 6vw, 65px);
 }
 
 .InfoContainer h1::first-letter{
@@ -71,6 +77,60 @@
 .InfoContainer p span{
     font-weight: 500;
     text-transform: capitalize;
+}
+
+.InfoContainer .IconsWrapper{
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.InfoContainer .IconsWrapper .Icon{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 30%;
+    max-width: 100px;
+    min-height: 50px;
+    margin-right: 5px;
+    color: var(--translucid-white);
+}
+
+.InfoContainer .IconsWrapper .Icon i{
+    font-size: 3.2rem;
+    min-height: 3.5rem;
+}
+
+.InfoContainer .IconsWrapper .Icon p{
+    text-align: center;
+    font-size: 1rem;
+}
+
+.Body{
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 30px;
+    font-size: 1.1rem;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.Body .Credits{
+    margin-left: auto;
+    width: fit-content;
+}
+
+.Body .Credits p,
+.Body .Credits p a{
+    color: var(--grey-2);
+}
+
+.Body .Credits p{
+    display: inline-block;
+    font-size: .8rem;
+    margin-right: 10px;
+    margin-bottom: 0px;
 }
 
 
@@ -96,7 +156,7 @@
     }
 
     .PosterContainer img{
-        height: 100%;
+        max-height: 100%;
         position: relative;
         border-radius: 5px;
         width: auto;
@@ -110,6 +170,16 @@
 
     .InfoContainer p{
         font-size: 1.3rem;
+    }
+
+    .InfoContainer .IconsWrapper{
+        justify-content: flex-start;
+    }
+
+    .Body{
+        width: calc(100% - 20px);
+        margin: 30px auto 0 auto;
+        color: var(--grey-2);
     }
 }
 
@@ -132,9 +202,22 @@
 }
 
 .FullScreen img{
+    z-index: 2;
     max-width: 100%;
     max-height: 100%;
+    width: auto;
+    height: auto;
     object-fit: cover;
     position: relative;
     border-radius: 5px;
+}
+
+.FullScreen .PosterOverlay{
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    filter: blur(.4rem);
+    opacity: .6;
 }
