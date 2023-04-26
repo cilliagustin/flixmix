@@ -9,6 +9,7 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 import styles from '../../styles/Movie.module.css'
 import appStyles from '../../App.module.css'
+import { axiosRes } from '../../api/axiosDefaults';
 
 const Movie = (props) => {
 
@@ -37,13 +38,83 @@ const Movie = (props) => {
         poster,
         release_year,
         release_decade,
+        setMovies,
     } = props;
 
     const currentUser = useCurrentUser();
 
-     
+    const handleSeen = async ()=>{
+        try {
+            const {data} = await axiosRes.post('/seen/', {movie:id});
+            setMovies((prevMovies)=>({
+                ...prevMovies,
+                results: prevMovies.results.map((movie)=>{
+                    return movie.id === id
+                    ? {...movie, seen_count: movie.seen_count + 1, seen_id: data.id}
+                    : movie;
+                })
+            }))
+            
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
+    const handleUnSeen = async ()=>{
+        try {
+            await axiosRes.delete(`/seen/${seen_id}`);
+            setMovies((prevMovies)=>({
+                ...prevMovies,
+                results: prevMovies.results.map((movie)=>{
+                    return movie.id === id
+                    ? {...movie, seen_count: movie.seen_count - 1, seen_id: null}
+                    : movie;
+                })
+            }))
+            
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const handleWatchlist = async ()=>{
+        try {
+            const {data} = await axiosRes.post('/watchlist/', {movie:id});
+            setMovies((prevMovies)=>({
+                ...prevMovies,
+                results: prevMovies.results.map((movie)=>{
+                    return movie.id === id
+                    ? {...movie, watchlist_count: movie.watchlist_count + 1, watchlist_id: data.id}
+                    : movie;
+                })
+            }))
+            
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const handleUnWatchlist = async ()=>{
+        try {
+            await axiosRes.delete(`/watchlist/${watchlist_id}`);
+            setMovies((prevMovies)=>({
+                ...prevMovies,
+                results: prevMovies.results.map((movie)=>{
+                    return movie.id === id
+                    ? {...movie, watchlist_count: movie.watchlist_count - 1, watchlist_id: null}
+                    : movie;
+                })
+            }))
+            
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+     
   return (
+
+
     <>
         <div className={`${styles.Header} d-flex`}>
             <div className={`${styles.PosterContainer} ${fullScreen && styles.FullScreen} d-flex align-items-center justify-content-center`}> 
@@ -70,12 +141,15 @@ const Movie = (props) => {
                     <div className={styles.Icon}>
                         {seen_id ? (
                             // already seen
-                            <span className={appStyles.Green}>
+                            <span 
+                            onClick={handleUnSeen}
+                                className={appStyles.Green}
+                            >
                                 <i className="fa-solid fa-eye"></i>
                             </span>
                         ): currentUser ? (
                             // logged not seen
-                            <span>
+                            <span onClick={handleSeen}>
                                 <i className="fa-regular fa-eye"></i>
                             </span>
                         ): (
@@ -87,17 +161,22 @@ const Movie = (props) => {
                                 <i className="fa-regular fa-eye"></i>
                             </OverlayTrigger>
                         )}
-                        <p>Seen by {seen_count} users</p>
+                        <p>Seen by {seen_count} {seen_count !== 1 ? "users" : "user"}</p>
                     </div>
                     <div className={styles.Icon}>
                         {watchlist_id ? (
                             // in the watchlist
-                            <span className={appStyles.Green}>
+                            <span
+                                onClick={handleUnWatchlist}
+                                className={appStyles.Green}
+                            >
                                 <i className="fa-solid fa-bookmark"></i>
                             </span>
                         ): currentUser ? (
                             // logged but not in watchlist
-                            <span>
+                            <span
+                                onClick={handleWatchlist}
+                            >
                                 <i className="fa-regular fa-bookmark"></i>
                             </span>
                         ): (
