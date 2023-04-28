@@ -1,0 +1,83 @@
+.Header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    min-height: 20px;
+    background: var(--purple-2);
+}
+.HeaderImg{
+    min-width: 100%;
+    width: auto;
+    height: 70vh;
+    object-fit: cover;
+    mask-image: linear-gradient(rgba(0, 0, 0, .95)40%, rgba(0, 0, 0, .3) 80%, rgba(0, 0, 0, 0));
+}
+
+.TitleContainer{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 15px 10px;
+}
+
+.TitleContainer img{
+    width: 80%;
+    max-width: 600px;
+    margin-bottom: 10px;
+}
+
+.TitleContainer h1{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--translucid-white);
+    font-size: 1.3rem;
+}
+
+
+.MoviesTitle{
+    background: var(--purple-2);
+    height: 100%;
+    position: relative;
+}
+
+.MoviesTitle::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    background: var(--purple-2);
+    bottom: -80%;
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+
+.Movies h2{
+    padding-top: 30px ;
+    color: var(--translucid-white);
+    font-size: 1.3rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+}
+
+
+
+
+
+
+
+@media only screen and (min-width: 768px){
+    .TitleContainer h1{
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        color: var(--translucid-white);
+        font-size: 1.7rem;
+    }
+}

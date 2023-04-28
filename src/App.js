@@ -6,6 +6,7 @@ import './api/axiosDefaults';
 import LogInRegister from './pages/auth/LogInRegister';
 import MovieCreateForm from './pages/movies/MovieCreateForm';
 import MoviePage from './pages/movies/MoviePage';
+import Home from './pages/home/Home';
 
 function App() {
   
@@ -16,7 +17,7 @@ function App() {
           <NavBar />
           <Container className={styles.Main}>
             <Switch>
-              <Route exact path="/" render={() => <h1>Home page</h1>} />
+              <Route exact path="/" render={() => <Home />} />
               <Route exact path="/search/movie" render={() => <h1>search movie</h1>} />
               <Route exact path="/search/review" render={() => <h1>search review</h1>} />
               <Route exact path="/search/list" render={() => <h1>search list</h1>} />
