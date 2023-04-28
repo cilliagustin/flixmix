@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
 import { OverlayTrigger, Tooltip} from "react-bootstrap";
@@ -50,8 +50,14 @@ const Movie = (props) => {
                 ...prevMovies,
                 results: prevMovies.results.map((movie)=>{
                     return movie.id === id
-                    ? {...movie, seen_count: movie.seen_count + 1, seen_id: data.id}
+                    ? (
+                        (movie.watchlist_id !== null)
+                          ? {...movie, seen_count: movie.seen_count + 1, seen_id: data.id, watchlist_count: movie.watchlist_count - 1, watchlist_id:null}
+                          : {...movie, seen_count: movie.seen_count + 1, seen_id: data.id}
+                      )
                     : movie;
+
+                    
                 })
             }))
             
@@ -84,7 +90,11 @@ const Movie = (props) => {
                 ...prevMovies,
                 results: prevMovies.results.map((movie)=>{
                     return movie.id === id
-                    ? {...movie, watchlist_count: movie.watchlist_count + 1, watchlist_id: data.id}
+                    ? (
+                        (movie.seen_id !== null)
+                          ? {...movie, watchlist_count: movie.watchlist_count + 1, watchlist_id: data.id, seen_count: movie.seen_count - 1, seen_id:null}
+                          : {...movie, watchlist_count: movie.watchlist_count + 1, watchlist_id: data.id}
+                      )
                     : movie;
                 })
             }))
