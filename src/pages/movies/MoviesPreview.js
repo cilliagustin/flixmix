@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min'
+import { Link, useLocation } from 'react-router-dom/cjs/react-router-dom.min'
 import {axiosReq} from '../../api/axiosDefaults'
 import MoviePreviewCard from './MoviePreviewCard'
 import styles from '../../styles/MoviesPreview.module.css'
+import { Container } from "react-bootstrap";
+import NoResults from '../../assets/no-results.png'
+import Asset from '../../components/Asset'
 
 const MoviesPreview = ({message, filter = ""}) => {
     const [movies, setMovies] = useState({results: []})
@@ -33,13 +36,18 @@ const MoviesPreview = ({message, filter = ""}) => {
                     {movies.results.map((movie) => (
                         <MoviePreviewCard  key={movie.id} {...movie} setMovies={setMovies}/>
                     ))}
+                    <Link to="/movies/">View all Movies <i class="fa-solid fa-arrow-right"></i></Link>
                 </div>
                 ) : (          
-                console.log("show no results")
+                <Container>
+                    <Asset src={NoResults} message={message} />
+                </Container>
             )}
             </>
         ) : (
-            console.log("has not loaded")
+            <Container>
+                <Asset spinner />
+            </Container>
     )}
     </>
   )

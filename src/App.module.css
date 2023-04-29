@@ -42,7 +42,6 @@ body{
     min-height: 100vh;
     font-family: "Open Sans", sans-serif;
     background: var(--white-2);
-    min-height: 200vh;
     margin: 0;
     padding: 0;
 }
