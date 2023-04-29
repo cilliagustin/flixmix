@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
 import { OverlayTrigger, Tooltip} from "react-bootstrap";
@@ -18,27 +18,12 @@ const Movie = (props) => {
     const handleFullScreen = ()=> setFullScreen(!fullScreen)
 
     const { 
-        id,
-        owner,
-        profile_id,
-        profile_image,
-        rating_count,
-        list_count,
-        seen_count,
-        seen_id,
-        watchlist_count,
-        watchlist_id,
-        created_at,
-        updated_at,
-        title,
-        synopsis,
-        directors,
-        main_cast,
-        movie_genre,
-        poster,
-        release_year,
-        release_decade,
-        setMovies,
+        id, owner, profile_id, profile_image,  list_count,
+        seen_count, seen_id, watchlist_count, watchlist_id, 
+        title, synopsis, directors, main_cast,  movie_genre,
+        poster, release_year, setMovies,
+
+        // rating_count,created_at,updated_at,release_decade,
     } = props;
 
     const currentUser = useCurrentUser();

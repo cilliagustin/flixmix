@@ -207,7 +207,7 @@ function MovieCreateForm() {
                                 {image ? (
                                     <div className={`${styles.SelectedImageContainer} p4`}>
                                         <div className={styles.ImageContainer}>
-                                            <img src={image}></img>
+                                            <img src={image} alt="preview poster"></img>
                                         </div>
                                         <div className={styles.ButtonContainer}>
                                             <Form.Label

@@ -1,8 +1,9 @@
 import React from 'react'
 import styles from '../../styles/Home.module.css'
-import { Col, Row, Container } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import header from '../../assets/header.jpg'
 import flixmix from '../../assets/flixmix_purple.png'
+import MoviesPreview from '../movies/MoviesPreview';
 
 const Home = () => {
   return (
@@ -20,6 +21,9 @@ const Home = () => {
             <Col className={`${styles.Movies} px-0`}>
                 <div className={styles.MoviesTitle}>
                     <h2>Latest Movies added</h2>
+                </div>
+                <div className={styles.LatestMovies}>
+                    <MoviesPreview message="No result found adjust your search" />
                 </div>
             </Col>
         </Row> 

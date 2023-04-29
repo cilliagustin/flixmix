@@ -195,7 +195,6 @@
     background: var(--gradient-3);
     padding: 5px;
     transition: all 0s;
-
 }
 
 .FullScreen::before{

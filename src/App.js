@@ -7,8 +7,12 @@ import LogInRegister from './pages/auth/LogInRegister';
 import MovieCreateForm from './pages/movies/MovieCreateForm';
 import MoviePage from './pages/movies/MoviePage';
 import Home from './pages/home/Home';
+import { useCurrentUser } from './contexts/CurrentUserContext';
 
 function App() {
+
+  const currentUser = useCurrentUser();
+  const profile_id = currentUser?.profile_id || "";
   
 
   return (
