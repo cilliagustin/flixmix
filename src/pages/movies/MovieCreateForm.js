@@ -198,7 +198,7 @@ function MovieCreateForm() {
         <>
         <Alert  type="warning" errors={allErrors} active={activeAlert} />
             <Form onSubmit={handleSubmit}>
-                <Row>
+                <Row className="mx-0">
                     <Col className="py-2 p-0 p-md-2" md={{ span: 7, order: 2 }}>
                         <Container
                             className={`${styles.ColContainer} d-flex flex-column justify-content-center`}

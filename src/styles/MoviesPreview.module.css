@@ -7,21 +7,6 @@
     padding: 10px;
 }
 
-.Container > a {
-    margin-left: auto;
-    color: var(--black);
-    font-size: 1.2rem;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    text-align: center;
-    grid-column: 1 / -1;
-    color: var(--purple-1);
-}
-
-.Container > a:hover{
-    text-decoration: none;
-}
-
 @media only screen and (min-width: 768px){
     .Container{
         grid-template-columns: repeat(5, 1fr);

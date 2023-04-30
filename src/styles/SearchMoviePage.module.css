@@ -1,0 +1,55 @@
+.Form{
+    position: relative;
+    margin-top: 50px;
+}
+
+.SearchBar,
+.Select{
+    outline: none;
+    padding-left: 2rem;
+    border-radius: 50px;
+    border: 1px solid var(--purple-4);
+    border-radius: 50px;
+    background: var(--white);
+}
+
+.SearchBar:focus{
+    border-color: none;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(162, 121, 238, 0.25);
+}
+
+
+.SearchIcon{
+    position: absolute;
+    top: 0%;
+    left: 8px;
+    z-index: 2;
+    transform: translateY(40%);
+    font-size: 1.3rem;
+    color: var(--purple-1);
+    transition: all .2s ease-in;
+}
+
+.Radio{
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.Radio input{
+    display: none;
+}
+
+.Radio label{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: var(--grey);
+    font-size: .6rem;
+}
+
+.Radio input:checked ~ label{
+    color: var(--purple-1);
+}
+
+

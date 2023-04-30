@@ -23,7 +23,15 @@ const Home = () => {
                     <h2>Latest Movies added</h2>
                 </div>
                 <div className={styles.LatestMovies}>
-                    <MoviesPreview message="No result found adjust your search" />
+                    <MoviesPreview message="No movies yet here" />
+                </div>
+            </Col>
+        </Row>
+        <Row className="mx-0">
+            <Col className={`${styles.Reviews} px-0`}>
+                <h2>Latest Reviews</h2>
+                <div className={styles.LatestReviews}>
+                    reviews
                 </div>
             </Col>
         </Row> 
