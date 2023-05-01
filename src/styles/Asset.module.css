@@ -11,3 +11,7 @@
     width: 90%;
     border-radius: 10px;
   }
+
+  .SpinnerContainer{
+    grid-column: 1/-1;
+  }

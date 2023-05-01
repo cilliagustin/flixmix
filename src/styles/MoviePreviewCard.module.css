@@ -60,9 +60,13 @@
 
 .IconContainer{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-flow: column;
+}
+
+.Content .IconContainer:nth-child(4) i{
+    margin-top: 1px;
 }
 
 .IconContainer i{
@@ -72,6 +76,7 @@
 
 .IconContainer p{
     font-size: .9rem;
+    margin-top: auto;
     margin-bottom: .1rem;
 }
 

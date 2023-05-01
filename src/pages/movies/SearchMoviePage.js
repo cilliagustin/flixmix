@@ -78,7 +78,7 @@ const SearchMoviePage = () => {
             ))}
           </Form>
 
-          <MoviesPreview message="No result found adjust your search" query={query} searchParameter={searchParameter} />
+          <MoviesPreview message="No result found adjust your search" query={query} searchParameter={searchParameter} infiniteScroll={true} />
         </Col>
       </Row>
     </Container>

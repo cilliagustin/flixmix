@@ -6,8 +6,10 @@ import styles from '../../styles/MoviesPreview.module.css'
 import { Container } from "react-bootstrap";
 import NoResults from '../../assets/no-results.png'
 import Asset from '../../components/Asset'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { fecthMoreData } from '../../utils/utils'
 
-const MoviesPreview = ({message, filter = "", query = "", searchParameter = ""}) => {
+const MoviesPreview = ({message, filter = "", query = "", searchParameter = "" , infiniteScroll = false}) => {
     const [movies, setMovies] = useState({results: []})
     const [hasLoaded, setHasLoaded] = useState(false)
     const {pathname} = useLocation()
@@ -39,11 +41,29 @@ const MoviesPreview = ({message, filter = "", query = "", searchParameter = ""})
     {hasLoaded ? (
             <>
             {movies.results.length ? (
-                <div className={styles.Container}>
-                    {movies.results.map((movie) => (
-                        <MoviePreviewCard  key={movie.id} {...movie} setMovies={setMovies}/>
-                    ))}
-                </div>
+                <>
+                {infiniteScroll ? (
+                    <div className={styles.InfiniteScrollContainer}>
+                        <InfiniteScroll 
+                            children={
+                                movies.results.map((movie) => (
+                                    <MoviePreviewCard  key={movie.id} {...movie} setMovies={setMovies}/>
+                                ))
+                            }
+                            dataLength={movies.results.length}
+                            loader={<Asset spinner />}
+                            hasMore={!!movies.next}
+                            next={()=> fecthMoreData(movies, setMovies)}
+                        />
+                    </div>
+                ) : (
+                    <div className={styles.Container}>
+                        {movies.results.map((movie) => (
+                            <MoviePreviewCard  key={movie.id} {...movie} setMovies={setMovies}/>
+                        ))}
+                    </div>
+                )}
+                </>
                 ) : (          
                 <Container>
                     <Asset src={NoResults} message={message} />
