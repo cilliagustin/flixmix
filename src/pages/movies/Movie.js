@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 import { OverlayTrigger, Tooltip} from "react-bootstrap";
 
@@ -10,6 +10,7 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import styles from '../../styles/Movie.module.css'
 import appStyles from '../../App.module.css'
 import { axiosRes } from '../../api/axiosDefaults';
+import { MoreDropdown } from '../../components/MoreDropdown';
 
 const Movie = (props) => {
 
@@ -27,6 +28,21 @@ const Movie = (props) => {
     } = props;
 
     const currentUser = useCurrentUser();
+
+    const history = useHistory();
+
+    const handleEdit = ()=>{
+        history.push(`/movies/${id}/edit`)
+    }
+
+    const handleDelete = async () => {
+        try {
+          await axiosRes.delete(`/movies/${id}/`);
+          history.goBack();
+        } catch (err) {
+          console.log(err);
+        }
+      };
 
     const handleSeen = async ()=>{
         try {
@@ -190,6 +206,9 @@ const Movie = (props) => {
                         <p>Appears in {list_count} lists</p>
                     </div>
                 </div>
+            </div>
+            <div className={styles.DropdownContainer}>
+                <MoreDropdown handleEdit={handleEdit} handleDelete={handleDelete} />
             </div>
         </div>
         <div className={styles.Body}>

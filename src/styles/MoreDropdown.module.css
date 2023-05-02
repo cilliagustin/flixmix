@@ -1,0 +1,36 @@
+.DropdownMenu{
+    border: none;
+    background: var(--white-2);
+}
+.DropdownItem {
+    display: inline-block;
+    max-width: 50%;
+    padding: 0px;
+    color: var(--purple-3);
+    font-size: 1.5rem;
+  }
+
+.DropdownItem:hover {
+    color: var(--purple-1);
+    background: none;
+  }
+  
+  .Absolute {
+    position: absolute;
+    right: 0;
+    z-index: 99;
+  }
+
+  .Icon{
+    font-size: 2.5rem;
+    color: var(--translucid-white);
+    transition: var(--transition-08s);
+    width: 2rem;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .Icon:hover{
+    font-size: 2.5rem;
+    color: var(--white);
+  }
