@@ -9,6 +9,7 @@ import MoviePage from './pages/movies/MoviePage';
 import Home from './pages/home/Home';
 import { useCurrentUser } from './contexts/CurrentUserContext';
 import SearchMoviePage from './pages/movies/SearchMoviePage';
+import MovieEditForm from './pages/movies/MovieEditForm';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
               <Route exact path="/search/review" render={() => <h1>search review</h1>} />
               <Route exact path="/search/list" render={() => <h1>search list</h1>} />
               <Route exact path="/add/movie" render={() => <MovieCreateForm />} />
+              <Route exact path="/movies/:id/edit" render={() => <MovieEditForm />} />
               <Route exact path="/add/list" render={() => <h1>add list</h1>} />
               <Route exact path="/movies/:id" render={() => <MoviePage />} />
               <Route exact path="/activity" render={() => <h1>your activity</h1>} />
