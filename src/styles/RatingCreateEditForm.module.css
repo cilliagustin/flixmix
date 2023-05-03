@@ -1,0 +1,72 @@
+.CreateRating{
+    background: var(--white-1);
+    border-radius: 5px;
+    max-width: 1000px;
+    margin: 50px auto 0 auto;
+    display: flex;
+    flex-flow: column;
+    padding:20px;
+}
+
+.FormDisplay{
+    width: 100%;
+    display: grid;
+    grid-template-areas: 
+    "avatar title"
+    ". stars"
+    "textarea textarea"
+    ;
+    grid-template-columns: 70px 1fr;
+    grid-template-rows: 1fr auto auto;
+    gap: 5px;
+}
+
+.Avatar{
+    grid-area: avatar;
+}
+
+.Input{
+    grid-area: title;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px!important;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.ButtonControl{
+    grid-area: stars;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.StarButton{
+    border: none;
+    height: auto;
+    width: auto;
+    margin-right: 5px;
+    background: none;
+}
+
+.StarButton i{
+    font-size: 1.5rem;
+    pointer-events: none;
+}
+
+.Grey i{
+    color: var(--grey-2);
+}
+
+.Textarea{
+    grid-area: textarea;
+    width: 100%;
+    resize: none;
+    border-radius: 10px!important;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.Submit{
+    margin: auto;
+}
