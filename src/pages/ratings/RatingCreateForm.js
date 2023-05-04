@@ -3,7 +3,6 @@ import styles from '../../styles/RatingCreateEditForm.module.css'
 import btnStyles from '../../styles/Button.module.css'
 import appStyles from '../../App.module.css'
 
-import { Link } from "react-router-dom";
 
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -35,7 +34,7 @@ function RatingCreateForm(props) {
         ...ratingData,
         value: e.target.value,
       });
-      console.log(value)
+      console.log(ratingData)
     }
 
   const handleSubmit = async (event) => {
@@ -46,6 +45,8 @@ function RatingCreateForm(props) {
     formData.append('content', content);
     formData.append('value', value);
     formData.append('movie', movie);
+
+    console.log(title, content, value, movie)
 
 
     try {
