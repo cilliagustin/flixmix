@@ -11,7 +11,7 @@ import Avatar from "../../components/Avatar";
 import { axiosReq } from "../../api/axiosDefaults";
 
 function RatingCreateForm(props) {
-  const { movie, setMovie, setRatings, profile_image, profile_id } = props;
+  const { movie, setMovie, setRatings, setWasRated, setUserRating, profile_image, profile_id } = props;
   const [ratingData, setRatingData] = useState({
         title: "",
         content: "",
@@ -50,19 +50,25 @@ function RatingCreateForm(props) {
 
 
     try {
-        const { data } = await axiosReq.post("/ratings/", formData);
-      setRatings((prevRating) => ({
-        ...prevRating,
-        results: [data, ...prevRating.results],
-      }));
-      setMovie((prevMovie) => ({
-        results: [
-          {
-            ...prevMovie.results[0],
-            rating_count: prevMovie.results[0].rating_count + 1,
-          },
-        ],
-      }));
+      const { data } = await axiosReq.post("/ratings/", formData);
+  
+      await Promise.all([
+        setRatings((prevRating) => ({
+          ...prevRating,
+          results: [data, ...prevRating.results],
+        })),
+        setMovie((prevMovie) => ({
+          results: [
+            {
+              ...prevMovie.results[0],
+              rating_count: prevMovie.results[0].rating_count + 1,
+              rating_id: data.id,
+            },
+          ],
+        })),
+      ]);
+  
+      setWasRated(true);
     } catch (err) {
       console.log(err);
     }

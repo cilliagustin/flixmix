@@ -5,6 +5,9 @@ import {axiosReq} from '../../api/axiosDefaults'
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
+import styles from '../../styles/MoviePage.module.css'
+import Asset from "../../components/Asset";
+import { fecthMoreData } from '../../utils/utils'
 
 import appStyles from "../../App.module.css";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
@@ -12,6 +15,7 @@ import Movie from "./Movie";
 import RatingCreateForm from "../ratings/RatingCreateForm";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import RatingPreviewCard from "../ratings/RatingPreviewCard";
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 function MoviePage() {
     const { id } = useParams()
@@ -20,6 +24,7 @@ function MoviePage() {
     const profile_image = currentUser?.profile_image;
     const profile_id = currentUser?.profile_id;
     const [ratings, setRatings] = useState({ results: [] });
+    const [userRating, setUserRating] = useState({ results: [] });
     const [wasRated, setWasRated] = useState(false)
 
     useEffect(()=>{
@@ -40,7 +45,21 @@ function MoviePage() {
         handleMount()
     },[id])
 
-console.log(ratings.results)
+    useEffect(()=>{
+      const handleMount = async ()=>{
+        try {
+            const {data: rating} = await axiosReq.get(`/ratings/${movie.results[0]?.rating_id}`)
+            setUserRating(rating)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+      if(wasRated){
+        handleMount()
+      }
+    },[wasRated])
+
+
   return (
     <Row className="h-100 mx-0">
       <Col className="p-0">
@@ -49,7 +68,7 @@ console.log(ratings.results)
           {currentUser && (
             wasRated ? (
               // add later a preview rate card
-              "was rated"
+              <RatingPreviewCard rating={userRating} userRating={true} />
               ) : (
               <RatingCreateForm 
                 profile_id={profile_id} 
@@ -57,40 +76,26 @@ console.log(ratings.results)
                 movie={id}
                 setMovie={setMovie}
                 setRatings={setRatings} 
+                setWasRated={setWasRated}
+                setUserRating={setUserRating}
               />
             )
           )}
           {ratings.results.length ? (
-            <div className="w-100">
-              {ratings.results.map((rating)=>{
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  return <RatingPreviewCard key={rating.id} rating={rating}/>
-
-
-
-
-
-
-
-
-
-
-
-
-                  
-              })}
+            <div className={styles.Container}>
+              <InfiniteScroll 
+                  children={
+                    ratings.results.map((rating)=>{
+                      if(rating.id !== movie.results[0]?.rating_id){
+                        return <RatingPreviewCard key={rating.id} rating={rating}/>
+                      }
+                    })
+                  }
+                  dataLength={ratings.results.length}
+                  loader={<Asset spinner />}
+                  hasMore={!!ratings.next}
+                  next={()=> fecthMoreData(ratings, setRatings)}
+              />
             </div>
           ): currentUser ? (
             <span>Be the first to make a review</span>
