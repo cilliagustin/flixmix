@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import {axiosReq} from '../../api/axiosDefaults'
+import { axiosReq } from '../../api/axiosDefaults'
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -18,46 +18,46 @@ import RatingPreviewCard from "../ratings/RatingPreviewCard";
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 function MoviePage() {
-    const { id } = useParams()
-    const [movie, setMovie] = useState({results: []})
-    const currentUser = useCurrentUser()
-    const profile_image = currentUser?.profile_image;
-    const profile_id = currentUser?.profile_id;
-    const [ratings, setRatings] = useState({ results: [] });
-    const [userRating, setUserRating] = useState({ results: [] });
-    const [wasRated, setWasRated] = useState(false)
+  const { id } = useParams()
+  const [movie, setMovie] = useState({ results: [] })
+  const currentUser = useCurrentUser()
+  const profile_image = currentUser?.profile_image;
+  const profile_id = currentUser?.profile_id;
+  const [ratings, setRatings] = useState({ results: [] });
+  const [userRating, setUserRating] = useState({ results: [] });
+  const [wasRated, setWasRated] = useState(false)
 
-    useEffect(()=>{
-        const handleMount = async ()=>{
-            try {
-                const [{data: movie}, {data:ratings}] = await Promise.all([
-                    axiosReq.get(`/movies/${id}`),
-                    axiosReq.get(`/ratings/?movie=${id}`)
-                ])
-                setMovie({results: [movie]});
-                setRatings(ratings)
-                setWasRated(!!movie.rating_id);
-            } catch (err) {
-                console.log(err)
-            }
-        }
-
-        handleMount()
-    },[id])
-
-    useEffect(()=>{
-      const handleMount = async ()=>{
-        try {
-            const {data: rating} = await axiosReq.get(`/ratings/${movie.results[0]?.rating_id}`)
-            setUserRating(rating)
-        } catch (err) {
-            console.log(err)
-        }
-    }
-      if(wasRated){
-        handleMount()
+  useEffect(() => {
+    const handleMount = async () => {
+      try {
+        const [{ data: movie }, { data: ratings }] = await Promise.all([
+          axiosReq.get(`/movies/${id}`),
+          axiosReq.get(`/ratings/?movie=${id}`)
+        ])
+        setMovie({ results: [movie] });
+        setRatings(ratings)
+        setWasRated(!!movie.rating_id);
+      } catch (err) {
+        console.log(err)
       }
-    },[wasRated])
+    }
+
+    handleMount()
+  }, [id])
+
+  useEffect(() => {
+    const handleMount = async () => {
+      try {
+        const { data: rating } = await axiosReq.get(`/ratings/${movie.results[0]?.rating_id}`)
+        setUserRating(rating)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    if (wasRated) {
+      handleMount()
+    }
+  }, [wasRated, movie.results])
 
 
   return (
@@ -69,39 +69,39 @@ function MoviePage() {
             wasRated ? (
               // add later a preview rate card
               <RatingPreviewCard rating={userRating} userRating={true} />
-              ) : (
-              <RatingCreateForm 
-                profile_id={profile_id} 
-                profile_image={profile_image} 
+            ) : (
+              <RatingCreateForm
+                profile_id={profile_id}
+                profile_image={profile_image}
                 movie={id}
                 setMovie={setMovie}
-                setRatings={setRatings} 
+                setRatings={setRatings}
                 setWasRated={setWasRated}
-                setUserRating={setUserRating}
               />
             )
           )}
-          {ratings.results.length ? (
-            <div className={styles.Container}>
-              <InfiniteScroll 
-                  children={
-                    ratings.results.map((rating)=>{
-                      if(rating.id !== movie.results[0]?.rating_id){
-                        return <RatingPreviewCard key={rating.id} rating={rating}/>
-                      }
-                    })
-                  }
-                  dataLength={ratings.results.length}
-                  loader={<Asset spinner />}
-                  hasMore={!!ratings.next}
-                  next={()=> fecthMoreData(ratings, setRatings)}
+          <div className={styles.Container}>
+            {ratings.results.length ? (
+              <InfiniteScroll
+                children={
+                  ratings.results.map((rating) => {
+                    if (rating.id !== movie.results[0]?.rating_id) {
+                      return <RatingPreviewCard key={rating.id} rating={rating} />
+                    }
+                    return null;
+                  })
+                }
+                dataLength={ratings.results.length}
+                loader={<Asset spinner />}
+                hasMore={!!ratings.next}
+                next={() => fecthMoreData(ratings, setRatings)}
               />
-            </div>
-          ): currentUser ? (
-            <span>Be the first to make a review</span>
-          ): (
-            <span>No reviews made... yet</span>
-          )}
+            ) : currentUser ? (
+              <span>Be the first one to make a review</span>
+            ) : (
+              <span>No reviews made... yet</span>
+            )}
+          </div>
         </Container>
       </Col>
     </Row>

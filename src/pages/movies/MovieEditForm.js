@@ -48,7 +48,6 @@ function MovieEditForm() {
         }
 
         handleMount()
-        console.log(movieData)
     },[history, id])
 
     const handleChange = (event) => {

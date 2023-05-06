@@ -20,6 +20,7 @@ const NavBar = () => {
                 key={index} 
               />
     }
+    return null
   })
 
   const loggedInLinks = NavBarData.map((item,index)=>{
@@ -30,6 +31,7 @@ const NavBar = () => {
                 last={item.authIconLink === true}
               />
     }
+    return null
   })
 
   const loggedOutLinks = NavBarData.map((item,index)=>{
@@ -40,6 +42,7 @@ const NavBar = () => {
                 last={item.authIconLink === true}
               />
     }
+    return null
   })
 
   const [hidden, setHidden] = useState(true);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from '../../styles/RatingCreateEditForm.module.css'
 import btnStyles from '../../styles/Button.module.css'
 import appStyles from '../../App.module.css'
@@ -11,15 +11,14 @@ import Avatar from "../../components/Avatar";
 import { axiosReq } from "../../api/axiosDefaults";
 
 function RatingCreateForm(props) {
-  const { movie, setMovie, setRatings, setWasRated, setUserRating, profile_image, profile_id } = props;
+  const { movie, setMovie, setRatings, setWasRated, profile_image, profile_id } = props;
   const [ratingData, setRatingData] = useState({
         title: "",
         content: "",
         value: "",
-        movieData: movie,
     });
 
-    const { title, content, value, movieData } = ratingData;
+    const { title, content, value } = ratingData;
 
     const handleChange = (event) => {
         setRatingData({
@@ -130,7 +129,7 @@ function RatingCreateForm(props) {
                 />
           <Form.Control
             className={`w-100 ${styles.Textarea}`}
-            placeholder='Review Title'
+            placeholder='Write your review'
             as="textarea"
             rows={6}
             name="content"
