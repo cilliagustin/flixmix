@@ -4,6 +4,8 @@ import appStyles from '../../App.module.css'
 
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
+import DisplayAvgRating from '../../components/DisplayAvgRating';
+
 import { OverlayTrigger, Tooltip} from "react-bootstrap";
 
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
@@ -15,7 +17,7 @@ import { axiosRes } from '../../api/axiosDefaults';
 const MoviePreviewCard = (props) => {
     const { 
         id, rating_count, seen_count, seen_id, watchlist_count, watchlist_id,
-        title, poster, release_year, setMovies,
+        title, poster, release_year, setMovies, avg_rating
         // owner, profile_id, profile_image,  list_count,
         // created_at, updated_at,  synopsis, directors, main_cast,  movie_genre,
         // release_decade
@@ -122,6 +124,9 @@ const MoviePreviewCard = (props) => {
           )}
         </div>
         <div className={styles.Content}>
+          <div className={styles.AvgRating}>
+          <DisplayAvgRating title={title} avg_rating={avg_rating} xs={true} />
+            </div>
           <Link to={`/movies/${id}`}>
             <h3>{title}</h3>
           </Link>

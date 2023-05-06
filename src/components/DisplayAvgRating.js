@@ -3,8 +3,8 @@ import styles from '../styles/DisplayAvgRating.module.css'
 import appStyles from '../App.module.css'
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-const DisplayAvgRating = ({ title, avg_rating }) => {
-  const [integer, setInteger] = useState(-1);
+const DisplayAvgRating = ({ title, avg_rating, xs=false }) => {
+  const [integer, setInteger] = useState(0);
   const [fraction, setFraction] = useState(0);
   const [clip, setClip] = useState("");
 
@@ -20,45 +20,62 @@ const DisplayAvgRating = ({ title, avg_rating }) => {
 
 
   return (
-    <OverlayTrigger
+    <>
+    {integer > 0 ? (
+       <OverlayTrigger
+       placement="top"
+       overlay={<Tooltip>{title} average rating: {avg_rating}</Tooltip>}
+     >
+       <div className={`${styles.Back} ${ xs && styles.Xs}`}>
+         <i className="fa-solid fa-star"></i>
+         <i className="fa-solid fa-star"></i>
+         <i className="fa-solid fa-star"></i>
+         <i className="fa-solid fa-star"></i>
+         <i className="fa-solid fa-star"></i>
+         <div className={styles.Front}>
+           <i
+             className={`${integer + 1 >= 1 && appStyles.Green} fa-solid fa-star`}
+           >
+           </i>
+           <i
+             className={`${integer + 1 >= 2 && appStyles.Green} fa-solid fa-star`}
+             style={{ clipPath: integer === 1 ? clip : "none" }}
+           >
+           </i>
+           <i
+             className={`${integer + 1 >= 3 && appStyles.Green} fa-solid fa-star`}
+             style={{ clipPath: integer === 2 ? clip : "none" }}
+ 
+           >
+           </i>
+           <i
+             className={`${integer + 1 >= 4 && appStyles.Green} fa-solid fa-star`}
+             style={{ clipPath: integer === 3 ? clip : "none" }}
+           >
+           </i>
+           <i
+             className={`${integer + 1 >= 5 && appStyles.Green} fa-solid fa-star`}
+             style={{ clipPath: integer === 4 ? clip : "none" }}
+           >
+           </i>
+         </div>
+       </div>
+     </OverlayTrigger>
+    ): (
+      <OverlayTrigger
       placement="top"
-      overlay={<Tooltip>{title} average rating: {avg_rating}</Tooltip>}
+      overlay={<Tooltip>{title} has no ratings yet</Tooltip>}
     >
-      <div className={styles.Back}>
+      <div className={`${styles.Back} ${ xs && styles.Xs}`}>
         <i className="fa-solid fa-star"></i>
         <i className="fa-solid fa-star"></i>
         <i className="fa-solid fa-star"></i>
         <i className="fa-solid fa-star"></i>
         <i className="fa-solid fa-star"></i>
-        <div className={styles.Front}>
-          <i
-            className={`${integer + 1 >= 1 && appStyles.Green} fa-solid fa-star`}
-          >
-          </i>
-          <i
-            className={`${integer + 1 >= 2 && appStyles.Green} fa-solid fa-star`}
-            style={{ clipPath: integer === 1 ? clip : `polygon(0 0, 100% 0, 100% 100%, 0% 100%)` }}
-          >
-          </i>
-          <i
-            className={`${integer + 1 >= 3 && appStyles.Green} fa-solid fa-star`}
-            style={{ clipPath: integer === 2 ? clip : `polygon(0 0, 100% 0, 100% 100%, 0% 100%)` }}
-
-          >
-          </i>
-          <i
-            className={`${integer + 1 >= 4 && appStyles.Green} fa-solid fa-star`}
-            style={{ clipPath: integer === 3 ? clip : `polygon(0 0, 100% 0, 100% 100%, 0% 100%)` }}
-          >
-          </i>
-          <i
-            className={`${integer + 1 >= 5 && appStyles.Green} fa-solid fa-star`}
-            style={{ clipPath: integer === 4 ? clip : `polygon(0 0, 100% 0, 100% 100%, 0% 100%)` }}
-          >
-          </i>
-        </div>
       </div>
     </OverlayTrigger>
+    )}
+   </>
   )
 }
 

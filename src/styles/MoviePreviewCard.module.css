@@ -27,10 +27,20 @@
 .Content{
     display: grid;
     grid-template-areas: 
+    "rating rating rating"
     "title title title"
     "year year year"
     "seen watchlist reviews";
     grid-template-columns: 1fr 1fr 1fr;
+}
+
+.AvgRating{
+    grid-area: rating;
+    position: relative;
+    top: -20px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: -10px;
 }
 
 .Content a:hover{
@@ -48,12 +58,12 @@
     margin-bottom: .25rem;
 }
 
-.Content a:first-child{
+.Content a:nth-child(2){
     grid-area: title;
 }
 
 
-.Content a:nth-child(2){
+.Content a:nth-child(3){
     grid-area: year;
     font-size: 1rem;
 }
@@ -65,7 +75,7 @@
     flex-flow: column;
 }
 
-.Content .IconContainer:nth-child(4) i{
+.Content .IconContainer:nth-child(5) i{
     margin-top: 1px;
 }
 
@@ -80,19 +90,19 @@
     margin-bottom: .1rem;
 }
 
-.Content .IconContainer:nth-child(3){
+.Content .IconContainer:nth-child(4){
     grid-area: seen;
 }
 
-.Content .IconContainer:nth-child(4){
+.Content .IconContainer:nth-child(5){
     grid-area: watchlist;
 }
 
-.Content .IconContainer:nth-child(3) i{
+.Content .IconContainer:nth-child(4) i{
     cursor: pointer;
 }
 
-.Content .IconContainer:nth-child(4) i{
+.Content .IconContainer:nth-child(5) i{
     cursor: pointer;
 }
 
