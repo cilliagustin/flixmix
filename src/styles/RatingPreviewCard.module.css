@@ -2,8 +2,7 @@
     min-height: 20px;
     border-radius: 10px;
     padding: 20px;
-    max-width: 1000px;
-    width: calc(100% - 20px);
+    width: 100%;
     display: flex;
     flex-flow: row;
     flex-wrap: wrap;
@@ -22,16 +21,26 @@
 }
 
 .UserRating{
+    position: relative;
     background: var(--white-1);
     margin: 50px auto 10px auto;
+    width: calc(100% - 20px);
+    max-width: 1000px;
 }
 
 .UserRating:after{
     display: none;
 }
 
+.Dropdown{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
 .User{
     margin-left: 8px;
+    margin-right: auto;
 }
 
 .User a {
@@ -39,14 +48,18 @@
     font-size: .9rem;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
+    
 }
 
 .Stars{
-    margin-left: auto;
     width: auto;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+
+.UserRating .Stars{
+    margin-right: 40px;
 }
 
 .Stars i{

@@ -2,21 +2,25 @@ import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from '../styles/MoreDropdown.module.css'
 
-const ThreeDots = React.forwardRef(({ onClick }, ref) => (
+const ThreeDots = React.forwardRef(({ onClick, color }, ref) => {
+  const iconClassName = color === 'grey' ? styles.Grey : styles.White;
+
+  return (
     <i
-      className={`${styles.Icon} fas fa-ellipsis-v`}
+      className={`${styles.Icon} fas fa-ellipsis-v ${iconClassName}`}
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
         onClick(e);
       }}
     />
-  ));
+  );
+});
   
-  export const MoreDropdown = ({ handleEdit, handleDelete }) => {
+  export const MoreDropdown = ({ handleEdit, handleDelete, color }) => {
     return (
       <Dropdown className="ml-auto" drop="left">
-        <Dropdown.Toggle as={ThreeDots} />
+        <Dropdown.Toggle as={ThreeDots} color={color} />
   
         <Dropdown.Menu
           className={`${styles.DropdownMenu} text-center`}

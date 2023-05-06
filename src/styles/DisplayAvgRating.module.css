@@ -1,0 +1,22 @@
+.Back,
+.Front{
+    display: flex;
+    justify-content: start;
+    gap: 5px;
+    width: min-content;
+    position: relative;
+}
+
+.Back i{
+    color: var(--grey-2);
+    font-size: 1.3rem;
+}
+
+.Front{
+    background: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+}

@@ -23,14 +23,21 @@
 
   .Icon{
     font-size: 2.5rem;
-    color: var(--translucid-white);
     transition: var(--transition-08s);
     width: 2rem;
     text-align: center;
     cursor: pointer;
   }
-
-  .Icon:hover{
-    font-size: 2.5rem;
+  
+  .White{
+    color: var(--translucid-white);  
+  }
+  .White:hover{
     color: var(--white);
+  }
+  .Grey{
+    color: var(--grey-2);  
+  }
+  .Purple:hover{
+    color: rgb(28, 28, 28);  
   }

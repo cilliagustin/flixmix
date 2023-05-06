@@ -33,7 +33,6 @@ function RatingCreateForm(props) {
         ...ratingData,
         value: e.target.value,
       });
-      console.log(ratingData)
     }
 
   const handleSubmit = async (event) => {
@@ -45,7 +44,6 @@ function RatingCreateForm(props) {
     formData.append('value', value);
     formData.append('movie', movie);
 
-    console.log(title, content, value, movie)
 
 
     try {

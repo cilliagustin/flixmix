@@ -47,6 +47,7 @@ function MoviePage() {
 
   useEffect(() => {
     const handleMount = async () => {
+      console.log(wasRated)
       try {
         const { data: rating } = await axiosReq.get(`/ratings/${movie.results[0]?.rating_id}`)
         setUserRating(rating)
@@ -59,16 +60,24 @@ function MoviePage() {
     }
   }, [wasRated, movie.results])
 
+  console.log(movie.results[0])
 
   return (
     <Row className="h-100 mx-0">
       <Col className="p-0">
         <Movie {...movie.results[0]} setMovies={setMovie} />
-        <Container fluid className={`${appStyles.Content} mx-0 px-0`}>
+        <Container fluid className="mx-0 px-0">
           {currentUser && (
             wasRated ? (
               // add later a preview rate card
-              <RatingPreviewCard rating={userRating} userRating={true} />
+              <RatingPreviewCard 
+                rating={userRating} 
+                userRating={true} 
+                setMovie={setMovie}
+                setRatings={setRatings}
+                setWasRated={setWasRated}
+                setUserRating={setUserRating}
+              />
             ) : (
               <RatingCreateForm
                 profile_id={profile_id}
