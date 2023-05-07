@@ -27,6 +27,7 @@ function MoviePage() {
   const [userRating, setUserRating] = useState({ results: [] });
   const [wasRated, setWasRated] = useState(false)
 
+
   useEffect(() => {
     const handleMount = async () => {
       try {
@@ -47,7 +48,6 @@ function MoviePage() {
 
   useEffect(() => {
     const handleMount = async () => {
-      console.log(wasRated)
       try {
         const { data: rating } = await axiosReq.get(`/ratings/${movie.results[0]?.rating_id}`)
         setUserRating(rating)
@@ -60,8 +60,6 @@ function MoviePage() {
     }
   }, [wasRated, movie.results])
 
-  console.log(movie.results[0])
-
   return (
     <Row className="h-100 mx-0">
       <Col className="p-0">
@@ -72,17 +70,19 @@ function MoviePage() {
               // add later a preview rate card
               <RatingPreviewCard 
                 rating={userRating} 
-                userRating={true} 
+                currentUserRating={true} 
                 setMovie={setMovie}
                 setRatings={setRatings}
                 setWasRated={setWasRated}
                 setUserRating={setUserRating}
+                movieData={movie.results[0]}
               />
             ) : (
               <RatingCreateForm
                 profile_id={profile_id}
                 profile_image={profile_image}
-                movie={id}
+                movieId={id}
+                movieData={movie.results[0]}
                 setMovie={setMovie}
                 setRatings={setRatings}
                 setWasRated={setWasRated}

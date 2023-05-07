@@ -11,29 +11,29 @@ import Avatar from "../../components/Avatar";
 import { axiosReq } from "../../api/axiosDefaults";
 
 function RatingCreateForm(props) {
-  const { movie, setMovie, setRatings, setWasRated, profile_image, profile_id } = props;
+  const { movieId, movieData, setMovie, setRatings, setWasRated, profile_image, profile_id } = props;
   const [ratingData, setRatingData] = useState({
-        title: "",
-        content: "",
-        value: "",
+    title: "",
+    content: "",
+    value: "",
+  });
+
+  const { title, content, value } = ratingData;
+
+  const handleChange = (event) => {
+    setRatingData({
+      ...ratingData,
+      [event.target.name]: event.target.value,
     });
+  };
 
-    const { title, content, value } = ratingData;
-
-    const handleChange = (event) => {
-        setRatingData({
-            ...ratingData,
-            [event.target.name]: event.target.value,
-        });
-    };
-
-    const handleClick = (e)=> {
-      e.preventDefault()
-      setRatingData({
-        ...ratingData,
-        value: e.target.value,
-      });
-    }
+  const handleClick = (e) => {
+    e.preventDefault()
+    setRatingData({
+      ...ratingData,
+      value: e.target.value,
+    });
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -42,13 +42,16 @@ function RatingCreateForm(props) {
     formData.append('title', title);
     formData.append('content', content);
     formData.append('value', value);
-    formData.append('movie', movie);
-
-
+    formData.append('movie', movieId);
 
     try {
       const { data } = await axiosReq.post("/ratings/", formData);
-  
+
+      const sumOfRatings = parseFloat(movieData.avg_rating) * movieData.rating_count;
+      const totalNumberOfRatings = movieData.rating_count + 1;
+      const newSumOfRatings = sumOfRatings + parseFloat(value);
+      const newAvgRating = movieData.rating_count !== 0 ? (newSumOfRatings / totalNumberOfRatings).toFixed(2) : value;
+
       await Promise.all([
         setRatings((prevRating) => ({
           ...prevRating,
@@ -60,11 +63,12 @@ function RatingCreateForm(props) {
               ...prevMovie.results[0],
               rating_count: prevMovie.results[0].rating_count + 1,
               rating_id: data.id,
+              avg_rating: newAvgRating,
             },
           ],
         })),
       ]);
-  
+
       setWasRated(true);
     } catch (err) {
       console.log(err);
@@ -76,12 +80,12 @@ function RatingCreateForm(props) {
     <Form className={styles.CreateRating} onSubmit={handleSubmit}>
       <Form.Group>
         <InputGroup className={styles.FormDisplay}>
-          <Avatar 
-              src={profile_image} 
-              height={55}
-              id={profile_id}
-              username={null}
-              className={styles.Avatar}
+          <Avatar
+            src={profile_image}
+            height={55}
+            id={profile_id}
+            username={null}
+            className={styles.Avatar}
           />
           <Form.Control
             className={`w-100 ${styles.Input}`}
@@ -94,37 +98,37 @@ function RatingCreateForm(props) {
           <div className={styles.ButtonControl}>
             <button
               className={`${styles.StarButton} ${value < 1 ? styles.Grey : appStyles.Green}`}
-              onClick={(e) => {handleClick(e);}} value={1}>
-                <i className="fa-solid fa-star"></i>
+              onClick={(e) => { handleClick(e); }} value={1}>
+              <i className="fa-solid fa-star"></i>
             </button>
             <button
               className={`${styles.StarButton} ${value < 2 ? styles.Grey : appStyles.Green}`}
-              onClick={(e) => {handleClick(e);}} value={2}>
-                <i className="fa-solid fa-star"></i>
+              onClick={(e) => { handleClick(e); }} value={2}>
+              <i className="fa-solid fa-star"></i>
             </button>
             <button
               className={`${styles.StarButton} ${value < 3 ? styles.Grey : appStyles.Green}`}
-              onClick={(e) => {handleClick(e);}} value={3}>
-                <i className="fa-solid fa-star"></i>
+              onClick={(e) => { handleClick(e); }} value={3}>
+              <i className="fa-solid fa-star"></i>
             </button>
             <button
               className={`${styles.StarButton} ${value < 4 ? styles.Grey : appStyles.Green}`}
-              onClick={(e) => {handleClick(e);}} value={4}>
-                <i className="fa-solid fa-star"></i>
+              onClick={(e) => { handleClick(e); }} value={4}>
+              <i className="fa-solid fa-star"></i>
             </button>
             <button
               className={`${styles.StarButton} ${value < 5 ? styles.Grey : appStyles.Green}`}
-              onClick={(e) => {handleClick(e);}} value={5}>
-                <i className="fa-solid fa-star"></i>
+              onClick={(e) => { handleClick(e); }} value={5}>
+              <i className="fa-solid fa-star"></i>
             </button>
           </div>
           <Form.Control
-                    className={`d-none`}
-                    type="number"
-                    name="value"
-                    value={value}
-                    readOnly
-                />
+            className={`d-none`}
+            type="number"
+            name="value"
+            value={value}
+            readOnly
+          />
           <Form.Control
             className={`w-100 ${styles.Textarea}`}
             placeholder='Write your review'
