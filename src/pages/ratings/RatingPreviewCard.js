@@ -69,8 +69,8 @@ const RatingPreviewCard = ({ rating, currentUserRating = false, setMovie, movieD
             <i className={`${value >= 4 && appStyles.Green} fa-solid fa-star`}></i>
             <i className={`${value >= 5 && appStyles.Green} fa-solid fa-star`}></i>
           </div>
-          <h4 className={styles.Title}><Link to={`/ratings/${id}`}>{title}</Link></h4>
-          <p className={styles.Content}><Link to={`/ratings/${id}`}>{content}</Link></p>
+          <h4 className={styles.Title}><Link to={`/reviews/${id}`}>{title}</Link></h4>
+          <p className={styles.Content}><Link to={`/reviews/${id}`}>{content}</Link></p>
           <OverlayTrigger
             placement="top"
             overlay={<Tooltip>This review has {comments_count} {comments_count === 1 ? "comment" : "coments"} </Tooltip>}
