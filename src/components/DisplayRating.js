@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import styles from '../styles/DisplayAvgRating.module.css'
+import styles from '../styles/DisplayRating.module.css'
 import appStyles from '../App.module.css'
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-const DisplayAvgRating = ({ title, avg_rating, xs=false }) => {
+const DisplayRating = ({ title, rating, xs=false, type }) => {
   const [integer, setInteger] = useState(0);
   const [fraction, setFraction] = useState(0);
   const [clip, setClip] = useState("");
 
+  const tooltipText = type === "average" ? `${title} average rating: ${rating}` : `${integer} out of 5`
+
   useEffect(() => {
-    setInteger(Math.floor(avg_rating))
-    setFraction((avg_rating % 1) * 100)
-  }, [avg_rating])
+    setInteger(Math.floor(rating))
+    setFraction((rating % 1) * 100)
+  }, [rating])
 
   useEffect(() => {
     setClip(`polygon(0 0, ${fraction}% 0, ${fraction}% 100%, 0% 100%)`)
@@ -24,7 +26,7 @@ const DisplayAvgRating = ({ title, avg_rating, xs=false }) => {
     {integer > 0 ? (
        <OverlayTrigger
        placement="top"
-       overlay={<Tooltip>{title} average rating: {avg_rating}</Tooltip>}
+       overlay={<Tooltip>{tooltipText}</Tooltip>}
      >
        <div className={`${styles.Back} ${ xs && styles.Xs}`}>
          <i className="fa-solid fa-star"></i>
@@ -79,4 +81,4 @@ const DisplayAvgRating = ({ title, avg_rating, xs=false }) => {
   )
 }
 
-export default DisplayAvgRating
+export default DisplayRating

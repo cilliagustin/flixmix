@@ -1,0 +1,129 @@
+.Rating{
+    width: 100%;
+}
+
+.Header{
+    width: 100%;
+    background: var(--gradient-3);
+    border-radius: 0 0 10px 10px;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-areas:
+    "title poster"
+    "stars poster"
+    "user poster"
+    ". poster";
+    grid-template-columns: 1fr 100px;
+    grid-template-rows: auto auto auto 1fr;
+    padding: 50px 15px 20px;
+}
+
+.MovieTitle{
+    grid-area: title;
+    color: var(--translucid-white);
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.MovieTitle span{
+    font-size: 1.1rem;
+    font-weight: 300;
+    display: block;
+}
+
+.Stars{
+    grid-area: stars;
+    margin-bottom: 10px;
+}
+
+.User{
+    grid-area: user;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.User a{
+    color: var(--grey-2);
+    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+.User a:hover{
+    text-decoration: none;
+}
+
+.Poster{
+    grid-area: poster;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.Content{
+    width: 100%;
+    padding: 20px 15px 0px;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.Content h2,
+.Content p{
+    color: var(--grey-2);
+}
+
+.Content h2{
+    font-size: 1.3rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.Content p{
+    margin-bottom: 0;
+}
+
+.Content p:last-child{
+    font-size: .8rem;
+    margin-left: auto;
+}
+
+.Content p:last-child span{
+    color: var(--grey-1);
+}
+
+
+@media only screen and (min-width: 768px){
+    .Rating{
+        margin: 0 auto;
+        width: calc(100% - 20px);
+        max-width: 1000px;
+        background: var(--gradient-3);
+        border-radius: 0 0 10px 10px;
+        box-shadow: var(--shadow);
+        padding-bottom: 20px;
+    }
+    .Header{
+        background: none;
+        border-radius: none;
+        box-shadow: none;
+    }
+    .Header{
+        grid-template-areas:
+        none;
+        grid-template-areas:
+        "poster title"
+        "poster stars"
+        "poster user"
+        "poster .";
+        grid-template-columns: 150px 1fr;
+        gap: 10px;
+    }
+
+    .Content p:last-child span{
+        color: var(--white-1);
+    }
+}

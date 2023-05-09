@@ -4,7 +4,7 @@ import appStyles from '../../App.module.css'
 
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
-import DisplayAvgRating from '../../components/DisplayAvgRating';
+import DisplayRating from '../../components/DisplayRating';
 
 import { OverlayTrigger, Tooltip} from "react-bootstrap";
 
@@ -125,7 +125,7 @@ const MoviePreviewCard = (props) => {
         </div>
         <div className={styles.Content}>
           <div className={styles.AvgRating}>
-          <DisplayAvgRating title={title} avg_rating={avg_rating} xs={true} />
+          <DisplayRating title={title} rating={avg_rating} xs={true} type={"average"} />
             </div>
           <Link to={`/movies/${id}`}>
             <h3>{title}</h3>

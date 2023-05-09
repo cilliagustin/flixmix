@@ -11,7 +11,7 @@ import styles from '../../styles/Movie.module.css'
 import appStyles from '../../App.module.css'
 import { axiosRes } from '../../api/axiosDefaults';
 import { MoreDropdown } from '../../components/MoreDropdown';
-import DisplayAvgRating from '../../components/DisplayAvgRating';
+import DisplayRating from '../../components/DisplayRating';
 
 const Movie = (props) => {
 
@@ -150,7 +150,7 @@ const Movie = (props) => {
                     <p>Genre: <span>{movie_genre}</span></p>
                     <p>Main cast: <span>{main_cast}</span></p>
                     <div className={styles.AvgRating}>
-                        <DisplayAvgRating title={title} avg_rating={avg_rating} />
+                        <DisplayRating title={title} rating={avg_rating} type={"average"} />
                     </div>
                     <div className={styles.IconsWrapper}>
                         <div className={styles.Icon}>
