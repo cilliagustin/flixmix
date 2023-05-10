@@ -9,6 +9,7 @@ import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom";
 import Alert from "../../components/Alert";
+import { handleInputChange } from "../../utils/utils";
 
 function MovieEditForm() {
 
@@ -49,13 +50,6 @@ function MovieEditForm() {
 
         handleMount()
     },[history, id])
-
-    const handleChange = (event) => {
-        setMovieData({
-            ...movieData,
-            [event.target.name]: event.target.value,
-        });
-    };
 
     const handleChangeImage = (event) => {
         if (event.target.files.length) {
@@ -131,7 +125,7 @@ function MovieEditForm() {
                     type="text"
                     name="title"
                     value={title}
-                    onChange={handleChange}
+                    onChange={(event) => handleInputChange(event, movieData, setMovieData)}
                 />
             </Form.Group>
             <Form.Group>
@@ -142,7 +136,7 @@ function MovieEditForm() {
                     rows={6}
                     name="synopsis"
                     value={synopsis}
-                    onChange={handleChange}
+                    onChange={(event) => handleInputChange(event, movieData, setMovieData)}
                 />
             </Form.Group>
             <Form.Group>
@@ -153,7 +147,7 @@ function MovieEditForm() {
                     rows={1}
                     name="directors"
                     value={directors}
-                    onChange={handleChange}
+                    onChange={(event) => handleInputChange(event, movieData, setMovieData)}
                 />
             </Form.Group>
             <Form.Group>
@@ -164,7 +158,7 @@ function MovieEditForm() {
                     rows={3}
                     name="main_cast"
                     value={main_cast}
-                    onChange={handleChange}
+                    onChange={(event) => handleInputChange(event, movieData, setMovieData)}
                 />
             </Form.Group>
             <Form.Group>
@@ -175,7 +169,7 @@ function MovieEditForm() {
                     min="1888"
                     name="release_year"
                     value={release_year}
-                    onChange={handleChange}
+                    onChange={(event) => handleInputChange(event, movieData, setMovieData)}
                 />
             </Form.Group>
             <Form.Group>
@@ -186,7 +180,7 @@ function MovieEditForm() {
                     className={styles.Input}
                     name="movie_genre"
                     value={movie_genre}
-                    onChange={handleChange}
+                    onChange={(event) => handleInputChange(event, movieData, setMovieData)}
                 >
                     <option className="text-center" disabled value="">------------------------------------</option>
                     <option value={"action"}>action</option>

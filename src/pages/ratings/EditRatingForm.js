@@ -9,6 +9,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 
 import Avatar from "../../components/Avatar";
 import { axiosReq } from "../../api/axiosDefaults";
+import { handleInputChange } from '../../utils/utils';
 
 const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, rating, title, content, value }) => {
     console.log(rating)
@@ -20,12 +21,6 @@ const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, r
     });
     const [oldValue, setOldValue] = useState(value)
 
-    const handleChange = (event) => {
-        setRatingData({
-            ...ratingData,
-            [event.target.name]: event.target.value,
-        });
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -83,7 +78,7 @@ const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, r
                         type="text"
                         name="title"
                         value={ratingData.title}
-                        onChange={handleChange}
+                        onChange={(event) => handleInputChange(event, ratingData, setRatingData)}
                     />
                     <div className={styles.ButtonControl}>
                         <RateButtons setRating={setRatingData} rating={ratingData} />
@@ -102,7 +97,7 @@ const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, r
                         rows={6}
                         name="content"
                         value={ratingData.content}
-                        onChange={handleChange}
+                        onChange={(event) => handleInputChange(event, ratingData, setRatingData)}
                     />
                 </InputGroup>
             </Form.Group>

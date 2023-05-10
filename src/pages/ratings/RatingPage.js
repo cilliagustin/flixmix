@@ -9,6 +9,7 @@ import { Form } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
 import { MoreDropdown } from '../../components/MoreDropdown'
 import RateButtons from '../../components/RateButtons'
+import { handleInputChange } from '../../utils/utils'
 
 const RatingPage = () => {
   const { id } = useParams()
@@ -21,13 +22,6 @@ const RatingPage = () => {
   const handleIsEditing = () => {
     setIsEditing(!isEditing)
   }
-
-  const handleChange = (event) => {
-    setRating({
-      ...rating,
-      [event.target.name]: event.target.value,
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -145,7 +139,7 @@ const RatingPage = () => {
                     type="text"
                     name="title"
                     value={rating.title}
-                    onChange={handleChange}
+                    onChange={(event) => handleInputChange(event, rating, setRating)}
                   />
                   <Form.Control
                     className={`w-100 ${styles.Textarea}`}
@@ -154,12 +148,12 @@ const RatingPage = () => {
                     rows={6}
                     name="content"
                     value={rating.content}
-                    onChange={handleChange}
+                    onChange={(event) => handleInputChange(event, rating, setRating)}
                   />
                 </InputGroup>
               </Form.Group>
               <button
-                className={`mx-auto mt-4 ${btnStyles.Button}`}
+                className={`mx-auto mt-4 ${btnStyles.Button} ${btnStyles.Inverted}`}
                 type="submit"
               >
                 Edit
