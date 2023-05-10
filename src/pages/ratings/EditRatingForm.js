@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from '../../styles/RatingCreateEditForm.module.css'
 import btnStyles from '../../styles/Button.module.css'
-import appStyles from '../../App.module.css'
+import RateButtons from "../../components/RateButtons";
 
 
 import Form from "react-bootstrap/Form";
@@ -26,14 +26,6 @@ const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, r
             [event.target.name]: event.target.value,
         });
     };
-
-    const handleClick = (e) => {
-        e.preventDefault()
-        setRatingData({
-            ...ratingData,
-            value: e.target.value,
-        });
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -94,31 +86,7 @@ const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, r
                         onChange={handleChange}
                     />
                     <div className={styles.ButtonControl}>
-                        <button
-                            className={`${styles.StarButton} ${ratingData.value < 1 ? styles.Grey : appStyles.Green}`}
-                            onClick={(e) => { handleClick(e); }} value={1}>
-                            <i className="fa-solid fa-star"></i>
-                        </button>
-                        <button
-                            className={`${styles.StarButton} ${ratingData.value < 2 ? styles.Grey : appStyles.Green}`}
-                            onClick={(e) => { handleClick(e); }} value={2}>
-                            <i className="fa-solid fa-star"></i>
-                        </button>
-                        <button
-                            className={`${styles.StarButton} ${ratingData.value < 3 ? styles.Grey : appStyles.Green}`}
-                            onClick={(e) => { handleClick(e); }} value={3}>
-                            <i className="fa-solid fa-star"></i>
-                        </button>
-                        <button
-                            className={`${styles.StarButton} ${ratingData.value < 4 ? styles.Grey : appStyles.Green}`}
-                            onClick={(e) => { handleClick(e); }} value={4}>
-                            <i className="fa-solid fa-star"></i>
-                        </button>
-                        <button
-                            className={`${styles.StarButton} ${ratingData.value < 5 ? styles.Grey : appStyles.Green}`}
-                            onClick={(e) => { handleClick(e); }} value={5}>
-                            <i className="fa-solid fa-star"></i>
-                        </button>
+                        <RateButtons setRating={setRatingData} rating={ratingData} />
                     </div>
                     <Form.Control
                         className={`d-none`}

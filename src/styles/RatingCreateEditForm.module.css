@@ -41,22 +41,6 @@
     justify-content: flex-start;
 }
 
-.StarButton{
-    border: none;
-    height: auto;
-    width: auto;
-    margin-right: 5px;
-    background: none;
-}
-
-.StarButton i{
-    font-size: 1.5rem;
-    pointer-events: none;
-}
-
-.Grey i{
-    color: var(--grey-2);
-}
 
 .Textarea{
     grid-area: textarea;

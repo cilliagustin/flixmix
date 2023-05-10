@@ -7,7 +7,7 @@ import { Container } from "react-bootstrap";
 import NoResults from '../../assets/no-results.png'
 import Asset from '../../components/Asset'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { fecthMoreData } from '../../utils/utils'
+import { fetchMoreData } from '../../utils/utils'
 
 const MoviesPreview = ({message, filter = "", query = "", searchParameter = "" , infiniteScroll = false}) => {
     const [movies, setMovies] = useState({results: []})
@@ -17,7 +17,7 @@ const MoviesPreview = ({message, filter = "", query = "", searchParameter = "" ,
 
     useEffect(()=>{
         
-        const fecthMovies = async ()=>{
+        const fetchMovies = async ()=>{
             try {
                 const {data} = await axiosReq.get(`/movies/${filter}${search}`)
                 setMovies(data);
@@ -29,7 +29,7 @@ const MoviesPreview = ({message, filter = "", query = "", searchParameter = "" ,
         
         setHasLoaded(false);
         const timer = setTimeout(()=>{
-            fecthMovies()
+            fetchMovies()
         }, 1000)
         return ()=>{
             clearTimeout(timer)
@@ -53,7 +53,7 @@ const MoviesPreview = ({message, filter = "", query = "", searchParameter = "" ,
                             dataLength={movies.results.length}
                             loader={<Asset spinner />}
                             hasMore={!!movies.next}
-                            next={()=> fecthMoreData(movies, setMovies)}
+                            next={()=> fetchMoreData(movies, setMovies)}
                         />
                     </div>
                 ) : (

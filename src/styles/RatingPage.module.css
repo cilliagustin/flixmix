@@ -16,6 +16,13 @@
     grid-template-columns: 1fr 100px;
     grid-template-rows: auto auto auto 1fr;
     padding: 50px 15px 20px;
+    position: relative;
+}
+
+.Dropdown{
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 
 .MovieTitle{
@@ -96,13 +103,29 @@
 }
 
 
+.Input{
+    border-radius: 10px!important;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.Textarea{
+    grid-area: textarea;
+    width: 100%;
+    resize: none;
+    border-radius: 10px!important;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+
 @media only screen and (min-width: 768px){
     .Rating{
-        margin: 0 auto;
+        margin: 20px auto;
         width: calc(100% - 20px);
         max-width: 1000px;
         background: var(--gradient-3);
-        border-radius: 0 0 10px 10px;
+        border-radius: 10px;
         box-shadow: var(--shadow);
         padding-bottom: 20px;
     }

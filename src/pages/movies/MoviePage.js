@@ -7,9 +7,8 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import styles from '../../styles/MoviePage.module.css'
 import Asset from "../../components/Asset";
-import { fecthMoreData } from '../../utils/utils'
+import { fetchMoreData } from '../../utils/utils'
 
-import appStyles from "../../App.module.css";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import Movie from "./Movie";
 import RatingCreateForm from "../ratings/RatingCreateForm";
@@ -103,7 +102,7 @@ function MoviePage() {
                 dataLength={ratings.results.length}
                 loader={<Asset spinner />}
                 hasMore={!!ratings.next}
-                next={() => fecthMoreData(ratings, setRatings)}
+                next={() => fetchMoreData(ratings, setRatings)}
               />
             ) : currentUser ? (
               <span>Be the first one to make a review</span>

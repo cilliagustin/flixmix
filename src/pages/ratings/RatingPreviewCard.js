@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from '../../styles/RatingPreviewCard.module.css'
 import appStyles from '../../App.module.css'
 import Avatar from '../../components/Avatar'
