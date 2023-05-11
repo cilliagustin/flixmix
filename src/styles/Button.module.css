@@ -17,6 +17,12 @@
     align-items: center;
 }
 
+.XsButton{
+    width: 68px;
+    height: 29px;
+    font-size: .6rem;
+}
+
 .Inverted{
     background: none;
     border: 2px solid var(--white-1);
