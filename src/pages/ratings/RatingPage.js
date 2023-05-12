@@ -24,7 +24,7 @@ const RatingPage = () => {
   const profile_image = currentUser?.profile_image;
   const [comments, setComments] = useState({ results: [] });
 
-  console.log(comments)
+  console.log(rating)
 
   const history = useHistory();
 
@@ -179,7 +179,11 @@ const RatingPage = () => {
               ) : (
                 <>
                   <h2>{rating.title}</h2>
-                  <p>{rating.content}</p>
+                  <p className={styles.RatingContent}>{rating.content}</p>
+                  <div className={styles.CommentsCount}>
+                    <i className="fa-regular fa-comments"></i>
+                    <span>{rating.comments_count}</span>
+                  </div>
                   <p>Movie reviewed on {rating.created_at} {rating.created_at !== rating.updated_at && <span>Edited</span>}</p>
                 </>
               )}
@@ -206,12 +210,10 @@ const RatingPage = () => {
               comments.results.map(comment => (
                 <Comment
                   key={comment.id}
-                  content={comment.content}
-                  owner={comment.owner}
-                  profile_id={comment.profile_id}
-                  profile_image={comment.profile_image}
-                  created_at={comment.created_at}
-                  updated_at={comment.updated_at}
+                  {...comment}
+                  setParent={setRating}
+                  setComments={setComments}
+                  endpoint="ratingcomments"
                 />
               ))
             ) : currentUser ? (

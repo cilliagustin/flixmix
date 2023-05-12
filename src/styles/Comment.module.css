@@ -1,25 +1,38 @@
+.Container{
+    position: relative;
+    width: 100%;
+    padding: 10px 15px 10px 0;
+}
+
 .Comment{
     margin-top: 3px;
     width: 100%;
     display: grid;
     grid-template-areas: 
-    "avatar owner date"
-    ". comment comment";
-    grid-template-columns: auto auto 1fr;
+    "avatar owner date ."
+    ". comment comment .";
+    grid-template-columns: auto auto 1fr 40px;
     grid-template-rows: auto 1fr;
     align-items: center;
     padding: 5px 8px;
     position: relative;
 }
 
-.Comment:before{
+.Comment:before,
+.Container:before{
     content: "";
     position: absolute;
-    width: 94%;
+    width: 96%;
     left: 2%;
     bottom: -4px;
     height: 1px;
     background: var(--grey-2);
+}
+
+.Dropdown{
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 
 .Avatar{

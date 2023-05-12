@@ -73,10 +73,17 @@
     width: 100%;
     padding: 20px 15px 0px;
     display: flex;
-    flex-flow: column;
-    align-items: flex-start;
-    justify-content: center;
+    flex-flow: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
 }
+
+.Content h2,
+.RatingContent{
+    width: 100%;
+}
+
 
 .Content h2,
 .Content p{
@@ -91,6 +98,21 @@
 
 .Content p{
     margin-bottom: 0;
+}
+
+
+.Content .RatingContent{
+    margin-bottom: 15px;
+}
+
+.CommentsCount i{
+    margin-right: 5px;
+}
+
+.CommentsCount i,
+.CommentsCount span{
+    font-size: .9rem;
+    color: var(--grey-2);
 }
 
 .Content p:last-child{
