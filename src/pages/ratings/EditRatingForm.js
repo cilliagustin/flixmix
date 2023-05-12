@@ -12,8 +12,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { handleInputChange } from '../../utils/utils';
 
 const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, rating, title, content, value }) => {
-    console.log(rating)
-    
+
     const [ratingData, setRatingData] = useState({
         title: title,
         content: content,

@@ -39,7 +39,7 @@ function CommentCreateForm(props) {
   };
 
   return (
-    <Form className="mt-2 d-flex flex-column" onSubmit={handleSubmit}>
+    <Form className="my-2 mx-4 d-flex flex-column" onSubmit={handleSubmit}>
       <Form.Group>
         <InputGroup>
         <Avatar

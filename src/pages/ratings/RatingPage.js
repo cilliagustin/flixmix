@@ -12,6 +12,7 @@ import RateButtons from '../../components/RateButtons'
 import { handleInputChange } from '../../utils/utils'
 import { useCurrentUser } from '../../contexts/CurrentUserContext'
 import CommentCreateForm from '../comments/CommentCreateForm'
+import Comment from '../comments/Comment'
 
 const RatingPage = () => {
   const { id } = useParams()
@@ -23,6 +24,8 @@ const RatingPage = () => {
   const profile_image = currentUser?.profile_image;
   const [comments, setComments] = useState({ results: [] });
 
+  console.log(comments)
+
   const history = useHistory();
 
   const handleIsEditing = () => {
@@ -30,7 +33,6 @@ const RatingPage = () => {
     setIsEditing(!isEditing)
   }
 
-  console.log(rating)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -85,10 +87,12 @@ const RatingPage = () => {
 
   useEffect(() => {
     const fetchMovieData = async () => {
-      const [{ data: movieData }] = await Promise.all([
-        axiosReq.get(`/movies/${rating.movie}`)
+      const [{ data: movieData }, { data: comments }] = await Promise.all([
+        axiosReq.get(`/movies/${rating.movie}`),
+        axiosReq.get(`/ratingcomments/?rating=${rating.id}`)
       ])
-      setMovie(movieData)
+      setMovie(movieData);
+      setComments(comments)
     }
 
     if (rating.id !== undefined) {
@@ -102,7 +106,7 @@ const RatingPage = () => {
   return (
     <>
       <Row className='m-0'>
-        <Col>
+        <Col className='px-0'>
           <div className={styles.Rating}>
             <div className={styles.Header}>
               <div className={styles.Dropdown}>
@@ -160,13 +164,13 @@ const RatingPage = () => {
                     </InputGroup>
                   </Form.Group>
                   <button
-                    className={`mr-auto ml-2 mt-4 ${btnStyles.Button}`}
+                    className={`ml-auto mr-2 mt-4 ${btnStyles.Button}`}
                     type="submit"
                   >
                     Edit
                   </button>
                   <button
-                    className={`ml-auto mr-2 mt-4 ${btnStyles.Button}`}
+                    className={`mr-auto ml-2 mt-4 ${btnStyles.Button}`}
                     onClick={(e) => { e.preventDefault(); handleIsEditing() }}
                   >
                     Cancel
@@ -184,7 +188,7 @@ const RatingPage = () => {
         </Col>
       </Row>
       <Row className='m-0'>
-        <Col>
+        <Col className='px-0'>
           <div className={styles.Comments}>
             {currentUser ? (
               <CommentCreateForm
@@ -198,6 +202,23 @@ const RatingPage = () => {
             ) : comments.results.length ? (
               "Comments"
             ) : null}
+            {comments.results.length ? (
+              comments.results.map(comment => (
+                <Comment
+                  key={comment.id}
+                  content={comment.content}
+                  owner={comment.owner}
+                  profile_id={comment.profile_id}
+                  profile_image={comment.profile_image}
+                  created_at={comment.created_at}
+                  updated_at={comment.updated_at}
+                />
+              ))
+            ) : currentUser ? (
+              <span>No comments yet, be the first to do it</span>
+            ) : (
+              <span>No comments yet</span>
+            )}
           </div>
         </Col>
       </Row>

@@ -1,0 +1,56 @@
+.Comment{
+    margin-top: 3px;
+    width: 100%;
+    display: grid;
+    grid-template-areas: 
+    "avatar owner date"
+    ". comment comment";
+    grid-template-columns: auto auto 1fr;
+    grid-template-rows: auto 1fr;
+    align-items: center;
+    padding: 5px 8px;
+    position: relative;
+}
+
+.Comment:before{
+    content: "";
+    position: absolute;
+    width: 94%;
+    left: 2%;
+    bottom: -4px;
+    height: 1px;
+    background: var(--grey-2);
+}
+
+.Avatar{
+    grid-area: avatar;
+}
+
+.Owner{
+    grid-area: owner;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: var(--grey-2);
+    margin-left: 8px;
+}
+
+.Owner:hover{
+    color: var(--grey-2);
+    text-decoration: none;
+}
+
+.Date{
+    grid-area: date;
+    justify-self: end;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: .8rem;
+    color: var(--grey-1);
+
+}
+
+.Content{
+    grid-area: comment;
+    margin: 10px 0 20px 8px
+}

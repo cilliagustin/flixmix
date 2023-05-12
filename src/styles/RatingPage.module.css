@@ -21,8 +21,8 @@
 
 .Dropdown{
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 50px;
+    right: 10px;
 }
 
 .MovieTitle{
@@ -120,6 +120,10 @@
 
 .Comments{
     margin-top: 40px;
+    background: var(--white-1);
+    border-radius: 10px;
+    padding: 10px 0px 0px;
+    overflow: hidden;
 }
 
 
@@ -154,5 +158,8 @@
 
     .Content p:last-child span{
         color: var(--white-1);
+    }
+    .Comments{
+        border-radius: 10px 10px 0 0;
     }
 }
