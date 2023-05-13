@@ -1,31 +1,31 @@
-.Rating{
+.Rating {
     width: 100%;
 }
 
-.Header{
+.Header {
     width: 100%;
     background: var(--gradient-3);
     border-radius: 0 0 10px 10px;
     box-shadow: var(--shadow);
     display: grid;
     grid-template-areas:
-    "title poster"
-    "stars poster"
-    "user poster"
-    ". poster";
+        "title poster"
+        "stars poster"
+        "user poster"
+        ". poster";
     grid-template-columns: 1fr 100px;
     grid-template-rows: auto auto auto 1fr;
     padding: 50px 15px 20px;
     position: relative;
 }
 
-.Dropdown{
+.Dropdown {
     position: absolute;
     top: 50px;
     right: 10px;
 }
 
-.MovieTitle{
+.MovieTitle {
     grid-area: title;
     color: var(--translucid-white);
     font-size: 1.5rem;
@@ -34,42 +34,43 @@
     margin-bottom: 10px;
 }
 
-.MovieTitle span{
+.MovieTitle span {
     font-size: 1.1rem;
     font-weight: 300;
     display: block;
 }
 
-.Stars{
+.Stars {
     grid-area: stars;
     margin-bottom: 10px;
 }
 
-.User{
+.User {
     grid-area: user;
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-.User a{
+.User a {
     color: var(--grey-2);
     font-size: 1.2rem;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
 }
-.User a:hover{
+
+.User a:hover {
     text-decoration: none;
 }
 
-.Poster{
+.Poster {
     grid-area: poster;
     width: 100%;
     height: auto;
     border-radius: 5px;
 }
 
-.Content{
+.Content {
     width: 100%;
     padding: 20px 15px 0px;
     display: flex;
@@ -80,67 +81,67 @@
 }
 
 .Content h2,
-.RatingContent{
+.RatingContent {
     width: 100%;
 }
 
 
 .Content h2,
-.Content p{
+.Content p {
     color: var(--grey-2);
 }
 
-.Content h2{
+.Content h2 {
     font-size: 1.3rem;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
 }
 
-.Content p{
+.Content p {
     margin-bottom: 0;
 }
 
 
-.Content .RatingContent{
+.Content .RatingContent {
     margin-bottom: 15px;
 }
 
-.CommentsCount i{
+.CommentsCount i {
     margin-right: 5px;
 }
 
 .CommentsCount i,
-.CommentsCount span{
+.CommentsCount span {
     font-size: .9rem;
     color: var(--grey-2);
 }
 
-.Content p:last-child{
+.Content p:last-child {
     font-size: .8rem;
     margin-left: auto;
 }
 
-.Content p:last-child span{
+.Content p:last-child span {
     color: var(--grey-1);
 }
 
 
-.Input{
-    border-radius: 10px!important;
+.Input {
+    border-radius: 10px !important;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
 }
 
-.Textarea{
+.Textarea {
     grid-area: textarea;
     width: 100%;
     resize: none;
-    border-radius: 10px!important;
+    border-radius: 10px !important;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
 }
 
-.Comments{
+.Comments {
     margin-top: 40px;
     background: var(--white-1);
     border-radius: 10px;
@@ -149,39 +150,49 @@
 }
 
 
-@media only screen and (min-width: 768px){
+@media only screen and (min-width: 768px) {
+
     .Rating,
-    .Comments{
+    .Comments {
         margin-left: auto;
         margin-right: auto;
         width: calc(100% - 20px);
         max-width: 1000px;
     }
-    .Rating{
+
+    .Rating {
         background: var(--gradient-3);
         border-radius: 10px;
         box-shadow: var(--shadow);
         padding-bottom: 20px;
     }
-    .Header{
+
+    .Header {
         margin-top: 20px;
         background: none;
         box-shadow: none;
         grid-template-areas:
-        none;
+            none;
         grid-template-areas:
-        "poster title"
-        "poster stars"
-        "poster user"
-        "poster .";
+            "poster title"
+            "poster stars"
+            "poster user"
+            "poster .";
         grid-template-columns: 150px 1fr;
         gap: 10px;
     }
 
-    .Content p:last-child span{
+    .Content p:last-child span {
         color: var(--white-1);
     }
-    .Comments{
+
+    .Comments {
         border-radius: 10px 10px 0 0;
+    }
+
+    .CommentsCount i,
+    .CommentsCount span {
+        font-size: 1.2rem;
+        color: var(--translucid-white);
     }
 }

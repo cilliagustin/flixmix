@@ -11,7 +11,7 @@ import styles from "../../styles/CommentCreateEditForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 
 const CommentEditForm = (props) => {
-    const { id, profile_id, content, profileImage, setComments, setShowEditForm, endpoint } = props;
+    const { id, rating, profile_id, content, profileImage, setComments, setShowEditForm, endpoint } = props;
     const [formContent, setFormContent] = useState(content);
 
     const handleChange = (event) => {
@@ -21,9 +21,9 @@ const CommentEditForm = (props) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();
-        formData.append('content', formContent);
+        formData.append('content', formContent.trim());
+        formData.append('rating', rating);
 
-        console.log(formContent)
         try {
             await axiosRes.put(`/${endpoint}/${id}/`, formData);
             setComments((prevComments) => ({

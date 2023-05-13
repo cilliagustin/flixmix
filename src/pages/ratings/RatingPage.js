@@ -5,14 +5,16 @@ import { Link, useHistory, useParams } from 'react-router-dom/cjs/react-router-d
 import { axiosReq, axiosRes } from '../../api/axiosDefaults'
 import DisplayRating from '../../components/DisplayRating'
 import Avatar from '../../components/Avatar'
+import Asset from '../../components/Asset'
 import { Form, Row, Col } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
 import { MoreDropdown } from '../../components/MoreDropdown'
 import RateButtons from '../../components/RateButtons'
-import { handleInputChange } from '../../utils/utils'
+import { fetchMoreData, handleInputChange } from '../../utils/utils'
 import { useCurrentUser } from '../../contexts/CurrentUserContext'
 import CommentCreateForm from '../comments/CommentCreateForm'
 import Comment from '../comments/Comment'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 const RatingPage = () => {
   const { id } = useParams()
@@ -24,7 +26,7 @@ const RatingPage = () => {
   const profile_image = currentUser?.profile_image;
   const [comments, setComments] = useState({ results: [] });
 
-  console.log(rating)
+  console.log(comments)
 
   const history = useHistory();
 
@@ -207,15 +209,24 @@ const RatingPage = () => {
               "Comments"
             ) : null}
             {comments.results.length ? (
-              comments.results.map(comment => (
-                <Comment
-                  key={comment.id}
-                  {...comment}
-                  setParent={setRating}
-                  setComments={setComments}
-                  endpoint="ratingcomments"
-                />
-              ))
+              <InfiniteScroll
+              children={
+                comments.results.map(comment => (
+                  <Comment
+                    key={comment.id}
+                    {...comment}
+                    setParent={setRating}
+                    setComments={setComments}
+                    endpoint="ratingcomments"
+                  />
+                ))
+              }
+              dataLength={comments.results.length}
+              loader={<Asset spinner />}
+              hasMore={!!comments.next}
+              next={()=> fetchMoreData(comments, setComments)}
+            />
+              
             ) : currentUser ? (
               <span>No comments yet, be the first to do it</span>
             ) : (

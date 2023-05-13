@@ -16,6 +16,7 @@
     align-items: center;
     padding: 5px 8px;
     position: relative;
+    overflow: hidden;
 }
 
 .Comment:before,
@@ -24,7 +25,7 @@
     position: absolute;
     width: 96%;
     left: 2%;
-    bottom: -4px;
+    bottom: 1px;
     height: 1px;
     background: var(--grey-2);
 }
