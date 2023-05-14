@@ -220,7 +220,7 @@ const RatingPage = () => {
                     endpoint="ratingcomments"
                   />
                 ))
-              }
+              }n
               dataLength={comments.results.length}
               loader={<Asset spinner />}
               hasMore={!!comments.next}

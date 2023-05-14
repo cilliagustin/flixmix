@@ -1,110 +1,98 @@
-.Container{
-    min-height: 20px;
-    border-radius: 10px;
-    padding: 20px;
+.Card{
     width: 100%;
-    display: flex;
-    flex-flow: row;
-    flex-wrap: wrap;
-    position: relative;
+    display: grid;
+    padding: 10px;
+    grid-template-areas:
+    "movieTitle movieTitle movieTitle movieTitle"
+    "stars stars owner avatar"
+    "poster ratingTitle ratingTitle ratingTitle"
+    "poster ratingContent ratingContent ratingContent"
+    ;
+    grid-template-columns: 75px auto auto 25px;
+    grid-template-rows: auto auto 1fr 1.5fr;
+
 }
 
-.Container:after{
-    content: "";
-    width: 90%;
-    position: absolute;
-    z-index: 2;
-    bottom: -5px;
-    left: 5%;
-    background: var(--grey-2);
-    height: 1px;
-}
 
-.UserRating{
-    position: relative;
-    background: var(--white-1);
-    margin: 50px auto 10px auto;
-    width: calc(100% - 20px);
-    max-width: 1000px;
-}
-
-.UserRating:after{
-    display: none;
-}
-
-.Dropdown{
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-.User{
-    margin-left: 8px;
-    margin-right: auto;
-}
-
-.User a {
+.MovieTitle,
+.Owner,
+.RatingTitle,
+.RatingContent,
+.MovieTitle:hover,
+.Owner:hover,
+.RatingTitle:hover,
+.RatingContent:hover{
+    text-decoration: none;
     color: var(--grey-2);
-    font-size: .9rem;
     font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    
+}
+
+.MovieTitle{
+    grid-area: movieTitle;
+    align-self: center;
+}
+
+.MovieTitle h2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.MovieTitle span{
+    font-size: .9rem;
+    margin-left: 3px;
 }
 
 .Stars{
-    width: auto;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    grid-area: stars;
+    align-self: center;
 }
 
-.UserRating .Stars{
-    margin-right: 40px;
+.Owner{
+    grid-area: owner;
+    align-self: center;
+    justify-self: end;
+    margin-right: 5px;
+    font-size: .8rem;
 }
 
-.Stars i{
-    color: var(--grey-2);
-    font-size: 1.1rem;
+.Avatar{
+    grid-area: avatar;
+    align-self: center;
 }
 
-.Title{
-    margin: 10px 0 15px;
+.Poster{
+    margin-top: 20px;
+    grid-area: poster;
     width: 100%;
-    font-size: 1.4rem;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
 }
 
-.Content{
-    width: 100%;
-    text-align: justify;
+.RatingTitle,
+.RatingTitle:hover,
+.RatingContent,
+.RatingContent:hover{
+    font-family: 'Work Sans', sans-serif;
 }
 
-.Title a,
-.Content a{
-    color: var(--grey-2);
+.RatingTitle{
+    grid-area: ratingTitle;
+    margin: 20px 0 0 10px;
+}
+.RatingTitle h3{
+    font-size: 1.2rem;
+    margin-bottom: .25rem;
 }
 
-.Title a:hover,
-.Content a:hover,
-.User a:hover{
-    text-decoration: none;
+.RatingContent{
+    grid-area: ratingContent;
+    margin-left: 10px;
 }
 
-.CommentCount{
-    display: flex;
-    flex-flow: column;
-    text-align: center;
-    justify-content: center;
-    margin-left: auto;
-}
 
-.CommentCount i,
-.CommentCount span{
-    color: var(--grey-2);
-    font-size: 1.1rem;
-}
-.CommentCount span{
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
+
+
+@media only screen and (min-width: 768px){
+    .Last{
+        display: none;
+    }
 }

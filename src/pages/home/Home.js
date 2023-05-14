@@ -4,6 +4,7 @@ import { Col, Row } from "react-bootstrap";
 import header from '../../assets/header.jpg'
 import flixmix from '../../assets/flixmix_purple.png'
 import MoviesPreview from '../movies/MoviesPreview';
+import RatingsPreview from '../ratings/RatingsPreview';
 
 const Home = () => {
   return (
@@ -23,7 +24,7 @@ const Home = () => {
                     <h2>Latest Movies added</h2>
                 </div>
                 <div className={styles.LatestMovies}>
-                    <MoviesPreview message="No movies yet here" />
+                    <MoviesPreview message="No movies here yet" />
                 </div>
             </Col>
         </Row>
@@ -31,7 +32,7 @@ const Home = () => {
             <Col className={`${styles.Reviews} px-0`}>
                 <h2>Latest Reviews</h2>
                 <div className={styles.LatestReviews}>
-                    reviews
+                    <RatingsPreview message="No ratings here yet" />
                 </div>
             </Col>
         </Row> 

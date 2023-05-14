@@ -1,4 +1,4 @@
-.Header{
+.Header {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,7 +6,8 @@
     min-height: 20px;
     background: var(--purple-2);
 }
-.HeaderImg{
+
+.HeaderImg {
     min-width: 100%;
     width: auto;
     height: 70vh;
@@ -14,7 +15,7 @@
     mask-image: linear-gradient(rgba(0, 0, 0, .95)40%, rgba(0, 0, 0, .3) 80%, rgba(0, 0, 0, 0));
 }
 
-.TitleContainer{
+.TitleContainer {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -25,13 +26,13 @@
     padding: 10px 15px 10px;
 }
 
-.TitleContainer img{
+.TitleContainer img {
     width: 80%;
     max-width: 600px;
     margin-bottom: 10px;
 }
 
-.TitleContainer h1{
+.TitleContainer h1 {
     text-align: center;
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
@@ -40,12 +41,12 @@
 }
 
 
-.MoviesTitle{
+.MoviesTitle {
     position: relative;
     height: 0;
 }
 
-.MoviesTitle::before{
+.MoviesTitle::before {
     content: "";
     position: absolute;
     width: 100%;
@@ -55,7 +56,7 @@
     border-radius: 0 0 50% 50% / 0 0 100% 100%;
 }
 
-.Movies h2{
+.Movies h2 {
     color: var(--translucid-white);
     font-size: 1.3rem;
     font-family: 'Poppins', sans-serif;
@@ -67,17 +68,17 @@
 }
 
 .LatestMovies,
-.LatestReviews{
+.LatestReviews {
     width: 100%;
     margin-top: 70px;
 }
 
-.Reviews{
+.Reviews {
     width: 100%;
     min-height: 200px;
 }
 
-.Reviews h2{
+.Reviews h2 {
     color: var(--grey-2);
     font-size: 1.3rem;
     font-family: 'Poppins', sans-serif;
@@ -86,7 +87,7 @@
     text-align: center;
 }
 
-.LatestReviews{
+.LatestReviews {
     width: 100%;
     margin-top: 30px;
 }
@@ -97,12 +98,22 @@
 
 
 
-@media only screen and (min-width: 768px){
-    .TitleContainer h1{
+@media only screen and (min-width: 768px) {
+    .TitleContainer h1 {
         text-align: center;
         font-family: 'Poppins', sans-serif;
         font-weight: 700;
         color: var(--translucid-white);
         font-size: 1.7rem;
     }
+
+    .LatestMovies,
+    .LatestReviews {
+        margin-left: auto;
+        margin-right: auto;
+        width: calc(100% - 20px);
+        max-width: 1000px;
+    }
+
+
 }

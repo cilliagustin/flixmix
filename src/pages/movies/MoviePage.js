@@ -13,7 +13,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import Movie from "./Movie";
 import RatingCreateForm from "../ratings/RatingCreateForm";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import RatingPreviewCard from "../ratings/RatingPreviewCard";
+import RatingMoviePage from "../ratings/RatingMoviePage";
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 function MoviePage() {
@@ -67,7 +67,7 @@ function MoviePage() {
           {currentUser && (
             wasRated ? (
               // add later a preview rate card
-              <RatingPreviewCard 
+              <RatingMoviePage 
                 rating={userRating} 
                 currentUserRating={true} 
                 setMovie={setMovie}
@@ -94,7 +94,7 @@ function MoviePage() {
                 children={
                   ratings.results.map((rating) => {
                     if (rating.id !== movie.results[0]?.rating_id) {
-                      return <RatingPreviewCard key={rating.id} rating={rating} />
+                      return <RatingMoviePage key={rating.id} rating={rating} />
                     }
                     return null;
                   })
