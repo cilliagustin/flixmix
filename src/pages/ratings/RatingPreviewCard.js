@@ -5,7 +5,6 @@ import DisplayRating from '../../components/DisplayRating'
 import Avatar from '../../components/Avatar'
 
 const RatingPreviewCard = (props) => {
-    console.log(props)
     const {
         content,
         id,

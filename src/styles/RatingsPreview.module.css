@@ -1,15 +1,58 @@
-.HomeContainer{
+.HomeContainer,
+.InfiniteScrollContainer > div > div{
     width: 100%;
     background: var(--gradient-3);
     display: flex;
     flex-flow: column;
+    border-radius: 10px;
+}
+
+.HomeContainer > div:after,
+.InfiniteScrollContainer > div > div > div:after{
+    left: 5%;
+    width: 90%;
+}
+
+.HomeContainer > div:last-child:after{
+    display: none;
 }
 
 @media only screen and (min-width: 768px){
-    .HomeContainer{
+    .HomeContainer,
+    .InfiniteScrollContainer > div > div{
         display: grid;
         padding: 0px 20px;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows:repeat(5, 1fr);
+    }
+
+    .InfiniteScrollContainer > div > div{
+        grid-template-rows:1fr;
+    }
+
+    .HomeContainer > div:nth-child(odd):before,
+    .InfiniteScrollContainer > div > div > div:nth-child(odd):before{
+        background: var(--translucid-white);
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 90%;
+        top: 5%;
+        right: 1px;
+    }
+
+    .HomeContainer > div:nth-child(odd):after,
+    .InfiniteScrollContainer > div > div > div:nth-child(odd):after{
+        right: 5%;
+        left: auto;
+    }
+
+    .HomeContainer > div:nth-child(even):after,
+    .InfiniteScrollContainer > div > div > div:nth-child(even):after{
+        left: 5%;
+    }
+
+    .HomeContainer > div:nth-last-child(2):after{
+        display: none;
     }
 }

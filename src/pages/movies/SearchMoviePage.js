@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { Form, Col, Row, Container } from "react-bootstrap";
 
-import styles from '../../styles/SearchMoviePage.module.css'
+import styles from '../../styles/SearchMovieRatingPage.module.css'
 import MoviesPreview from './MoviesPreview';
 
 const SearchMoviePage = () => {

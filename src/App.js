@@ -11,6 +11,7 @@ import { useCurrentUser } from './contexts/CurrentUserContext';
 import SearchMoviePage from './pages/movies/SearchMoviePage';
 import MovieEditForm from './pages/movies/MovieEditForm';
 import RatingPage from './pages/ratings/RatingPage';
+import SearchRatingsPage from './pages/ratings/SearchRatingsPage';
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
             <Switch>
               <Route exact path="/" render={() => <Home />} />
               <Route exact path="/search/movie" render={() => <SearchMoviePage />} />
-              <Route exact path="/search/review" render={() => <h1>search review</h1>} />
+              <Route exact path="/search/review" render={() => <SearchRatingsPage />} />
               <Route exact path="/search/list" render={() => <h1>search list</h1>} />
               <Route exact path="/add/movie" render={() => <MovieCreateForm />} />
               <Route exact path="/movies/:id/edit" render={() => <MovieEditForm />} />

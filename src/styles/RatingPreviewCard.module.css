@@ -1,16 +1,24 @@
-.Card{
+.Card {
     width: 100%;
     display: grid;
     padding: 10px;
     grid-template-areas:
-    "movieTitle movieTitle movieTitle movieTitle"
-    "stars stars owner avatar"
-    "poster ratingTitle ratingTitle ratingTitle"
-    "poster ratingContent ratingContent ratingContent"
+        "movieTitle movieTitle owner avatar"
+        "stars stars stars stars"
+        "poster ratingTitle ratingTitle ratingTitle"
+        "poster ratingContent ratingContent ratingContent"
     ;
-    grid-template-columns: 75px auto auto 25px;
-    grid-template-rows: auto auto 1fr 1.5fr;
+    grid-template-columns: auto 1fr auto 25px;
+    grid-template-rows: auto auto auto 1fr;
+    position: relative;
+}
 
+.Card:after {
+    background: var(--translucid-white);
+    content: "";
+    position: absolute;
+    height: 2px;
+    bottom: 1px;
 }
 
 
@@ -21,34 +29,36 @@
 .MovieTitle:hover,
 .Owner:hover,
 .RatingTitle:hover,
-.RatingContent:hover{
+.RatingContent:hover {
     text-decoration: none;
     color: var(--grey-2);
     font-family: 'Poppins', sans-serif;
 }
 
-.MovieTitle{
+.MovieTitle {
     grid-area: movieTitle;
     align-self: center;
 }
 
-.MovieTitle h2{
+.MovieTitle h2 {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    margin: 0;
 }
 
-.MovieTitle span{
+.MovieTitle span {
     font-size: .9rem;
     margin-left: 3px;
 }
 
-.Stars{
+.Stars {
+    margin-top: 15px;
     grid-area: stars;
     align-self: center;
 }
 
-.Owner{
+.Owner {
     grid-area: owner;
     align-self: center;
     justify-self: end;
@@ -56,34 +66,35 @@
     font-size: .8rem;
 }
 
-.Avatar{
+.Avatar {
     grid-area: avatar;
     align-self: center;
 }
 
-.Poster{
+.Poster {
     margin-top: 20px;
     grid-area: poster;
-    width: 100%;
+    width: 75px;
 }
 
 .RatingTitle,
 .RatingTitle:hover,
 .RatingContent,
-.RatingContent:hover{
+.RatingContent:hover {
     font-family: 'Work Sans', sans-serif;
 }
 
-.RatingTitle{
+.RatingTitle {
     grid-area: ratingTitle;
     margin: 20px 0 0 10px;
 }
-.RatingTitle h3{
+
+.RatingTitle h3 {
     font-size: 1.2rem;
     margin-bottom: .25rem;
 }
 
-.RatingContent{
+.RatingContent {
     grid-area: ratingContent;
     margin-left: 10px;
 }
@@ -91,8 +102,30 @@
 
 
 
-@media only screen and (min-width: 768px){
-    .Last{
-        display: none;
+@media only screen and (min-width: 768px) {
+    .Card {
+        grid-template-areas:
+            "movieTitle movieTitle movieTitle movieTitle"
+            "stars stars owner avatar"
+            "poster ratingTitle ratingTitle ratingTitle"
+            "poster ratingContent ratingContent ratingContent"
+        ;
+        grid-template-columns: 75px auto auto 25px;
+    }
+
+    .Card:after {
+        width: calc(90% + 20px);
+    }
+
+    .MovieTitle h2 {
+        justify-content: center;
+    }
+
+    .Stars {
+        margin-top: 0;
+    }
+
+    .Poster {
+        width: 100%;
     }
 }
