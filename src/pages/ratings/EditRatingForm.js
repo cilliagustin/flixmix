@@ -10,6 +10,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Avatar from "../../components/Avatar";
 import { axiosReq } from "../../api/axiosDefaults";
 import { handleInputChange } from '../../utils/utils';
+import Alert from '../../components/Alert';
 
 const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, rating, title, content, value }) => {
 
@@ -37,77 +38,106 @@ const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, r
             const difference = ratingData.value - oldValue
             const newSumOfRatings = sumOfRatings + parseFloat(difference);
             const newAvgRating = newSumOfRatings / totalNumberOfRatings;
-            
+
             setMovie((prevMovie) => ({
                 results: [
-                  {
-                    ...prevMovie.results[0],
-                    avg_rating: newAvgRating,
-                  },
+                    {
+                        ...prevMovie.results[0],
+                        avg_rating: newAvgRating,
+                    },
                 ],
-              }))
-              setUserRating((prevRating) => ({
-                    
-                    ...prevRating,
-                    title: ratingData.title,
-                    content: ratingData.content,
-                    value: ratingData.value,
-                  
-              }))
+            }))
+            setUserRating((prevRating) => ({
+
+                ...prevRating,
+                title: ratingData.title,
+                content: ratingData.content,
+                value: ratingData.value,
+
+            }))
             setOldValue(ratingData.value)
             handleIsEditing()
         } catch (err) {
             console.log(err)
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data);
+                createAlert()
+            }
         }
     }
+
+    //Errors and alert
+    const [errors, setErrors] = useState({});
+    const [timeout, setTimeoutId] = useState(null);
+    const [activeAlert, setActiveAlert] = useState(false);
+    const allErrors = [
+        { title: "Rating title", message: errors.title },
+        { title: "Rating value", message: errors.value },
+        { title: "Rating content", message: errors.content },
+
+    ]
+    const createAlert = () => {
+        if (timeout) {
+            clearTimeout(timeout);
+            setTimeoutId(null);
+            setActiveAlert(false);
+        }
+        setActiveAlert(true);
+        const newTimeout = setTimeout(() => {
+            setActiveAlert(false);
+        }, 5000);
+        setTimeoutId(newTimeout);
+    };
     return (
-        <Form className={styles.CreateRating} onSubmit={handleSubmit}>
-            <Form.Group>
-                <InputGroup className={styles.FormDisplay}>
-                    <Avatar
-                        src={rating.profile_image}
-                        height={55}
-                        id={rating.profile_id}
-                        username={null}
-                        className={styles.Avatar}
-                    />
-                    <Form.Control
-                        className={`w-100 ${styles.Input}`}
-                        placeholder='Review Title'
-                        type="text"
-                        name="title"
-                        value={ratingData.title}
-                        onChange={(event) => handleInputChange(event, ratingData, setRatingData)}
-                    />
-                    <div className={styles.ButtonControl}>
-                        <RateButtons setRating={setRatingData} rating={ratingData} />
-                    </div>
-                    <Form.Control
-                        className={`d-none`}
-                        type="number"
-                        name="value"
-                        value={ratingData.value}
-                        readOnly
-                    />
-                    <Form.Control
-                        className={`w-100 ${styles.Textarea}`}
-                        placeholder='Write your review'
-                        as="textarea"
-                        rows={6}
-                        name="content"
-                        value={ratingData.content}
-                        onChange={(event) => handleInputChange(event, ratingData, setRatingData)}
-                    />
-                </InputGroup>
-            </Form.Group>
-            <button
-                className={`mx-auto mt-4 ${btnStyles.Button}`}
-                disabled={!content.trim()}
-                type="submit"
-            >
-                Edit
-            </button>
-        </Form>
+        <>
+            <Alert type="warning" errors={allErrors} active={activeAlert} />
+            <Form className={styles.CreateRating} onSubmit={handleSubmit}>
+                <Form.Group>
+                    <InputGroup className={styles.FormDisplay}>
+                        <Avatar
+                            src={rating.profile_image}
+                            height={55}
+                            id={rating.profile_id}
+                            username={null}
+                            className={styles.Avatar}
+                        />
+                        <Form.Control
+                            className={`w-100 ${styles.Input}`}
+                            placeholder='Review Title'
+                            type="text"
+                            name="title"
+                            value={ratingData.title}
+                            onChange={(event) => handleInputChange(event, ratingData, setRatingData)}
+                        />
+                        <div className={styles.ButtonControl}>
+                            <RateButtons setRating={setRatingData} rating={ratingData} />
+                        </div>
+                        <Form.Control
+                            className={`d-none`}
+                            type="number"
+                            name="value"
+                            value={ratingData.value}
+                            readOnly
+                        />
+                        <Form.Control
+                            className={`w-100 ${styles.Textarea}`}
+                            placeholder='Write your review'
+                            as="textarea"
+                            rows={6}
+                            name="content"
+                            value={ratingData.content}
+                            onChange={(event) => handleInputChange(event, ratingData, setRatingData)}
+                        />
+                    </InputGroup>
+                </Form.Group>
+                <button
+                    className={`mx-auto mt-4 ${btnStyles.Button}`}
+                    type="submit"
+                >
+                    Edit
+                </button>
+            </Form>
+        </>
     )
 }
 

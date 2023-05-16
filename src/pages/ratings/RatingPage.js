@@ -15,6 +15,7 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext'
 import CommentCreateForm from '../comments/CommentCreateForm'
 import Comment from '../comments/Comment'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import Alert from '../../components/Alert'
 
 const RatingPage = () => {
   const { id } = useParams()
@@ -32,6 +33,12 @@ const RatingPage = () => {
   const handleIsEditing = () => {
     setRating(oldRating)
     setIsEditing(!isEditing)
+  }
+
+  const cancelEdit = (e)=>{
+    e.preventDefault(); 
+    setActiveAlert(false)
+    handleIsEditing();
   }
 
 
@@ -58,6 +65,10 @@ const RatingPage = () => {
       setIsEditing(!isEditing)
     } catch (err) {
       console.log(err)
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
+        createAlert()
+      }
     }
   }
 
@@ -103,9 +114,33 @@ const RatingPage = () => {
   }, [rating])
 
 
+    //Errors and alert
+    const [errors, setErrors] = useState({});
+    const [timeout, setTimeoutId] = useState(null);
+    const [activeAlert, setActiveAlert] = useState(false);
+    const allErrors = [
+      { title: "Rating title", message: errors.title },
+      { title: "Rating value", message: errors.value },
+      { title: "Rating content", message: errors.content },
+  
+    ]
+    const createAlert = () => {
+      if (timeout) {
+        clearTimeout(timeout);
+        setTimeoutId(null);
+        setActiveAlert(false);
+      }
+      setActiveAlert(true);
+      const newTimeout = setTimeout(() => {
+        setActiveAlert(false);
+      }, 5000);
+      setTimeoutId(newTimeout);
+    };
+
 
   return (
     <>
+    <Alert type="warning" errors={allErrors} active={activeAlert} />
       <Row className='m-0'>
         <Col className='px-0'>
           <div className={styles.Rating}>
@@ -172,7 +207,7 @@ const RatingPage = () => {
                   </button>
                   <button
                     className={`mr-auto ml-2 mt-4 ${btnStyles.Button}`}
-                    onClick={(e) => { e.preventDefault(); handleIsEditing() }}
+                    onClick={e=> cancelEdit(e)}
                   >
                     Cancel
                   </button>

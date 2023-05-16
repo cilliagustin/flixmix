@@ -9,6 +9,7 @@ import Avatar from "../../components/Avatar";
 import { axiosReq } from "../../api/axiosDefaults";
 import RateButtons from '../../components/RateButtons';
 import { handleInputChange } from '../../utils/utils';
+import Alert from "../../components/Alert";
 
 function RatingCreateForm(props) {
   const { movieId, movieData, setMovie, setRatings, setWasRated, profile_image, profile_id } = props;
@@ -58,58 +59,87 @@ function RatingCreateForm(props) {
       setWasRated(true);
     } catch (err) {
       console.log(err);
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
+        createAlert()
+      }
     }
+  };
+
+  //Errors and alert
+  const [errors, setErrors] = useState({});
+  const [timeout, setTimeoutId] = useState(null);
+  const [activeAlert, setActiveAlert] = useState(false);
+  const allErrors = [
+    { title: "Rating title", message: errors.title },
+    { title: "Rating value", message: errors.value },
+    { title: "Rating content", message: errors.content },
+
+  ]
+  const createAlert = () => {
+    if (timeout) {
+      clearTimeout(timeout);
+      setTimeoutId(null);
+      setActiveAlert(false);
+    }
+    setActiveAlert(true);
+    const newTimeout = setTimeout(() => {
+      setActiveAlert(false);
+    }, 5000);
+    setTimeoutId(newTimeout);
   };
 
 
   return (
-    <Form className={styles.CreateRating} onSubmit={handleSubmit}>
-      <Form.Group>
-        <InputGroup className={styles.FormDisplay}>
-          <Avatar
-            src={profile_image}
-            height={55}
-            id={profile_id}
-            username={null}
-            className={styles.Avatar}
-          />
-          <Form.Control
-            className={`w-100 ${styles.Input}`}
-            placeholder='Review Title'
-            type="text"
-            name="title"
-            value={title}
-            onChange={(event) => handleInputChange(event, ratingData, setRatingData)}
-          />
-          <div className={styles.ButtonControl}>
-            <RateButtons setRating={setRatingData} rating={ratingData} />
-          </div>
-          <Form.Control
-            className={`d-none`}
-            type="number"
-            name="value"
-            value={value}
-            readOnly
-          />
-          <Form.Control
-            className={`w-100 ${styles.Textarea}`}
-            placeholder='Write your review'
-            as="textarea"
-            rows={6}
-            name="content"
-            value={content}
-            onChange={(event) => handleInputChange(event, ratingData, setRatingData)}
-          />
-        </InputGroup>
-      </Form.Group>
-      <button
-        className={`mx-auto mt-4 ${btnStyles.Button}`}
-        disabled={!content.trim()}
-        type="submit"
-      >
-        post
-      </button>
-    </Form>
+    <>
+      <Alert type="warning" errors={allErrors} active={activeAlert} />
+      <Form className={styles.CreateRating} onSubmit={handleSubmit}>
+        <Form.Group>
+          <InputGroup className={styles.FormDisplay}>
+            <Avatar
+              src={profile_image}
+              height={55}
+              id={profile_id}
+              username={null}
+              className={styles.Avatar}
+            />
+            <Form.Control
+              className={`w-100 ${styles.Input}`}
+              placeholder='Review Title'
+              type="text"
+              name="title"
+              value={title}
+              onChange={(event) => handleInputChange(event, ratingData, setRatingData)}
+            />
+            <div className={styles.ButtonControl}>
+              <RateButtons setRating={setRatingData} rating={ratingData} />
+            </div>
+            <Form.Control
+              className={`d-none`}
+              type="number"
+              name="value"
+              value={value}
+              readOnly
+            />
+            <Form.Control
+              className={`w-100 ${styles.Textarea}`}
+              placeholder='Write your review'
+              as="textarea"
+              rows={6}
+              name="content"
+              value={content}
+              onChange={(event) => handleInputChange(event, ratingData, setRatingData)}
+            />
+          </InputGroup>
+        </Form.Group>
+        <button
+          className={`mx-auto mt-4 ${btnStyles.Button}`}
+          type="submit"
+        >
+          post
+        </button>
+      </Form>
+    </>
   );
 }
 
