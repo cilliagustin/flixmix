@@ -1,22 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Form, Col, Row, Container } from "react-bootstrap";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 import styles from '../../styles/SearchMovieRatingPage.module.css'
 import MoviesPreview from './MoviesPreview';
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 const SearchMoviePage = () => {
 
+  const currentUser = useCurrentUser()
+
   const [query, setQuery] = useState("");
-
   const [searchParameter, setSearchParameter] = useState("title")
+  const [searchFilter, setSearchFilter] = useState("");
 
-  const handleRadio = (e) =>{
+
+  useEffect(() => { console.log(searchFilter) }, [searchFilter])
+
+
+  const handleCheckBoxChange = (e) => {
+    const { name, checked } = e.target;
+
+    if (name === 'seen' && checked) {
+      setSearchFilter("seen");
+    } else if (name === 'watchlist' && checked) {
+      setSearchFilter("watchlist");
+    } else {
+      setSearchFilter("");
+    }
+  };
+
+  const handleRadio = (e) => {
     setSearchParameter(e.target.value)
     e.target.value === "release_decade" && setQuery("")
-
     e.target.value !== "release_decade" && !isNaN(query) && setQuery("")
-  
   }
 
   const placeholders = {
@@ -76,9 +94,66 @@ const SearchMoviePage = () => {
                 <Form.Check onChange={handleRadio} inline value="release_decade" label="Release decade" name="group" type={type} id={`inline-${type}-4`} />
               </div>
             ))}
+            {currentUser && (
+              <div className={styles.Checkbox}>
+                <input
+                  type="checkbox"
+                  name="seen"
+                  id='seen'
+                  checked={searchFilter === "seen"}
+                  onChange={handleCheckBoxChange}
+                />
+                <label htmlFor="seen">
+                  {searchFilter === "seen" ? (
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip>Filtering by seen movies</Tooltip>}
+                    >
+                      <i className="fa-solid fa-eye"></i>
+                    </OverlayTrigger>
+
+                  ) : (
+                    
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip>Filter by seen movies</Tooltip>}
+                    >
+                      <i className="fa-regular fa-eye"></i>
+                    </OverlayTrigger>
+                  )}
+                </label>
+                <input
+                  type="checkbox"
+                  name="watchlist"
+                  id='watchlist'
+                  checked={searchFilter === "watchlist"}
+                  onChange={handleCheckBoxChange}
+                />
+                <label htmlFor="watchlist">
+                  {searchFilter === "watchlist" ? (
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip>Filtering movies in your watchlist</Tooltip>}
+                    >
+                     <i className="fa-solid fa-bookmark"></i>
+                    </OverlayTrigger>
+                    
+                  ) : (
+                    <OverlayTrigger
+                      placement="top"
+                      overlay={<Tooltip>Filter movies in your watchlist</Tooltip>}
+                    >
+                       <i className="fa-regular fa-bookmark"></i>
+                    </OverlayTrigger>
+                   
+                  )}
+                </label>
+
+              </div>
+            )}
           </Form>
 
-          <MoviesPreview message="No result found adjust your search" query={query} searchParameter={searchParameter} infiniteScroll={true} />
+          <MoviesPreview message="No result found adjust your search" query={query} searchParameter={searchParameter} searchFilter={searchFilter} infiniteScroll={true} />
         </Col>
       </Row>
     </Container>

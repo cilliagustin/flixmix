@@ -52,4 +52,20 @@
     color: var(--purple-1);
 }
 
+.Checkbox{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+}
+
+.Checkbox input{
+    display: none;
+}
+
+.Checkbox label{
+    color: var(--purple-1);
+    font-size: 1.8rem;
+}
+
 
