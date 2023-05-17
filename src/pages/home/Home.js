@@ -26,7 +26,7 @@ const Home = () => {
                 </div>
                 <div className={styles.LatestMovies}>
                     <MoviesPreview message="No movies here yet" />
-                    <Link className={styles.Link} to={'/search/movies/'}>View all movies <i className="fa-solid fa-arrow-right"></i></Link>
+                    <Link className={styles.Link} to={'/search/movie/'}>View all movies <i className="fa-solid fa-arrow-right"></i></Link>
                 </div>
             </Col>
         </Row>
@@ -35,7 +35,7 @@ const Home = () => {
                 <h2>Latest Reviews</h2>
                 <div className={styles.LatestReviews}>
                     <RatingsPreview message="No ratings here yet" />
-                    <Link className={styles.Link} to={'/search/reviews/'}>View all reviews <i className="fa-solid fa-arrow-right"></i></Link>
+                    <Link className={styles.Link} to={'/search/review/'}>View all reviews <i className="fa-solid fa-arrow-right"></i></Link>
                 </div>
             </Col>
         </Row> 
