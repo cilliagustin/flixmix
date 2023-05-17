@@ -114,7 +114,7 @@ const LogInRegister = () => {
   return (
     <>
       <Alert type="warning" errors={allErrors} active={activeAlert} />
-      <Row>
+      <Row className='mx-0'>
         <Col className='my-auto' xs={{ span: 10, offset: 1 }}>
           <Container className={styles.FormContainer}>
             <div className={`${styles.Forms} ${showRegister && styles.ShowRegister}`}>
