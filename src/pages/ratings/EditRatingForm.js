@@ -10,6 +10,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Avatar from "../../components/Avatar";
 import { axiosReq } from "../../api/axiosDefaults";
 import { handleInputChange } from '../../utils/utils';
+import { useErrorHandling } from './../../components/HandleErrors';
 import Alert from '../../components/Alert';
 
 const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, rating, title, content, value }) => {
@@ -60,34 +61,20 @@ const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, r
         } catch (err) {
             console.log(err)
             if (err.response?.status !== 401) {
-                setErrors(err.response?.data);
-                createAlert()
+                handleErrors(err.response?.data);
             }
         }
     }
 
-    //Errors and alert
-    const [errors, setErrors] = useState({});
-    const [timeout, setTimeoutId] = useState(null);
-    const [activeAlert, setActiveAlert] = useState(false);
-    const allErrors = [
-        { title: "Rating title", message: errors.title },
-        { title: "Rating value", message: errors.value },
-        { title: "Rating content", message: errors.content },
+  //Errors and alert
+  const { errors, activeAlert, handleErrors } = useErrorHandling();
+  const allErrors = [
+    { title: "Rating title", message: errors.title },
+    { title: "Rating value", message: errors.value },
+    { title: "Rating content", message: errors.content },
+  ]
 
-    ]
-    const createAlert = () => {
-        if (timeout) {
-            clearTimeout(timeout);
-            setTimeoutId(null);
-            setActiveAlert(false);
-        }
-        setActiveAlert(true);
-        const newTimeout = setTimeout(() => {
-            setActiveAlert(false);
-        }, 5000);
-        setTimeoutId(newTimeout);
-    };
+
     return (
         <>
             <Alert type="warning" errors={allErrors} active={activeAlert} />

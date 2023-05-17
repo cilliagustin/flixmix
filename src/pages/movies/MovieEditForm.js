@@ -10,6 +10,7 @@ import btnStyles from "../../styles/Button.module.css";
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom";
 import Alert from "../../components/Alert";
 import { handleInputChange } from "../../utils/utils";
+import { useErrorHandling } from './../../components/HandleErrors';
 
 function MovieEditForm() {
 
@@ -83,38 +84,23 @@ function MovieEditForm() {
         } catch (err) {
             console.log(err)
             if (err.response?.status !== 401) {
-                setErrors(err.response?.data);
-                createAlert()
+                handleErrors(err.response?.data);
             }
         }
     }
 
     
     //Errors and alert
-    const [errors, setErrors] = useState({});
-    const [timeout, setTimeoutId] = useState(null);
-    const [activeAlert, setActiveAlert] = useState(false);
+    const { errors, activeAlert, handleErrors } = useErrorHandling();
     const allErrors = [
         { title: "Movie title", message: errors.title },
         { title: "Movie synopsis", message: errors.synopsis },
         { title: "Movie director", message: errors.directors },
         { title: "Movie cast", message: errors.main_cast },
         { title: "Movie release year", message: errors.release_year },
-        { title: "Movie genre", message: errors.movie_genre },
+        { title: "Movie genre", message: "A valid genre must be selected" },
         { title: "Movie image", message: errors.poster },
     ]
-    const createAlert = () => {
-        if (timeout) {
-          clearTimeout(timeout);
-          setTimeoutId(null);
-          setActiveAlert(false);
-        }
-        setActiveAlert(true);
-        const newTimeout = setTimeout(() => {
-          setActiveAlert(false);
-        }, 5000);
-        setTimeoutId(newTimeout);
-      };
 
     const textFields = (
         <div className={`text-center`}>
@@ -167,6 +153,7 @@ function MovieEditForm() {
                     className={`${appStyles.TextArea} ${styles.Input}`}
                     type="number"
                     min="1888"
+                    max={new Date().getFullYear()}
                     name="release_year"
                     value={release_year}
                     onChange={(event) => handleInputChange(event, movieData, setMovieData)}

@@ -16,17 +16,16 @@ import CommentCreateForm from '../comments/CommentCreateForm'
 import Comment from '../comments/Comment'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Alert from '../../components/Alert'
+import { useErrorHandling } from './../../components/HandleErrors';
 
 const RatingPage = () => {
   const { id } = useParams()
   const [rating, setRating] = useState({ results: [] })
   const [oldRating, setOldRating] = useState({ results: [] })
-  const [movie, setMovie] = useState({ results: [] })
   const [isEditing, setIsEditing] = useState(false)
   const currentUser = useCurrentUser();
   const profile_image = currentUser?.profile_image;
   const [comments, setComments] = useState({ results: [] });
-
 
   const history = useHistory();
 
@@ -35,8 +34,8 @@ const RatingPage = () => {
     setIsEditing(!isEditing)
   }
 
-  const cancelEdit = (e)=>{
-    e.preventDefault(); 
+  const cancelEdit = (e) => {
+    e.preventDefault();
     setActiveAlert(false)
     handleIsEditing();
   }
@@ -45,17 +44,17 @@ const RatingPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    setOldRating(rating);
 
     const formData = new FormData();
 
     formData.append('title', rating.title);
     formData.append('content', rating.content);
     formData.append('value', rating.value);
-    formData.append('movie', movie.id);
+    formData.append('movie', rating.movie);
 
     try {
       await axiosReq.put(`/ratings/${rating.id}/`, formData);
+      setOldRating(rating);
       setRating((prevRating) => ({
         ...prevRating,
         title: rating.title,
@@ -66,8 +65,7 @@ const RatingPage = () => {
     } catch (err) {
       console.log(err)
       if (err.response?.status !== 401) {
-        setErrors(err.response?.data);
-        createAlert()
+        handleErrors(err.response?.data);
       }
     }
   }
@@ -85,9 +83,13 @@ const RatingPage = () => {
   useEffect(() => {
     const handleMount = async () => {
       try {
-        const { data: ratingData } = await axiosReq.get(`/ratings/${id}`)
+        const [{ data: ratingData }, { data: comments }] = await Promise.all([
+          axiosReq.get(`/ratings/${id}`),
+          axiosReq.get(`/ratingcomments/?rating=${id}`)
+        ])
         setRating(ratingData)
         setOldRating(ratingData)
+        setComments(comments)
 
       } catch (err) {
         console.log(err)
@@ -97,50 +99,18 @@ const RatingPage = () => {
     handleMount()
   }, [id])
 
-  useEffect(() => {
-    const fetchMovieData = async () => {
-      const [{ data: movieData }, { data: comments }] = await Promise.all([
-        axiosReq.get(`/movies/${rating.movie}`),
-        axiosReq.get(`/ratingcomments/?rating=${rating.id}`)
-      ])
-      setMovie(movieData);
-      setComments(comments)
-    }
-
-    if (rating.id !== undefined) {
-      fetchMovieData()
-    }
-
-  }, [rating])
-
-
-    //Errors and alert
-    const [errors, setErrors] = useState({});
-    const [timeout, setTimeoutId] = useState(null);
-    const [activeAlert, setActiveAlert] = useState(false);
-    const allErrors = [
-      { title: "Rating title", message: errors.title },
-      { title: "Rating value", message: errors.value },
-      { title: "Rating content", message: errors.content },
-  
-    ]
-    const createAlert = () => {
-      if (timeout) {
-        clearTimeout(timeout);
-        setTimeoutId(null);
-        setActiveAlert(false);
-      }
-      setActiveAlert(true);
-      const newTimeout = setTimeout(() => {
-        setActiveAlert(false);
-      }, 5000);
-      setTimeoutId(newTimeout);
-    };
+  //Errors and alert
+  const { errors, activeAlert, setActiveAlert, handleErrors } = useErrorHandling();
+  const allErrors = [
+    { title: "Rating title", message: errors.title },
+    { title: "Rating value", message: errors.value },
+    { title: "Rating content", message: errors.content },
+  ]
 
 
   return (
     <>
-    <Alert type="warning" errors={allErrors} active={activeAlert} />
+      <Alert type="warning" errors={allErrors} active={activeAlert} />
       <Row className='m-0'>
         <Col className='px-0'>
           <div className={styles.Rating}>
@@ -148,12 +118,12 @@ const RatingPage = () => {
               <div className={styles.Dropdown}>
                 <MoreDropdown handleEdit={handleIsEditing} handleDelete={handleDelete} />
               </div>
-              <h1 className={styles.MovieTitle}>{movie.title} <span>({movie.release_year})</span></h1>
+              <h1 className={styles.MovieTitle}>{rating.movie_title} <span>({rating.movie_release_year})</span></h1>
               <div
                 className={styles.Stars}
                 style={{ display: isEditing ? "none" : "block" }}
               >
-                <DisplayRating title={movie.title} rating={rating.value} type={"user"} />
+                <DisplayRating title={rating.movie_title} rating={rating.value} type={"user"} />
               </div>
               <div className={styles.User}>
                 <Avatar
@@ -164,7 +134,7 @@ const RatingPage = () => {
                 />
                 <Link to={`/profiles/${rating?.profile_id}`}>{rating?.owner}</Link>
               </div>
-              <img className={styles.Poster} src={movie.poster} alt={`${movie.title} movie poster`} />
+              <img className={styles.Poster} src={rating.movie_poster} alt={`${rating.movie_title} movie poster`} />
             </div>
             <div className={`${styles.Content} ${isEditing && "align-items-center"}`}>
 
@@ -207,7 +177,7 @@ const RatingPage = () => {
                   </button>
                   <button
                     className={`mr-auto ml-2 mt-4 ${btnStyles.Button}`}
-                    onClick={e=> cancelEdit(e)}
+                    onClick={e => cancelEdit(e)}
                   >
                     Cancel
                   </button>
@@ -244,23 +214,23 @@ const RatingPage = () => {
             ) : null}
             {comments.results.length ? (
               <InfiniteScroll
-              children={
-                comments.results.map(comment => (
-                  <Comment
-                    key={comment.id}
-                    {...comment}
-                    setParent={setRating}
-                    setComments={setComments}
-                    endpoint="ratingcomments"
-                  />
-                ))
-              }n
-              dataLength={comments.results.length}
-              loader={<Asset spinner />}
-              hasMore={!!comments.next}
-              next={()=> fetchMoreData(comments, setComments)}
-            />
-              
+                children={
+                  comments.results.map(comment => (
+                    <Comment
+                      key={comment.id}
+                      {...comment}
+                      setParent={setRating}
+                      setComments={setComments}
+                      endpoint="ratingcomments"
+                    />
+                  ))
+                } n
+                dataLength={comments.results.length}
+                loader={<Asset spinner />}
+                hasMore={!!comments.next}
+                next={() => fetchMoreData(comments, setComments)}
+              />
+
             ) : currentUser ? (
               <span>No comments yet, be the first to do it</span>
             ) : (

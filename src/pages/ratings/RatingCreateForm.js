@@ -10,6 +10,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import RateButtons from '../../components/RateButtons';
 import { handleInputChange } from '../../utils/utils';
 import Alert from "../../components/Alert";
+import { useErrorHandling } from './../../components/HandleErrors';
 
 function RatingCreateForm(props) {
   const { movieId, movieData, setMovie, setRatings, setWasRated, profile_image, profile_id } = props;
@@ -60,34 +61,18 @@ function RatingCreateForm(props) {
     } catch (err) {
       console.log(err);
       if (err.response?.status !== 401) {
-        setErrors(err.response?.data);
-        createAlert()
+        handleErrors(err.response?.data);
       }
     }
   };
 
   //Errors and alert
-  const [errors, setErrors] = useState({});
-  const [timeout, setTimeoutId] = useState(null);
-  const [activeAlert, setActiveAlert] = useState(false);
+  const { errors, activeAlert, handleErrors } = useErrorHandling();
   const allErrors = [
     { title: "Rating title", message: errors.title },
     { title: "Rating value", message: errors.value },
     { title: "Rating content", message: errors.content },
-
   ]
-  const createAlert = () => {
-    if (timeout) {
-      clearTimeout(timeout);
-      setTimeoutId(null);
-      setActiveAlert(false);
-    }
-    setActiveAlert(true);
-    const newTimeout = setTimeout(() => {
-      setActiveAlert(false);
-    }, 5000);
-    setTimeoutId(newTimeout);
-  };
 
 
   return (
