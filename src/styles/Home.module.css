@@ -71,6 +71,8 @@
 .LatestReviews {
     width: 100%;
     margin-top: 70px;
+    display: flex;
+    flex-flow: column;
 }
 
 .Reviews {
@@ -92,6 +94,18 @@
     margin-top: 30px;
 }
 
+.Link{
+    margin-left: auto;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
+
+.Link,
+.Link:hover{
+    color: var(--grey-2);
+    text-decoration: none;
+}
 
 
 
@@ -115,5 +129,8 @@
         max-width: 1000px;
     }
 
+    .Link{
+        font-size: 1.4rem;
+    }
 
 }
