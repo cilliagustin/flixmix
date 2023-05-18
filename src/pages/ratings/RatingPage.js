@@ -17,6 +17,7 @@ import Comment from '../comments/Comment'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Alert from '../../components/Alert'
 import { useErrorHandling } from './../../components/HandleErrors';
+import { useFullScreen, FullScreenModal } from '../../components/HandleFullScreen'
 
 const RatingPage = () => {
   const { id } = useParams()
@@ -26,6 +27,7 @@ const RatingPage = () => {
   const currentUser = useCurrentUser();
   const profile_image = currentUser?.profile_image;
   const [comments, setComments] = useState({ results: [] });
+  const { fullScreen, handleFullScreen, imageData } = useFullScreen();
 
   const history = useHistory();
 
@@ -111,6 +113,9 @@ const RatingPage = () => {
   return (
     <>
       <Alert type="warning" errors={allErrors} active={activeAlert} />
+      {fullScreen && (
+        <FullScreenModal src={imageData.src} alt={imageData.alt} handleClick={handleFullScreen} />
+      )}
       <Row className='m-0'>
         <Col className='px-0'>
           <div className={styles.Rating}>
@@ -134,7 +139,12 @@ const RatingPage = () => {
                 />
                 <Link to={`/profiles/${rating?.profile_id}`}>{rating?.owner}</Link>
               </div>
-              <img className={styles.Poster} src={rating.movie_poster} alt={`${rating.movie_title} movie poster`} />
+              <img
+                className={styles.Poster} 
+                src={rating.movie_poster}
+                alt={`${rating.movie_title} movie poster`}
+                onClick={e=>handleFullScreen(e)}
+              />
             </div>
             <div className={`${styles.Content} ${isEditing && "align-items-center"}`}>
 

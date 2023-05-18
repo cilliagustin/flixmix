@@ -14,7 +14,7 @@ export function useErrorHandling() {
     setActiveAlert(true);
     const newTimeoutId = setTimeout(() => {
       setActiveAlert(false);
-    }, 500000000000);
+    }, 5000);
     setTimeoutId(newTimeoutId);
   };
 
