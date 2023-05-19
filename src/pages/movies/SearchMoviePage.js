@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Form, Col, Row, Container } from "react-bootstrap";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-import styles from '../../styles/SearchMovieRatingPage.module.css'
+import styles from '../../styles/SearchPage.module.css'
 import MoviesPreview from './MoviesPreview';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
@@ -104,23 +104,17 @@ const SearchMoviePage = () => {
                   onChange={handleCheckBoxChange}
                 />
                 <label htmlFor="seen">
-                  {searchFilter === "seen" ? (
-                    <OverlayTrigger
-                      placement="top"
-                      overlay={<Tooltip>Filtering by seen movies</Tooltip>}
-                    >
-                      <i className="fa-solid fa-eye"></i>
-                    </OverlayTrigger>
-
-                  ) : (
-                    
-                    <OverlayTrigger
-                      placement="top"
-                      overlay={<Tooltip>Filter by seen movies</Tooltip>}
-                    >
-                      <i className="fa-regular fa-eye"></i>
-                    </OverlayTrigger>
-                  )}
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={
+                      <Tooltip>
+                        {searchFilter === "seen" ? "Filtering" : "Filter"} seen movies
+                      </Tooltip>}
+                  >
+                    <i
+                      className={`${searchFilter === "seen" ? "fa-solid" : "fa-regular"} fa-eye`}>
+                    </i>
+                  </OverlayTrigger>
                 </label>
                 <input
                   type="checkbox"
@@ -130,25 +124,18 @@ const SearchMoviePage = () => {
                   onChange={handleCheckBoxChange}
                 />
                 <label htmlFor="watchlist">
-                  {searchFilter === "watchlist" ? (
-                    <OverlayTrigger
-                      placement="top"
-                      overlay={<Tooltip>Filtering movies in your watchlist</Tooltip>}
-                    >
-                     <i className="fa-solid fa-bookmark"></i>
-                    </OverlayTrigger>
-                    
-                  ) : (
-                    <OverlayTrigger
-                      placement="top"
-                      overlay={<Tooltip>Filter movies in your watchlist</Tooltip>}
-                    >
-                       <i className="fa-regular fa-bookmark"></i>
-                    </OverlayTrigger>
-                   
-                  )}
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={
+                      <Tooltip>
+                        {searchFilter === "watchlist" ? "Filtering" : "Filter"} movies in your watchlist
+                      </Tooltip>}
+                  >
+                    <i
+                      className={`${searchFilter === "watchlist" ? "fa-solid" : "fa-regular"} fa-bookmark`}>
+                    </i>
+                  </OverlayTrigger>
                 </label>
-
               </div>
             )}
           </Form>

@@ -60,12 +60,22 @@
 }
 
 .Checkbox input{
-    display: none;
+   display: none;
 }
 
-.Checkbox label{
+.Checkbox label i{
     color: var(--purple-1);
     font-size: 1.8rem;
+}
+
+.Checkbox label p{
+    color: var(--purple-1);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.Checkbox input:checked + label p{
+    text-decoration: underline;
 }
 
 

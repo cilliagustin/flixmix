@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from '../../styles/SearchMovieRatingPage.module.css'
+import styles from '../../styles/SearchPage.module.css'
 import { Form, Col, Row, Container } from "react-bootstrap";
 import RatingsPreview from './RatingsPreview';
 
@@ -8,9 +8,9 @@ const SearchRatingsPage = () => {
 
     const [searchParameter, setSearchParameter] = useState("movie_title")
 
-    const handleRadio = (e) =>{
+    const handleRadio = (e) => {
         setSearchParameter(e.target.value)
-      }
+    }
 
     const placeholders = {
         movie_title: "Search review by movie title",
@@ -38,7 +38,12 @@ const SearchRatingsPage = () => {
                             </div>
                         ))}
                     </Form>
-                    <RatingsPreview message="No result found adjust your search" query={query} searchParameter={searchParameter} infiniteScroll={true}/>
+                    <RatingsPreview
+                        message="No result found adjust your search"
+                        query={query}
+                        searchParameter={searchParameter}
+                        infiniteScroll={true}
+                    />
                 </Col>
             </Row>
         </Container>
