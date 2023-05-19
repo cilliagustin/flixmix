@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
@@ -12,23 +12,20 @@ import appStyles from '../../App.module.css'
 import { axiosRes } from '../../api/axiosDefaults';
 import { MoreDropdown } from '../../components/MoreDropdown';
 import DisplayRating from '../../components/DisplayRating';
+import { useFullScreen, FullScreenModal } from '../../components/HandleFullScreen'
 
 const Movie = (props) => {
-
-    const [fullScreen, setFullScreen] = useState(false);
-
-    const handleFullScreen = () => setFullScreen(!fullScreen)
-
     const {
         id, owner, profile_id, profile_image, list_count,
         seen_count, seen_id, watchlist_count, watchlist_id,
         title, synopsis, directors, main_cast, movie_genre,
         poster, release_year, setMovies, rating_count, rating_id,
         avg_rating
-
-        // rating_count,created_at,updated_at,release_decade,
     } = props;
-    
+
+    const { fullScreen, handleFullScreen, imageData } = useFullScreen();
+
+
 
     const currentUser = useCurrentUser();
 
@@ -128,20 +125,15 @@ const Movie = (props) => {
 
     return (
         <>
+            {fullScreen && (
+                <FullScreenModal src={imageData.src} alt={imageData.alt} handleClick={handleFullScreen} />
+            )}
             <div className={`${styles.Header} d-flex`}>
-                <div className={`${styles.PosterContainer} ${fullScreen && styles.FullScreen} d-flex align-items-center justify-content-center`}>
-                    {fullScreen && (
-                        <img
-                            src={poster}
-                            alt={`${title} movie poster overlay`}
-                            className={styles.PosterOverlay}
-                            onClick={handleFullScreen}
-                        />
-                    )}
+                <div className={`${styles.PosterContainer} d-flex align-items-center justify-content-center`}>
                     <img
                         src={poster}
                         alt={`${title} movie poster`}
-                        onClick={handleFullScreen}
+                        onClick={e => handleFullScreen(e)}
                     />
                 </div>
                 <div className={styles.InfoContainer}>
