@@ -13,6 +13,7 @@ import MovieEditForm from './pages/movies/MovieEditForm';
 import RatingPage from './pages/ratings/RatingPage';
 import SearchRatingsPage from './pages/ratings/SearchRatingsPage';
 import SearchProfiles from './pages/profiles/SearchProfiles';
+import ProfilePage from './pages/profiles/ProfilePage';
 
 function App() {
 
@@ -38,7 +39,7 @@ function App() {
               <Route exact path="/reviews/:id" render={() => <RatingPage />} />
               <Route exact path="/activity" render={() => <h1>your activity</h1>} />
               <Route exact path="/activity/followed" render={() => <h1>followed activity</h1>} />
-              <Route exact path="/profile" render={() => <h1>profile</h1>} />
+              <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
               <Route exact path="/log_in_register" render={() => <LogInRegister />} />
               <Route exact path="/log_out" render={() => <h1>Log out</h1>} />
               <Route render={() => <p>Page not found!</p>} />

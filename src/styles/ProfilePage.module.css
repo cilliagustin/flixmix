@@ -1,0 +1,45 @@
+.Container{
+    width: 100%;
+    min-height: 200px;
+    background: red;
+    margin: 0 auto;
+}
+
+.Header{
+    width: 100%;
+    background: rgba(255, 0, 0, 0.187);
+    min-height: 200px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, auto);
+}
+
+.Avatar{
+    grid-column: 1/-1;
+    grid-row: 1/2;
+    width: 300px;
+    height: 300px;
+    justify-self:center;
+    overflow: hidden;
+    border-radius: 50%;
+    position: relative;
+}
+
+.Avatar img{
+    object-fit: cover;
+    min-height: 100%;
+    min-width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media only screen and (min-width: 768px) {
+    .Container{
+        max-width: 1000px;
+        width: calc(100% - 20px);
+        margin: 0 auto;
+    }
+
+}
