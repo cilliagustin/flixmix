@@ -29,6 +29,13 @@
     color: var(--white-1);
 }
 
+.White,
+.HoverWhite:hover{
+    background: none;
+    border: 2px solid var(--purple-1);
+    color: var(--purple-1);
+}
+
 .ButtonLink{
     height: auto;
     width: auto;
