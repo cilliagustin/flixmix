@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
-// import styles from '../../styles/ProfilesPreview.module.css'
+import styles from '../../styles/ProfilesPreview.module.css'
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import { axiosReq } from '../../api/axiosDefaults';
 import { Container } from "react-bootstrap";
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
+import NoResults from '../../assets/no-results.png'
 import Asset from '../../components/Asset';
+import ProfilePreviewCard from './ProfilePreviewCard';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { fetchMoreData } from '../../utils/utils';
 
 const ProfilesPreview = ({ message, query, searchFilter }) => {
     const currentUser = useCurrentUser()
@@ -47,7 +51,30 @@ const ProfilesPreview = ({ message, query, searchFilter }) => {
     return (
         <>
             {hasLoaded ? (
-                <Asset spinner />
+                <>
+                    {profiles.results.length ? (
+                        <div className={styles.Container}>
+                            <InfiniteScroll
+                                children={
+                                    profiles.results.map((profile) => (
+                                        <ProfilePreviewCard
+                                            key={profile.id}
+                                            {...profile}
+                                            setProfiles={setProfiles}
+                                        />
+                                    ))}
+                                dataLength={profiles.results.length}
+                                loader={<Asset spinner />}
+                                hasMore={!!profiles.next}
+                                next={() => fetchMoreData(profiles, setProfiles)}
+                            />
+                        </div>
+                    ) : (
+                        <Container>
+                            <Asset src={NoResults} message={message} />
+                        </Container>
+                    )}
+                </>
             ) : (
                 <Asset spinner />
             )}

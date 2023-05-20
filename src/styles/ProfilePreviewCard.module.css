@@ -1,0 +1,124 @@
+.Container{
+    width: 100%;
+    min-height: 20px;
+    position: relative;
+    min-height: 420px;
+}
+
+.CardHead,
+.CardBody{
+    box-shadow: var(--shadow);
+    border-radius: 5px;
+}
+
+.CardHead{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    top: 0;
+    width: 75%;
+    max-width: 350px;
+    margin: 0 auto;
+    background: var(--white-1);
+    padding: 8px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto 55px auto;
+}
+
+.Avatar{
+    grid-row: 1/2;
+    grid-column: 1/-1;
+    justify-self: center;
+}
+
+.User{
+    grid-row: 2/3;
+    grid-column: 1/-1;
+    justify-self: center;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 8px 0;
+    height: 55px;
+}
+.User,
+.User:hover{
+    color: var(--purple-1);
+    text-decoration: none;
+}
+.User:hover span:first-child{
+    text-decoration: underline;
+}
+
+.User span:nth-child(3){
+    font-weight: 400;
+    font-size: .7rem;
+}
+
+.User span:nth-child(3),
+.User:hover span:nth-child(3){
+    color: var(--purple-3);
+    text-decoration: none;
+}
+
+.Button{
+    grid-row: 3/4;
+    grid-column: 1/-1;
+    justify-self: center;
+}
+
+.Follow{
+    grid-row: 4/5;
+    grid-column: 1/3;
+    justify-self: center;
+    text-align: center;
+    color: var(--purple-1);
+    font-family: 'Work Sans', sans-serif;
+    margin: 0;
+}
+
+.Follow span{
+    font-weight: 600;
+}
+
+.CardHead .Follow:last-child{
+    grid-column: 3/5;
+}
+
+.CardBody{
+    width: 100%;
+    max-width: 600px;
+    height: 100px;
+    background: var(--gradient);
+    position: absolute;
+    bottom: 56px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-columns: 1fr;
+    padding: 43px 5px 8px 5px;
+    gap: 5px;
+}
+
+.Info{
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.Info span{
+    font-family: 'Work Sans', sans-serif;
+    color: var(--translucid-white);
+    font-size: .7rem;
+    text-align: center;
+}
+.Info span:first-child{
+    font-weight: 600;
+}
