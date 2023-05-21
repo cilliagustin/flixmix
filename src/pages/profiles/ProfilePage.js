@@ -77,7 +77,7 @@ const ProfilePage = () => {
                             <img src={profile.image} alt={`${profile.owner} avatar`} />
                         </div>
                         <h1 className={styles.Username}>{profile.owner}{profile.name !== "" && <><br /><span>{profile.name}</span></>}</h1>
-                        <p className={styles.Description}>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.</p>
+                        <p className={styles.Description}>{profile.description}</p>
                         <p className={styles.Data}>{profile.following_count}<br />Following</p>
                         <p className={styles.Data}>{profile.followers_count}<br />{profile.followers_count !== 1 ? "Followers" : "Follower"}</p>
                         <p className={styles.Data}>{profile.seen_count}<br />Seen<br />{profile.seen_count !== 1 ? " Movies" : "Movie"}</p>
