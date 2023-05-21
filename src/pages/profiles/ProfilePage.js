@@ -8,6 +8,7 @@ import { axiosReq, axiosRes } from '../../api/axiosDefaults'
 import { useCurrentUser } from '../../contexts/CurrentUserContext'
 import ProfileMovies from '../movies/ProfileMovies'
 import ProfileRatings from '../ratings/ProfileRatings'
+import { ProfileEditDropdown } from '../../components/MoreDropdown'
 
 const ProfilePage = () => {
     const { id } = useParams()
@@ -16,8 +17,7 @@ const ProfilePage = () => {
     const [movies, setMovies] = useState({})
     const [ratings, setRatings] = useState({});
     const [hasLoaded, setHasLoaded] = useState(false)
-
-    console.log(profile)
+    
 
     useEffect(() => {
         const handleMount = async () => {
@@ -39,13 +39,13 @@ const ProfilePage = () => {
         handleMount()
     }, [id])
 
-    
+
     const handleFollow = async () => {
         try {
-            const {data} = await axiosRes.post(`/followers/`, {
+            const { data } = await axiosRes.post(`/followers/`, {
                 followed: profile.id
             })
-            setProfile((prevProfile)=>({
+            setProfile((prevProfile) => ({
                 ...prevProfile,
                 following_id: data.id,
                 followers_count: profile.followers_count + 1
@@ -58,7 +58,7 @@ const ProfilePage = () => {
     const handleUnFollow = async () => {
         try {
             await axiosRes.delete(`/followers/${profile.following_id}`)
-            setProfile((prevProfile)=>({
+            setProfile((prevProfile) => ({
                 ...prevProfile,
                 following_id: null,
                 followers_count: profile.followers_count - 1
@@ -86,8 +86,9 @@ const ProfilePage = () => {
                         <p className={styles.Data}>{profile.rating_count}<br />Rated<br />{profile.rating_count !== 1 ? "movies" : "movie"}</p>
                         <p className={styles.Data}>{profile.list_count}<br />{profile.list_count !== 1 ? "Lists" : "List"}<br />created</p>
                         <div className={styles.BtnContainer}>
-                            {currentUser && !profile.is_owner && (
-                                profile.following_id ? (
+                            {currentUser && (
+                                !profile.is_owner ?(
+                                    profile.following_id ? (
                                     <button
                                         className={`${BtnStyles.Button} ${BtnStyles.Black} ${BtnStyles.HoverWhite}`}
                                         onClick={handleUnFollow}
@@ -101,6 +102,8 @@ const ProfilePage = () => {
                                     >
                                         Follow
                                     </button>
+                                )) : (
+                                    <ProfileEditDropdown id={profile?.id} />
                                 )
                             )}
                         </div>

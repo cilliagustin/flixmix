@@ -41,3 +41,20 @@
   .Purple:hover{
     color: rgb(28, 28, 28);  
   }
+
+
+  .Profile{
+    display: flex!important;
+    flex-flow: column;
+    padding: 10px;
+    gap: 5px;
+  }
+
+  .Profile .DropdownItem{
+    font-size: 1rem;
+  }
+
+  .Profile .DropdownItem i{
+    font-size: 1.3rem;
+    margin-right: 5px;
+  }

@@ -15,7 +15,6 @@ const ProfilePreviewCard = (props) => {
     setProfiles
   } = props
 
-  console.log(props)
 
   const handleFollow = async () => {
     try {

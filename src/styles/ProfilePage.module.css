@@ -129,7 +129,7 @@
 .DisplayContrib h2{
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 1.3rem;
     margin: 20px 0 10px 20px;
     color: var(--grey-2);
 }
@@ -208,6 +208,10 @@
     .Header p:nth-child(10) {
         grid-column: 7/-1;
         grid-row: 6/-1;
+    }
+
+    .DisplayContrib h2{
+        font-size: 1.8rem;
     }
 
 }

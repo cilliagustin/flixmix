@@ -4,5 +4,5 @@
     height: 100%;
     display: flex;
     gap: 5px;
-    overflow-x: scroll;
+    overflow-x: auto;
 }
