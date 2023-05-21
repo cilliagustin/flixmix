@@ -4,15 +4,63 @@ import BtnStyles from '../../styles/Button.module.css'
 import Avatar from '../../components/Avatar'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import { useCurrentUser } from '../../contexts/CurrentUserContext'
+import { axiosRes } from '../../api/axiosDefaults'
 
 const ProfilePreviewCard = (props) => {
   const currentUser = useCurrentUser()
+  const currentUserId = currentUser?.profile_id;
   const {
     followers_count, following_count, following_id, id, name, owner, image,
     is_owner, list_count, movie_count, seen_count, watchlist_count, rating_count,
     setProfiles
   } = props
-  console.log(following_id)
+
+  console.log(props)
+
+  const handleFollow = async () => {
+    try {
+      const { data } = await axiosRes.post(`/followers/`, {
+        followed: id
+      })
+      setProfiles((prevProfiles) => ({
+        ...prevProfiles,
+        results: prevProfiles.results.map((profile) => {
+          return profile.id === id
+            ? (
+              { ...profile, followers_count: profile.followers_count + 1, following_id: data.id }
+            ) : profile.id === currentUserId
+              ? (
+                { ...profile, following_count: profile.following_count + 1 }
+              ) : profile
+        })
+      }))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleUnFollow = async () => {
+    try {
+      await axiosRes.delete(`/followers/${following_id}`)
+      setProfiles((prevProfiles) => ({
+        ...prevProfiles,
+        results: prevProfiles.results.map((profile) => {
+          return profile.id === id
+            ? (
+              { ...profile, followers_count: profile.followers_count - 1, following_id: null }
+            ) : profile.id === currentUserId
+              ? (
+                { ...profile, following_count: profile.following_count - 1 }
+              ) : profile
+        })
+      }))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+
+
   return (
     <div className={styles.Container}>
       <div className={styles.CardHead}>
@@ -33,9 +81,19 @@ const ProfilePreviewCard = (props) => {
         </Link>
         {currentUser && !is_owner && (
           following_id ? (
-            <button className={`${BtnStyles.Button} ${BtnStyles.White} ${styles.Button}`}>Unfollow</button>
+            <button
+              className={`${BtnStyles.Button} ${BtnStyles.White} ${styles.Button}`}
+              onClick={handleUnFollow}
+            >
+              Unfollow
+            </button>
           ) : (
-            <button className={`${BtnStyles.Button} ${BtnStyles.HoverWhite} ${styles.Button}`}>Follow</button>
+            <button
+              className={`${BtnStyles.Button} ${BtnStyles.HoverWhite} ${styles.Button}`}
+              onClick={handleFollow}
+            >
+              Follow
+            </button>
           )
         )}
         <p className={styles.Follow}>

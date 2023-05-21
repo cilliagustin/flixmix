@@ -4,7 +4,7 @@ import BtnStyles from '../../styles/Button.module.css'
 import Asset from '../../components/Asset'
 import { Container } from 'react-bootstrap'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
-import { axiosReq } from '../../api/axiosDefaults'
+import { axiosReq, axiosRes } from '../../api/axiosDefaults'
 import { useCurrentUser } from '../../contexts/CurrentUserContext'
 import ProfileMovies from '../movies/ProfileMovies'
 import ProfileRatings from '../ratings/ProfileRatings'
@@ -16,6 +16,8 @@ const ProfilePage = () => {
     const [movies, setMovies] = useState({})
     const [ratings, setRatings] = useState({});
     const [hasLoaded, setHasLoaded] = useState(false)
+
+    console.log(profile)
 
     useEffect(() => {
         const handleMount = async () => {
@@ -37,6 +39,35 @@ const ProfilePage = () => {
         handleMount()
     }, [id])
 
+    
+    const handleFollow = async () => {
+        try {
+            const {data} = await axiosRes.post(`/followers/`, {
+                followed: profile.id
+            })
+            setProfile((prevProfile)=>({
+                ...prevProfile,
+                following_id: data.id,
+                followers_count: profile.followers_count + 1
+            }))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const handleUnFollow = async () => {
+        try {
+            await axiosRes.delete(`/followers/${profile.following_id}`)
+            setProfile((prevProfile)=>({
+                ...prevProfile,
+                following_id: null,
+                followers_count: profile.followers_count - 1
+            }))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     return (
         <>
             {hasLoaded ? (
@@ -46,7 +77,7 @@ const ProfilePage = () => {
                             <img src={profile.image} alt={`${profile.owner} avatar`} />
                         </div>
                         <h1 className={styles.Username}>{profile.owner}{profile.name !== "" && <><br /><span>{profile.name}</span></>}</h1>
-                        <p className={styles.Description}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum at mi sed ipsum cursus elementum at nec arcu. Aenean molestie id dui eget mollis. Morbi efficitur pretium felis vestibulum tincidunt. Fusce quam mi, cursus nec elit sit amet, rhoncus condimentum ligula. Aenean risus dolor, egestas vel justo consequat, finibus aliquam quam. Vestibulum porttitor urna eget enim placerat, ut laoreet ipsum condimentum. Donec sed tellus posuere, malesuada diam nec, ultrices erat. Morbi nibh elit, fringilla vel tincidunt eget, pellentesque at tortor. Praesent tempor metus eget sodales vulputate. M</p>
+                        <p className={styles.Description}>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium.</p>
                         <p className={styles.Data}>{profile.following_count}<br />Following</p>
                         <p className={styles.Data}>{profile.followers_count}<br />{profile.followers_count !== 1 ? "Followers" : "Follower"}</p>
                         <p className={styles.Data}>{profile.seen_count}<br />Seen<br />{profile.seen_count !== 1 ? " Movies" : "Movie"}</p>
@@ -57,9 +88,19 @@ const ProfilePage = () => {
                         <div className={styles.BtnContainer}>
                             {currentUser && !profile.is_owner && (
                                 profile.following_id ? (
-                                    <button className={`${BtnStyles.Button} ${BtnStyles.Black} ${BtnStyles.HoverWhite}`}>Unfollow</button>
+                                    <button
+                                        className={`${BtnStyles.Button} ${BtnStyles.Black} ${BtnStyles.HoverWhite}`}
+                                        onClick={handleUnFollow}
+                                    >
+                                        Unfollow
+                                    </button>
                                 ) : (
-                                    <button className={`${BtnStyles.Button} ${BtnStyles.White} ${BtnStyles.HoverBlack}`}>Follow</button>
+                                    <button
+                                        className={`${BtnStyles.Button} ${BtnStyles.White} ${BtnStyles.HoverBlack}`}
+                                        onClick={handleFollow}
+                                    >
+                                        Follow
+                                    </button>
                                 )
                             )}
                         </div>

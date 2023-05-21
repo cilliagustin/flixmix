@@ -25,7 +25,6 @@ const ProfilesPreview = ({ message, query, searchFilter }) => {
         ) : ""
     )
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -45,8 +44,6 @@ const ProfilesPreview = ({ message, query, searchFilter }) => {
             clearTimeout(timer)
         }
     }, [pathname, filter, search])
-
-    hasLoaded && console.log(profiles)
 
     return (
         <>

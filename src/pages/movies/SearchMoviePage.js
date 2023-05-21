@@ -16,9 +16,6 @@ const SearchMoviePage = () => {
   const [searchFilter, setSearchFilter] = useState("");
 
 
-  useEffect(() => { console.log(searchFilter) }, [searchFilter])
-
-
   const handleCheckBoxChange = (e) => {
     const { name, checked } = e.target;
 
