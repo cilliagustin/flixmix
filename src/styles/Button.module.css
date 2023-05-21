@@ -8,6 +8,7 @@
     font-weight: 500;
     color: var(--white-1);
     cursor: pointer;
+    transition: all .2s ease-in;
 }
 
 .BigButton{
@@ -29,11 +30,22 @@
     color: var(--white-1);
 }
 
+.Black{
+    border: 2px solid var(--grey-2);
+    background: var(--grey-2);
+    color: var(--white-1);
+}
+
 .White,
 .HoverWhite:hover{
-    background: none;
+    background: var(--white-1);
     border: 2px solid var(--purple-1);
     color: var(--purple-1);
+}
+.HoverBlack:hover{
+    border: 2px solid var(--grey-2);
+    background: var(--grey-2);
+    color: var(--white-1);
 }
 
 .ButtonLink{

@@ -9,9 +9,10 @@
 }
 
 .Poster{
+    user-select: none;
     z-index: 2;
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 90%;
+    max-height: 90%;
     width: auto;
     height: auto;
     object-fit: cover;
@@ -23,6 +24,7 @@
 }
 
 .PosterOverlay{
+    user-select: none;
     z-index: 1;
     width: 100%;
     height: 100%;

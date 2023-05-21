@@ -1,0 +1,43 @@
+.Card {
+    margin: 15px 0;
+    background: var(--gradient);
+    border-radius: 5px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5px;
+    gap: 5px;
+    box-shadow: var(--shadow);
+}
+
+.PosterContainer {
+    height: 130px;
+    width: 95px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.PosterContainer img {
+    user-select: none;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.Title,
+.Title h4,
+.Title:hover{
+    user-select: none;
+    font-size: .7rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: var(--translucid-white);
+    text-decoration: none;
+    text-align: center;
+}
+
+.Title span{
+    font-size: .5rem;
+    display: block;
+}
