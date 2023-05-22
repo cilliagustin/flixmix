@@ -169,6 +169,7 @@
     .Description {
         grid-column: 4/-1;
         grid-row: 2/5;
+        padding-left: 0;
     }
 
     .Header p:nth-child(4) {

@@ -28,18 +28,43 @@ const UsernameForm = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
 
+  const [isLoading, setIsLoading] = useState(true);
   const [hasLoaded, setHasLoaded] = useState(false);
 
+  const [timeoutId, setTimeoutId] = useState(null);
+  const [secondTimeoutId, setSecondTimeoutId] = useState(null);
+
+
   useEffect(() => {
-    if (currentUser !== null) {
-      setHasLoaded(true);
+    const firstTimeout = setTimeout(() => {
       if (currentUser?.profile_id?.toString() === id) {
         setUsername(currentUser.username);
+        setHasLoaded(true);
       } else {
         history.push("/");
       }
-    }
+  
+      setIsLoading(false);
+    }, 2500);
+  
+    setTimeoutId(firstTimeout);
+  
+    return () => clearTimeout(firstTimeout);
   }, [currentUser, history, id]);
+  
+  useEffect(() => {
+    let newSecondTimeoutId;
+  
+    if (!hasLoaded && !isLoading) {
+      newSecondTimeoutId = setTimeout(() => {
+        history.push("/");
+      }, 200);
+    }
+  
+    setSecondTimeoutId(newSecondTimeoutId);
+  
+    return () => clearTimeout(newSecondTimeoutId);
+  }, [hasLoaded, isLoading]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

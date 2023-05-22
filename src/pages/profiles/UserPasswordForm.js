@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-
-import Alert from "react-bootstrap/Alert";
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -13,6 +10,9 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+import { useErrorHandling } from './../../components/HandleErrors';
+import Asset from "../../components/Asset";
+import Alert from "../../components/Alert";
 
 const UserPasswordForm = () => {
   const history = useHistory();
@@ -25,7 +25,17 @@ const UserPasswordForm = () => {
   });
   const { new_password1, new_password2 } = userData;
 
-  const [errors, setErrors] = useState({});
+  const { errors, activeAlert, handleErrors } = useErrorHandling();
+  const allErrors = [
+    { title: "Username", message: errors.new_password1 },
+    { title: "Username", message: errors.new_password2 },
+  ]
+
+  const isLoading = true;
+  const [hasLoaded, setHasLoaded] = useState(false);
+
+  const [timeoutId, setTimeoutId] = useState(null);
+  const [secondTimeoutId, setSecondTimeoutId] = useState(null);
 
   const handleChange = (event) => {
     setUserData({
@@ -34,12 +44,35 @@ const UserPasswordForm = () => {
     });
   };
 
+
   useEffect(() => {
-    if (currentUser?.profile_id?.toString() !== id) {
-      // redirect user if they are not the owner of this profile
-      history.push("/");
-    }
+    setTimeout(()=>{
+      if (currentUser?.profile_id?.toString() !== id) {
+        history.push("/");
+      } else{
+        setHasLoaded(true);
+      }
+    }, 2500)
+
+    return () => {
+      clearTimeout(timeoutId);
+      clearTimeout(secondTimeoutId);
+    };
   }, [currentUser, history, id]);
+
+  useEffect(() => {
+    let newSecondTimeoutId;
+  
+    if (!hasLoaded && !isLoading) {
+      newSecondTimeoutId = setTimeout(() => {
+        history.push("/");
+      }, 200);
+    }
+  
+    setSecondTimeoutId(newSecondTimeoutId);
+  
+    return () => clearTimeout(newSecondTimeoutId);
+  }, [hasLoaded, isLoading]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -48,61 +81,62 @@ const UserPasswordForm = () => {
       history.goBack();
     } catch (err) {
       console.log(err);
-      setErrors(err.response?.data);
+      if (err.response?.status !== 401) {
+        handleErrors(err.response?.data);
+      }
     }
   };
 
   return (
-    <Row>
-      <Col className="py-2 mx-auto text-center" md={6}>
-        <Container className={appStyles.Content}>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group>
-              <Form.Label>New password</Form.Label>
-              <Form.Control
-                placeholder="new password"
-                type="password"
-                value={new_password1}
-                onChange={handleChange}
-                name="new_password1"
-              />
-            </Form.Group>
-            {errors?.new_password1?.map((message, idx) => (
-              <Alert key={idx} variant="warning">
-                {message}
-              </Alert>
-            ))}
-            <Form.Group>
-              <Form.Label>Confirm password</Form.Label>
-              <Form.Control
-                placeholder="confirm new password"
-                type="password"
-                value={new_password2}
-                onChange={handleChange}
-                name="new_password2"
-              />
-            </Form.Group>
-            {errors?.new_password2?.map((message, idx) => (
-              <Alert key={idx} variant="warning">
-                {message}
-              </Alert>
-            ))}
-            <Button
-              className={`${btnStyles.Button} ${btnStyles.Blue}`}
-              onClick={() => history.goBack()}
-            >
-              cancel
-            </Button>
-            <Button
-              type="submit"
-              className={`${btnStyles.Button} ${btnStyles.Blue}`}
-            >
-              save
-            </Button>
-          </Form>
-        </Container>
-      </Col>
-    </Row>
+    <>
+      <Alert type="warning" errors={allErrors} active={activeAlert} />
+      <Row className="mx-0">
+        <Col className="py-2 mx-auto text-center" md={6}>
+          <Container className={appStyles.Content}>
+            {hasLoaded ? (
+              <Form onSubmit={handleSubmit}>
+                <Form.Group>
+                  <Form.Label>New password</Form.Label>
+                  <Form.Control
+                    placeholder="new password"
+                    type="password"
+                    value={new_password1}
+                    onChange={handleChange}
+                    name="new_password1"
+                    className={appStyles.Input}
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Confirm password</Form.Label>
+                  <Form.Control
+                    placeholder="confirm new password"
+                    type="password"
+                    value={new_password2}
+                    onChange={handleChange}
+                    name="new_password2"
+                    className={appStyles.Input}
+                  />
+                </Form.Group>
+                <button
+                  className={`${btnStyles.Button} ${btnStyles.HoverWhite} mx-1`}
+                  onClick={() => history.goBack()}
+                >
+                  cancel
+                </button>
+                <button
+                  className={`${btnStyles.Button} ${btnStyles.HoverWhite} mx-1`}
+                  type="submit"
+                >
+                  save
+                </button>
+              </Form>
+            ) : (
+              <Asset spinner />
+            )}
+          </Container>
+        </Col>
+      </Row>
+    </>
   );
 };
 

@@ -2,12 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import Alert from "react-bootstrap/Alert";
 
 import { axiosReq } from "../../api/axiosDefaults";
 import {
@@ -17,6 +15,12 @@ import {
 
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+import Asset from "../../components/Asset";
+
+import { useErrorHandling } from './../../components/HandleErrors';
+import Alert from "../../components/Alert";
+
+import { handleInputChange } from '../../utils/utils';
 
 const ProfileEditForm = () => {
   const currentUser = useCurrentUser();
@@ -27,20 +31,28 @@ const ProfileEditForm = () => {
 
   const [profileData, setProfileData] = useState({
     name: "",
-    content: "",
+    description: "",
     image: "",
   });
-  const { name, content, image } = profileData;
+  const { name, description, image } = profileData;
 
-  const [errors, setErrors] = useState({});
+  const [hasLoaded, setHasLoaded] = useState(false);
+
+  const { errors, activeAlert, handleErrors } = useErrorHandling();
+  const allErrors = [
+    { title: "Username", message: errors.name },
+    { title: "Username", message: errors.description },
+    { title: "Username", message: errors.image },
+  ]
 
   useEffect(() => {
     const handleMount = async () => {
       if (currentUser?.profile_id?.toString() === id) {
         try {
           const { data } = await axiosReq.get(`/profiles/${id}/`);
-          const { name, content, image } = data;
-          setProfileData({ name, content, image });
+          const { name, description, image } = data;
+          setProfileData({ name, description, image });
+          setHasLoaded(true)
         } catch (err) {
           console.log(err);
           history.push("/");
@@ -53,18 +65,11 @@ const ProfileEditForm = () => {
     handleMount();
   }, [currentUser, history, id]);
 
-  const handleChange = (event) => {
-    setProfileData({
-      ...profileData,
-      [event.target.name]: event.target.value,
-    });
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("name", name);
-    formData.append("content", content);
+    formData.append("description", description);
 
     if (imageFile?.current?.files[0]) {
       formData.append("image", imageFile?.current?.files[0]);
@@ -79,86 +84,98 @@ const ProfileEditForm = () => {
       history.goBack();
     } catch (err) {
       console.log(err);
-      setErrors(err.response?.data);
+      if (err.response?.status !== 401) {
+        handleErrors(err.response?.data);
+      }
     }
   };
 
   const textFields = (
     <>
       <Form.Group>
+        <Form.Label>Full Name</Form.Label>
+        <Form.Control
+          className={appStyles.Input}
+          type="text"
+          name="name"
+          value={name}
+          onChange={(event) => handleInputChange(event, profileData, setProfileData)}
+        />
+      </Form.Group>
+      <Form.Group>
         <Form.Label>Bio</Form.Label>
         <Form.Control
+         className={appStyles.TextArea}
           as="textarea"
-          value={content}
-          onChange={handleChange}
-          name="content"
+          value={description}
+          onChange={(event) => handleInputChange(event, profileData, setProfileData)}
+          name="description"
           rows={7}
         />
       </Form.Group>
-
-      {errors?.content?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
-      <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+      <button
+        className={`${btnStyles.Button} ${btnStyles.HoverWhite} mx-1`}
         onClick={() => history.goBack()}
       >
         cancel
-      </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+      </button>
+      <button className={`${btnStyles.Button} ${btnStyles.HoverWhite} mx-1`} type="submit">
         save
-      </Button>
+      </button>
     </>
   );
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row>
-        <Col className="py-2 p-0 p-md-2 text-center" md={7} lg={6}>
-          <Container className={appStyles.Content}>
-            <Form.Group>
-              {image && (
-                <figure>
-                  <Image src={image} fluid />
-                </figure>
-              )}
-              {errors?.image?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                  {message}
-                </Alert>
-              ))}
-              <div>
-                <Form.Label
-                  className={`${btnStyles.Button} ${btnStyles.Blue} btn my-auto`}
-                  htmlFor="image-upload"
-                >
-                  Change the image
-                </Form.Label>
-              </div>
-              <Form.File
-                id="image-upload"
-                ref={imageFile}
-                accept="image/*"
-                onChange={(e) => {
-                  if (e.target.files.length) {
-                    setProfileData({
-                      ...profileData,
-                      image: URL.createObjectURL(e.target.files[0]),
-                    });
-                  }
-                }}
-              />
-            </Form.Group>
-            <div className="d-md-none">{textFields}</div>
-          </Container>
-        </Col>
-        <Col md={5} lg={6} className="d-none d-md-block p-0 p-md-2 text-center">
-          <Container className={appStyles.Content}>{textFields}</Container>
-        </Col>
-      </Row>
-    </Form>
+    <>
+      <Alert type="warning" errors={allErrors} active={activeAlert} />
+      {hasLoaded ? (
+        <Form onSubmit={handleSubmit}>
+          <Row className="mx-0">
+            <Col className="py-2 p-0 p-md-2 text-center" md={7} lg={6}>
+              <Container className={appStyles.Content}>
+                <Form.Group>
+                  {image && (
+                    <figure>
+                      <Image src={image} fluid />
+                    </figure>
+                  )}
+                  <div>
+                    <Form.Label
+                      className={`${btnStyles.Button} ${btnStyles.BigButton} ${btnStyles.HoverWhite} m-auto`}
+                      htmlFor="image-upload"
+                    >
+                      Change image
+                    </Form.Label>
+                  </div>
+                  <Form.File
+                    className="d-none"
+                    id="image-upload"
+                    ref={imageFile}
+                    accept="image/*"
+                    onChange={(e) => {
+                      if (e.target.files.length) {
+                        setProfileData({
+                          ...profileData,
+                          image: URL.createObjectURL(e.target.files[0]),
+                        });
+                      }
+                    }}
+                  />
+                </Form.Group>
+                <div className="d-md-none">{textFields}</div>
+              </Container>
+            </Col>
+            <Col md={5} lg={6} className="d-none d-md-block p-0 p-md-2 text-center">
+              <Container className={appStyles.Content}>{textFields}</Container>
+            </Col>
+          </Row>
+        </Form>
+      ) : (
+        <Container>
+          <Asset spinner />
+        </Container>
+      )}
+    </>
   );
 };
 

@@ -7,7 +7,6 @@ import LogInRegister from './pages/auth/LogInRegister';
 import MovieCreateForm from './pages/movies/MovieCreateForm';
 import MoviePage from './pages/movies/MoviePage';
 import Home from './pages/home/Home';
-import { useCurrentUser } from './contexts/CurrentUserContext';
 import SearchMoviePage from './pages/movies/SearchMoviePage';
 import MovieEditForm from './pages/movies/MovieEditForm';
 import RatingPage from './pages/ratings/RatingPage';
