@@ -8,17 +8,23 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import NoResults from '../../assets/no-results.png'
 import Asset from '../../components/Asset'
 import { fetchMoreData } from '../../utils/utils'
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
-const RatingsPreview = ({ message, query = "", searchParameter = "", infiniteScroll = false }) => {
+const RatingsPreview = ({ message, query = "", searchParameter = "", infiniteScroll = false, followedFilter }) => {
+    const currentUser = useCurrentUser()
+    const profile_id = currentUser?.profile_id || "";
+    
     const [ratings, setRatings] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
     const pathname = useLocation();
-    const search = query !== "" ? `?${searchParameter}=${query}` : ""
+    const search = query !== "" ? `${searchParameter}=${query}&` : ""
+    const followedProfilesFilter = followedFilter ? `owner__followed__owner__profile=${profile_id}&` : ""
+
 
     useEffect(() => {
         const fetchRatings = async () => {
             try {
-                const { data } = await axiosReq.get(`/ratings/${search}`)
+                const { data } = await axiosReq.get(`/ratings/?${search}${followedProfilesFilter}`)
                 setRatings(data)
                 setHasLoaded(true)
             } catch (err) {
@@ -33,7 +39,7 @@ const RatingsPreview = ({ message, query = "", searchParameter = "", infiniteScr
         return ()=>{
             clearTimeout(timer)
         }
-    }, [pathname, query, search])
+    }, [pathname,followedProfilesFilter, query, search])
 
 
     return (

@@ -14,6 +14,7 @@ const SearchMoviePage = () => {
   const [query, setQuery] = useState("");
   const [searchParameter, setSearchParameter] = useState("title")
   const [searchFilter, setSearchFilter] = useState("");
+  const [followedFilter, setFollowedFilter] = useState(false);
 
 
   const handleCheckBoxChange = (e) => {
@@ -27,6 +28,10 @@ const SearchMoviePage = () => {
       setSearchFilter("");
     }
   };
+
+  const handleFollowedChange = () =>{
+    setFollowedFilter(!followedFilter)
+  }
 
   const handleRadio = (e) => {
     setSearchParameter(e.target.value)
@@ -133,11 +138,39 @@ const SearchMoviePage = () => {
                     </i>
                   </OverlayTrigger>
                 </label>
+
+                <input
+                  type="checkbox"
+                  name="followed"
+                  id='followed'
+                  checked={followedFilter}
+                  onChange={handleFollowedChange}
+                />
+                <label htmlFor="followed">
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={
+                      <Tooltip>
+                        {followedFilter ? "Filtering" : "Filter"} movies created by users you follow
+                      </Tooltip>}
+                  >
+                    <i
+                      className={`${followedFilter ? "fa-solid" : "fa-regular"} fa-user`}>
+                    </i>
+                  </OverlayTrigger>
+                </label>
               </div>
             )}
           </Form>
 
-          <MoviesPreview message="No result found adjust your search" query={query} searchParameter={searchParameter} searchFilter={searchFilter} infiniteScroll={true} />
+          <MoviesPreview 
+          message="No result found adjust your search" 
+          query={query} 
+          searchParameter={searchParameter} 
+          searchFilter={searchFilter} 
+          infiniteScroll={true} 
+          followedFilter={followedFilter}
+          />
         </Col>
       </Row>
     </Container>

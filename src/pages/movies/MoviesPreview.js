@@ -10,21 +10,25 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { fetchMoreData } from '../../utils/utils'
 import { useCurrentUser } from '../../contexts/CurrentUserContext'
 
-const MoviesPreview = ({ message, searchFilter = "", query = "", searchParameter = "", infiniteScroll = false }) => {
+const MoviesPreview = ({ message, searchFilter = "", query = "", searchParameter = "", infiniteScroll = false, followedFilter }) => {
     const currentUser = useCurrentUser()
     const profile_id = currentUser?.profile_id || "";
 
     const [movies, setMovies] = useState({ results: [] })
     const [hasLoaded, setHasLoaded] = useState(false)
     const { pathname } = useLocation()
-    const search = query !== "" ? `?${searchParameter}=${query}` : ""
-    const filter = searchFilter === "" ? "" : `?${searchFilter}__owner__profile=${profile_id}&ordering=-${searchFilter}__created_at&`
+    const search = query !== "" ? `${searchParameter}=${query}` : ""
+    const filter = searchFilter === "" ? "" : `${searchFilter}__owner__profile=${profile_id}&ordering=-${searchFilter}__created_at&`
+    const followedProfilesFilter = followedFilter ? `owner__followed__owner__profile=${profile_id}&` : ""
 
     useEffect(() => {
 
         const fetchMovies = async () => {
             try {
-                const { data } = await axiosReq.get(`/movies/${filter}${search}`)
+                const { data } = await axiosReq.get(`/movies/?${filter}${followedProfilesFilter}${search}`)
+                console.log(filter)
+                console.log(followedProfilesFilter)
+                console.log(search)
                 setMovies(data);
                 setHasLoaded(true);
             } catch (err) {
@@ -39,7 +43,7 @@ const MoviesPreview = ({ message, searchFilter = "", query = "", searchParameter
         return () => {
             clearTimeout(timer)
         }
-    }, [filter, pathname, query, search])
+    }, [filter,followedProfilesFilter, pathname, query, search])
 
     return (
         <>

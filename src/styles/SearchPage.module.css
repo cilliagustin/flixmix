@@ -52,6 +52,11 @@
     color: var(--purple-1);
 }
 
+.Radio  input[type='checkbox'] + label i{
+    color: var(--purple-1);
+    font-size: 1.2rem;
+}
+
 .Checkbox{
     display: flex;
     justify-content: center;
