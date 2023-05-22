@@ -26,7 +26,7 @@ const Alert = ({ type, errors, active }) => {
         <div className={styles.Container}>
           {Object.keys(errors).map((errorKey, index) => (
             errors[errorKey].message !== undefined && (
-              <div className={`${styles.Alert} ${styles[alertClass]}`}>
+              <div key={index} className={`${styles.Alert} ${styles[alertClass]}`}>
                 {alertIcon}
                 <h4>Error in {errors[errorKey].title}:</h4>
                 <p>{errors[errorKey].message}</p>
