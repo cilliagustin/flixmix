@@ -14,8 +14,9 @@ import Alert from "../../components/Alert";
 import { useErrorHandling } from './../../components/HandleErrors';
 
 const CommentEditForm = (props) => {
-    const { id, rating, profile_id, content, profileImage, setComments, setShowEditForm, endpoint } = props;
+    const { id, parent_id, profile_id, content, profileImage, setComments, setShowEditForm, endpoint } = props;
     const [formContent, setFormContent] = useState(content);
+    const foreignKey = endpoint === "ratingcomments" ? "rating" : "list"
 
     //Errors and alert
     const { errors, activeAlert, handleErrors } = useErrorHandling();
@@ -27,12 +28,13 @@ const CommentEditForm = (props) => {
         setFormContent(event.target.value);
     };
 
+    console.log(parent_id)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();
         formData.append('content', formContent.trim());
-        formData.append('rating', rating);
+        formData.append(foreignKey, parent_id);
 
         try {
             await axiosRes.put(`/${endpoint}/${id}/`, formData);

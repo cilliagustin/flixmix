@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import styles from '../../styles/ListPage.module.css'
 import { Link, useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min'
-import { axiosReq } from '../../api/axiosDefaults'
+import { axiosReq, axiosRes } from '../../api/axiosDefaults'
 import { useCurrentUser } from '../../contexts/CurrentUserContext'
 import { Row, Col } from "react-bootstrap";
 import Asset from '../../components/Asset'
 import Avatar from '../../components/Avatar'
 import { MoreDropdown } from '../../components/MoreDropdown'
 import { useFullScreen, FullScreenModal } from '../../components/HandleFullScreen'
+import CommentCreateForm from '../comments/CommentCreateForm'
+import { fetchMoreData } from '../../utils/utils'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import Comment from '../comments/Comment'
 
 const ListPage = () => {
 
@@ -21,6 +25,19 @@ const ListPage = () => {
     const history = useHistory()
 
     const { fullScreen, handleFullScreen, imageData } = useFullScreen();
+
+    const handleEdit = () => {
+        history.push(`/lists/${id}/edit`)
+    }
+
+    const handleDelete = async () => {
+        try {
+            await axiosRes.delete(`/lists/${id}/`);
+            history.goBack();
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
 
     useEffect(() => {
@@ -66,7 +83,7 @@ const ListPage = () => {
                                 </div>
                                 <span className={styles.Date}>Created on {list.created_at}</span>
                                 <div className={styles.Dropdown}>
-                                    {list.is_owner && <MoreDropdown color={"grey"} handleDelete={() => { }} handleEdit={() => { }} />}
+                                    {list.is_owner && <MoreDropdown color={"grey"} handleDelete={handleDelete} handleEdit={handleEdit} />}
                                 </div>
                                 <p className={styles.Content}>{list.description}</p>
                             </div>
@@ -80,6 +97,49 @@ const ListPage = () => {
                                         />
                                     </div>
                                 ))}
+                            </div>
+                            <div className={styles.Comments}>
+                                <div className={styles.CommentsCount}>
+                                    <i className="fa-regular fa-comments"></i>
+                                    <span>{list.comments_count}</span>
+                                </div>
+                                {currentUser ? (
+                                    <CommentCreateForm
+                                        profile_id={currentUser.profile_id}
+                                        profileImage={profile_image}
+                                        parentId={id}
+                                        setParent={setList}
+                                        setComments={setComments}
+                                        endpoint="listcomments"
+                                    />
+                                ) : comments.results.length ? (
+                                    "Comments"
+                                ) : null}
+                                {comments.results.length ? (
+                                    <InfiniteScroll
+                                        children={
+                                            comments.results.map(comment => (
+                                                <Comment
+                                                    key={comment.id}
+                                                    {...comment}
+                                                    setParent={setList}
+                                                    setComments={setComments}
+                                                    endpoint="listcomments"
+                                                    parent_id={id}
+                                                />
+                                            ))
+                                        } n
+                                        dataLength={comments.results.length}
+                                        loader={<Asset spinner />}
+                                        hasMore={!!comments.next}
+                                        next={() => fetchMoreData(comments, setComments)}
+                                    />
+
+                                ) : currentUser ? (
+                                    <span>No comments yet, be the first to do it</span>
+                                ) : (
+                                    <span>No comments yet</span>
+                                )}
                             </div>
                         </>
                     ) : (

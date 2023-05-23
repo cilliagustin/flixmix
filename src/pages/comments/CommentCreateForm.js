@@ -14,6 +14,8 @@ function CommentCreateForm(props) {
   const { parentId, setParent, setComments, profileImage, profile_id, endpoint } = props;
   const [content, setContent] = useState("");
 
+  const foreignKey = endpoint === "ratingcomments" ? "rating" : "list"
+
   //Errors and alert
   const { errors, activeAlert, handleErrors } = useErrorHandling();
   const allErrors = [
@@ -29,7 +31,7 @@ function CommentCreateForm(props) {
     const formData = new FormData();
 
     formData.append('content', content);
-    formData.append('rating', parentId);
+    formData.append(foreignKey, parentId);
     try {
       const { data } = await axiosRes.post(`/${endpoint}/`, formData);
       setComments((prevComments) => ({

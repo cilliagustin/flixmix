@@ -10,11 +10,10 @@ import CommentEditForm from "./CommentEditForm";
 
 
 const Comment = (props) => {
-    const { setParent, setComments, endpoint, id, rating, content, owner, profile_id, profile_image, created_at, updated_at } = props
+    const { setParent, setComments, endpoint, id, content, owner, profile_id, profile_image, created_at, updated_at, parent_id } = props
     const currentUser = useCurrentUser();
     const isOwner = currentUser?.username === owner
     const [showEditForm, setShowEditForm] = useState(false);
-
     const handleEditForm = () => {
         setShowEditForm(!showEditForm)
     }
@@ -46,7 +45,7 @@ const Comment = (props) => {
             {showEditForm ? (
                 <CommentEditForm
                     id={id}
-                    rating={rating}
+                    parent_id={parent_id}
                     profile_id={profile_id}
                     content={content}
                     profileImage={profile_image}

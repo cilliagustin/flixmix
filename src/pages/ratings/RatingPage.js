@@ -232,6 +232,7 @@ const RatingPage = () => {
                       setParent={setRating}
                       setComments={setComments}
                       endpoint="ratingcomments"
+                      parent_id={id}
                     />
                   ))
                 } n

@@ -12,7 +12,8 @@
     align-items: flex-end;
 }
 
-.Owner {
+.Owner, 
+.Owner:hover{
     grid-column: 1/2;
     grid-row: 1/2;
     text-align: center;
@@ -21,6 +22,7 @@
     color: var(--grey-2);
     font-size: 1rem;
     margin-right: 5px;
+    text-decoration: none;
 }
 
 .Avatar{
@@ -76,10 +78,23 @@
     cursor: pointer;
 }
 
+.CommentsCount{
+    color: var(--grey-2);
+    font-size: .8rem;
+    margin-bottom: 20px;
+}
+.CommentsCount i{
+    margin-right: 5px;
+}
+
 @media only screen and (min-width: 768px) {
     .Container,
     .Movies {
         max-width: 1000px;
         width: calc(100% - 20px);
+    }
+
+    .CommentsCount{
+        font-size: 1.3rem;
     }
 }
