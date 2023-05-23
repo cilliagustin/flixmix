@@ -75,7 +75,7 @@ export const NavBarData = [
     },
     {
         title: 'log in/register',
-        path: '/log_in_register',
+        path: '/log',
         icon:<i className={'fa-solid fa-arrow-right-to-bracket'}></i>,
         loggedInRequired: false,
         authIconLink: true

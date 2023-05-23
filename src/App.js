@@ -44,7 +44,7 @@ function App() {
           <Route exact path="/profiles/:id/edit/username" render={() => <UsernameForm />}/>
           <Route exact path="/profiles/:id/edit/password" render={() => <UserPasswordForm />}/>
           <Route exact path="/profiles/:id/edit" render={() => <ProfileEditForm />}/>
-          <Route exact path="/log_in_register" render={() => <LogInRegister />} />
+          <Route exact path="/log" render={() => <LogInRegister />} />
           <Route exact path="/log_out" render={() => <h1>Log out</h1>} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
