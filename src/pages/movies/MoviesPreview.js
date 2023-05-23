@@ -26,9 +26,7 @@ const MoviesPreview = ({ message, searchFilter = "", query = "", searchParameter
         const fetchMovies = async () => {
             try {
                 const { data } = await axiosReq.get(`/movies/?${filter}${followedProfilesFilter}${search}`)
-                console.log(filter)
-                console.log(followedProfilesFilter)
-                console.log(search)
+
                 setMovies(data);
                 setHasLoaded(true);
             } catch (err) {

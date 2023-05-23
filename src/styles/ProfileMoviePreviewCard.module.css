@@ -11,6 +11,10 @@
     box-shadow: var(--shadow);
 }
 
+.ListCard > * {
+    pointer-events: none;
+}
+
 .PosterContainer {
     height: 130px;
     width: 95px;
