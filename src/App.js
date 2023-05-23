@@ -17,6 +17,7 @@ import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import ListCreateForm from './pages/lists/ListCreateForm';
+import ListPage from './pages/lists/ListPage';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Route exact path="/add/movie" render={() => <MovieCreateForm />} />
           <Route exact path="/movies/:id/edit" render={() => <MovieEditForm />} />
           <Route exact path="/add/list" render={() => <ListCreateForm />} />
+          <Route exact path="/list/:id" render={() => <ListPage />} />
           <Route exact path="/movies/:id" render={() => <MoviePage />} />
           <Route exact path="/reviews/:id" render={() => <RatingPage />} />
           <Route exact path="/activity" render={() => <h1>your activity</h1>} />

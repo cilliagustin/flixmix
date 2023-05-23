@@ -1,0 +1,85 @@
+.Container, 
+.Movies {
+    width: 100%;
+    min-height: 20px;
+    margin: 45px auto 0px auto;
+    display: grid;
+}
+.Container {
+
+    grid-template-columns: auto auto auto 1fr;
+    row-gap: 5px;
+    align-items: flex-end;
+}
+
+.Owner {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--grey-2);
+    font-size: 1rem;
+    margin-right: 5px;
+}
+
+.Avatar{
+    grid-column: 2/-1;
+    grid-row: 1/2; 
+}
+
+.Date{
+    grid-column: 1/3;
+    grid-row: 2/3;
+    color: var(--grey-2);
+    font-family: 'Poppins', sans-serif;
+    font-size: .8rem;
+}
+
+.Dropdown{
+    grid-column: 3/-1;
+    grid-row: 2/3;
+    justify-self: flex-end;
+}
+
+.Content{
+    grid-column: 1/-1;
+    grid-row: 3/4;
+    color: var(--grey-1);
+}
+
+.Movies{
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.Movie{
+    width: 100%;
+    padding-top: 150%;
+    background: red;
+    border-radius: 5px;
+    border: 1px solid var(--grey-2);
+    position: relative;
+    overflow: hidden;
+}
+
+.Movie img{
+    position: absolute;
+    z-index: 1;
+    max-width: 110%;
+    max-height: 110%;
+    object-fit: cover;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+    .Container,
+    .Movies {
+        max-width: 1000px;
+        width: calc(100% - 20px);
+    }
+}
