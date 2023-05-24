@@ -27,7 +27,7 @@ const ListPage = () => {
     const { fullScreen, handleFullScreen, imageData } = useFullScreen();
 
     const handleEdit = () => {
-        history.push(`/lists/${id}/edit`)
+        history.push(`/list/${id}/edit`)
     }
 
     const handleDelete = async () => {
