@@ -6,6 +6,7 @@ import flixmix from '../../assets/flixmix_purple.png'
 import MoviesPreview from '../movies/MoviesPreview';
 import RatingsPreview from '../ratings/RatingsPreview';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import ListsPreview from '../lists/ListsPreview';
 
 const Home = () => {
   return (
@@ -36,6 +37,15 @@ const Home = () => {
                 <div className={styles.LatestReviews}>
                     <RatingsPreview message="No ratings here yet" />
                     <Link className={styles.Link} to={'/search/review/'}>View all reviews <i className="fa-solid fa-arrow-right"></i></Link>
+                </div>
+            </Col>
+        </Row> 
+        <Row className="mx-0">
+            <Col className={`${styles.Lists} px-0`}>
+                <h2>Latest Lists</h2>
+                <div className={styles.LatestLists}>
+                    <ListsPreview message="No ratings here yet" />
+                    <Link className={styles.Link} to={'/search/list/'}>View all lists <i className="fa-solid fa-arrow-right"></i></Link>
                 </div>
             </Col>
         </Row> 

@@ -19,6 +19,7 @@ import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import ListCreateForm from './pages/lists/ListCreateForm';
 import ListPage from './pages/lists/ListPage';
 import ListEditForm from './pages/lists/ListEditForm';
+import SearchListPage from './pages/lists/SearchListPage';
 
 function App() {
 
@@ -30,18 +31,18 @@ function App() {
         <Switch>
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/search/movie" render={() => <SearchMoviePage />} />
-          <Route exact path="/search/review" render={() => <SearchRatingsPage />} />
-          <Route exact path="/search/profiles" render={() => <SearchProfiles />} />
-          <Route exact path="/search/list" render={() => <h1>search list</h1>} />
           <Route exact path="/add/movie" render={() => <MovieCreateForm />} />
+          <Route exact path="/movies/:id" render={() => <MoviePage />} />
           <Route exact path="/movies/:id/edit" render={() => <MovieEditForm />} />
+          <Route exact path="/search/review" render={() => <SearchRatingsPage />} />
+          <Route exact path="/reviews/:id" render={() => <RatingPage />} />
+          <Route exact path="/search/list" render={() => <SearchListPage />} />
           <Route exact path="/add/list" render={() => <ListCreateForm />} />
           <Route exact path="/list/:id" render={() => <ListPage />} />
           <Route exact path="/list/:id/edit" render={() => <ListEditForm />} />
-          <Route exact path="/movies/:id" render={() => <MoviePage />} />
-          <Route exact path="/reviews/:id" render={() => <RatingPage />} />
           <Route exact path="/activity" render={() => <h1>your activity</h1>} />
           <Route exact path="/activity/followed" render={() => <h1>followed activity</h1>} />
+          <Route exact path="/search/profiles" render={() => <SearchProfiles />} />
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
           <Route exact path="/profiles/:id/edit/username" render={() => <UsernameForm />}/>
           <Route exact path="/profiles/:id/edit/password" render={() => <UserPasswordForm />}/>

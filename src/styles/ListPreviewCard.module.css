@@ -1,0 +1,138 @@
+.Container {
+    width: 100%;
+    min-height: 20px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.Posters {
+    grid-column: 1/-1;
+    grid-row: 1/2;
+    position: relative;
+    padding-bottom: 33%;
+    width: 100%;
+}
+
+.Posters:before{
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    content: "";
+    background: var(--grey-1);
+}
+
+.Posters .Poster:first-child {
+    left: 0;
+    z-index: 6;
+}
+
+.Posters .Poster:nth-child(2) {
+    left: 15%;
+    z-index: 5;
+}
+
+.Posters .Poster:nth-child(3) {
+    left: 30%;
+    z-index: 4;
+}
+
+.Posters .Poster:nth-child(4) {
+    left: 45%;
+    z-index: 3;
+}
+
+.Posters .Poster:nth-child(5) {
+    left: 60%;
+    z-index: 2;
+}
+.Posters .Poster:nth-child(6) {
+    left: 75%;
+    z-index: 1;
+}
+
+.Poster {
+    height: 100%;
+    padding-right: 20%;
+    background: yellow;
+    border-radius: 5px;
+    border: 1px solid var(--grey-2);
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+}
+
+.Poster img {
+    cursor: pointer;
+    object-fit: cover;
+    min-height: 100%;
+    max-width: 110%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+}
+
+.Avatar{
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+
+.Username,
+.Username:hover{
+    grid-column: 2/3;
+    grid-row: 2/3;
+    margin-right: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: var(--grey-2);
+    font-size: .9rem;
+    text-decoration: none;
+}
+
+.Date{
+    grid-column: 3/4;
+    grid-row: 2/3;
+    color: var(--grey-1);
+    font-size: .7rem;
+    justify-self: flex-end;
+    margin: 0;
+}
+
+.Title,
+.Title:Hover,
+.Title h3{
+    grid-column: 1/-1;
+    grid-row: 3/4;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: var(--grey-2);
+}
+
+.Description,
+.Description:Hover,
+.Description p{
+    grid-column: 1/-1;
+    grid-row: 4/5;
+    text-decoration: none;
+    color: var(--grey-2);
+}
+
+.CommentsCount{
+    color: var(--grey-2);
+    font-size: .8rem;
+    margin-bottom: 20px;
+    grid-column: 1/-1;
+    grid-row: 6/7;
+    justify-self: flex-end;
+}
+.CommentsCount i{
+    margin-right: 5px;
+}
