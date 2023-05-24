@@ -25,6 +25,7 @@ function MoviePage() {
   const [ratings, setRatings] = useState({ results: [] });
   const [userRating, setUserRating] = useState({ results: [] });
   const [wasRated, setWasRated] = useState(false)
+  const [hasLoaded, setHasLoaded] = useState(false)
 
 
   useEffect(() => {
@@ -37,6 +38,7 @@ function MoviePage() {
         setMovie({ results: [movie] });
         setRatings(ratings)
         setWasRated(!!movie.rating_id);
+        setHasLoaded(true)
       } catch (err) {
         console.log(err)
       }
@@ -61,57 +63,63 @@ function MoviePage() {
 
   return (
     <Row className="h-100 mx-0">
-      <Col className="p-0">
-        <Movie {...movie.results[0]} setMovies={setMovie} />
-        <Container fluid className="mx-0 px-0">
-          {currentUser && (
-            wasRated ? (
-              // add later a preview rate card
-              <RatingMoviePage 
-                rating={userRating} 
-                currentUserRating={true} 
-                setMovie={setMovie}
-                setRatings={setRatings}
-                setWasRated={setWasRated}
-                setUserRating={setUserRating}
-                movieData={movie.results[0]}
-              />
-            ) : (
-              <RatingCreateForm
-                profile_id={profile_id}
-                profile_image={profile_image}
-                movieId={id}
-                movieData={movie.results[0]}
-                setMovie={setMovie}
-                setRatings={setRatings}
-                setWasRated={setWasRated}
-              />
-            )
-          )}
-          <div className={styles.Container}>
-            {ratings.results.length ? (
-              <InfiniteScroll
-                children={
-                  ratings.results.map((rating) => {
-                    if (rating.id !== movie.results[0]?.rating_id) {
-                      return <RatingMoviePage key={rating.id} rating={rating} />
-                    }
-                    return null;
-                  })
-                }
-                dataLength={ratings.results.length}
-                loader={<Asset spinner />}
-                hasMore={!!ratings.next}
-                next={() => fetchMoreData(ratings, setRatings)}
-              />
-            ) : currentUser ? (
-              <span>Be the first one to make a review</span>
-            ) : (
-              <span>No reviews made... yet</span>
+      {hasLoaded ? (
+        <Col className="p-0">
+          <Movie {...movie.results[0]} setMovies={setMovie} />
+          <Container fluid className="mx-0 px-0">
+            {currentUser && (
+              wasRated ? (
+                // add later a preview rate card
+                <RatingMoviePage
+                  rating={userRating}
+                  currentUserRating={true}
+                  setMovie={setMovie}
+                  setRatings={setRatings}
+                  setWasRated={setWasRated}
+                  setUserRating={setUserRating}
+                  movieData={movie.results[0]}
+                />
+              ) : (
+                <RatingCreateForm
+                  profile_id={profile_id}
+                  profile_image={profile_image}
+                  movieId={id}
+                  movieData={movie.results[0]}
+                  setMovie={setMovie}
+                  setRatings={setRatings}
+                  setWasRated={setWasRated}
+                />
+              )
             )}
-          </div>
+            <div className={styles.Container}>
+              {ratings.results.length ? (
+                <InfiniteScroll
+                  children={
+                    ratings.results.map((rating) => {
+                      if (rating.id !== movie.results[0]?.rating_id) {
+                        return <RatingMoviePage key={rating.id} rating={rating} />
+                      }
+                      return null;
+                    })
+                  }
+                  dataLength={ratings.results.length}
+                  loader={<Asset spinner />}
+                  hasMore={!!ratings.next}
+                  next={() => fetchMoreData(ratings, setRatings)}
+                />
+              ) : currentUser ? (
+                <span>Be the first one to make a review</span>
+              ) : (
+                <span>No reviews made... yet</span>
+              )}
+            </div>
+          </Container>
+        </Col>
+      ) : (
+        <Container>
+          <Asset spinner />
         </Container>
-      </Col>
+      )}
     </Row>
   );
 }

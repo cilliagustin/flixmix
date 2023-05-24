@@ -11,6 +11,7 @@ import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom";
 import Alert from "../../components/Alert";
 import { handleInputChange } from "../../utils/utils";
 import { useErrorHandling } from './../../components/HandleErrors';
+import Asset from "../../components/Asset";
 
 function MovieEditForm() {
 
@@ -28,6 +29,7 @@ function MovieEditForm() {
     const imageInput = useRef(null)
     const history = useHistory()
     const {id} = useParams()
+    const [hasLoaded, setHasLoaded] = useState(false)
 
     useEffect(()=>{
         const handleMount = async()=>{
@@ -44,6 +46,7 @@ function MovieEditForm() {
                     movie_genre: movie_genre,
                     image: poster,
                 })
+                setHasLoaded(true)
             } catch (err) {
                 console.log(err)
             }
@@ -202,6 +205,7 @@ function MovieEditForm() {
     return (
         <>
         <Alert  type="warning" errors={allErrors} active={activeAlert} />
+        {hasLoaded ? (
             <Form onSubmit={handleSubmit}>
                 <Row className="mx-0">
                     <Col className="py-2 p-0 p-md-2" md={{ span: 7, order: 2 }}>
@@ -239,6 +243,12 @@ function MovieEditForm() {
                     </Col>
                 </Row>
             </Form>
+        ):(
+            <Container>
+                <Asset spinner/>
+            </Container>
+        )}
+            
         </>
     );
 }

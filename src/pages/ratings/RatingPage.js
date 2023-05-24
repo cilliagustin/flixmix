@@ -6,7 +6,7 @@ import { axiosReq, axiosRes } from '../../api/axiosDefaults'
 import DisplayRating from '../../components/DisplayRating'
 import Avatar from '../../components/Avatar'
 import Asset from '../../components/Asset'
-import { Form, Row, Col } from "react-bootstrap";
+import { Form, Row, Col, Container } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
 import { MoreDropdown } from '../../components/MoreDropdown'
 import RateButtons from '../../components/RateButtons'
@@ -28,6 +28,7 @@ const RatingPage = () => {
   const profile_image = currentUser?.profile_image;
   const [comments, setComments] = useState({ results: [] });
   const { fullScreen, handleFullScreen, imageData } = useFullScreen();
+  const [hasLoaded, setHasLoaded] = useState(false)
 
   const history = useHistory();
 
@@ -92,7 +93,7 @@ const RatingPage = () => {
         setRating(ratingData)
         setOldRating(ratingData)
         setComments(comments)
-
+        setHasLoaded(true)
       } catch (err) {
         console.log(err)
       }
@@ -118,6 +119,7 @@ const RatingPage = () => {
       )}
       <Row className='m-0'>
         <Col className='px-0'>
+          {hasLoaded ? ( 
           <div className={styles.Rating}>
             <div className={styles.Header}>
               <div className={styles.Dropdown}>
@@ -205,6 +207,12 @@ const RatingPage = () => {
               )}
             </div>
           </div>
+
+          ):(
+            <Container>
+              <Asset spinner/>
+            </Container>
+          )}
         </Col>
       </Row>
       <Row className='m-0'>
