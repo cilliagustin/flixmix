@@ -96,8 +96,8 @@ body{
 
 @media only screen and (min-width: 768px){
     .Main {
-        width: calc(100% - 72px);
-        margin: 0 0 0 72px;
+        width: calc(100% - 50px);
+        margin: 0 0 0 50px;
         padding: 0;
       }
 }

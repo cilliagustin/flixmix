@@ -1,5 +1,4 @@
 import styles from './App.module.css';
-import NavBar from './components/NavBar'
 import { Route, Switch } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import './api/axiosDefaults';
@@ -20,13 +19,14 @@ import ListCreateForm from './pages/lists/ListCreateForm';
 import ListPage from './pages/lists/ListPage';
 import ListEditForm from './pages/lists/ListEditForm';
 import SearchListPage from './pages/lists/SearchListPage';
+import Sidebar from './components/Sidebar';
 
 function App() {
 
   return (
 
     <div className={styles.App}>
-      <NavBar />
+      <Sidebar />
       <Container className={styles.Main}>
         <Switch>
           <Route exact path="/" render={() => <Home />} />

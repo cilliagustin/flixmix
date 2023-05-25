@@ -1,0 +1,357 @@
+.Sidebar {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: auto;
+    transition: var(--transition-08s);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    background: var(--gradient-2);
+    display: flex;
+    flex-flow: column;
+    padding-top: 50px;
+}
+
+.LogoContainer {
+    position: absolute;
+    z-index: 13;
+    top: -40px;
+    left: -40px;
+    width: 92px;
+    height: 92px;
+    background: var(--purple-3);
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    border-radius: 0 0% 50% 0%;
+    overflow: hidden;
+}
+
+.LogoContainer img:first-child {
+    width: 40px;
+    height: 40px;
+    margin: 0 6px 6px 0;
+}
+
+.FullLogoContainer{
+    width: 0px;
+    height: 23px;
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: var(--transition-08s);
+}
+
+.Open .FullLogoContainer{
+    width: 105px;
+    left: 70px;
+}
+
+.FullLogoContainer img{
+    width: auto;
+    height: 100%;
+}
+
+.ButtonContainer {
+    position: absolute;
+    z-index: 12;
+    top: 0px;
+    left: 5px;
+    width: 95px;
+    height: 52px;
+    background: var(--purple-3);
+    border-radius: 0 50% 50% 0%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    transition: var(--transition-08s);
+}
+
+
+.ButtonContainer button {
+    height: 40px;
+    width: 40px;
+    border: none;
+    background: none;
+    position: relative;
+    margin-right: 6px;
+    transition: var(--transition-08s);
+}
+
+.ButtonContainer button:focus-visible {
+    outline-width: 0;
+}
+
+.ButtonContainer button span {
+    position: absolute;
+    background: var(--white-1);
+    left: 10px;
+    top: 8px;
+    height: 4px;
+    width: 20px;
+    border-radius: 3px;
+    transition: var(--transition-08s)
+}
+
+.ButtonContainer button span:nth-child(2) {
+    top: 18px;
+    left: 5px;
+    width: 30px;
+}
+
+.ButtonContainer button span:last-child {
+    top: 28px;
+}
+
+.ButtonContainerHide {
+    left: -70px;
+}
+
+.Open .ButtonContainer,
+.Open .ButtonContainerHide {
+    left: calc(100% - 95px);
+}
+
+.Open .ButtonContainer {
+    background: none;
+}
+
+.Open .ButtonContainer button {
+    transform: rotate(180deg);
+}
+
+.Open .ButtonContainer button span:first-child {
+    transform: rotate(-45deg);
+    top: 14px;
+    width: 10px;
+    left: 18px;
+}
+
+.Open .ButtonContainer button span:nth-child(2) {
+    transform: rotate(45deg);
+    top: 18px;
+    width: 20px;
+    left: 10px;
+}
+
+.Open .ButtonContainer button span:last-child {
+    transform: rotate(-45deg);
+    top: 21px;
+    width: 10px;
+    left: 11px;
+}
+
+.Link,
+.Link:hover,
+.Dropdown {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    color: var(--translucid-white);
+    text-decoration: none;
+    overflow: hidden;
+    width: 0;
+    padding: 5px 0;
+    transition: var(--transition-08s);
+    position: relative;
+}
+
+.Link:before,
+.Dropdown:before{
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 0%;
+    left: 5px;
+    bottom: 0;
+    background: var(--translucid-white);
+    transition: var(--transition-08s);
+}
+
+.Link:hover:before,
+.DropdownContainer:hover .Dropdown:before,
+.Active.Link:before,
+.Active.Link:hover:before,
+.DropdownContainer.OpenDropdown .Dropdown:before{
+    background: var(--white-1);
+    width: 80%;
+}
+
+.Link:hover,
+.DropdownContainer:hover .Dropdown,
+.Active.Link,
+.Active.Link:hover,
+.DropdownContainer.OpenDropdown .Dropdown {
+    color: var(--white-1);
+}
+
+
+.Open .Link,
+.Open .Dropdown {
+    padding: 5px;
+    width: 240px;
+}
+
+.Link div:first-child i,
+.Dropdown div:first-child i {
+    width: 35px;
+    text-align: center;
+    height: 32px;
+}
+
+.Link span,
+.Dropdown span {
+    font-size: 20px;
+    height: 32px;
+    margin-left: 15px;
+    white-space: nowrap
+}
+
+.DropdownContainer {
+    position: relative;
+    cursor: pointer;
+}
+
+.SublinksContainer {
+    text-align: right;
+    padding-left: 5px;
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 10px;
+    flex-flow: column;
+    background: var(--purple-5);
+    border-radius: 0 3px 3px 0;
+    overflow: hidden;
+    padding: 5px;
+}
+
+.Open .OpenDropdown .SublinksContainer {
+    display: flex;
+}
+
+.SublinksContainer a {
+    color: var(--translucid-white);
+    font-size: 13px;
+}
+
+.SublinksContainer .ActiveSubLink,
+.SublinksContainer a:hover{
+    text-decoration: none;
+    color: var(--white-1);
+}
+
+.Log {
+    margin-top: auto;
+}
+
+.User {
+    margin-top: 15px;
+    gap: 5px;
+    width: 0;
+    transition: var(--transition-08s);
+    overflow: hidden;
+    display: flex;
+    padding: 5px 0px;
+    align-items: flex-end;
+}
+
+.Username,
+.Username:hover {
+    color: var(--translucid-white);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.Open .User {
+    display: flex;
+    padding: 5px;
+    width: 240px;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .LogoContainer {
+        z-index: 12;
+        top: 0px;
+        left: 0px;
+        width: 50px;
+        height: auto;
+        display: inline;
+        border-radius: 0;
+    }
+
+    .LogoContainer img:first-child {
+        margin: 5px;
+    }
+
+    .FullLogoContainer {
+        top: 15px;
+        left: 20px;
+    }
+
+    .Open .FullLogoContainer {
+        left: 95px;
+    }
+
+    .SubmenuWrapper {
+        width: 72px;
+    }
+
+    .ButtonContainer {
+        width: 52px;
+        left: 30px;
+        top: 0px;
+        border-radius: 50%;
+        justify-content: center;
+        z-index: 13;
+        transform: scale(.7);
+    }
+
+    .ButtonContainer button {
+        margin: 0;
+    }
+
+    .Open .ButtonContainer {
+        left: calc(100% - 30px);
+        background: var(--purple-3);
+    }
+
+    .Link,
+    .Link:hover,
+    .Dropdown {
+        font-size: 30px;
+        width: 50px;
+        padding: 5px;
+    }
+
+    .Open .Link,
+    .Open .Link:hover,
+    .Open .Dropdown {
+        width: 300px;
+    }
+
+    .SublinksContainer a,
+    .SublinksContainer a:hover{
+        font-size: 1.1rem;
+        padding-left: 30px;
+    }
+
+    .OpenDropdown .SublinksContainer{
+        display: flex;
+    }
+
+    .User {
+        width: 40px;
+        padding: 5px;
+        margin-left: 5px;
+    }
+
+}
