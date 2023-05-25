@@ -33,14 +33,11 @@ const ListEditForm = () => {
         { title: "List Description", message: errors.description },
     ]
 
-    console.log(listedMovies)
     useEffect(() => {
         const handleMount = async () => {
             try {
                 const { data } = await axiosReq.get(`/lists/${id}`);
                 const { title, description, movies_details } = data;
-
-                console.log(data)
 
                 setListData({
                     title: title,
@@ -86,8 +83,6 @@ const ListEditForm = () => {
             description: description,
             movies: moviesIds,
         };
-
-        console.log(requestData)
 
         try {
             await axiosReq.put(`/lists/${id}/`, requestData);

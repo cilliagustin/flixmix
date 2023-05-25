@@ -9,6 +9,7 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext'
 import ProfileMovies from '../movies/ProfileMovies'
 import ProfileRatings from '../ratings/ProfileRatings'
 import { ProfileEditDropdown } from '../../components/MoreDropdown'
+import ProfileLists from '../lists/ProfileLists'
 
 const ProfilePage = () => {
     const { id } = useParams()
@@ -16,20 +17,23 @@ const ProfilePage = () => {
     const [profile, setProfile] = useState({})
     const [movies, setMovies] = useState({})
     const [ratings, setRatings] = useState({});
+    const [lists, setLists] = useState({});
     const [hasLoaded, setHasLoaded] = useState(false)
     
 
     useEffect(() => {
         const handleMount = async () => {
             try {
-                const [{ data: profile }, { data: movies }, { data: ratings }] = await Promise.all([
+                const [{ data: profile }, { data: movies }, { data: ratings }, { data: lists }] = await Promise.all([
                     axiosReq.get(`/profiles/${id}`),
                     axiosReq.get(`/movies/?owner_id=${id}`),
-                    axiosReq.get(`/ratings/?owner_id=${id}`)
+                    axiosReq.get(`/ratings/?owner_id=${id}`),
+                    axiosReq.get(`/lists/?owner_id=${id}`)
                 ])
                 setProfile(profile);
                 setMovies(movies);
                 setRatings(ratings);
+                setLists(lists)
                 setHasLoaded(true)
             } catch (err) {
                 console.log(err)
@@ -118,6 +122,12 @@ const ProfilePage = () => {
                         <div className={styles.DisplayContrib}>
                             <h2>Reviews written by {profile.owner}</h2>
                             <ProfileRatings ratings={ratings} setRatings={setRatings} />
+                        </div>
+                    )}
+                    {profile.list_count > 0 && (
+                        <div className={styles.DisplayContrib}>
+                            <h2>Lists written by {profile.owner}</h2>
+                            <ProfileLists lists={lists} setLists={setLists} />
                         </div>
                     )}
                 </div>

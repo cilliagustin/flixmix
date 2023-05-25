@@ -76,6 +76,13 @@
     left: 50%;
     transform: translate(-50%, -50%);
     user-select: none;
+    filter: brightness(30%);
+    transition: filter .2s ease-in;
+}
+
+.Posters .Poster:first-child img,
+.Poster img:hover{
+    filter: brightness(100%);
 }
 
 .Avatar{

@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../../styles/ProfileMoviesRatings.module.css'
+import styles from '../../styles/ProfileContentDisplay.module.css'
 import ProfileMoviePreviewCard from './ProfileMoviePreviewCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Asset from '../../components/Asset';

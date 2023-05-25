@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import styles from '../../styles/ProfileMoviePreviewCard.module.css'
 
 const MovieListCard = ({ movie, setListedMovies, listedMovies}) => {
-    useEffect(() => { console.log(listedMovies) }, [listedMovies])
     const removeMovie = () =>{
         const updatedMovies = listedMovies.filter(listedMovie => listedMovie.id !== movie.id);
         setListedMovies(updatedMovies);

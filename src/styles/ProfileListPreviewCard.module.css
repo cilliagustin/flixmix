@@ -1,0 +1,109 @@
+.Card {
+    margin: 15px 0;
+    background: var(--gradient);
+    border-radius: 5px;
+    display: flex;
+    flex-flow: column;
+    padding: 5px;
+    gap: 5px;
+    width: 250px;
+    height: auto;
+    color: var(--translucid-white);
+    font-family: 'Poppins', sans-serif;
+    box-shadow: var(--shadow);
+}
+
+.PostersContainer{
+    width: 100%;
+    height: 160px;
+    position: relative;
+}
+
+.Poster{
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 150px;
+    border-radius: 4px;
+    border: 1px solid var(--grey-1);
+    overflow: hidden;
+}
+
+.PostersContainer .Poster:nth-child(1){
+    left: 0px;
+    z-index: 6;
+}
+
+.PostersContainer .Poster:nth-child(2){
+    left: 30px;
+    z-index: 5;
+}
+
+.PostersContainer .Poster:nth-child(3){
+    left: 60px;
+    z-index: 4;
+}
+
+.PostersContainer .Poster:nth-child(4){
+    left: 88px;
+    z-index: 3;
+}
+
+.PostersContainer .Poster:nth-child(5){
+    left: 117px;
+    z-index: 2;
+}
+
+.PostersContainer .Poster:nth-child(6){
+    left: 140px;
+    z-index: 1;
+}
+
+.Poster img {
+    cursor: pointer;
+    object-fit: cover;
+    min-height: 100%;
+    max-width: 110%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+    filter: brightness(30%);
+    transition: filter .2s ease-in;
+}
+
+.PostersContainer .Poster:nth-child(1) img,
+.Poster img:hover {
+    filter: brightness(100%);
+}
+
+.Title,
+.Title:hover{
+    color: var(--translucid-white);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 0 8px;
+}
+
+.Description{
+    margin: 0px 10px;
+    font-weight: 300;
+    font-size: .7rem;
+}
+
+.Details{
+    display: flex;
+    font-size: .6rem;
+    align-items: baseline;
+    font-family: "Open Sans", sans-serif;
+}
+
+.Details i{
+    margin: 0 5px;
+}
+
+.Details span:last-child{
+    margin-left: auto;
+}

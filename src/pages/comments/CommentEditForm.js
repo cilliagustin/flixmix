@@ -28,7 +28,6 @@ const CommentEditForm = (props) => {
         setFormContent(event.target.value);
     };
 
-    console.log(parent_id)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
