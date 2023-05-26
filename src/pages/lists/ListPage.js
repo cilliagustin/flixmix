@@ -12,6 +12,7 @@ import CommentCreateForm from '../comments/CommentCreateForm'
 import { fetchMoreData } from '../../utils/utils'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Comment from '../comments/Comment'
+import { useProfileData } from '../../contexts/ProfileDataContext'
 
 const ListPage = () => {
 
@@ -21,6 +22,8 @@ const ListPage = () => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const currentUser = useCurrentUser()
     const profile_image = currentUser?.profile_image;
+    const profileData = useProfileData()
+    const isAdmin = profileData?.is_admin
 
     const history = useHistory()
 
@@ -83,7 +86,7 @@ const ListPage = () => {
                                 </div>
                                 <span className={styles.Date}>Created on {list.created_at}</span>
                                 <div className={styles.Dropdown}>
-                                    {list.is_owner && <MoreDropdown color={"grey"} handleDelete={handleDelete} handleEdit={handleEdit} />}
+                                    {(list.is_owner || isAdmin) && <MoreDropdown color={"grey"} handleDelete={handleDelete} handleEdit={handleEdit} />}
                                 </div>
                                 <p className={styles.Content}>{list.description}</p>
                             </div>

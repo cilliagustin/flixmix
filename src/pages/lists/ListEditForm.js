@@ -41,7 +41,6 @@ const ListEditForm = () => {
         const handleMount = async () => {
             try {
                 const { data } = await axiosReq.get(`/lists/${id}`);
-                console.log(data)
                 const { title, description, profile_id, movies_details } = data;
 
                 setListData({
@@ -109,12 +108,15 @@ const ListEditForm = () => {
     const profileData = useProfileData()
     useEffect(() => {
         const handleMount = () => {
-            if ((profileData !== null && currentUser?.profile_id !== owner)) {
+            const isAdminOrOwner = (profileData?.is_admin || currentUser?.profile_id === owner)
+            if(!isAdminOrOwner){
                 history.push("/")
             }
         };
 
-        handleMount();
+        if(profileData !== null){
+            handleMount();
+        }
     }, [profileData, history]);
     return (
         <>

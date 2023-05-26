@@ -13,6 +13,8 @@ import appStyles from "../../App.module.css";
 import { useErrorHandling } from './../../components/HandleErrors';
 import Asset from "../../components/Asset";
 import Alert from "../../components/Alert";
+import { useRedirect } from "../../hooks/useRedirect";
+import { useProfileData } from "../../contexts/ProfileDataContext";
 
 const UserPasswordForm = () => {
   const history = useHistory();
@@ -31,11 +33,9 @@ const UserPasswordForm = () => {
     { title: "Username", message: errors.new_password2 },
   ]
 
-  const isLoading = true;
   const [hasLoaded, setHasLoaded] = useState(false);
+  const profileData = useProfileData()
 
-  const [timeoutId, setTimeoutId] = useState(null);
-  const [secondTimeoutId, setSecondTimeoutId] = useState(null);
 
   const handleChange = (event) => {
     setUserData({
@@ -44,35 +44,22 @@ const UserPasswordForm = () => {
     });
   };
 
-
-  useEffect(() => {
-    setTimeout(()=>{
-      if (currentUser?.profile_id?.toString() !== id) {
-        history.push("/");
-      } else{
-        setHasLoaded(true);
-      }
-    }, 2500)
-
-    return () => {
-      clearTimeout(timeoutId);
-      clearTimeout(secondTimeoutId);
-    };
-  }, [currentUser, history, id]);
-
-  useEffect(() => {
-    let newSecondTimeoutId;
+      // only allow the owner to enter to this page
+      useRedirect('loggedOut')
+      useEffect(() => {
+          const handleMount = () => {
   
-    if (!hasLoaded && !isLoading) {
-      newSecondTimeoutId = setTimeout(() => {
-        history.push("/");
-      }, 200);
-    }
+              if(currentUser?.profile_id?.toString() === id){
+                setHasLoaded(true);
+              } else {
+                history.push("/")
+              }
+          };
   
-    setSecondTimeoutId(newSecondTimeoutId);
-  
-    return () => clearTimeout(newSecondTimeoutId);
-  }, [hasLoaded, isLoading]);
+          if(profileData !== null){
+              handleMount();
+          }
+      }, [profileData, history]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

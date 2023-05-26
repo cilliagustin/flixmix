@@ -13,6 +13,8 @@ import appStyles from "../../App.module.css";
 import { useErrorHandling } from './../../components/HandleErrors';
 import Asset from "../../components/Asset";
 import Alert from "../../components/Alert";
+import { useProfileData } from "../../contexts/ProfileDataContext";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const UsernameForm = () => {
   const [username, setUsername] = useState("");
@@ -26,45 +28,29 @@ const UsernameForm = () => {
   const { id } = useParams();
 
   const currentUser = useCurrentUser();
+  const profileData = useProfileData()
   const setCurrentUser = useSetCurrentUser();
 
-  const [isLoading, setIsLoading] = useState(true);
   const [hasLoaded, setHasLoaded] = useState(false);
 
-  const [timeoutId, setTimeoutId] = useState(null);
-  const [secondTimeoutId, setSecondTimeoutId] = useState(null);
 
+    // only allow the owner to enter to this page
+    useRedirect('loggedOut')
+    useEffect(() => {
+        const handleMount = () => {
 
-  useEffect(() => {
-    const firstTimeout = setTimeout(() => {
-      if (currentUser?.profile_id?.toString() === id) {
-        setUsername(currentUser.username);
-        setHasLoaded(true);
-      } else {
-        history.push("/");
-      }
-  
-      setIsLoading(false);
-    }, 2500);
-  
-    setTimeoutId(firstTimeout);
-  
-    return () => clearTimeout(firstTimeout);
-  }, [currentUser, history, id]);
-  
-  useEffect(() => {
-    let newSecondTimeoutId;
-  
-    if (!hasLoaded && !isLoading) {
-      newSecondTimeoutId = setTimeout(() => {
-        history.push("/");
-      }, 200);
-    }
-  
-    setSecondTimeoutId(newSecondTimeoutId);
-  
-    return () => clearTimeout(newSecondTimeoutId);
-  }, [hasLoaded, isLoading]);
+            if(currentUser?.profile_id?.toString() === id){
+              setUsername(currentUser.username);
+              setHasLoaded(true);
+            } else {
+              history.push("/")
+            }
+        };
+
+        if(profileData !== null){
+            handleMount();
+        }
+    }, [profileData, history]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
