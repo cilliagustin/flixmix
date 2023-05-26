@@ -49,6 +49,7 @@ const ProfilesPreview = ({ message, query, searchFilter }) => {
         <>
             {hasLoaded ? (
                 <>
+                    <span className={styles.Count}>{profiles.count} results</span>
                     {profiles.results.length ? (
                         <div className={styles.Container}>
                             <InfiniteScroll

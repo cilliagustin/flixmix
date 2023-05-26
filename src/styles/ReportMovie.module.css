@@ -1,0 +1,51 @@
+.Overlay{
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 8;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ReportContainer{
+    width: 280px;
+    height: 370px;
+    background: var(--white-1);
+    border-radius: 4px;
+    position: relative;
+}
+
+.Header{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    background: var(--gradient);
+    border-radius: 4px 4px 0 0;
+}
+
+.Header h4{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--translucid-white);
+    margin: 0;
+}
+
+.Btn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(30%, -30%);
+    width: 30px;
+    height: 30px;
+    font-size: .8rem;
+    border: none;
+    color: var(--white-2);
+    background: var(--grey-2);
+    border-radius: 50%;
+}

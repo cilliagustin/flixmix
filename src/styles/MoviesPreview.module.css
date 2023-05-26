@@ -8,6 +8,13 @@
     padding: 10px;
 }
 
+.Count{
+    display: block;
+    text-align: end;
+    color: var(--purple-1);
+    font-weight: 600;
+}
+
 
 @media only screen and (min-width: 768px){
     .Container,

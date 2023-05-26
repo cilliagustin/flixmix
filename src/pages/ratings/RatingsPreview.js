@@ -13,7 +13,7 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext';
 const RatingsPreview = ({ message, query = "", searchParameter = "", infiniteScroll = false, followedFilter }) => {
     const currentUser = useCurrentUser()
     const profile_id = currentUser?.profile_id || "";
-    
+
     const [ratings, setRatings] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
     const pathname = useLocation();
@@ -33,19 +33,20 @@ const RatingsPreview = ({ message, query = "", searchParameter = "", infiniteScr
         }
 
         setHasLoaded(false)
-        const timer = setTimeout(()=>{
+        const timer = setTimeout(() => {
             fetchRatings()
         }, 1000)
-        return ()=>{
+        return () => {
             clearTimeout(timer)
         }
-    }, [pathname,followedProfilesFilter, query, search])
+    }, [pathname, followedProfilesFilter, query, search])
 
 
     return (
         <div className={infiniteScroll ? styles.Container : styles.HomeContainer}>
             {hasLoaded ? (
                 <>
+                    <span className={styles.Count}>{ratings.count} results</span>
                     {ratings.results.length ? (infiniteScroll ? (
                         <div className={styles.InfiniteScrollContainer}>
                             <InfiniteScroll
@@ -77,7 +78,7 @@ const RatingsPreview = ({ message, query = "", searchParameter = "", infiniteScr
                     )}
                 </>
             ) : (
-                    <Asset spinner />
+                <Asset spinner />
             )}
         </div>
     )

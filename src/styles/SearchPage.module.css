@@ -41,6 +41,10 @@
     display: none;
 }
 
+.Radio div{
+    margin: 0 0.45rem;
+}
+
 .Radio label{
     font-family: 'Poppins', sans-serif;
     font-weight: 500;

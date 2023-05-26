@@ -41,12 +41,13 @@ const MoviesPreview = ({ message, searchFilter = "", query = "", searchParameter
         return () => {
             clearTimeout(timer)
         }
-    }, [filter,followedProfilesFilter, pathname, query, search])
+    }, [filter, followedProfilesFilter, pathname, query, search])
 
     return (
         <>
             {hasLoaded ? (
                 <>
+                    <span className={styles.Count}>{movies.count} results</span>
                     {movies.results.length ? (
                         <>
                             {infiniteScroll ? (

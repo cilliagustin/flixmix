@@ -45,6 +45,7 @@ const ListsPreview = ({ message, query = "", searchParameter = "", infiniteScrol
         <>
             {hasLoaded ? (
                 <>
+                <span className={styles.Count}>{lists.count} results</span>
                     {lists.results.length ? (
                         <>
                             {infiniteScroll ? (

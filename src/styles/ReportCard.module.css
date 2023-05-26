@@ -1,0 +1,95 @@
+.Card{
+    width: 100%;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    grid-template-rows: auto auto 1fr auto auto 50px auto;
+    border-radius: 8px;
+    background: rgb(255,88,88);
+    color: var(--white-2);
+    max-width: 350px;
+}
+
+.Poster {
+    grid-column: 1/2;
+    grid-row: 1/4;
+    width: 100%;
+    padding-bottom: 150%;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.Poster img {
+    cursor: pointer;
+    object-fit: cover;
+    min-height: 100%;
+    max-width: 110%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+}
+
+.Title,
+.Title:hover,
+.Year,
+.Year:hover{
+    grid-column: 2/3;
+    grid-row: 1/2;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-decoration: none;
+    justify-self: center;
+    color: var(--white-2);
+}
+
+.Year,
+.Year:hover{
+    grid-row: 2/3;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.User{
+    margin: 5px 0;
+    grid-column: 1/-1;
+    grid-row: 4/5;
+}
+
+.Username,
+.Username:hover{
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: var(--white-2);
+    margin-left: 5px;
+}
+
+.Content{
+    grid-column: 1/-1;
+    grid-row: 5/6;
+}
+
+.Card button{
+    grid-column: 1/-1;
+    grid-row: 6/7;
+    justify-self: center;
+}
+
+.Date{
+    grid-column: 1/-1;
+    grid-row: 7/8;
+    justify-self: flex-end;
+    font-size: .6rem;
+}
+
+@media only screen and (min-width: 768px) {
+    .Card{
+        justify-self: flex-start;
+    }
+    .Card:nth-child(odd){
+        justify-self: flex-end;
+    }
+}

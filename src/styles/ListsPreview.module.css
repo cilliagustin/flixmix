@@ -6,3 +6,10 @@
     flex-flow: column;
     gap: 15px;
 }
+
+.Count{
+    display: block;
+    text-align: end;
+    color: var(--purple-1);
+    font-weight: 600;
+}

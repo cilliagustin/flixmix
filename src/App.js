@@ -20,6 +20,7 @@ import ListPage from './pages/lists/ListPage';
 import ListEditForm from './pages/lists/ListEditForm';
 import SearchListPage from './pages/lists/SearchListPage';
 import Sidebar from './components/Sidebar';
+import SearchReportPage from './pages/reports/SearchReportPage';
 
 function App() {
 
@@ -40,8 +41,7 @@ function App() {
           <Route exact path="/add/list" render={() => <ListCreateForm />} />
           <Route exact path="/list/:id" render={() => <ListPage />} />
           <Route exact path="/list/:id/edit" render={() => <ListEditForm />} />
-          <Route exact path="/activity" render={() => <h1>your activity</h1>} />
-          <Route exact path="/activity/followed" render={() => <h1>followed activity</h1>} />
+          <Route exact path="/admin" render={() => <SearchReportPage />} />
           <Route exact path="/search/profiles" render={() => <SearchProfiles />} />
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
           <Route exact path="/profiles/:id/edit/username" render={() => <UsernameForm />}/>
