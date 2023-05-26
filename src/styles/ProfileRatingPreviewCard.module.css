@@ -12,6 +12,7 @@
     color: var(--translucid-white);
     font-family: 'Poppins', sans-serif;
     box-shadow: var(--shadow);
+    user-select: none;
 }
 
 .Card img{

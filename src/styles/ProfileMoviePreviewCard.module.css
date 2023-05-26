@@ -9,6 +9,7 @@
     padding: 5px;
     gap: 5px;
     box-shadow: var(--shadow);
+    user-select: none;
 }
 
 .ListCard > * {
