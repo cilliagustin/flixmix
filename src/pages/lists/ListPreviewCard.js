@@ -16,7 +16,7 @@ const ListPreviewCard = (props) => {
             <div className={styles.Container}>
                 <div className={styles.Posters}>
                     {movies_details.slice(0, 6).map((movie) => (
-                        <div className={styles.Poster}>
+                        <div className={styles.Poster} key={movie.id}>
                             <img
                                 src={movie.poster}
                                 alt={`${movie.title} movie poster`}
