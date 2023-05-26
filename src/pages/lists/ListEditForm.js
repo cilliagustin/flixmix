@@ -10,14 +10,18 @@ import ListDisplayMovies from './ListDisplayMovies';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import Alert from "../../components/Alert";
 import { useErrorHandling } from './../../components/HandleErrors';
+import { useProfileData } from '../../contexts/ProfileDataContext';
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
+import { useRedirect } from '../../hooks/useRedirect';
 
 const ListEditForm = () => {
     const { id } = useParams()
     const [listData, setListData] = useState({
         title: "",
         description: "",
+        owner:"",
     });
-    const { title, description } = listData
+    const { title, description, owner } = listData
     const [hasListLoaded, setHasListLoaded] = useState(false)
     const [hasMoviesLoaded, setHasMoviesLoaded] = useState(false)
     const [listedMovies, setListedMovies] = useState([]);
@@ -37,11 +41,13 @@ const ListEditForm = () => {
         const handleMount = async () => {
             try {
                 const { data } = await axiosReq.get(`/lists/${id}`);
-                const { title, description, movies_details } = data;
+                console.log(data)
+                const { title, description, profile_id, movies_details } = data;
 
                 setListData({
                     title: title,
                     description: description,
+                    owner: profile_id,
                 })
                 setListedMovies(movies_details)
                 setHasListLoaded(true)
@@ -95,6 +101,21 @@ const ListEditForm = () => {
             }
         }
     }
+
+
+    // only allow the owner or the admin to enter to this page
+    useRedirect('loggedOut')
+    const currentUser = useCurrentUser()
+    const profileData = useProfileData()
+    useEffect(() => {
+        const handleMount = () => {
+            if ((profileData !== null && currentUser?.profile_id !== owner)) {
+                history.push("/")
+            }
+        };
+
+        handleMount();
+    }, [profileData, history]);
     return (
         <>
             <Alert type="warning" errors={allErrors} active={activeAlert} />

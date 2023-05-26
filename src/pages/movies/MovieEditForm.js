@@ -12,8 +12,14 @@ import Alert from "../../components/Alert";
 import { handleInputChange } from "../../utils/utils";
 import { useErrorHandling } from './../../components/HandleErrors';
 import Asset from "../../components/Asset";
+import { useRedirect } from '../../hooks/useRedirect';
+import { useProfileData } from '../../contexts/ProfileDataContext';
 
 function MovieEditForm() {
+
+
+
+
 
     const [movieData, setMovieData] = useState({
         title: "",
@@ -25,16 +31,18 @@ function MovieEditForm() {
         image: "",
     });
     const { title, synopsis, directors, main_cast, release_year, movie_genre, image } = movieData;
+    const history = useHistory()
 
     const imageInput = useRef(null)
-    const history = useHistory()
-    const {id} = useParams()
+    const { id } = useParams()
     const [hasLoaded, setHasLoaded] = useState(false)
 
-    useEffect(()=>{
-        const handleMount = async()=>{
+
+    useEffect(() => {
+        const handleMount = async () => {
             try {
-                const {data} = await axiosReq.get(`/movies/${id}`);
+                const { data } = await axiosReq.get(`/movies/${id}`);
+                console.log(data)
                 const { title, synopsis, directors, main_cast, release_year, movie_genre, poster } = data;
 
                 setMovieData({
@@ -53,7 +61,7 @@ function MovieEditForm() {
         }
 
         handleMount()
-    },[history, id])
+    }, [history, id])
 
     const handleChangeImage = (event) => {
         if (event.target.files.length) {
@@ -76,7 +84,7 @@ function MovieEditForm() {
         formData.append('release_year', release_year);
         formData.append('movie_genre', movie_genre);
 
-        if(imageInput?.current?.files[0]){
+        if (imageInput?.current?.files[0]) {
             formData.append("poster", imageInput.current.files[0]);
         }
 
@@ -92,7 +100,21 @@ function MovieEditForm() {
         }
     }
 
-    
+
+     // only allow the admin to enter to this page
+    useRedirect('loggedOut')
+    const profileData = useProfileData()
+    useEffect(() => {
+        const handleMount = () => {
+            if (profileData !== null && !profileData?.is_admin) {
+                history.push("/")
+            }
+        };
+
+        handleMount();
+    }, [profileData, history]);
+
+
     //Errors and alert
     const { errors, activeAlert, handleErrors } = useErrorHandling();
     const allErrors = [
@@ -204,15 +226,15 @@ function MovieEditForm() {
 
     return (
         <>
-        <Alert  type="warning" errors={allErrors} active={activeAlert} />
-        {hasLoaded ? (
-            <Form onSubmit={handleSubmit}>
-                <Row className="mx-0">
-                    <Col className="py-2 p-0 p-md-2" md={{ span: 7, order: 2 }}>
-                        <Container
-                            className={`${styles.ColContainer} d-flex flex-column justify-content-center`}
-                        >
-                            <Form.Group className="text-center h-100">
+            <Alert type="warning" errors={allErrors} active={activeAlert} />
+            {hasLoaded ? (
+                <Form onSubmit={handleSubmit}>
+                    <Row className="mx-0">
+                        <Col className="py-2 p-0 p-md-2" md={{ span: 7, order: 2 }}>
+                            <Container
+                                className={`${styles.ColContainer} d-flex flex-column justify-content-center`}
+                            >
+                                <Form.Group className="text-center h-100">
                                     <div className={`${styles.SelectedImageContainer} p4`}>
                                         <div className={styles.ImageContainer}>
                                             <img src={image} alt="preview poster"></img>
@@ -226,29 +248,29 @@ function MovieEditForm() {
                                             </Form.Label>
                                         </div>
                                     </div>
-                                <Form.File
-                                    id="image-upload"
-                                    accept="image/"
-                                    onChange={handleChangeImage}
-                                    className="d-none"
-                                    ref={imageInput}
-                                />
+                                    <Form.File
+                                        id="image-upload"
+                                        accept="image/"
+                                        onChange={handleChangeImage}
+                                        className="d-none"
+                                        ref={imageInput}
+                                    />
 
-                            </Form.Group>
-                            <div className="d-md-none">{textFields}</div>
-                        </Container>
-                    </Col>
-                    <Col md={{ span: 5, order: 1 }} className="d-none d-md-block p-0 p-md-2">
-                        <Container className={`${styles.ColContainer}`}>{textFields}</Container>
-                    </Col>
-                </Row>
-            </Form>
-        ):(
-            <Container>
-                <Asset spinner/>
-            </Container>
-        )}
-            
+                                </Form.Group>
+                                <div className="d-md-none">{textFields}</div>
+                            </Container>
+                        </Col>
+                        <Col md={{ span: 5, order: 1 }} className="d-none d-md-block p-0 p-md-2">
+                            <Container className={`${styles.ColContainer}`}>{textFields}</Container>
+                        </Col>
+                    </Row>
+                </Form>
+            ) : (
+                <Container>
+                    <Asset spinner />
+                </Container>
+            )}
+
         </>
     );
 }

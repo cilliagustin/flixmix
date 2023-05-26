@@ -14,8 +14,11 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import Alert from "../../components/Alert";
 import { useErrorHandling } from './../../components/HandleErrors';
 import { handleInputChange } from "../../utils/utils";
+import { useRedirect } from "../../hooks/useRedirect";
 
 function MovieCreateForm() {
+    // only allow registered users to enter to this page
+    useRedirect('loggedOut')
 
     const [movieData, setMovieData] = useState({
         title: "",

@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Form, Col, Row, Container } from "react-bootstrap";
 
 import styles from '../../styles/SearchPage.module.css'
 import ReportsPreview from './ReportsPreview';
+import { useRedirect } from '../../hooks/useRedirect';
+import { useProfileData } from '../../contexts/ProfileDataContext';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const SearchReportPage = () => {
 
@@ -14,10 +17,25 @@ const SearchReportPage = () => {
         setSearchParameter(e.target.value)
     }
 
+    const history = useHistory()
+
     const placeholders = {
         movie_title: "Search report by movie title",
         owner: "Search report by author",
     }
+
+         // only allow the admin to enter to this page
+         useRedirect('loggedOut')
+         const profileData = useProfileData()
+         useEffect(() => {
+             const handleMount = () => {
+                 if (profileData !== null && !profileData?.is_admin) {
+                     history.push("/")
+                 }
+             };
+     
+             handleMount();
+         }, [profileData, history]);
     return (
         <Container>
             <Row>

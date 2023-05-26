@@ -10,8 +10,12 @@ import ListDisplayMovies from './ListDisplayMovies';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Alert from "../../components/Alert";
 import { useErrorHandling } from './../../components/HandleErrors';
+import { useRedirect } from '../../hooks/useRedirect';
 
 const ListCreateForm = () => {
+    // only allow registered users to enter to this page
+    useRedirect('loggedOut')
+    
     const [listData, setListData] = useState({
         title: "",
         description: "",

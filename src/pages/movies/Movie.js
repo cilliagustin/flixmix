@@ -31,9 +31,7 @@ const Movie = (props) => {
 
     const currentUser = useCurrentUser();
     const profileData = useProfileData();
-    const isOwner = owner === currentUser?.profile_id;
     const isAdmin = profileData?.is_admin;
-
 
     const history = useHistory();
 
@@ -228,7 +226,7 @@ const Movie = (props) => {
                     </div>
                 </div>
                 <div className={styles.DropdownContainer}>
-                    {(isOwner || isAdmin) && (
+                    {isAdmin && (
                         <MoreDropdown color={"white"} handleEdit={handleEdit} handleDelete={handleDelete} />
                     )}
                 </div>

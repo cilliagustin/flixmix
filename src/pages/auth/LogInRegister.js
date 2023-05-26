@@ -7,8 +7,11 @@ import Alert from '../../components/Alert';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
+import { useRedirect } from '../../hooks/useRedirect';
 
 const LogInRegister = () => {
+  useRedirect('loggedIn')
+
   //user context
   const setCurrentUser = useSetCurrentUser()
 
@@ -31,7 +34,7 @@ const LogInRegister = () => {
     try {
       const {data} = await axios.post("/dj-rest-auth/login/", logInSubmitObj);
       setCurrentUser(data.user)
-      history.push("/");
+      history.goBack()
     } catch (err) {
       setLogInErrors(err.response?.data);
       createAlert()
