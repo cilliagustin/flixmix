@@ -7,6 +7,7 @@ import styles from '../styles/Sidebar.module.css'
 import UseScrollDirection from './UseScrollDirection';
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import Avatar from './Avatar';
+import { useProfileData } from '../contexts/ProfileDataContext';
 
 const Sidebar = () => {
     const [collapsed, setCollapsed] = useState(true);
@@ -16,6 +17,9 @@ const Sidebar = () => {
 
     const currentUser = useCurrentUser()
     const setCurrentUser = useSetCurrentUser()
+    
+    const profileData = useProfileData()
+    console.log(profileData)
 
     const handleOpenDropdown = (e) => {
         openDropdown === e.currentTarget.dataset.value ? (
