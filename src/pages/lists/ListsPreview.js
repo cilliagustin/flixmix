@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../../styles/ListsPreview.module.css'
 import { axiosReq } from '../../api/axiosDefaults'
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
@@ -38,14 +38,16 @@ const ListsPreview = ({ message, query = "", searchParameter = "", infiniteScrol
         return () => {
             clearTimeout(timer)
         }
-    }, [ followedProfilesFilter, pathname, query, search])
+    }, [followedProfilesFilter, pathname, query, search])
 
 
     return (
         <>
             {hasLoaded ? (
                 <>
-                <span className={styles.Count}>{lists.count} results</span>
+                    {infiniteScroll && (
+                        <span className={styles.Count}>{lists.count} results</span>
+                    )}
                     {lists.results.length ? (
                         <>
                             {infiniteScroll ? (
@@ -64,11 +66,11 @@ const ListsPreview = ({ message, query = "", searchParameter = "", infiniteScrol
                                 </div>
                             ) : (
 
-                            <div className={styles.Container}>
-                                {lists.results.slice(0,5).map((list) => (
-                                    <ListPreviewCard key={list.id} {...list} />
-                                ))}
-                            </div>
+                                <div className={styles.Container}>
+                                    {lists.results.slice(0, 5).map((list) => (
+                                        <ListPreviewCard key={list.id} {...list} />
+                                    ))}
+                                </div>
                             )}
                         </>
                     ) : (

@@ -47,7 +47,9 @@ const MoviesPreview = ({ message, searchFilter = "", query = "", searchParameter
         <>
             {hasLoaded ? (
                 <>
-                    <span className={styles.Count}>{movies.count} results</span>
+                    {infiniteScroll && (
+                        <span className={styles.Count}>{movies.count} results</span>
+                    )}
                     {movies.results.length ? (
                         <>
                             {infiniteScroll ? (

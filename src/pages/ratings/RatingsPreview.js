@@ -46,7 +46,9 @@ const RatingsPreview = ({ message, query = "", searchParameter = "", infiniteScr
         <div className={infiniteScroll ? styles.Container : styles.HomeContainer}>
             {hasLoaded ? (
                 <>
-                    <span className={styles.Count}>{ratings.count} results</span>
+                    {infiniteScroll && (
+                        <span className={styles.Count}>{ratings.count} results</span>
+                    )}
                     {ratings.results.length ? (infiniteScroll ? (
                         <div className={styles.InfiniteScrollContainer}>
                             <InfiniteScroll

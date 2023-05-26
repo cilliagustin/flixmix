@@ -111,6 +111,14 @@ const Sidebar = () => {
                     >
                         Lists
                     </NavLink>
+                    <NavLink
+                        to="/search/profiles"
+                        className={styles.Sublink}
+                        activeClassName={styles.ActiveSubLink}
+                        exact
+                    >
+                        Profiles
+                    </NavLink>
                 </div>
             </div>
 
