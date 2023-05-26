@@ -7,7 +7,7 @@
 }
 .Container {
 
-    grid-template-columns: auto auto auto 1fr;
+    grid-template-columns: auto auto auto auto 1fr;
     row-gap: 5px;
     align-items: flex-end;
 }
@@ -44,9 +44,17 @@
     justify-self: flex-end;
 }
 
-.Content{
+.Title{
     grid-column: 1/-1;
     grid-row: 3/4;
+    color: var(--grey-2);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.Content{
+    grid-column: 1/-1;
+    grid-row: 4/5;
     color: var(--grey-1);
 }
 

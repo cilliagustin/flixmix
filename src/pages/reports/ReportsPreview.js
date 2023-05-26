@@ -15,9 +15,6 @@ const ReportsPreview = ({ message, query = "", searchParameter = "" }) => {
     const [reportCount, setReportCount] = useState(0)
     const { pathname } = useLocation();
     const search = query !== "" ? `${searchParameter}=${query}&` : ""
-
-    console.log(reports)
-
     useEffect(() => {
 
 

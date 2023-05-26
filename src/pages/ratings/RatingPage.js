@@ -18,6 +18,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import Alert from '../../components/Alert'
 import { useErrorHandling } from './../../components/HandleErrors';
 import { useFullScreen, FullScreenModal } from '../../components/HandleFullScreen'
+import { useProfileData } from '../../contexts/ProfileDataContext'
 
 const RatingPage = () => {
   const { id } = useParams()
@@ -25,6 +26,10 @@ const RatingPage = () => {
   const [oldRating, setOldRating] = useState({ results: [] })
   const [isEditing, setIsEditing] = useState(false)
   const currentUser = useCurrentUser();
+  const profileData = useProfileData()
+  const isOwner = rating?.profile_id === currentUser?.profile_id;
+  const isAdmin = profileData?.is_admin;
+
   const profile_image = currentUser?.profile_image;
   const [comments, setComments] = useState({ results: [] });
   const { fullScreen, handleFullScreen, imageData } = useFullScreen();
@@ -123,7 +128,9 @@ const RatingPage = () => {
           <div className={styles.Rating}>
             <div className={styles.Header}>
               <div className={styles.Dropdown}>
-                <MoreDropdown handleEdit={handleIsEditing} handleDelete={handleDelete} />
+                {(isAdmin || isOwner) && (
+                  <MoreDropdown handleEdit={handleIsEditing} handleDelete={handleDelete} />
+                )}
               </div>
               <h1 className={styles.MovieTitle}>{rating.movie_title} <span>({rating.movie_release_year})</span></h1>
               <div

@@ -4,6 +4,7 @@ import Avatar from '../../components/Avatar'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
+import { useProfileData } from '../../contexts/ProfileDataContext';
 import { MoreDropdown } from '../../components/MoreDropdown';
 import { axiosRes } from '../../api/axiosDefaults';
 import CommentEditForm from "./CommentEditForm";
@@ -12,7 +13,10 @@ import CommentEditForm from "./CommentEditForm";
 const Comment = (props) => {
     const { setParent, setComments, endpoint, id, content, owner, profile_id, profile_image, created_at, updated_at, parent_id } = props
     const currentUser = useCurrentUser();
+    const profileData = useProfileData()
     const isOwner = currentUser?.username === owner
+    const isAdmin = profileData?.is_admin
+
     const [showEditForm, setShowEditForm] = useState(false);
     const handleEditForm = () => {
         setShowEditForm(!showEditForm)
@@ -37,7 +41,7 @@ const Comment = (props) => {
 
     return (
         <div className={showEditForm ? styles.Container : styles.Comment}>
-            {isOwner && (
+            {(isOwner || isAdmin) && (
                 <div className={styles.Dropdown}>
                     <MoreDropdown color={"grey"} handleDelete={handleDelete} handleEdit={handleEditForm} />
                 </div>

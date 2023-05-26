@@ -17,9 +17,9 @@ const Sidebar = () => {
 
     const currentUser = useCurrentUser()
     const setCurrentUser = useSetCurrentUser()
-    
+
     const profileData = useProfileData()
-    console.log(profileData)
+
 
     const handleOpenDropdown = (e) => {
         openDropdown === e.currentTarget.dataset.value ? (
@@ -113,52 +113,54 @@ const Sidebar = () => {
                     </NavLink>
                 </div>
             </div>
-            <div
-                className={`${styles.DropdownContainer}  ${openDropdown === "add" && styles.OpenDropdown}`}
-
-            >
-                <div className={styles.Dropdown}
-                    onClick={handleOpenDropdown}
-                    data-value="add">
-                    <div>
-                        <i className={'fa-solid fa-plus'}></i>
-                    </div>
-                    <span>Add</span>
-                </div>
-                <div className={styles.SublinksContainer}>
-                    <NavLink
-                        to="/add/movie"
-                        className={styles.Sublink}
-                        exact
-                        activeClassName={styles.ActiveSubLink}
-                    >
-                        Movies
-                    </NavLink>
-                    <NavLink
-                        to="/add/list"
-                        className={styles.Sublink}
-                        exact
-                        activeClassName={styles.ActiveSubLink}
-                    >
-                        Lists
-                    </NavLink>
-                </div>
-            </div>
 
             {currentUser ? (
                 <>
-                    <NavLink
-                        to="/admin"
-                        className={styles.Link}
-                        onClick={() => setOpenDropdown(null)}
-                        activeClassName={styles.Active}
-                        exact
+                    <div
+                        className={`${styles.DropdownContainer}  ${openDropdown === "add" && styles.OpenDropdown}`}
+
                     >
-                        <div>
-                            <i className={'fa-solid fa-user-gear'}></i>
+                        <div className={styles.Dropdown}
+                            onClick={handleOpenDropdown}
+                            data-value="add">
+                            <div>
+                                <i className={'fa-solid fa-plus'}></i>
+                            </div>
+                            <span>Add</span>
                         </div>
-                        <span>Admin Panel</span>
-                    </NavLink>
+                        <div className={styles.SublinksContainer}>
+                            <NavLink
+                                to="/add/movie"
+                                className={styles.Sublink}
+                                exact
+                                activeClassName={styles.ActiveSubLink}
+                            >
+                                Movies
+                            </NavLink>
+                            <NavLink
+                                to="/add/list"
+                                className={styles.Sublink}
+                                exact
+                                activeClassName={styles.ActiveSubLink}
+                            >
+                                Lists
+                            </NavLink>
+                        </div>
+                    </div>
+                    {profileData?.is_admin && (
+                        <NavLink
+                            to="/admin"
+                            className={styles.Link}
+                            onClick={() => setOpenDropdown(null)}
+                            activeClassName={styles.Active}
+                            exact
+                        >
+                            <div>
+                                <i className={'fa-solid fa-user-gear'}></i>
+                            </div>
+                            <span>Admin Panel</span>
+                        </NavLink>
+                    )}
                     <NavLink
                         to="/"
                         className={`${styles.Link} ${styles.Log}`}
@@ -169,6 +171,7 @@ const Sidebar = () => {
                         </div>
                         <span>Log Out</span>
                     </NavLink>
+
                     <div className={styles.User}>
                         <Avatar
                             src={currentUser?.profile_image}

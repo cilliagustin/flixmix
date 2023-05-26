@@ -14,9 +14,9 @@ import { MoreDropdown } from '../../components/MoreDropdown';
 import DisplayRating from '../../components/DisplayRating';
 import { useFullScreen, FullScreenModal } from '../../components/HandleFullScreen'
 import ReportMovie from '../reports/ReportMovie';
+import { useProfileData } from '../../contexts/ProfileDataContext';
 
 const Movie = (props) => {
-    console.log(props)
     const {
         id, owner, profile_id, profile_image, list_count,
         seen_count, seen_id, watchlist_count, watchlist_id,
@@ -30,6 +30,10 @@ const Movie = (props) => {
 
 
     const currentUser = useCurrentUser();
+    const profileData = useProfileData();
+    const isOwner = owner === currentUser?.profile_id;
+    const isAdmin = profileData?.is_admin;
+
 
     const history = useHistory();
 
@@ -224,7 +228,9 @@ const Movie = (props) => {
                     </div>
                 </div>
                 <div className={styles.DropdownContainer}>
-                    <MoreDropdown color={"white"} handleEdit={handleEdit} handleDelete={handleDelete} />
+                    {(isOwner || isAdmin) && (
+                        <MoreDropdown color={"white"} handleEdit={handleEdit} handleDelete={handleDelete} />
+                    )}
                 </div>
             </div>
             <div className={styles.Body}>
@@ -239,17 +245,24 @@ const Movie = (props) => {
                     />
                 </div>
                 {currentUser && (
-                    <>
-                        {report_id ? (
-                            <span className={styles.Reported}>
-                                You already reported this movie. The administrator will handle this shortly.
-                            </span>
-                        ) : (
-                            <div className={styles.Report}>
-                                <ReportMovie id={id} setMovies={setMovies} />
-                            </div>
-                        )}
-                    </>
+                    profileData?.is_admin ? (
+                        <span className={styles.Reported}>
+                            This movie has {report_count} <Link to={`/admin`}>{report_count === 1 ? "report" : "reports"}</Link> open
+                        </span>
+                    ) : (
+                        <>
+                            {report_id ? (
+                                <span className={styles.Reported}>
+                                    You already reported this movie. The administrator will handle this shortly.
+                                </span>
+                            ) : (
+                                <div className={styles.Report}>
+                                    <ReportMovie id={id} setMovies={setMovies} />
+                                </div>
+                            )}
+                        </>
+                    )
+
                 )}
             </div>
         </>
