@@ -3,6 +3,8 @@
     width: 100%;
     border-radius: 5px;
     padding: 5px;
+    display: flex;
+    flex-flow: column;
 }
 
 .Ratio{
@@ -32,6 +34,8 @@
     "year year year"
     "seen watchlist reviews";
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    height: 100%;
 }
 
 .AvgRating{
@@ -65,7 +69,11 @@
 
 .Content a:nth-child(3){
     grid-area: year;
-    font-size: 1rem;
+}
+
+.Content a:nth-child(3) p{
+    grid-area: year;
+    font-size: .9rem;
 }
 
 .IconContainer{
