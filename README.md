@@ -473,6 +473,12 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 - Tracks the croll direction to change the state when the user scroll up or down
 
 
+## Future Features
+
+Here are some features i wan´t able to implement yet but work well on the website:
+- View all movies the user has seen or added to the watchlist on the profile page.
+- When clicking a cast member or a director will link to the search movie and filter movies based on that data
+- Users can modify the list movies order. Right now they are always ordered by the and cannot be changed yet.
 
 
 
