@@ -303,6 +303,19 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 
 ## Features
 
+### Global components
+
+#### Sidebar
+- Located on the left side of the page
+- Has a collapsed or open versions. This are toggeled by a button.
+- On mobile the collapsed button hides then the user scrolls down and is shown when the user scrolls up.
+- On mobile the collapsed version is completely closed and when is open shows the icons and texts for the links .
+- On desktop the collapsed version is shows the icons and when is open shows also the texts for the links.
+- The create (Movie, list) dropdown button is conditionally rendered only when the user is logged in.
+- The admin panel link is conditionally rendered only when the user is logged ad an admin profile.
+- The log in/register and log out buttons are rendered conditionally according to the user logged status.
+- The profile avatar and username are rendered only when the user is logged in.
+
 ### Pages
 
 #### Home Page
@@ -407,6 +420,57 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 - A register form that allows to create a username or password.
 - A Log in form that allows to access to the user using theirr credentials.
 - If any form is not submited correctly the handleErrors helper function and the Alert component display the error.
+
+#### Error Page
+- Is displayed the user enters an invalid url.
+- Allows the user to go back to the previous page
+
+### Helper functions and components
+
+#### Reports
+- Allows a registered user to report a movie.
+- If already reported it displays a text displaying this
+
+#### Seen
+- Allows registered users to mark a movie as seen.
+- If the movie is marked as in the watchlist it deleted this (since a movie can be seen and in the wathlist at the same time)
+
+#### Watchlist
+- Allows registered users to mark a movie as watchlist.
+- If the movie is marked as seen it deleted this (since a movie can be seen and in the wathlist at the same time)
+
+#### Comments
+- Allows registered users to comment either lists or reviews.
+- A user can delete or edit the comments they wrote.
+- The admin can also delete or edit any comment.
+
+#### HandleErrors.js
+- Here different function manipulate the erros and changes the state of activeAlert Allowing the page to display the data in an aler module.
+
+#### Alert
+- Takes the data from the handleErrors and display it in a modal.
+- The modal closes itself in 5 seconds.
+
+#### Asset
+- Displays a spinner or a image and a message.
+
+#### Avatar
+- Displays the profile image with a link to that profile page.
+
+#### HandleFullScreen.js
+- Here different function manipulate the clicked image to get their src and alt and displays them in a full screen container so the user when clicking a poster can open it in full screen.
+
+#### RateButtons.js
+- Allows a registered user to set the rating by clicking some star buttons.
+- This component is used when the user need to reaview a movie. 
+
+#### DisplayRating.js
+- Takes as parameter the average rating and displays it
+- The rating can be a float number and will diplay the star percentage. If the average rating is 4.5 and fifth star will be filled in half.
+
+#### UseScrollDirection.js
+- Used in the sidebar.
+- Tracks the croll direction to change the state when the user scroll up or down
 
 
 

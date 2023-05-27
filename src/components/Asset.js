@@ -1,7 +1,6 @@
 import React from "react";
 import film from "../assets/film.png"
 import filmwhite from "../assets/filmwhite.png"
-import { Spinner } from "react-bootstrap";
 import styles from "../styles/Asset.module.css";
 
 const Asset = ({ spinner, src, message, white }) => {
