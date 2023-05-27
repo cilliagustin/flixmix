@@ -1,4 +1,4 @@
-.Movie{
+.Movie {
     width: 100%;
     height: 100%;
     display: flex;
@@ -7,23 +7,23 @@
     align-items: flex-start;
 }
 
-.Header{
+.Header {
     width: 100%;
     background: var(--gradient-3);
-    border-radius:0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
     overflow: hidden;
     box-shadow: var(--shadow);
     flex-wrap: wrap;
     position: relative;
 }
 
-.DropdownContainer{
+.DropdownContainer {
     position: absolute;
     top: 10px;
     right: 10px;
 }
 
-.PosterContainer{
+.PosterContainer {
     width: 100vw;
     position: relative;
     height: 120vw;
@@ -31,7 +31,7 @@
     transition: var(--transition-08s);
 }
 
-.PosterContainer:before{
+.PosterContainer:before {
     position: absolute;
     content: "";
     bottom: 0;
@@ -44,7 +44,7 @@
 
 
 
-.PosterContainer img{
+.PosterContainer img {
     width: 100%;
     position: absolute;
     top: 0;
@@ -52,7 +52,7 @@
     cursor: pointer;
 }
 
-.InfoContainer{
+.InfoContainer {
     width: 100%;
     padding: 15px;
     color: var(--white);
@@ -61,45 +61,45 @@
     flex-flow: column;
 }
 
-.InfoContainer h1{
+.InfoContainer h1 {
     font-family: 'Work Sans', sans-serif;
     font-size: clamp(60px, 6vw, 80px);
 }
 
-.InfoContainer h1 span{
+.InfoContainer h1 span {
     color: var(--translucid-white);
     font-size: clamp(45px, 6vw, 65px);
 }
 
-.InfoContainer h1::first-letter{
+.InfoContainer h1::first-letter {
     text-transform: capitalize;
 }
 
-.InfoContainer p{
+.InfoContainer p {
     font-size: clamp(1.1rem, 6vw, 1.1rem);
     color: var(--translucid-white);
     font-weight: 600;
 }
 
-.InfoContainer p span{
+.InfoContainer p span {
     font-weight: 500;
     text-transform: capitalize;
 }
 
-.InfoContainer .AvgRating{
+.InfoContainer .AvgRating {
     width: 100%;
     min-height: 20px;
     margin-bottom: 1rem;
 }
 
-.InfoContainer .IconsWrapper{
+.InfoContainer .IconsWrapper {
     margin-top: auto;
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.InfoContainer .IconsWrapper .Icon{
+.InfoContainer .IconsWrapper .Icon {
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -110,18 +110,18 @@
     color: var(--translucid-white);
 }
 
-.InfoContainer .IconsWrapper .Icon i{
+.InfoContainer .IconsWrapper .Icon i {
     font-size: 2.5rem;
     min-height: 2.8rem;
     cursor: pointer;
 }
 
-.InfoContainer .IconsWrapper .Icon p{
+.InfoContainer .IconsWrapper .Icon p {
     text-align: center;
     font-size: .8rem;
 }
 
-.Body{
+.Body {
     width: 100%;
     max-width: 1000px;
     margin-top: 30px;
@@ -130,24 +130,24 @@
     padding-bottom: 0px;
 }
 
-.Body .Credits{
+.Body .Credits {
     margin-left: auto;
     width: fit-content;
 }
 
 .Body .Credits p,
-.Body .Credits p a{
+.Body .Credits p a {
     color: var(--grey-2);
 }
 
-.Body .Credits p{
+.Body .Credits p {
     display: inline-block;
     font-size: .8rem;
     margin-right: 10px;
     margin-bottom: 0px;
 }
 
-.Body span{
+.Body span {
     display: block;
     font-size: .8rem;
     margin-bottom: 0px;
@@ -155,22 +155,22 @@
     text-align: end;
 }
 
-.Report{
+.Report {
     display: flex;
     justify-content: flex-end;
 }
 
 .Reported a,
-.Reported a:hover{
+.Reported a:hover {
     text-decoration: none;
     font-weight: 600;
     color: var(--grey-2);
 }
 
 
-@media only screen and (min-width: 768px){
+@media only screen and (min-width: 768px) {
 
-    .Header{
+    .Header {
         margin: 50px auto 0px auto;
         border-radius: 10px;
         overflow: hidden;
@@ -181,39 +181,40 @@
         flex-wrap: nowrap;
     }
 
-    .PosterContainer{
-        width: fit-content;
+    .PosterContainer {
+        width: 300px;
+        align-self: flex-start;
         height: auto;
     }
-    .PosterContainer:before{
+
+    .PosterContainer:before {
         display: none;
     }
 
-    .PosterContainer img{
+    .PosterContainer img {
         max-height: 100%;
         position: relative;
         border-radius: 5px;
         width: auto;
     }
 
-    .InfoContainer{
+    .InfoContainer {
         width: 100%;
         padding-left: 10px;
         background: none;
     }
 
-    .InfoContainer p{
+    .InfoContainer p {
         font-size: 1.3rem;
     }
 
-    .InfoContainer .IconsWrapper{
+    .InfoContainer .IconsWrapper {
         justify-content: flex-start;
     }
 
-    .Body{
+    .Body {
         width: calc(100% - 20px);
         margin: 30px auto 0 auto;
         color: var(--grey-2);
     }
 }
-

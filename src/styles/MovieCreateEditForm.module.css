@@ -41,6 +41,7 @@
 .ImageContainer img{
     height: 85%;
     border-radius: 10px;
+    max-width: 100%;
 }
 
 .ButtonContainer{
