@@ -35,10 +35,6 @@ const ListCreateForm = () => {
         { title: "List Description", message: errors.description },
     ]
 
-
-
-
-
     useEffect(() => {
         const fetchMovies = async () => {
             try {

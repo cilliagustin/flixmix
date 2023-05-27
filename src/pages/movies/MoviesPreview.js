@@ -41,7 +41,7 @@ const MoviesPreview = ({ message, searchFilter = "", query = "", searchParameter
         return () => {
             clearTimeout(timer)
         }
-    }, [filter, followedProfilesFilter, pathname, query, search])
+    }, [filter, followedProfilesFilter, pathname, currentUser, search])
 
     return (
         <>

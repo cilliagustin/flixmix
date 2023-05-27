@@ -43,7 +43,7 @@ const ProfilesPreview = ({ message, query, searchFilter }) => {
         return () => {
             clearTimeout(timer)
         }
-    }, [pathname, filter, search])
+    }, [pathname, filter, search, currentUser])
 
     return (
         <>

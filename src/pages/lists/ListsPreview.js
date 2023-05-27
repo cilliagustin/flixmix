@@ -38,7 +38,7 @@ const ListsPreview = ({ message, query = "", searchParameter = "", infiniteScrol
         return () => {
             clearTimeout(timer)
         }
-    }, [followedProfilesFilter, pathname, query, search])
+    }, [followedProfilesFilter, pathname, currentUser, search])
 
 
     return (

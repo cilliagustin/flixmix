@@ -39,7 +39,7 @@ const RatingsPreview = ({ message, query = "", searchParameter = "", infiniteScr
         return () => {
             clearTimeout(timer)
         }
-    }, [pathname, followedProfilesFilter, query, search])
+    }, [pathname, followedProfilesFilter, currentUser, search])
 
 
     return (
