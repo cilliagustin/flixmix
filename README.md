@@ -123,3 +123,182 @@ The user stories were broken down with 3 types of users in mind: "users" (non-re
 - As an admin, I can delete a movie from the database if there was a mistake or if the movie violates the website's rules
 - As an admin, I can update movie information so that I can correct errors or adding missing details
 - As an admin, I can access a specific panel to view users reports about movies and fix them
+
+## Wireframes
+
+To follow best practice, wireframes were developed for mobile, tablet, and desktop sizes.
+I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wireframes.
+
+### Index Wireframes
+<details>
+<summary>View Index Wireframes</summary>
+
+| Size | Screenshot |
+| --- | --- |
+| Mobile | ![screenshot](documentation/wireframes/mobile-wireframe-home.png) |
+| Desktop | ![screenshot](documentation/wireframes/desktop-wireframe-home.png) |
+
+</details>
+
+### Search Movies Wireframes
+<details>
+<summary>View Search Movies Wireframes</summary>
+
+| Size | Screenshot |
+| --- | --- |
+| Mobile | ![screenshot](documentation/wireframes/mobile-wireframe-search-movie.png) |
+| Desktop | ![screenshot](documentation/wireframes/desktop-wireframe-search-movie.png) |
+</details>
+
+### Search Reviews Wireframes
+<details>
+<summary>View Search Reviews Wireframes</summary>
+
+| Size | Screenshot |
+| --- | --- |
+| Mobile | ![screenshot](documentation/wireframes/mobile-wireframe-search-reviews.png) |
+| Desktop | ![screenshot](documentation/wireframes/desktop-wireframe-search-reviews.png) |
+</details>
+
+### Search Reviews Wireframes
+<details>
+<summary>View Search Reviews Wireframes</summary>
+
+| Size | Screenshot |
+| --- | --- |
+| Mobile | ![screenshot](documentation/wireframes/mobile-wireframe-search-lists.png) |
+| Desktop | ![screenshot](documentation/wireframes/desktop-wireframe-search-lists.png) |
+</details>
+
+### Search Reviews Wireframes
+<details>
+<summary>View Search Reviews Wireframes</summary>
+
+| Size | Screenshot |
+| --- | --- |
+| Mobile | ![screenshot](documentation/wireframes/mobile-wireframe-search-profiles.png) |
+| Desktop | ![screenshot](documentation/wireframes/desktop-wireframe-search-profiles.png) |
+</details>
+
+### Search Profiles Wireframes
+<details>
+<summary>View Search Profiles Wireframes</summary>
+
+| Size | Screenshot |
+| --- | --- |
+| Mobile | ![screenshot](documentation/wireframes/mobile-wireframe-search-profiles.png) |
+| Desktop | ![screenshot](documentation/wireframes/desktop-wireframe-search-profiles.png) |
+</details>
+
+### Create Edit Movie Wireframes
+<details>
+<summary>View Create Edit Movie Wireframes</summary>
+
+| Size | Screenshot |
+| --- | --- |
+| Mobile | ![screenshot](documentation/wireframes/mobile-wireframe-create-edit-movie.png) |
+| Desktop | ![screenshot](documentation/wireframes/desktop-wireframe-create-edit-movie.png) |
+</details>
+
+### Create List Wireframes
+<details>
+<summary>View Create List Wireframes</summary>
+
+| Size | Screenshot |
+| --- | --- |
+| Mobile | ![screenshot](documentation/wireframes/mobile-wireframe-create-list.png) |
+| Desktop | ![screenshot](documentation/wireframes/desktop-wireframe-create-list.png) |
+</details>
+
+### Movie Details Wireframes
+<details>
+<summary>View Movie Details Wireframes</summary>
+
+| Size | Screenshot |
+| --- | --- |
+| Mobile | ![screenshot](documentation/wireframes/mobile-wireframe-movie-detail.png) |
+| Desktop | ![screenshot](documentation/wireframes/desktop-wireframe-movie-detail.png) |
+</details>
+
+### Review Details Wireframes
+<details>
+<summary>View Review Details Wireframes</summary>
+
+| Size | Screenshot |
+| --- | --- |
+| Mobile | ![screenshot](documentation/wireframes/mobile-wireframe-review-detail.png) |
+| Desktop | ![screenshot](documentation/wireframes/desktop-wireframe-review-detail.png) |
+</details>
+
+### List Details Wireframes
+<details>
+<summary>View List Details Wireframes</summary>
+
+| Size | Screenshot |
+| --- | --- |
+| Mobile | ![screenshot](documentation/wireframes/mobile-wireframe-list-detail.png) |
+| Desktop | ![screenshot](documentation/wireframes/desktop-wireframe-list-detail.png) |
+</details>
+
+### Profile Page Wireframes
+<details>
+<summary>View Profile Page Wireframes</summary>
+
+| Size | Screenshot |
+| --- | --- |
+| Mobile | ![screenshot](documentation/wireframes/mobile-wireframe-profile.png) |
+| Desktop | ![screenshot](documentation/wireframes/desktop-wireframe-profile.png) |
+</details>
+
+### Log Page Wireframes
+<details>
+<summary>View Log Page Wireframes</summary>
+
+| Size | Screenshot |
+| --- | --- |
+| Mobile | ![screenshot](documentation/wireframes/mobile-wireframe-log.png) |
+| Desktop | ![screenshot](documentation/wireframes/desktop-wireframe-log.png) |
+</details>
+
+
+## Technologies Used
+
+### Languages
+
+- HTML
+- CSS
+- Javascript
+  - React (16.18.0)
+
+  ### Libraries, frameworks and dependencies
+
+- [Axios:](https://axios-http.com/docs/intro) I use Axios in my code to fetch data from APIs, leveraging its simplicity and efficiency for handling HTTP requests and responses in React.
+- [JWT](https://jwt.io/) I used the JWT library to decode JSON Web tokens in my application. By using JWT, I ensured that only authenticated users could access certain resources and prevented unauthorized users from making unnecessary network requests to refresh their access tokens. Additionally, I used JWT to handle scenarios where the token expired or the user logged out, ensuring a seamless and secure user experience by removing the token's timestamp from the browser.
+- [React 16.18.0](https://17.reactjs.org/) I used the JavaScript library for building the interface
+- [React-Bootstrap 4.6](https://legacy.reactjs.org/blog/2019/02/06/react-v16.8.0.html) I used the react bootstrap mainy to use the Form, Row, Col, Conteiner, Tooltip coponents as well as some Bootstrap classes for spacing.
+- [React Infinite Scroll](https://www.npmjs.com/package/react-infinite-scroll-component) I used the library to automatically fetch more data as the user scrolls (movies, reviews, lists, profiles). I modify certain rules on css to be able to implement horizontal scroll as well as displaying in a grid system certain information.
+- [React Router](https://v5.reactrouter.com/web/guides/quick-start) I used this library to nable navegation across different pages without the need to refresh the page.
+
+### Tools & Programs
+
+### Frameworks, Libraries & Programs Used
+*   [Google Fonts](https://fonts.google.com/)
+    * Used to import fonts.
+*   [Font Awesome](https://fontawesome.com/)
+    * Used to add all icons on the website.
+*   [Balsamiq](https://balsamiq.com/)
+    * Used to create the wireframes.
+*   [Git](https://git-scm.com/)
+    * Used to deploy through the Gitpod terminal.
+*   [GitHub](https://github.com/)
+    * Used the GitHub pages to deploy the website.
+*   [Microsoft Paint](https://apps.microsoft.com/store/detail/paint/9PCFS5B6T72H?hl=en-us&gl=US)
+    * Used to edit the screenshots provided in the README and TESTING files.
+*   [Coolors](https://coolors.co/)
+      * Used to display palettes used for README file.
+*   [Am I Responsive?](https://ui.dev/amiresponsive)
+      * Used to provide responsive screenshots used at the beggining of the README file.
+*   [Cloudinary](https://cloudinary.com/)
+      * Used to store static files.
+
+
