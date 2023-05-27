@@ -260,14 +260,27 @@
     overflow: hidden;
     display: flex;
     padding: 5px 0px;
-    align-items: flex-end;
+    align-items: flex-start;
 }
 
 .Username,
-.Username:hover {
+.Username:hover
+.Username span,
+.Username:hover span {
     color: var(--translucid-white);
     font-weight: 600;
     text-decoration: none;
+    align-self: flex-start;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+    min-height: 100%;
+}
+
+.Username span,
+.Username:hover span{
+    font-weight: 400;
+    font-size: .8rem;
 }
 
 .Open .User {

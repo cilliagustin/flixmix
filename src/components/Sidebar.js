@@ -189,6 +189,9 @@ const Sidebar = () => {
                         />
                         <NavLink to={`/profiles/${currentUser?.profile_id}`} className={styles.Username}>
                             {currentUser?.username}
+                            {profileData?.is_admin && (
+                                <span>(Site Admin)</span>
+                            )}
                         </NavLink>
                     </div>
                 </>
