@@ -80,7 +80,7 @@ const RatingsPreview = ({ message, query = "", searchParameter = "", infiniteScr
                     )}
                 </>
             ) : (
-                <Asset spinner />
+                <Asset spinner white={!infiniteScroll} />
             )}
         </div>
     )
