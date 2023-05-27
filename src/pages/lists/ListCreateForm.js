@@ -81,8 +81,8 @@ const ListCreateForm = () => {
             <Alert type="warning" errors={allErrors} active={activeAlert} />
             <Row className='mx-0'>
                 <Col md={{ span: 10, offset: 1 }}>
-                    <Form onSubmit={handleSubmit} className='d-flex flex-column'>
-                        <Form.Group>
+                    <Form onSubmit={handleSubmit} className='d-flex mt-5 flex-column'>
+                        <Form.Group className='mt-2'>
                             <Form.Label>Title</Form.Label>
                             <Form.Control
                                 className={appStyles.Input}

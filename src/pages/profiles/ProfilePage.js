@@ -126,7 +126,7 @@ const ProfilePage = () => {
                     )}
                     {profile.list_count > 0 && (
                         <div className={styles.DisplayContrib}>
-                            <h2>Lists written by {profile.owner}</h2>
+                            <h2>Lists created by {profile.owner}</h2>
                             <ProfileLists lists={lists} setLists={setLists} />
                         </div>
                     )}
