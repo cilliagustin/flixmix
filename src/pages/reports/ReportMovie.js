@@ -4,13 +4,18 @@ import btnStyles from '../../styles/Button.module.css'
 import appStyles from '../../App.module.css'
 import { Form } from "react-bootstrap";
 import { axiosReq } from '../../api/axiosDefaults'
+import Alert from "../../components/Alert";
+import { useErrorHandling } from './../../components/HandleErrors';
 
 const ReportMovie = ({ id, setMovies }) => {
     const [showForm, setShowForm] = useState(false);
     const [content, setContent] = useState("");
 
-
-
+    //Errors and alert
+    const { errors, activeAlert, handleErrors } = useErrorHandling();
+    const allErrors = [
+        { title: "Report Content", message: errors.content },
+    ]
 
     const handleChange = (e) => {
         setContent(e.target.value)
@@ -18,13 +23,10 @@ const ReportMovie = ({ id, setMovies }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const requestData = {
             movie: id,
             content: content,
         };
-
-
         try {
             const { data } = await axiosReq.post("/reports/", requestData);
             setMovies((prevMovies) => ({
@@ -40,10 +42,14 @@ const ReportMovie = ({ id, setMovies }) => {
 
         } catch (err) {
             console.log(err)
+            if (err.response?.status !== 401) {
+                handleErrors(err.response?.data);
+            }
         }
     }
     return (
         <>
+            <Alert type="warning" errors={allErrors} active={activeAlert} />
             {showForm && (
                 <div className={styles.Overlay}>
                     <div className={styles.ReportContainer}>
