@@ -67,7 +67,6 @@
 .Movie{
     width: 100%;
     padding-top: 150%;
-    background: red;
     border-radius: 5px;
     border: 1px solid var(--grey-2);
     position: relative;
@@ -79,6 +78,8 @@
     z-index: 1;
     max-width: 110%;
     max-height: 110%;
+    min-width: 100%;
+    min-height: 100%;
     object-fit: cover;
     top: 50%;
     left: 50%;
