@@ -42,7 +42,6 @@ function MovieEditForm() {
         const handleMount = async () => {
             try {
                 const { data } = await axiosReq.get(`/movies/${id}`);
-                console.log(data)
                 const { title, synopsis, directors, main_cast, release_year, movie_genre, poster } = data;
 
                 setMovieData({

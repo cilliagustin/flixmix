@@ -14,9 +14,6 @@ import { useErrorHandling } from './../../components/HandleErrors';
 import Alert from '../../components/Alert';
 
 const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, rating, title, content, value }) => {
-
-    console.log({ movieData, handleIsEditing, setUserRating, setMovie, rating, title, content, value })
-
     const [ratingData, setRatingData] = useState({
         title: title,
         content: content,
