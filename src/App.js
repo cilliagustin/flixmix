@@ -21,6 +21,7 @@ import ListEditForm from './pages/lists/ListEditForm';
 import SearchListPage from './pages/lists/SearchListPage';
 import Sidebar from './components/Sidebar';
 import SearchReportPage from './pages/reports/SearchReportPage';
+import ErrorPage from './pages/error/ErrorPage';
 
 function App() {
 
@@ -49,7 +50,7 @@ function App() {
           <Route exact path="/profiles/:id/edit" render={() => <ProfileEditForm />}/>
           <Route exact path="/log" render={() => <LogInRegister />} />
           <Route exact path="/log_out" render={() => <h1>Log out</h1>} />
-          <Route render={() => <p>Page not found!</p>} />
+          <Route render={() => <ErrorPage />} />
         </Switch>
       </Container>
     </div>
