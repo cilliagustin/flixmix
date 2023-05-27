@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { handleInputChange } from '../../utils/utils';
+import { handleInputChange, setTokenTimestamp } from '../../utils/utils';
 import styles from '../../styles/LogInRegister.module.css'
 import btnStyles from '../../styles/Button.module.css'
 import { Form, Col, Row, Container } from "react-bootstrap";
@@ -34,6 +34,7 @@ const LogInRegister = () => {
     try {
       const {data} = await axios.post("/dj-rest-auth/login/", logInSubmitObj);
       setCurrentUser(data.user)
+      setTokenTimestamp(data)
       history.goBack()
     } catch (err) {
       setLogInErrors(err.response?.data);

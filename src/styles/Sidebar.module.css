@@ -254,7 +254,6 @@
 }
 
 .User {
-    margin-top: 15px;
     gap: 5px;
     width: 0;
     transition: var(--transition-08s);
@@ -356,7 +355,11 @@
     .User {
         width: 40px;
         padding: 5px;
-        margin-left: 5px;
+        margin-left: 3px;
+    }
+
+    .Username{
+        margin-left: 10px;
     }
 
 }
