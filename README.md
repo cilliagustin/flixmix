@@ -76,3 +76,50 @@ The site uses a mix of fonts to create a unique and modern look. These are provi
 These deliberate font choices contribute to creating a visually appealing and consistent design.
 
 [Font Awesome](https://fontawesome.com/) is also used to add different icons throughout the website
+
+## User Stories
+
+The user stories were broken down with 3 types of users in mind: "users" (non-registered users who can access the website), "Registered Users," and "Site Admins."
+
+### Regular users (non registered)
+- As a User I can always see a navbar so that I can navigate though the website
+- As a User I can navigate without refreshing so that have a quicker and better experience
+- As a User I can create an accound and log in so that access all the website features
+- As a User I can see the movie information so that get the synopsis, title and basic information of the film
+- As a User I can view all posts so that see all movies in the database
+- As a User I can search a movie by title so that easily find the movie im looking for
+- As a User I can filter the movies based on the cast, director, genre or release decade so that I can find movies based on specific parameters
+- As a User I can keep scrolling when looking for a movie so that I dont need to use pagination to get more movies
+- As a User I can see how many Registered users marked this movie as seen or added it to a watchlist so that i can tell how popular is the movie
+- As a User I can read Reviews of other users so that I can hear other people opinions and how they rank a specific movie
+- As a user, I can see lists created by other users so that I can discover new movie suggestions and see how other users have grouped movies
+- As a user, I can search for a list by name so that I can quickly find a list that matches my interests.
+- As a user, I can view other users' activity to see their new lists, reviews, and comments
+
+### Registered Users
+- As a Registed User I can see some indication that I am curretly logged in so that easily tell my logged status
+- As a Registered User I can maintain my logged in status until i log out so that control this status myself
+- As a Registed User I can have links to log in/log out according to my status so that I am not redirected no an unnecesary link
+- As a Registered User I can view my avatar in the navbar so that easily identify my account
+- As a Registered User I can add a movie to the database so that other users can see the movie information
+- As a Registered User I can mark a movie as seen or add it to my future watchlistt so that keep a log of what movies i have and haven´t seen yet
+- As a registered user, I can write a review of a movie to share my thoughts and impressions with others
+- As a registered user, I can update a review I wrote so that i can correct it if I made a mistake or want to add more details
+- As a registered user, I can delete a review I wrote if I change my mind about my opinion or want to remove it from the website
+- As a registered user, I can comment on other users' movie reviews to share my thoughts and opinions
+- As a registered user, I can create a list so that I can group movies according to a specific theme and share them with other users
+- As a registered user, I can update a list I created so that I can correct mistakes or add new movies
+- As a registered user, I can delete a list I created so that I can remove the list and its associated movies from the website
+- As a registered user, I can comment on a list to share my opinion about the list's movie choices or theme
+- As a registered user, I can follow another user to receive updates about their activity and new lists or reviews
+- As a registered user, I can edit my comments to correct mistakes or add more information
+- As a registered user, I can delete my comments so that if I change my mind about what I wrote or made a mistake, can remove it
+- As a registered user, I can edit my username and password to update my account information or to increase my account security
+
+
+### Site Admin
+- As an Administrator of the site I can have a link to the admin panel so that easily access the admin functions
+- As an Administrator of the site I can see a label that indicates this status so that easily differentiate that the logged account has special permissions
+- As an admin, I can delete a movie from the database if there was a mistake or if the movie violates the website's rules
+- As an admin, I can update movie information so that I can correct errors or adding missing details
+- As an admin, I can access a specific panel to view users reports about movies and fix them
