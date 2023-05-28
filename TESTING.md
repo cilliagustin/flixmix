@@ -683,3 +683,4 @@ Here is the result:
 ## Bugs
 
 ### Unsolved Bugs
+- To use the Flixmix web app on iOS devices, users need to disable the 'Prevent Cross Site Tracking' feature. This requirement arises because the Django Rest Framework API and the React front-end are hosted on different domains using Heroku. The anti-tracking features implemented on iOS block cross-domain requests from the front-end to the API. Unfortunately, there doesn't seem to be a solution to this issue other than hosting both the API and front-end on the same domain.
