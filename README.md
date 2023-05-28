@@ -1,6 +1,13 @@
 ![Logo Image](./src/assets/flixmix_purple.png)
 # FlixMix
 
+[Live Link](https://agustin-cilli-flixmix.herokuapp.com/)
+
+This code repository hosts the FlixMix application's user interface. To view the Django REST Framework back end repository click [here](https://github.com/cilliagustin/flixmix_rest_api) or click [here](https://agustin-cilli-flixmix-api.herokuapp.com/) for the deployed back end site.
+
+![Live site preview image](./documentation/amiresponsive/amiresponsive.png)
+
+
 FlixMix is a comprehensive movie database created for passionate film enthusiasts. This user-friendly platform offers a seamless experience for users to explore and discover a vast collection of movies. Whether you're searching for a specific film or looking for inspiration, FlixMix has you covered. With intuitive search options such as title, cast, release, and directors, users can quickly find the movies they're interested in. The database provides detailed information on each film, including plot summaries, genres, and more, ensuring that users have access to comprehensive movie details.
 
 One of the key features of FlixMix is the ability for users to actively engage with the platform. Users can share their thoughts and insights by writing reviews and assigning ratings to the movies they've watched, helping others make informed decisions. Additionally, users can curate personalized lists of movies, allowing them to create collections based on their preferences and share them with the community. By marking movies as seen or adding them to their watchlist, users can keep track of their movie-watching journey.
