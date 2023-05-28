@@ -25,9 +25,3 @@ export const useRedirect = (userAuthStatus) => {
     },[history, userAuthStatus])
 
 }
-
-// export const validateCredentials = (target, profile) =>{
-//     const history = useHistory();
-
-
-// }
