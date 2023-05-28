@@ -102,23 +102,24 @@ const ListEditForm = () => {
         }
     }
 
-
     // only allow the owner or the admin to enter to this page
     useRedirect('loggedOut')
     const currentUser = useCurrentUser()
     const profileData = useProfileData()
     useEffect(() => {
         const handleMount = () => {
-            const isAdminOrOwner = (profileData?.is_admin || currentUser?.profile_id === owner)
-            if(!isAdminOrOwner){
-                history.push("/")
+            if(typeof owner === "number"){
+                const isAdminOrOwner = (profileData?.is_admin || currentUser?.profile_id === owner)
+                if(!isAdminOrOwner){
+                    history.push("/")
+                }
             }
         };
 
         if(profileData !== null){
             handleMount();
         }
-    }, [profileData, history]);
+    }, [listData, hasListLoaded, currentUser, profileData]);
     return (
         <>
             <Alert type="warning" errors={allErrors} active={activeAlert} />
