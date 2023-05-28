@@ -425,6 +425,29 @@ Here are comparissions of some of the different pages displayed in desktop mode 
 
 ## Browser Compatibility
 
+All previous screenshots for the responsiveness section were made with google chrome. here are some screenshots taken with [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/) and [Microsoft Edge](https://www.microsoft.com/en-us/edge?form=MA13FJ&exp=e00)
+
+### Mozilla Firefox
+
+| Page |  Screenshot |
+| --- | --- |
+| Review Page | ![screenshot](./documentation/browsers/firefox-review-page.png) |
+| Edit List | ![screenshot](./documentation/browsers/firefox-edit-list.png) |
+| Edit Movie | ![screenshot](./documentation/browsers/firefox-edit-movie.png) |
+| Admin Panel | ![screenshot](./documentation/browsers/firefox-admin-panel.png) |
+
+### Microsoft Edge
+
+| Page |  Screenshot |
+| --- | --- |
+| Log Page | ![screenshot](./documentation/browsers/edge-log.png) |
+| Full Screen Modal | ![screenshot](./documentation/browsers/edge-full-screen-modal.png) |
+| Movie Page | ![screenshot](./documentation/browsers/edge-movie-page.png) |
+| list Page | ![screenshot](./documentation/browsers/edge-list-page.png) |
+
+
+
+
 ## Testing
 
 ### User Story Testing
