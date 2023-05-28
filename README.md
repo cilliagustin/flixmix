@@ -444,6 +444,10 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 - A user can delete or edit the comments they wrote.
 - The admin can also delete or edit any comment.
 
+#### Follow/Unfollow
+- Allows registered users to follow or unfollow other registered users.
+- This allows the users when looking for a  review or list to see only the ones created by users they follow. 
+
 #### HandleErrors.js
 - Here different function manipulate the erros and changes the state of activeAlert Allowing the page to display the data in an aler module.
 
@@ -480,5 +484,83 @@ Here are some features i wan´t able to implement yet but work well on the websi
 - When clicking a cast member or a director will link to the search movie and filter movies based on that data
 - Users can modify the list movies order. Right now they are always ordered by the and cannot be changed yet.
 
+## Agile Development Process
+
+### GitHub Projects
+
+[GitHub Projects](https://github.com/cilliagustin/flixmix/projects) served as a versatile Agile tool for this project, though it may not be specifically designed for this purpose. However, with proper tagging and project management, it was effectively utilized.
+
+This platform allowed for effective planning and tracking of user stories, tasks, and project milestones through the use of a simple Kanban board, updated on a weekly basis.
+
+
+<!-- Add screenshot -->
+
+### GitHub Issues
+
+[GitHub Issues](https://github.com/cilliagustin/flixmix/issues) served as an another Agile tool.
+There, I used my own **User Story Template** to manage user stories.
+
+It also helped with milestone iterations on a weekly basis.
+
+
+- [Open Issues](https://github.com/cilliagustin/flixmix/issues)
+
+    <!-- Add screenshot -->
+
+- [Closed Issues](https://github.com/cilliagustin/flixmix/issues?q=is%3Aissue+is%3Aclosed)
+
+    <!-- Add screenshot -->
+
+## Testing
+
+For all testing, please refer to the [TESTING.md](TESTING.md) file.
+
+## Deployment
+
+The live deployed application can be found deployed on [Heroku](https://agustin-cilli-flixmix.herokuapp.com/).
+
+
+#### Cloning
+
+You can clone the repository by following these steps:
+
+1. Go to the [GitHub repository](https://github.com/cilliagustin/flixmix) 
+2. Locate the Code button above the list of files and click it 
+3. Select if you prefer to clone using HTTPS, SSH, or GitHub CLI and click the copy button to copy the URL to your clipboard
+4. Open Git Bash or Terminal
+5. Change the current working directory to the one where you want the cloned directory
+6. In your IDE Terminal, type the following command to clone my repository:
+	- `git clone https://github.com/cilliagustin/flixmix.git`
+7. Press Enter to create your local clone.
+
+Alternatively, if using Gitpod, you can click below to create your own workspace using this repository.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/cilliagustin/flixmix)
+
+Please note that in order to directly open the project in Gitpod, you need to have the browser extension installed.
+A tutorial on how to do that can be found [here](https://www.gitpod.io/docs/configure/user-settings/browser-extension).
+
+#### Forking
+
+By forking the GitHub Repository, we make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original owner's repository.
+You can fork this repository by using the following steps:
+
+1. Log in to GitHub and locate the [GitHub Repository](https://github.com/cilliagustin/flixmix)
+2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
+3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
+
+## Credits
+
+* [Letterboxd](https://letterboxd.com/) was the main influence to the concept of the website.
+
+### Media
+
+The images used in this project were all produced by Florencia Venditto
+
+### Acknowledgements
+
+- I extend my gratitude to my Code Institute mentor, [Lauren-Nicole](https://github.com/CluelessBiker), for their unwavering support during the entire project development process.
+
+- I would like to express my appreciation to the [Code Institute](https://codeinstitute.net) tutoring team for helping me resolve some project-related issues.
 
 
