@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { axiosReq } from '../../api/axiosDefaults';
-import { Form, Col, Row } from "react-bootstrap";
+import { Form, Col, Row, Container } from "react-bootstrap";
 import appStyles from '../../App.module.css'
 import btnStyles from '../../styles/Button.module.css'
 import { handleInputChange } from '../../utils/utils';
 import ProfileMovies from '../movies/ProfileMovies';
 import Asset from '../../components/Asset';
+import NoResults from '../../assets/no-results.png'
 import ListDisplayMovies from './ListDisplayMovies';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Alert from "../../components/Alert";
@@ -128,7 +129,15 @@ const ListCreateForm = () => {
                         />
                     </Form>
                     {hasLoaded ? (
-                        <ProfileMovies movies={movies} setMovies={setMovies} listSearch={true} listedMovies={listedMovies} setListedMovies={setListedMovies} />
+                        <>
+                        {movies.results.length ? (
+                            <ProfileMovies movies={movies} setMovies={setMovies} listSearch={true} listedMovies={listedMovies} setListedMovies={setListedMovies} />
+                        ) : (
+                            <Container>
+                                <Asset src={NoResults} message={"No movies found with that title"} />
+                            </Container>
+                        )}
+                        </>
                     ) : (
                         <Asset spinner />
                     )}

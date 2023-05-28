@@ -6,6 +6,7 @@ import btnStyles from '../../styles/Button.module.css'
 import { handleInputChange } from '../../utils/utils';
 import ProfileMovies from '../movies/ProfileMovies';
 import Asset from '../../components/Asset';
+import NoResults from '../../assets/no-results.png'
 import ListDisplayMovies from './ListDisplayMovies';
 import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import Alert from "../../components/Alert";
@@ -175,7 +176,15 @@ const ListEditForm = () => {
                         />
                     </Form>
                     {hasMoviesLoaded ? (
-                        <ProfileMovies movies={movies} setMovies={setMovies} listSearch={true} listedMovies={listedMovies} setListedMovies={setListedMovies} />
+                        <>
+                        {movies.results.length ? (
+                            <ProfileMovies movies={movies} setMovies={setMovies} listSearch={true} listedMovies={listedMovies} setListedMovies={setListedMovies} />
+                        ) : (
+                            <Container>
+                                <Asset src={NoResults} message={"No movies found with that title"} />
+                            </Container>
+                        )}
+                        </>
                     ) : (
                         <Asset spinner />
                     )}
