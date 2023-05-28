@@ -326,12 +326,11 @@ Due to this not really affecting the functionalities of the website were ignored
 
 ![report](documentation/validation/eslint.png)
 
-
 </details>
 
 ## Lighthouse Audit
 
-## Resosiveness
+## Responsiveness
 
 ## Browser Compatibility
 
@@ -339,7 +338,15 @@ Due to this not really affecting the functionalities of the website were ignored
 
 ### User Story Testing
 
-### Unit Testing
+### React Testing
+2 of the most common components in my application were tested to check conditional rendering. This were Sidebar and Avatar components.
+Here is the result:
+<details>
+<summary>View Testing</summary>
+
+![report](documentation/testScreenshot/react-test.png)
+
+</details>
 
 ## Bugs
 
