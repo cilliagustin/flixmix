@@ -6,7 +6,7 @@
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
-    align-items: end;
+    align-items: flex-end;
     gap: 5px;
     padding: 8px;
     top: 0;

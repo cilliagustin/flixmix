@@ -1,7 +1,7 @@
 .Back,
 .Front{
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     gap: 5px;
     width: min-content;
     position: relative;
