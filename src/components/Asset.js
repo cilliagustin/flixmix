@@ -4,7 +4,6 @@ import filmwhite from "../assets/filmwhite.png"
 import styles from "../styles/Asset.module.css";
 
 const Asset = ({ spinner, src, message, white }) => {
-  console.log(white)
   return (
     <div className={`${styles.Asset} ${spinner && styles.SpinnerContainer} ${src && styles.PosterContainer} p-4`}>
       {spinner && (
