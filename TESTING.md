@@ -329,6 +329,22 @@ Due to this not really affecting the functionalities of the website were ignored
 </details>
 
 ## Lighthouse Audit
+All the pages that do not rquire validation were validated using LIghthouse Audit. This is because thoise that require validation on lighthouse audit are not able to be accessed and analized.
+The performance scroce was lowered because of the size of the images. But that is due that the user can enter a image for a movie and in some pages they are displayed in a small format and the Lighthouse audit does not find this as good practices.
+
+| Page Audited |  Screenshot |
+| --- | --- |
+| Index | ![screenshot](./documentation/lighthouse/lighthouse-home.png) |
+| Log In Form | ![screenshot](./documentation/lighthouse/lighthouse-log.png) |
+| Movie Page | ![screenshot](./documentation/lighthouse/lighthouse-movie-page.png) |
+| Search Movies | ![screenshot](./documentation/lighthouse/lighthouse-search-movie.png) |
+| Review Page | ![screenshot](./documentation/lighthouse/lighthouse-review-page.png) |
+| Search Reviews | ![screenshot](./documentation/lighthouse/lighthouse-search-review.png) |
+| List Page | ![screenshot](./documentation/lighthouse/lighthouse-list-page.png) |
+| Search Lists | ![screenshot](./documentation/lighthouse/lighthouse-search-list.png) |
+| Profile Page | ![screenshot](./documentation/lighthouse/lighthouse-profile-page.png) |
+| Search Profiles | ![screenshot](./documentation/lighthouse/lighthouse-search-profile.png) |
+
 
 ## Responsiveness
 
