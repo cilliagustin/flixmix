@@ -4,6 +4,31 @@
 
 ### HTML Validation
 
+I have used the recommended [HTML W3C Validator](https://validator.w3.org) to validate all of my HTML files.
+
+| Page |  Screenshot |
+| --- | --- |
+| Index | ![screenshot](./documentation/validation/html-home.png) |
+| Search Movies | ![screenshot](./documentation/validation/html-search-movie.png) |
+| Search Reviews | ![screenshot](./documentation/validation/html-search-review.png) |
+| Search Lists | ![screenshot](./documentation/validation/html-search-list.png) |
+| Search Profiles | ![screenshot](./documentation/validation/html-search-profiles.png) |
+| Movie Page | ![screenshot](./documentation/validation/html-movie-page.png) |
+| Movie Create | ![screenshot](./documentation/validation/html-movie-create.png) |
+| Movie Edit | ![screenshot](./documentation/validation/html-movie-edit.png) |
+| Review Page | ![screenshot](./documentation/validation/html-reviews-page.png) |
+| List Page | ![screenshot](./documentation/validation/html-lists-page.png) |
+| List Create | ![screenshot](./documentation/validation/html-lists-create.png) |
+| List Edit | ![screenshot](./documentation/validation/html-lists-edit.png) |
+| Profile Page | ![screenshot](./documentation/validation/html-profile-page.png) |
+| Profile Edit | ![screenshot](./documentation/validation/html-profile-edit.png) |
+| Profile Edit(Username) | ![screenshot](./documentation/validation/html-profile-password-edit.png) |
+| Profile Edit(Password) | ![screenshot](./documentation/validation/html-profile-username-edit.png) |
+| Admin Panel | ![screenshot](./documentation/validation/html-admin.png) |
+| Log In Form | ![screenshot](./documentation/validation/html-log.png) |
+| Error page | ![screenshot](./documentation/validation/html-error-page.png) |
+
+
 ### CSS Validation
 
 Result from [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator) for style.css. The code was validated by copying and pasting the code directly to the validator:
