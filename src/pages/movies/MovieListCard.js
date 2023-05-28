@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from '../../styles/ProfileMoviePreviewCard.module.css'
 
 const MovieListCard = ({ movie, setListedMovies, listedMovies}) => {

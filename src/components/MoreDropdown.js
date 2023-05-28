@@ -18,6 +18,8 @@ const ThreeDots = React.forwardRef(({ onClick, color }, ref) => {
   );
 });
 
+ThreeDots.displayName = 'ThreeDots';
+
 export const MoreDropdown = ({ handleEdit, handleDelete, color }) => {
   return (
     <Dropdown className="ml-auto" drop="left">
@@ -45,6 +47,8 @@ export const MoreDropdown = ({ handleEdit, handleDelete, color }) => {
     </Dropdown>
   );
 };
+
+MoreDropdown.displayName = 'MoreDropdown';
 
 export function ProfileEditDropdown({ id , color }) {
   const history = useHistory();
@@ -82,3 +86,5 @@ export function ProfileEditDropdown({ id , color }) {
     </Dropdown>
   );
 }
+
+ProfileEditDropdown.displayName = 'ProfileEditDropdown';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import axios from 'axios';
 import logo from '../assets/logo.png';
 import logo2 from '../assets/flixmix.png';
