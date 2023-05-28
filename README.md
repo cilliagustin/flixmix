@@ -499,8 +499,7 @@ Here are some features i wan´t able to implement yet but work well on the websi
 
 This platform allowed for effective planning and tracking of user stories, tasks, and project milestones through the use of a simple Kanban board, updated on a weekly basis.
 
-
-<!-- Add screenshot -->
+![Kanban Board](./documentation/agile/board.png)
 
 ### GitHub Issues
 
@@ -512,11 +511,11 @@ It also helped with milestone iterations on a weekly basis.
 
 - [Open Issues](https://github.com/cilliagustin/flixmix/issues)
 
-    <!-- Add screenshot -->
+    ![Open Issues](./documentation/agile/open-issues.png)
 
 - [Closed Issues](https://github.com/cilliagustin/flixmix/issues?q=is%3Aissue+is%3Aclosed)
 
-    <!-- Add screenshot -->
+    ![Closed Issues](./documentation/agile/closed-issues.png)
 
 ## Testing
 
