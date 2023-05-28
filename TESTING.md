@@ -347,6 +347,81 @@ The performance scroce was lowered because of the size of the images. But that i
 
 
 ## Responsiveness
+Here are comparissions of some of the different pages displayed in desktop mode and on mobile (this mas made using the chrome dev tools and setting the screen to a size of an Iphone SE)
+
+### Home Page
+<details>
+<summary>View Home Page</summary>
+
+| Mobile |  Desktop |
+| --- | --- |
+| ![screenshot](./documentation/responsiveness/home-mobile.png) | ![screenshot](./documentation/responsiveness/home-desktop.png) |
+</details>
+
+### Search Movie
+<details>
+<summary>View Search Movie</summary>
+
+| Mobile |  Desktop |
+| --- | --- |
+| ![screenshot](./documentation/responsiveness/search-movie-mobile.png) | ![screenshot](./documentation/responsiveness/search-movie-desktop.png) |
+</details>
+
+### Movie Page
+<details>
+<summary>View Movie Page</summary>
+
+| Mobile |  Desktop |
+| --- | --- |
+| ![screenshot](./documentation/responsiveness/movie-page-mobile.png) | ![screenshot](./documentation/responsiveness/movie-page-desktop.png) |
+</details>
+
+### Movie Create
+<details>
+<summary>View Movie Create</summary>
+
+| Mobile |  Desktop |
+| --- | --- |
+| ![screenshot](./documentation/responsiveness/movie-create-mobile.png) | ![screenshot](./documentation/responsiveness/movie-create-desktop.png) |
+</details>
+
+### List Page
+<details>
+<summary>View List Page</summary>
+
+| Mobile |  Desktop |
+| --- | --- |
+| ![screenshot](./documentation/responsiveness/list-page-mobile.png) | ![screenshot](./documentation/responsiveness/list-page-desktop.png) |
+</details>
+
+### List Create
+<details>
+<summary>View List Create</summary>
+
+| Mobile |  Desktop |
+| --- | --- |
+| ![screenshot](./documentation/responsiveness/list-create-mobile.png) | ![screenshot](./documentation/responsiveness/list-create-desktop.png) |
+</details>
+
+### Profile Page
+<details>
+<summary>View Profile Page</summary>
+
+| Mobile |  Desktop |
+| --- | --- |
+| ![screenshot](./documentation/responsiveness/profile-page-mobile.png) | ![screenshot](./documentation/responsiveness/profile-page-desktop.png) |
+</details>
+
+### Log Page
+<details>
+<summary>View Log Page</summary>
+
+| Mobile |  Desktop |
+| --- | --- |
+| ![screenshot](./documentation/responsiveness/log-mobile.png) | ![screenshot](./documentation/responsiveness/log-desktop.png) |
+</details>
+
+
 
 ## Browser Compatibility
 
