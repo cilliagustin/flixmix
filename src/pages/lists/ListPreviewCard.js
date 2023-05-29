@@ -4,8 +4,11 @@ import Avatar from '../../components/Avatar'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import { useFullScreen, FullScreenModal } from '../../components/HandleFullScreen'
 
+/**
+ * display list in a card format
+*/
 const ListPreviewCard = (props) => {
-
+    //destructure list information
     const { id, title, owner, profile_id, profile_image, created_at, comments_count, movies_details, description } = props
     const { fullScreen, handleFullScreen, imageData } = useFullScreen();
     return (
@@ -15,6 +18,7 @@ const ListPreviewCard = (props) => {
             )}
             <div className={styles.Container}>
                 <div className={styles.Posters}>
+                    {/* map though the first 6 movies (max) in the list and display the posters */}
                     {movies_details.slice(0, 6).map((movie) => (
                         <div className={styles.Poster} key={movie.id}>
                             <img

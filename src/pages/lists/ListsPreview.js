@@ -16,13 +16,16 @@ const ListsPreview = ({ message, query = "", searchParameter = "", infiniteScrol
     const [lists, setLists] = useState({ results: [] })
     const [hasLoaded, setHasLoaded] = useState(false)
     const { pathname } = useLocation()
+    //import filter data to create a specific endpoint if the user selectd filter options
     const search = query !== "" ? `${searchParameter}=${query}&` : ""
     const followedProfilesFilter = followedFilter ? `owner__followed__owner__profile=${profile_id}&` : ""
 
+    // fetch list from api
     useEffect(() => {
-
         const fetchLists = async () => {
             try {
+                // if the user applied filters an endpint using this will fetch the data. 
+                // Otherise all list will be fetched
                 const { data } = await axiosReq.get(`/lists/?${followedProfilesFilter}${search}`)
                 setLists(data);
                 setHasLoaded(true);
@@ -49,11 +52,13 @@ const ListsPreview = ({ message, query = "", searchParameter = "", infiniteScrol
                         <span className={styles.Count}>{lists.count} results</span>
                     )}
                     {lists.results.length ? (
+                    // if there are lists in the requested search display them with infinite scroll
                         <>
                             {infiniteScroll ? (
                                 <div className={styles.InfiniteScrollContainer}>
                                     <InfiniteScroll
                                         children={
+                                            // display each list information in a list card
                                             lists.results.map((list) => (
                                                 <ListPreviewCard key={list.id} {...list} />
                                             ))
@@ -74,12 +79,14 @@ const ListsPreview = ({ message, query = "", searchParameter = "", infiniteScrol
                             )}
                         </>
                     ) : (
+                        // if there are no lists in the requested search display a no results asset
                         <Container>
                             <Asset src={NoResults} message={message} />
                         </Container>
                     )}
                 </>
             ) : (
+                // display loader until list data is fetched
                 <Container>
                     <Asset spinner />
                 </Container>

@@ -13,21 +13,28 @@ import Alert from "../../components/Alert";
 import { useErrorHandling } from './../../components/HandleErrors';
 import { useRedirect } from '../../hooks/useRedirect';
 
+
+/**
+ * Display list create form
+*/
 const ListCreateForm = () => {
     // only allow registered users to enter to this page
     useRedirect('loggedOut')
-    
+    const [hasLoaded, setHasLoaded] = useState(false)
+    const history = useHistory()
+
+    // list data
     const [listData, setListData] = useState({
         title: "",
         description: "",
     });
     const { title, description } = listData
-    const [hasLoaded, setHasLoaded] = useState(false)
     const [listedMovies, setListedMovies] = useState([]);
+    // movie data
     const [movies, setMovies] = useState({})
+    // search movies filter
     const [query, setQuery] = useState("")
     const search = query !== "" ? `?title=${query}` : ""
-    const history = useHistory()
 
     //Errors and alert
     const { errors, activeAlert, handleErrors } = useErrorHandling();
@@ -36,6 +43,7 @@ const ListCreateForm = () => {
         { title: "List Description", message: errors.description },
     ]
 
+    // fetch movies from api
     useEffect(() => {
         const fetchMovies = async () => {
             try {
@@ -56,6 +64,7 @@ const ListCreateForm = () => {
         }
     }, [query])
 
+    // send list information to api
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -68,6 +77,7 @@ const ListCreateForm = () => {
 
         try {
             const { data } = await axiosReq.post("/lists/", requestData);
+            //redirect to list page
             history.push(`/list/${data.id}`)
 
         } catch (err) {
@@ -77,6 +87,7 @@ const ListCreateForm = () => {
             }
         }
     }
+
     return (
         <>
             <Alert type="warning" errors={allErrors} active={activeAlert} />
@@ -104,6 +115,7 @@ const ListCreateForm = () => {
                                 rows={7}
                             />
                         </Form.Group>
+                        {/* display selected movies here */}
                         <ListDisplayMovies listedMovies={listedMovies} setListedMovies={setListedMovies} />
                         <button
                             className={`${btnStyles.Button} ${btnStyles.HoverWhite} mx-auto my-3`}
@@ -129,16 +141,24 @@ const ListCreateForm = () => {
                         />
                     </Form>
                     {hasLoaded ? (
+                        /* display data when fetched (has loaded = true) */
                         <>
-                        {movies.results.length ? (
-                            <ProfileMovies movies={movies} setMovies={setMovies} listSearch={true} listedMovies={listedMovies} setListedMovies={setListedMovies} />
-                        ) : (
-                            <Container>
-                                <Asset src={NoResults} message={"No movies found with that title"} />
-                            </Container>
-                        )}
+                            {
+                                /* if there are movies fetched by the user search display them
+                                clicking them here will add them to the listed movies 
+                                */
+                            }
+                            {movies.results.length ? (
+                                <ProfileMovies movies={movies} setMovies={setMovies} listSearch={true} listedMovies={listedMovies} setListedMovies={setListedMovies} />
+                            ) : (
+                                /* if there are not movies fetched by the user search display no results */
+                                <Container>
+                                    <Asset src={NoResults} message={"No movies found with that title"} />
+                                </Container>
+                            )}
                         </>
                     ) : (
+                        /* display spinner until data is fetched */
                         <Asset spinner />
                     )}
                 </Col>

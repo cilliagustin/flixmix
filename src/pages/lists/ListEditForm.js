@@ -15,21 +15,31 @@ import { useProfileData } from '../../contexts/ProfileDataContext';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { useRedirect } from '../../hooks/useRedirect';
 
+
+/**
+ * Display list edit form
+*/
 const ListEditForm = () => {
+    // set the list id from url
     const { id } = useParams()
+
+    const history = useHistory()
+
+    // list data
     const [listData, setListData] = useState({
         title: "",
         description: "",
-        owner:"",
+        owner: "",
     });
     const { title, description, owner } = listData
-    const [hasListLoaded, setHasListLoaded] = useState(false)
-    const [hasMoviesLoaded, setHasMoviesLoaded] = useState(false)
     const [listedMovies, setListedMovies] = useState([]);
+    const [hasListLoaded, setHasListLoaded] = useState(false)
+    // movie data
     const [movies, setMovies] = useState({})
+    const [hasMoviesLoaded, setHasMoviesLoaded] = useState(false)
+    // search movies filter
     const [query, setQuery] = useState("")
     const search = query !== "" ? `?title=${query}` : ""
-    const history = useHistory()
 
     //Errors and alert
     const { errors, activeAlert, handleErrors } = useErrorHandling();
@@ -38,6 +48,7 @@ const ListEditForm = () => {
         { title: "List Description", message: errors.description },
     ]
 
+    // Set list data and default movies displayed
     useEffect(() => {
         const handleMount = async () => {
             try {
@@ -60,6 +71,7 @@ const ListEditForm = () => {
     }, [history, id])
 
 
+    // fetch Movies
     useEffect(() => {
         const fetchMovies = async () => {
             try {
@@ -80,6 +92,7 @@ const ListEditForm = () => {
         }
     }, [query])
 
+    //submit form
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -92,6 +105,7 @@ const ListEditForm = () => {
 
         try {
             await axiosReq.put(`/lists/${id}/`, requestData);
+            //redirect to list page
             history.push(`/list/${id}`)
 
         } catch (err) {
@@ -107,26 +121,29 @@ const ListEditForm = () => {
     const currentUser = useCurrentUser()
     const profileData = useProfileData()
     useEffect(() => {
+        // check that the profileData has loaded and check if the
+        // user is an admin or the list owner
         const handleMount = () => {
-            if(typeof owner === "number"){
+            if (typeof owner === "number") {
                 const isAdminOrOwner = (profileData?.is_admin || currentUser?.profile_id === owner)
-                if(!isAdminOrOwner){
+                if (!isAdminOrOwner) {
                     history.push("/")
                 }
             }
         };
 
-        if(profileData !== null){
+        if (profileData !== null) {
             handleMount();
         }
     }, [listData, hasListLoaded, currentUser, profileData]);
+
     return (
         <>
             <Alert type="warning" errors={allErrors} active={activeAlert} />
             <Row className='mx-0'>
                 <Col md={{ span: 10, offset: 1 }}>
                     {hasListLoaded ? (
-
+                        /* when movie data has loaded fill out form with default data */
                         <Form onSubmit={handleSubmit} className='d-flex mt-5 flex-column'>
                             <Form.Group className='mt-2'>
                                 <Form.Label>Title</Form.Label>
@@ -159,6 +176,7 @@ const ListEditForm = () => {
                             </button>
                         </Form>
                     ) : (
+                        /* Display spinner until data is fetched */
                         <Asset spinner />
                     )}
                 </Col>
@@ -178,15 +196,18 @@ const ListEditForm = () => {
                     </Form>
                     {hasMoviesLoaded ? (
                         <>
-                        {movies.results.length ? (
-                            <ProfileMovies movies={movies} setMovies={setMovies} listSearch={true} listedMovies={listedMovies} setListedMovies={setListedMovies} />
-                        ) : (
-                            <Container>
-                                <Asset src={NoResults} message={"No movies found with that title"} />
-                            </Container>
-                        )}
+                            {movies.results.length ? (
+                                /* if the search has results (found movies) display them here */
+                                <ProfileMovies movies={movies} setMovies={setMovies} listSearch={true} listedMovies={listedMovies} setListedMovies={setListedMovies} />
+                            ) : (
+                                /* if the search has no results (found movies) display no results*/
+                                <Container>
+                                    <Asset src={NoResults} message={"No movies found with that title"} />
+                                </Container>
+                            )}
                         </>
                     ) : (
+                        /* Display spinner until movieData is fetched */
                         <Asset spinner />
                     )}
                 </Col>

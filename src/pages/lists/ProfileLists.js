@@ -5,12 +5,17 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Asset from '../../components/Asset';
 import { fetchMoreData } from '../../utils/utils'
 
+/**
+ * display all lists of a specific profile
+*/
 const ProfileLists = ({lists, setLists}) => {
+    // destructure the lists and setLists function
     return (
         <div className={styles.Container}>
             <InfiniteScroll
                 children={
                     lists.results.map((list) => (
+                        // display each list information in a list card
                         <ProfileListPreviewCard key={list.id} {...list} />
                     ))
                 }

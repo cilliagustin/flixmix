@@ -7,20 +7,27 @@ import styles from '../../styles/SearchPage.module.css'
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import ListsPreview from './ListsPreview';
 
+/**
+ * display search lists page
+*/
 const SearchListPage = () => {
     const currentUser = useCurrentUser();
+    //set filters for the endpoint
     const [query, setQuery] = useState("");
     const [searchParameter, setSearchParameter] = useState("title");
     const [followedFilter, setFollowedFilter] = useState(false);
 
+    //manipulate followed filter state
     const handleFollowedChange = () => {
         setFollowedFilter(!followedFilter)
     }
-
+    
+    //manipulate search parameter data from radio buttons
     const handleRadio = (e) => {
         setSearchParameter(e.target.value)
     }
 
+    //set dinamic placeholders
     const placeholders = {
         title: "Search List by title",
         // the api only has one search filter in the search 
@@ -53,6 +60,7 @@ const SearchListPage = () => {
                                 <Form.Check onChange={handleRadio} inline value="owner" label="Author" name="group" type={type} id={`inline-${type}-3`} />
                             </div>
                         ))}
+                        {/* current users will have displayed a checkbox to select filter data by users they follow */}
                         {currentUser && (
                             <div className={styles.Checkbox}>
                                 <input
@@ -78,6 +86,7 @@ const SearchListPage = () => {
                             </div>
                         )}
                     </Form>
+                    {/* send filter to listpreview to fetch the lists*/}
                     <ListsPreview
                         message="No result found adjust your search"
                         query={query}

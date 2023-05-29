@@ -14,8 +14,13 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import Comment from '../comments/Comment'
 import { useProfileData } from '../../contexts/ProfileDataContext'
 
+
+/**
+ * Display List Page
+*/
 const ListPage = () => {
 
+    // get id from url
     const { id } = useParams()
     const [list, setList] = useState({ results: [] })
     const [comments, setComments] = useState({ results: [] })
@@ -29,26 +34,29 @@ const ListPage = () => {
 
     const { fullScreen, handleFullScreen, imageData } = useFullScreen();
 
+    //link to edit list page
     const handleEdit = () => {
         history.push(`/list/${id}/edit`)
     }
 
+    //delete list from database
     const handleDelete = async () => {
         try {
             await axiosRes.delete(`/lists/${id}/`);
+            //redirect to previous page
             history.goBack();
         } catch (err) {
             console.log(err);
         }
     };
 
-
+    // fetch list data from api and listcomments
     useEffect(() => {
         const handleMount = async () => {
             try {
                 const [{ data: listData }, { data: comments }] = await Promise.all([
                     axiosReq.get(`/lists/${id}`),
-                    axiosReq.get(`/listcomments/?rating=${id}`)
+                    axiosReq.get(`/listcomments/?list=${id}`)
                 ])
                 setList(listData)
                 setComments(comments)
@@ -68,6 +76,7 @@ const ListPage = () => {
             <Row className='mx-0'>
                 <Col>
                     {hasLoaded ? (
+                        // if data has loaded pupulate with the list data
                         <>
                             <div className={styles.Container}>
                                 <Link
@@ -107,6 +116,7 @@ const ListPage = () => {
                                     <span>{list.comments_count}</span>
                                 </div>
                                 {currentUser ? (
+                                    // if user is logged in allow to create comments
                                     <CommentCreateForm
                                         profile_id={currentUser.profile_id}
                                         profileImage={profile_image}
@@ -119,6 +129,7 @@ const ListPage = () => {
                                     "Comments"
                                 ) : null}
                                 {comments.results.length ? (
+                                    // if list has results, display comments infinitely
                                     <InfiniteScroll
                                         children={
                                             comments.results.map(comment => (
@@ -139,13 +150,16 @@ const ListPage = () => {
                                     />
 
                                 ) : currentUser ? (
+                                    // if there are no comments and the user is logged invite him to comment
                                     <span>No comments yet, be the first to do it</span>
-                                ) : (
-                                    <span>No comments yet</span>
+                                    ) : (
+                                        // if there are no comments display text explaining that
+                                        <span>No comments yet</span>
                                 )}
                             </div>
                         </>
                     ) : (
+                        // display loader until list data is fetched
                         <Asset spinner />
                     )}
                 </Col>
