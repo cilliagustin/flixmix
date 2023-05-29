@@ -95,6 +95,7 @@ const ListPage = () => {
                                 </div>
                                 <span className={styles.Date}>Created on {list.created_at}</span>
                                 <div className={styles.Dropdown}>
+                                    {/* display dropdown to admin or list owner */}
                                     {(list.is_owner || isAdmin) && <MoreDropdown color={"grey"} handleDelete={handleDelete} handleEdit={handleEdit} />}
                                 </div>
                                 <p className={styles.Content}>{list.description}</p>
@@ -129,7 +130,7 @@ const ListPage = () => {
                                     "Comments"
                                 ) : null}
                                 {comments.results.length ? (
-                                    // if list has results, display comments infinitely
+                                    // if comments has results, display comments infinitely
                                     <InfiniteScroll
                                         children={
                                             comments.results.map(comment => (

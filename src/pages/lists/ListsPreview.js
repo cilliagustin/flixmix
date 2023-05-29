@@ -10,6 +10,11 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { fetchMoreData } from '../../utils/utils'
 import ListPreviewCard from './ListPreviewCard';
 
+/**
+ * Display lists
+ * can be fetched using or not a specific endpoint
+ * can be displayed with our without using infinite scroll
+*/
 const ListsPreview = ({ message, query = "", searchParameter = "", infiniteScroll = false, followedFilter }) => {
     const currentUser = useCurrentUser()
     const profile_id = currentUser?.profile_id || "";
@@ -49,12 +54,14 @@ const ListsPreview = ({ message, query = "", searchParameter = "", infiniteScrol
             {hasLoaded ? (
                 <>
                     {infiniteScroll && (
+                        //display the list count the infinitescroll param is true
                         <span className={styles.Count}>{lists.count} results</span>
                     )}
                     {lists.results.length ? (
-                    // if there are lists in the requested search display them with infinite scroll
                         <>
                             {infiniteScroll ? (
+                                // if there are lists in the requested search and the infinitescroll param is true
+                                //display the lists with infinite scroll
                                 <div className={styles.InfiniteScrollContainer}>
                                     <InfiniteScroll
                                         children={
@@ -70,7 +77,8 @@ const ListsPreview = ({ message, query = "", searchParameter = "", infiniteScrol
                                     />
                                 </div>
                             ) : (
-
+                                // if there are lists in the requested search and the infinitescroll param is false
+                                //display the first results fetched
                                 <div className={styles.Container}>
                                     {lists.results.slice(0, 5).map((list) => (
                                         <ListPreviewCard key={list.id} {...list} />

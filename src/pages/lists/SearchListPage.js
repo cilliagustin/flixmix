@@ -30,9 +30,10 @@ const SearchListPage = () => {
     //set dinamic placeholders
     const placeholders = {
         title: "Search List by title",
-        // the api only has one search filter in the search 
-        // fields that refers to the movie title making this endpoint 
+        // the api only has one search filter in the search fields that
+        //refers to the movie title making this endpoint 
         // locate only lists by movie title
+        // /?search="title" will search lists by movie title 
         search: "Search List by movies on it",
         owner: "Search List by author",
     }
