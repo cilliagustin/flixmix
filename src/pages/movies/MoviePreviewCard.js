@@ -4,16 +4,16 @@ import appStyles from '../../App.module.css'
 
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-
 import DisplayRating from '../../components/DisplayRating';
 import { useFullScreen, FullScreenModal } from '../../components/HandleFullScreen'
-
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { axiosRes } from '../../api/axiosDefaults';
 
-
-
+/**
+ * display movie in a card format
+*/
 const MoviePreviewCard = (props) => {
+  //destructure movie information
   const {
     id, rating_count, seen_count, seen_id, watchlist_count, watchlist_id,
     title, poster, release_year, setMovies, avg_rating
@@ -23,21 +23,23 @@ const MoviePreviewCard = (props) => {
 
   const { fullScreen, handleFullScreen, imageData } = useFullScreen();
 
+  //mark a movie as seen
   const handleSeen = async () => {
     try {
+      //post the data to the api mark a movie as seen
       const { data } = await axiosRes.post('/seen/', { movie: id });
       setMovies((prevMovies) => ({
         ...prevMovies,
         results: prevMovies.results.map((movie) => {
           return movie.id === id
             ? (
+              //update movie data to add seen id and update seen count
+              //if the movie was marked in the watchlist remove this
               (movie.watchlist_id !== null)
                 ? { ...movie, seen_count: movie.seen_count + 1, seen_id: data.id, watchlist_count: movie.watchlist_count - 1, watchlist_id: null }
                 : { ...movie, seen_count: movie.seen_count + 1, seen_id: data.id }
             )
             : movie;
-
-
         })
       }))
 
@@ -46,13 +48,16 @@ const MoviePreviewCard = (props) => {
     }
   }
 
+  //delete the seen instance
   const handleUnSeen = async () => {
     try {
+      //delete the data from the api
       await axiosRes.delete(`/seen/${seen_id}`);
       setMovies((prevMovies) => ({
         ...prevMovies,
         results: prevMovies.results.map((movie) => {
           return movie.id === id
+            //update movie data to remove seen id and update seen count
             ? { ...movie, seen_count: movie.seen_count - 1, seen_id: null }
             : movie;
         })
@@ -63,8 +68,10 @@ const MoviePreviewCard = (props) => {
     }
   }
 
+  //Add a movie to the watchlist
   const handleWatchlist = async () => {
     try {
+      //post the data to the api to add a movie to the watchlist
       const { data } = await axiosRes.post('/watchlist/', { movie: id });
       setMovies((prevMovies) => ({
         ...prevMovies,
@@ -72,6 +79,8 @@ const MoviePreviewCard = (props) => {
           return movie.id === id
             ? (
               (movie.seen_id !== null)
+                  //update movie data to add watchlist id and update watchlist count
+                  //if the movie was marked as seen remove this
                 ? { ...movie, watchlist_count: movie.watchlist_count + 1, watchlist_id: data.id, seen_count: movie.seen_count - 1, seen_id: null }
                 : { ...movie, watchlist_count: movie.watchlist_count + 1, watchlist_id: data.id }
             )
@@ -84,13 +93,16 @@ const MoviePreviewCard = (props) => {
     }
   }
 
+  //delete the watchlist instance
   const handleUnWatchlist = async () => {
     try {
+      //delete the data from the api
       await axiosRes.delete(`/watchlist/${watchlist_id}`);
       setMovies((prevMovies) => ({
         ...prevMovies,
         results: prevMovies.results.map((movie) => {
           return movie.id === id
+            //update movie data to remove watchlist id and update watchlist count
             ? { ...movie, watchlist_count: movie.watchlist_count - 1, watchlist_id: null }
             : movie;
         })
@@ -116,6 +128,7 @@ const MoviePreviewCard = (props) => {
         </div>
         <div className={styles.Content}>
           <div className={styles.AvgRating}>
+            {/* display average movie rating */}
             <DisplayRating title={title} rating={avg_rating} xs={true} type={"average"} />
           </div>
           <Link to={`/movies/${id}`}>
@@ -129,6 +142,12 @@ const MoviePreviewCard = (props) => {
               placement="top"
               overlay={<Tooltip>This movie was marked as seen by {seen_count} users</Tooltip>}
             >
+              {/*
+                here different validations will check if the user is logged and if they
+                have the movie on their watchlist or if they marked the movie as seen
+                and display different icons with different functions attached 
+              */}
+
               {seen_id ? (
                 // already seen
                 <span

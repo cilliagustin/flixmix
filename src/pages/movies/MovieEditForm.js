@@ -15,11 +15,13 @@ import Asset from "../../components/Asset";
 import { useRedirect } from '../../hooks/useRedirect';
 import { useProfileData } from '../../contexts/ProfileDataContext';
 
+
+/**
+ * Display list edit form
+*/
 function MovieEditForm() {
-
-
-
-
+    // set the movie id from url
+    const { id } = useParams()
 
     const [movieData, setMovieData] = useState({
         title: "",
@@ -34,13 +36,13 @@ function MovieEditForm() {
     const history = useHistory()
 
     const imageInput = useRef(null)
-    const { id } = useParams()
     const [hasLoaded, setHasLoaded] = useState(false)
 
-
+    // Set movie data
     useEffect(() => {
         const handleMount = async () => {
             try {
+                //fetch movie from api
                 const { data } = await axiosReq.get(`/movies/${id}`);
                 const { title, synopsis, directors, main_cast, release_year, movie_genre, poster } = data;
 
@@ -62,6 +64,7 @@ function MovieEditForm() {
         handleMount()
     }, [history, id])
 
+    //manipulate image selection
     const handleChangeImage = (event) => {
         if (event.target.files.length) {
             URL.revokeObjectURL(image);
@@ -72,6 +75,7 @@ function MovieEditForm() {
         }
     };
 
+    //submit changes
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();
@@ -90,17 +94,22 @@ function MovieEditForm() {
 
         try {
             await axiosReq.put(`/movies/${id}/`, formData);
+            //redirect to movie page
             history.push(`/movies/${id}`);
         } catch (err) {
             console.log(err)
             if (err.response?.status !== 401) {
-                handleErrors(err.response?.data);
+                // establish custom text for error in genre
+                if (err.response?.data.movie_genre) {
+                    err.response.data.movie_genre[0] = 'Must select a genre';
+                }
+                handleErrors(err.response?.data)
             }
         }
     }
 
 
-     // only allow the admin to enter to this page
+    // only allow the admin to enter to this page
     useRedirect('loggedOut')
     const profileData = useProfileData()
     useEffect(() => {

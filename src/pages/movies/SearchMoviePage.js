@@ -7,19 +7,24 @@ import styles from '../../styles/SearchPage.module.css'
 import MoviesPreview from './MoviesPreview';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
+
+/**
+ * display search movie page
+*/
 const SearchMoviePage = () => {
 
   const currentUser = useCurrentUser()
 
+  //set filters for the endpoint
   const [query, setQuery] = useState("");
   const [searchParameter, setSearchParameter] = useState("title")
   const [searchFilter, setSearchFilter] = useState("");
   const [followedFilter, setFollowedFilter] = useState(false);
 
 
+  //toggle between giving search filter a value of seen, watchlist or none
   const handleCheckBoxChange = (e) => {
     const { name, checked } = e.target;
-
     if (name === 'seen' && checked) {
       setSearchFilter("seen");
     } else if (name === 'watchlist' && checked) {
@@ -29,16 +34,19 @@ const SearchMoviePage = () => {
     }
   };
 
-  const handleFollowedChange = () =>{
+  //manipulate followed filter state
+  const handleFollowedChange = () => {
     setFollowedFilter(!followedFilter)
   }
 
+  //toggle between giving search parameter a title, directors, main_cast or release_decade filter
   const handleRadio = (e) => {
     setSearchParameter(e.target.value)
     e.target.value === "release_decade" && setQuery("")
     e.target.value !== "release_decade" && !isNaN(query) && setQuery("")
   }
 
+  //set dinamic placeholders
   const placeholders = {
     title: "Search Movie by title",
     directors: "Search Movie by director",
@@ -97,6 +105,8 @@ const SearchMoviePage = () => {
               </div>
             ))}
             {currentUser && (
+              /* current users will have displayed a checkbox to select filter data by
+              movies they have seen or they set in their watchlist */
               <div className={styles.Checkbox}>
                 <input
                   type="checkbox"
@@ -138,7 +148,8 @@ const SearchMoviePage = () => {
                     </i>
                   </OverlayTrigger>
                 </label>
-
+                {/* current users will have displayed a checkbox to select filter
+                data created by users they follow */}
                 <input
                   type="checkbox"
                   name="followed"
@@ -162,14 +173,14 @@ const SearchMoviePage = () => {
               </div>
             )}
           </Form>
-
-          <MoviesPreview 
-          message="No result found adjust your search" 
-          query={query} 
-          searchParameter={searchParameter} 
-          searchFilter={searchFilter} 
-          infiniteScroll={true} 
-          followedFilter={followedFilter}
+        {/* send filters to MoviesPreview to fetch the movies*/}
+          <MoviesPreview
+            message="No result found adjust your search"
+            query={query}
+            searchParameter={searchParameter}
+            searchFilter={searchFilter}
+            infiniteScroll={true}
+            followedFilter={followedFilter}
           />
         </Col>
       </Row>

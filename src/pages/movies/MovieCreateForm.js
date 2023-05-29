@@ -1,11 +1,7 @@
 import React, { useRef, useState } from "react";
-
 import { axiosReq } from '../../api/axiosDefaults'
-
 import { Form, Col, Row, Container } from "react-bootstrap";
-
 import Upload from "../../assets/upload.png";
-
 import styles from "../../styles/MovieCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -16,6 +12,10 @@ import { useErrorHandling } from './../../components/HandleErrors';
 import { handleInputChange } from "../../utils/utils";
 import { useRedirect } from "../../hooks/useRedirect";
 
+
+/**
+ * Display movie create form
+*/
 function MovieCreateForm() {
     // only allow registered users to enter to this page
     useRedirect('loggedOut')
@@ -34,6 +34,7 @@ function MovieCreateForm() {
     const imageInput = useRef(null)
     const history = useHistory()
 
+    //Change selected image
     const handleChangeImage = (event) => {
         if (event.target.files.length) {
             URL.revokeObjectURL(image);
@@ -44,6 +45,7 @@ function MovieCreateForm() {
         }
     };
 
+    //submit data (create a movie)
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = new FormData();
@@ -59,16 +61,21 @@ function MovieCreateForm() {
 
         try {
             const { data } = await axiosReq.post("/movies/", formData);
+            //redirect to movie page
             history.push(`/movies/${data.id}`);
         } catch (err) {
-            console.log(err)
+            console.log(err);
             if (err.response?.status !== 401) {
+                // establish custom text for error in genre
+                if (err.response?.data.movie_genre) {
+                    err.response.data.movie_genre[0] = 'Must select a genre';
+                }
                 handleErrors(err.response?.data);
             }
         }
     }
 
-    
+
     //Errors and alert
     const { errors, activeAlert, handleErrors } = useErrorHandling();
     const allErrors = [
@@ -77,10 +84,11 @@ function MovieCreateForm() {
         { title: "Movie director", message: errors.directors },
         { title: "Movie cast", message: errors.main_cast },
         { title: "Movie release year", message: errors.release_year },
-        { title: "Movie genre", message: "A valid genre must be selected" },
+        { title: "Movie genre", message: errors.movie_genre },
         { title: "Movie image", message: errors.poster },
     ]
 
+    //Form fields
     const textFields = (
         <div className={`text-center`}>
             <Form.Group>
@@ -166,6 +174,7 @@ function MovieCreateForm() {
                 </Form.Control>
             </Form.Group>
 
+            {/* cancel button */}
             <button
                 className={`${btnStyles.Button} mx-1`}
                 onClick={() => { history.goBack() }}
@@ -180,7 +189,7 @@ function MovieCreateForm() {
 
     return (
         <>
-        <Alert  type="warning" errors={allErrors} active={activeAlert} />
+            <Alert type="warning" errors={allErrors} active={activeAlert} />
             <Form onSubmit={handleSubmit}>
                 <Row className="mx-0">
                     <Col className="py-2 p-0 p-md-2" md={{ span: 7, order: 2 }}>
@@ -189,6 +198,7 @@ function MovieCreateForm() {
                         >
                             <Form.Group className="text-center h-100">
                                 {image ? (
+                                    //user selected image
                                     <div className={`${styles.SelectedImageContainer} p4`}>
                                         <div className={styles.ImageContainer}>
                                             <img src={image} alt="preview poster"></img>
@@ -203,6 +213,7 @@ function MovieCreateForm() {
                                         </div>
                                     </div>
                                 ) : (
+                                    //placeholder image until user selects one
                                     <Form.Label
                                         className="d-flex justify-content-center"
                                         htmlFor="image-upload"

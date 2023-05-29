@@ -1,15 +1,20 @@
 import React from 'react'
 import styles from '../../styles/ProfileMoviePreviewCard.module.css'
 
-const MovieListCard = ({ movie, setListedMovies, listedMovies}) => {
-    const removeMovie = () =>{
+
+/**
+ * Display movie information on listDisplayMovies
+*/
+const MovieListCard = ({ movie, setListedMovies, listedMovies }) => {
+    //Remove movie from the list when clicked
+    const removeMovie = () => {
         const updatedMovies = listedMovies.filter(listedMovie => listedMovie.id !== movie.id);
         setListedMovies(updatedMovies);
     }
     return (
         <div
             className={`${styles.Card} ${styles.ListCard}`}
-            onClick={()=> removeMovie()}
+            onClick={() => removeMovie()}
         >
             <div className={styles.PosterContainer}>
                 <img
