@@ -2,17 +2,18 @@ import React, { useState } from 'react'
 import styles from '../../styles/RatingCreateEditForm.module.css'
 import btnStyles from '../../styles/Button.module.css'
 import RateButtons from "../../components/RateButtons";
-
-
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-
 import Avatar from "../../components/Avatar";
 import { axiosReq } from "../../api/axiosDefaults";
 import { handleInputChange } from '../../utils/utils';
 import { useErrorHandling } from './../../components/HandleErrors';
 import Alert from '../../components/Alert';
 
+
+/**
+ * display edit rating form on the movie page
+*/
 const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, rating, title, content, value }) => {
     const [ratingData, setRatingData] = useState({
         title: title,
@@ -21,7 +22,7 @@ const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, r
     });
     const [oldValue, setOldValue] = useState(value)
 
-
+    //send new rating information to the api
     const handleSubmit = async (e) => {
         e.preventDefault()
         const formData = new FormData();
@@ -32,13 +33,17 @@ const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, r
         formData.append('movie', movieData.id);
 
         try {
+            //send data to api
             await axiosReq.put(`/ratings/${rating.id}/`, formData);
+
+            //get new avg rating for the movie
             const sumOfRatings = parseFloat(movieData.avg_rating) * movieData.rating_count;
             const totalNumberOfRatings = movieData.rating_count;
             const difference = ratingData.value - oldValue
             const newSumOfRatings = sumOfRatings + parseFloat(difference);
             const newAvgRating = newSumOfRatings / totalNumberOfRatings;
 
+            //spread movies and update avg rating in target movie
             setMovie((prevMovie) => ({
                 results: [
                     {
@@ -47,6 +52,8 @@ const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, r
                     },
                 ],
             }))
+
+            //update userRating
             setUserRating((prevRating) => ({
 
                 ...prevRating,
@@ -56,6 +63,8 @@ const EditRatingForm = ({ movieData, handleIsEditing, setUserRating, setMovie, r
 
             }))
             setOldValue(ratingData.value)
+
+            //close editRatingForm
             handleIsEditing()
         } catch (err) {
             console.log(err)

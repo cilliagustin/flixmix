@@ -5,19 +5,12 @@ import DisplayRating from '../../components/DisplayRating'
 import Avatar from '../../components/Avatar'
 import { useFullScreen, FullScreenModal } from '../../components/HandleFullScreen'
 
+/**
+ * display rating in a card format
+*/
 const RatingPreviewCard = (props) => {
-    const {
-        content,
-        id,
-        movie,
-        movie_poster,
-        movie_release_year,
-        movie_title,
-        owner,
-        profile_id,
-        profile_image,
-        title,
-        value } = props
+    //destructure rating information
+    const { content, id, movie, movie_poster, movie_release_year, movie_title, owner, profile_id, profile_image, title, value } = props
     const { fullScreen, handleFullScreen, imageData } = useFullScreen()
     return (
         <>
@@ -29,6 +22,7 @@ const RatingPreviewCard = (props) => {
                     <h2>{movie_title}<span>({movie_release_year})</span></h2>
                 </Link>
                 <div className={styles.Stars}>
+                    {/* display user rating in a 5 star format */}
                     <DisplayRating xs={true} title={movie_title} rating={value} type={"user"} />
                 </div>
                 <Link className={styles.Owner} to={`/profiles/${profile_id}`}>

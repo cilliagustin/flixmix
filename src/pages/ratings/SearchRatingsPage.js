@@ -5,21 +5,28 @@ import RatingsPreview from './RatingsPreview';
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
+/**
+ * display search rating page
+*/
 const SearchRatingsPage = () => {
     const currentUser = useCurrentUser()
-    const [query, setQuery] = useState("")
 
+    //set filters for the endpoint
+    const [query, setQuery] = useState("")
     const [searchParameter, setSearchParameter] = useState("movie_title")
     const [followedFilter, setFollowedFilter] = useState(false);
 
-    const handleRadio = (e) => {
-        setSearchParameter(e.target.value)
-    }
-
+    //manipulate followed filter state
     const handleFollowedChange = () => {
         setFollowedFilter(!followedFilter)
     }
 
+    //toggle between giving search parameter movie_title or owner value
+    const handleRadio = (e) => {
+        setSearchParameter(e.target.value)
+    }
+
+    //set dinamic placeholders
     const placeholders = {
         movie_title: "Search review by movie title",
         owner: "Search review by the author´s username",
@@ -44,6 +51,7 @@ const SearchRatingsPage = () => {
                                 <Form.Check onChange={handleRadio} defaultChecked inline value="movie_title" label="Title" name="group" type={type} id={`inline-${type}-1`} />
                                 <Form.Check onChange={handleRadio} inline value="owner" label="Creator" name="group" type={type} id={`inline-${type}-2`} />
                                 {currentUser && (
+                                    /* current users will have displayed a checkbox to select filter data by users they follow */
                                     <>
                                         <input
                                             type="checkbox"
@@ -69,8 +77,8 @@ const SearchRatingsPage = () => {
                                 )}
                             </div>
                         ))}
-
                     </Form>
+                    {/* send filter to listpreview to fetch the lists*/}
                     <RatingsPreview
                         message="No result found adjust your search"
                         query={query}

@@ -9,26 +9,33 @@ import { axiosRes } from '../../api/axiosDefaults';
 import EditRatingForm from './EditRatingForm';
 
 
+/**
+ * Display rating inside the movie page
+*/
 const RatingMoviePage = ({ rating, currentUserRating = false, setMovie, movieData, setRatings, setWasRated, setUserRating }) => {
+  // destructure data
   const { owner, profile_id, profile_image, id, value, title, content, comments_count } = rating
+  
+  //alter between displaying the information and showing the editratingForm
   const [isEditing, setIsEditing] = useState(false)
   const handleIsEditing = ()=>{
     setIsEditing(!isEditing)
   }
 
-
+  //delete rating from api
   const handleDelete = async()=>{
     try {
       await axiosRes.delete(`/ratings/${id}/`);
+      //get new avg rating for the movie
       const sumOfRatings = parseFloat(movieData.avg_rating) * movieData.rating_count;
       const totalNumberOfRatings = movieData.rating_count - 1;
       const newSumOfRatings = sumOfRatings - parseFloat(value);
       const newAvgRating = totalNumberOfRatings > 0 ? newSumOfRatings / totalNumberOfRatings : null;
 
-
-
+      //set the movie as not rated by the user and delete user rating data
       setWasRated(false)
       setUserRating({ results: [] })
+       //spread movies and update avg rating, rating id and ammount of ratings on target movie
       setMovie((prevMovie) => ({
         results: [
           {
@@ -39,6 +46,7 @@ const RatingMoviePage = ({ rating, currentUserRating = false, setMovie, movieDat
           },
         ],
       }))
+      //delete rating from ratings
       setRatings((prevRatings)=>({
         ...prevRatings,
         results: prevRatings.results.filter(rating => rating.id !== id),
@@ -52,6 +60,7 @@ const RatingMoviePage = ({ rating, currentUserRating = false, setMovie, movieDat
   return (
     <>
       {!isEditing ? (
+        //display rating information if isEditing param is false
         <div className={`${styles.Container} ${currentUserRating && styles.UserRating}`}>
           {currentUserRating && <div className={styles.Dropdown}><MoreDropdown color={"grey"} handleDelete={handleDelete} handleEdit={handleIsEditing} /></div>}
           <Avatar src={profile_image}
@@ -82,6 +91,7 @@ const RatingMoviePage = ({ rating, currentUserRating = false, setMovie, movieDat
           </OverlayTrigger>
         </div>
       ) : (
+        //display edit ratingForm if isEditing param is true
         <EditRatingForm 
           movieData={movieData}
           setMovie={setMovie}

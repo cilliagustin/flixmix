@@ -12,6 +12,10 @@ import { handleInputChange } from '../../utils/utils';
 import Alert from "../../components/Alert";
 import { useErrorHandling } from './../../components/HandleErrors';
 
+
+/**
+ * Display form used in the movie page
+*/
 function RatingCreateForm(props) {
   const { movieId, movieData, setMovie, setRatings, setWasRated, profile_image, profile_id } = props;
   const [ratingData, setRatingData] = useState({
@@ -22,7 +26,7 @@ function RatingCreateForm(props) {
 
   const { title, content, value } = ratingData;
 
-
+  //submit form and create rating
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -33,18 +37,22 @@ function RatingCreateForm(props) {
     formData.append('movie', movieId);
 
     try {
+      //send data to api
       const { data } = await axiosReq.post("/ratings/", formData);
 
+      //get new avg rating for the movie
       const sumOfRatings = parseFloat(movieData.avg_rating) * movieData.rating_count;
       const totalNumberOfRatings = movieData.rating_count + 1;
       const newSumOfRatings = sumOfRatings + parseFloat(value);
       const newAvgRating = movieData.rating_count !== 0 ? (newSumOfRatings / totalNumberOfRatings).toFixed(2) : value;
 
       await Promise.all([
+        //spread ratings and add new one
         setRatings((prevRating) => ({
           ...prevRating,
           results: [data, ...prevRating.results],
         })),
+        //spread movies and update avg rating, rating id and ammount of ratings on target movie
         setMovie((prevMovie) => ({
           results: [
             {
@@ -57,6 +65,7 @@ function RatingCreateForm(props) {
         })),
       ]);
 
+      //set the movie as rated by the user
       setWasRated(true);
     } catch (err) {
       console.log(err);

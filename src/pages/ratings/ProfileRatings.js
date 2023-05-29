@@ -5,22 +5,27 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Asset from '../../components/Asset';
 import { fetchMoreData } from '../../utils/utils'
 
-const ProfileRatings = ({ratings, setRatings}) => {
-  return (
-    <div className={styles.Container}>
-        <InfiniteScroll
-            children={
-                ratings.results.map((rating) => (
-                    <ProfileRatingPreviewCard key={rating.id} {...rating} />
-                ))
-            }
-            dataLength={ratings.results.length}
-            loader={<Asset spinner />}
-            hasMore={!!ratings.next}
-            next={() => fetchMoreData(ratings, setRatings)}
-        />  
-    </div >
-)
+/**
+ * display all ratings of a specific profile
+*/
+const ProfileRatings = ({ ratings, setRatings }) => {
+    // destructure the ratings and setRatings function
+    return (
+        <div className={styles.Container}>
+            <InfiniteScroll
+                children={
+                    ratings.results.map((rating) => (
+                        // display each rating information in a rating card
+                        <ProfileRatingPreviewCard key={rating.id} {...rating} />
+                    ))
+                }
+                dataLength={ratings.results.length}
+                loader={<Asset spinner />}
+                hasMore={!!ratings.next}
+                next={() => fetchMoreData(ratings, setRatings)}
+            />
+        </div >
+    )
 }
 
 export default ProfileRatings

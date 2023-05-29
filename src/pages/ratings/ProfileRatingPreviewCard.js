@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import DisplayRating from '../../components/DisplayRating'
 import { useFullScreen, FullScreenModal } from '../../components/HandleFullScreen'
 
+/**
+ * display rating in a card format
+*/
 const ProfileRatingPreviewCard = (props) => {
-    const {
-        movie_poster, movie_release_year, movie_title, title, content, created_at, id, value, comments_count
-    } = props
+    //destructure rating information
+    const { movie_poster, movie_release_year, movie_title, title, content, created_at, id, value, comments_count } = props
     const { fullScreen, handleFullScreen, imageData } = useFullScreen();
     return (
         <>
