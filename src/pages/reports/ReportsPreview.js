@@ -9,17 +9,24 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { fetchMoreData } from '../../utils/utils'
 import ReportCard from './ReportCard';
 
+/**
+ * Display the reports according to the filteres passed in the searchReportsPage
+ * if no filters were passed all reports will be displayed
+ */
 const ReportsPreview = ({ message, query = "", searchParameter = "" }) => {
     const [reports, setReports] = useState({ results: [] })
     const [hasLoaded, setHasLoaded] = useState(false)
     const [reportCount, setReportCount] = useState(0)
     const { pathname } = useLocation();
+    //import filter data to create a specific endpoint if the user selectd filter options
     const search = query !== "" ? `${searchParameter}=${query}&` : ""
     useEffect(() => {
 
-
+        // fetch reports from api
         const fetchReports = async () => {
             try {
+                // if the user applied filters an endpoint using this will fetch the data. 
+                // Otherise all reports will be fetched
                 const { data } = await axiosReq.get(`/reports/?${search}$`)
                 setReports(data);
                 setHasLoaded(true);
@@ -44,9 +51,12 @@ const ReportsPreview = ({ message, query = "", searchParameter = "" }) => {
     return (
         <>
             {hasLoaded ? (
+                //if the data has loaded all reports will be displayed here
                 <>
                     <span className={styles.Count}>{reportCount} results</span>
                     {reports.results.length ? (
+                        // if there are reports fetched they will be infinitely displayed
+                        // using infinite scroll using a card format
                         <div className={styles.InfiniteScrollContainer}>
                             <InfiniteScroll
                                 children={
@@ -61,12 +71,14 @@ const ReportsPreview = ({ message, query = "", searchParameter = "" }) => {
                             />
                         </div>
                     ) : (
+                        // if there are no reports fetched the no results asset will be displayed
                         <Container>
                             <Asset src={NoResults} message={message} />
                         </Container>
                     )}
                 </>
             ) : (
+                // display loader until list data is fetched
                 <Container>
                     <Asset spinner />
                 </Container>

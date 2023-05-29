@@ -8,8 +8,12 @@ import { useRedirect } from '../../hooks/useRedirect';
 import { useProfileData } from '../../contexts/ProfileDataContext';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
+/**
+ * Display search reports page (admin panel)
+*/
 const SearchReportPage = () => {
 
+    //establish search parameters for filtering the report search
     const [query, setQuery] = useState("");
     const [searchParameter, setSearchParameter] = useState("movie_title")
 
@@ -59,7 +63,8 @@ const SearchReportPage = () => {
                             </div>
                         ))}
                     </Form>
-
+                    
+                    {/* display the reports passing the filtered data to the reports preview component */}
                     <ReportsPreview
                         message="No result found adjust your search"
                         query={query}

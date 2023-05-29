@@ -9,12 +9,16 @@ import Avatar from '../../components/Avatar'
 
 import { axiosRes } from '../../api/axiosDefaults';
 
+/**
+ * display report in a card format
+*/
 const ReportCard = (props) => {
+    //destructure report information
     const { content, id, movie, movie_poster, movie_release_year, movie_title, owner, profile_id, profile_image, setReports, created_at, reportCount, setReportCount } = props
     const { fullScreen, handleFullScreen, imageData } = useFullScreen();
 
+    // delete report from database when admin decides the issue has been solved
     const closeReport = async () => {
-
         try {
             await axiosRes.delete(`/reports/${id}/`)
             setReports((prevReports) => ({

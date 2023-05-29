@@ -7,6 +7,10 @@ import { axiosReq } from '../../api/axiosDefaults'
 import Alert from "../../components/Alert";
 import { useErrorHandling } from './../../components/HandleErrors';
 
+/**
+ * display to a registered user a button to make a report and
+ * the report form modal
+*/
 const ReportMovie = ({ id, setMovies }) => {
     const [showForm, setShowForm] = useState(false);
     const [content, setContent] = useState("");
@@ -21,6 +25,7 @@ const ReportMovie = ({ id, setMovies }) => {
         setContent(e.target.value)
     }
 
+    //send report to api
     const handleSubmit = async (e) => {
         e.preventDefault();
         const requestData = {
@@ -32,6 +37,7 @@ const ReportMovie = ({ id, setMovies }) => {
             setMovies((prevMovies) => ({
                 ...prevMovies,
                 results: prevMovies.results.map((movie) => {
+                    // increment report count for movie and ser report id
                     return movie.id === id
                         ? { ...movie, report_count: movie.report_count + 1, report_id: data.id }
                         : movie;
@@ -51,6 +57,8 @@ const ReportMovie = ({ id, setMovies }) => {
         <>
             <Alert type="warning" errors={allErrors} active={activeAlert} />
             {showForm && (
+                // if users sets the showForm state to true the modal will appear and
+                // allow the user to submit a report
                 <div className={styles.Overlay}>
                     <div className={styles.ReportContainer}>
                         <div className={styles.Header}>
@@ -87,6 +95,7 @@ const ReportMovie = ({ id, setMovies }) => {
                     </div>
                 </div>
             )}
+            {/* this button will allow the user to open the report modal */}
             <button
                 className={`${btnStyles.Button} ${btnStyles.BigButton} ${btnStyles.Black} ${btnStyles.HoverWhite}`}
                 onClick={() => setShowForm(true)}
