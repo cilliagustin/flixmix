@@ -22,7 +22,6 @@ const ProfileEditForm = () => {
   const profileData = useProfileData();
   const setProfileData = useSetProfileData();
 
-  console.log(profileData)
 
   // get profile id from url
   const { id } = useParams();
@@ -51,6 +50,11 @@ const ProfileEditForm = () => {
   useEffect(() => {
     const handleMount = () => {
       if (currentUser?.profile_id?.toString() === id) {
+        setProfileInfo({
+          name: profileData?.name,
+          description: profileData?.description,
+          image: profileData?.image,
+        })
         setHasLoaded(true);
       } else {
         history.push("/")
@@ -67,9 +71,13 @@ const ProfileEditForm = () => {
   //submit form
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const is_admin = profileData?.is_admin;
+
     const formData = new FormData();
     formData.append("name", name);
     formData.append("description", description);
+    formData.append("is_admin", is_admin);
 
     if (imageFile?.current?.files[0]) {
       formData.append("image", imageFile?.current?.files[0]);
@@ -87,7 +95,8 @@ const ProfileEditForm = () => {
         ...profileData,
         name: name,
         description: description,
-        image: image
+        image: image,
+        is_admin: is_admin,
       }))
       // go back to the previous page
       history.goBack();
