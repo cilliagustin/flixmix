@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styles from '../styles/FullScreenModal.module.css'
 
+/**
+ * takes the src and alt of a target image and gives it to the modal.
+ */
 export const FullScreenModal = ({ src, alt, handleClick }) => {
     return (
         <div
@@ -20,6 +23,9 @@ export const FullScreenModal = ({ src, alt, handleClick }) => {
     );
 };
 
+/**
+ * when clicked the full screen modal it changes the active state of the modal to remove it
+ */
 export const useFullScreen = () => {
     const [fullScreen, setFullScreen] = useState(false);
     const [imageData, setImageData] = useState({ src: '', alt: '' });

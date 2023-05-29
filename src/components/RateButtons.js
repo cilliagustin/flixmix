@@ -2,6 +2,9 @@ import React from 'react'
 import styles from '../styles/RateButtons.module.css'
 import appStyles from '../App.module.css'
 
+/**
+ * Renders a set of buttons that clicking on them change the rating state passed as prop
+ */
 const RateButtons = ({ setRating, rating }) => {
     const handleClick = (e) => {
         e.preventDefault()

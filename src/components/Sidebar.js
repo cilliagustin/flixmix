@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import logo from '../assets/logo.png';
 import logo2 from '../assets/flixmix.png';
@@ -9,6 +9,12 @@ import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContex
 import Avatar from './Avatar';
 import { useProfileData } from '../contexts/ProfileDataContext';
 
+
+/**
+ * Returns the Sidebar always located on the left side of the page.
+ * conditionally renders certain links according to the user profile information
+ * Includes functions to open and close the dropdown and sign out
+ */
 const Sidebar = () => {
     const [collapsed, setCollapsed] = useState(true);
     const showSidebar = () => setCollapsed(!collapsed);
@@ -42,6 +48,7 @@ const Sidebar = () => {
 
 
     return (
+        // the collapsed state conditionally renders the Open class
         <nav className={`${styles.Sidebar} ${!collapsed && styles.Open}`}>
             <NavLink to="/" onClick={() => setOpenDropdown(null)}>
                 <div className={styles.LogoContainer}>
@@ -122,6 +129,10 @@ const Sidebar = () => {
                 </div>
             </div>
 
+            {/* 
+                if the user is logged in it will render links to create movies or list,
+                to sign out and its avatar (linking to their profile page)
+            */}
             {currentUser ? (
                 <>
                     <div
@@ -155,6 +166,9 @@ const Sidebar = () => {
                             </NavLink>
                         </div>
                     </div>
+                    {/* 
+                        if the user is the admin it will conditionally render a link to the admin panel
+                    */}
                     {profileData?.is_admin && (
                         <NavLink
                             to="/admin"
@@ -196,6 +210,7 @@ const Sidebar = () => {
                     </div>
                 </>
             ) : (
+                // If the user is not logged in it will render a link to go to the sign in form
                 <>
                     <NavLink
                         to="/log"

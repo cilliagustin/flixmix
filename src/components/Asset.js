@@ -3,6 +3,12 @@ import film from "../assets/film.png"
 import filmwhite from "../assets/filmwhite.png"
 import styles from "../styles/Asset.module.css";
 
+/**
+ * Renders an asset component with different elements depending on the provided props.
+ * If spinner is active it renders a loader image with animation
+ * If white is active the loader image is different
+ * If src and message are actives displays that image with the text provided
+ */
 const Asset = ({ spinner, src, message, white }) => {
   return (
     <div className={`${styles.Asset} ${spinner && styles.SpinnerContainer} ${src && styles.PosterContainer} p-4`}>

@@ -3,6 +3,10 @@ import Dropdown from "react-bootstrap/Dropdown";
 import styles from '../styles/MoreDropdown.module.css'
 import { useHistory } from "react-router";
 
+
+/**
+ * Returns the ellipsis icon with certain styles according to the props passed
+ */
 const ThreeDots = React.forwardRef(({ onClick, color }, ref) => {
   const iconClassName = color === 'grey' ? styles.Grey : styles.White;
 
@@ -20,6 +24,10 @@ const ThreeDots = React.forwardRef(({ onClick, color }, ref) => {
 
 ThreeDots.displayName = 'ThreeDots';
 
+/**
+ * Returns a button with the function handle edit and handle delete passed as props
+ * the color prop also conditionally renders its style
+*/
 export const MoreDropdown = ({ handleEdit, handleDelete, color }) => {
   return (
     <Dropdown className="ml-auto" drop="left">
@@ -28,19 +36,19 @@ export const MoreDropdown = ({ handleEdit, handleDelete, color }) => {
       <Dropdown.Menu
         className={`${styles.DropdownMenu} text-center`}
         popperConfig={{ strategy: "fixed" }}
-      >
+        >
         <Dropdown.Item
           className={styles.DropdownItem}
           onClick={handleEdit}
           aria-label="edit"
-        >
+          >
           <i className="fas fa-edit" />
         </Dropdown.Item>
         <Dropdown.Item
           className={styles.DropdownItem}
           onClick={handleDelete}
           aria-label="delete"
-        >
+          >
           <i className="fas fa-trash-alt" />
         </Dropdown.Item>
       </Dropdown.Menu>
@@ -50,6 +58,11 @@ export const MoreDropdown = ({ handleEdit, handleDelete, color }) => {
 
 MoreDropdown.displayName = 'MoreDropdown';
 
+/**
+ * Custom button for the profile page. creates the correct link according to
+ * the id passed as prop
+ * the color prop also conditionally renders its style
+ */
 export function ProfileEditDropdown({ id , color }) {
   const history = useHistory();
   return (

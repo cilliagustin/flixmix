@@ -11,6 +11,9 @@ export const SetCurrentUserContext = createContext();
 export const useCurrentUser = () => useContext(CurrentUserContext)
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext)
 
+/**
+Gets the context of the current user and provides it for the whole app
+ */
 export const CurrentUserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const history = useHistory()
@@ -28,15 +31,15 @@ export const CurrentUserProvider = ({ children }) => {
         handleMount()
     }, [])
 
-    useMemo(()=>{
+    useMemo(() => {
         axiosReq.interceptors.request.use(
-            async (config)=>{
-                if(shouldRefreshToken()){
+            async (config) => {
+                if (shouldRefreshToken()) {
                     try {
                         await axios.post('/dj-rest-auth/token/refresh/')
                     } catch (err) {
-                        setCurrentUser((prevCurrentUser) =>{
-                            if(prevCurrentUser){
+                        setCurrentUser((prevCurrentUser) => {
+                            if (prevCurrentUser) {
                                 history.push('/log')
                             }
                             return null
@@ -47,20 +50,20 @@ export const CurrentUserProvider = ({ children }) => {
                 }
                 return config
             },
-            (err)=>{
+            (err) => {
                 return Promise.reject(err)
             }
         )
 
         axiosRes.interceptors.response.use(
             (response) => response,
-            async (err) =>{
-                if(err.response?.status === 401){
+            async (err) => {
+                if (err.response?.status === 401) {
                     try {
                         await axios.post('/dj-rest-auth/token/refresh/')
-                    } catch(err) {
-                        setCurrentUser((prevCurrentUser) =>{
-                            if(prevCurrentUser){
+                    } catch (err) {
+                        setCurrentUser((prevCurrentUser) => {
+                            if (prevCurrentUser) {
                                 history.push('/log')
                             }
                             return null

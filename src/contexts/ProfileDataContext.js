@@ -9,6 +9,9 @@ export const SetProfileDataContext = createContext();
 export const useProfileData = () => useContext(ProfileDataContext);
 export const useSetProfileData = () => useContext(SetProfileDataContext);
 
+/**
+Gets the context of the current profile and provides it for the whole app.
+ */
 export const ProfileDataProvider = ({ children }) => {
   const [profileData, setProfileData] = useState(null);
   const currentUser = useCurrentUser();

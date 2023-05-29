@@ -3,6 +3,14 @@ import styles from '../styles/DisplayRating.module.css'
 import appStyles from '../App.module.css'
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
+/**
+ * Gets the Rating and displays it with stars
+ * if the rating is a float the last star will be displayed according to that percentage
+ * the field xs if true displays them in a smaller scale
+ * the type is average will state this is an average rating otherwise it will
+ * display this is a user rating
+ * there are two set of stars positioned with z index. The ones on top are green to differentiate them
+ */
 const DisplayRating = ({ title, rating, xs=false, type }) => {
   const [integer, setInteger] = useState(0);
   const [fraction, setFraction] = useState(0);

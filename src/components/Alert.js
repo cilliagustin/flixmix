@@ -1,6 +1,10 @@
 import React from 'react'
 import styles from '../styles/Alert.module.css'
 
+
+/**
+ * Retrieves alert data based on the provided alert type.
+ */
 function getAlertData(alertType) {
   switch (alertType) {
     case 'warning':
@@ -15,6 +19,10 @@ function getAlertData(alertType) {
   }
 }
 
+/**
+ * Displays an alert component with the specified properties.
+ * Displays an alert for each error provided.
+ */
 const Alert = ({ type, errors, active }) => {
   const { class: alertClass, icon: alertIcon } = getAlertData(type);
   const hasDefinedMessage = errors.some((error) => error.message !== undefined);
