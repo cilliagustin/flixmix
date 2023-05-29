@@ -1,15 +1,10 @@
 import React, { useState } from "react";
-
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-
-
 import { axiosRes } from "../../api/axiosDefaults";
 import Avatar from "../../components/Avatar";
-
 import styles from "../../styles/CommentCreateEditForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
-
 import Alert from "../../components/Alert";
 import { useErrorHandling } from './../../components/HandleErrors';
 

@@ -9,7 +9,9 @@ import { MoreDropdown } from '../../components/MoreDropdown';
 import { axiosRes } from '../../api/axiosDefaults';
 import CommentEditForm from "./CommentEditForm";
 
-
+/**
+ * Display a comment
+ */
 const Comment = (props) => {
     const { setParent, setComments, endpoint, id, content, owner, profile_id, profile_image, created_at, updated_at, parent_id } = props
     const currentUser = useCurrentUser();
@@ -18,10 +20,17 @@ const Comment = (props) => {
     const isAdmin = profileData?.is_admin
 
     const [showEditForm, setShowEditForm] = useState(false);
+
+    /**
+     * Change state to show edit form
+     */
     const handleEditForm = () => {
         setShowEditForm(!showEditForm)
     }
 
+    /**
+     * Delete comment
+     */
     const handleDelete = async () => {
         try {
             await axiosRes.delete(`/${endpoint}/${id}/`)
@@ -41,11 +50,13 @@ const Comment = (props) => {
 
     return (
         <div className={showEditForm ? styles.Container : styles.Comment}>
+            {/* Display dropdown button for admin or owner */}
             {(isOwner || isAdmin) && (
                 <div className={styles.Dropdown}>
                     <MoreDropdown color={"grey"} handleDelete={handleDelete} handleEdit={handleEditForm} />
                 </div>
             )}
+            {/* Display Edit form if showEditForm is true */}
             {showEditForm ? (
                 <CommentEditForm
                     id={id}
@@ -58,6 +69,7 @@ const Comment = (props) => {
                     endpoint={endpoint}
                 />
             ) : (
+                /* Display comment if showEditForm is false */
                 <>
                     <Avatar
                         src={profile_image}
@@ -67,6 +79,7 @@ const Comment = (props) => {
                         className={styles.Avatar}
                     />
                     <Link to={`/profiles/${profile_id}`} className={styles.Owner}>{owner}</Link>
+                    {/*  Display overlayTrigger if comment was edited */}
                     {updated_at !== created_at ? (
                         <OverlayTrigger
                             placement="top"
