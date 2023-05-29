@@ -272,7 +272,7 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 
 ### Languages
 
-- HTML
+- JSX
 - CSS
 - Javascript
   - React (16.18.0)
