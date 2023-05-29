@@ -16,8 +16,13 @@ import Alert from "../../components/Alert";
 import { useRedirect } from "../../hooks/useRedirect";
 import { useProfileData } from "../../contexts/ProfileDataContext";
 
+
+/**
+ * Display form to update user password
+*/
 const UserPasswordForm = () => {
   const history = useHistory();
+  // get profile id from url
   const { id } = useParams();
   const currentUser = useCurrentUser();
 
@@ -36,7 +41,6 @@ const UserPasswordForm = () => {
   const [hasLoaded, setHasLoaded] = useState(false);
   const profileData = useProfileData()
 
-
   const handleChange = (event) => {
     setUserData({
       ...userData,
@@ -44,27 +48,29 @@ const UserPasswordForm = () => {
     });
   };
 
-      // only allow the owner to enter to this page
-      useRedirect('loggedOut')
-      useEffect(() => {
-          const handleMount = () => {
-  
-              if(currentUser?.profile_id?.toString() === id){
-                setHasLoaded(true);
-              } else {
-                history.push("/")
-              }
-          };
-  
-          if(profileData !== null){
-              handleMount();
-          }
-      }, [profileData, history]);
+  // only allow the owner to access this page
+  useRedirect('loggedOut')
+  useEffect(() => {
+    const handleMount = () => {
 
+      if (currentUser?.profile_id?.toString() === id) {
+        setHasLoaded(true);
+      } else {
+        history.push("/")
+      }
+    };
+
+    if (profileData !== null) {
+      handleMount();
+    }
+  }, [profileData, history]);
+
+  //submit form
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       await axiosRes.post("/dj-rest-auth/password/change/", userData);
+      // go back to the previous page
       history.goBack();
     } catch (err) {
       console.log(err);
@@ -81,6 +87,7 @@ const UserPasswordForm = () => {
         <Col className="py-2 mx-auto text-center" md={6}>
           <Container className={appStyles.Content}>
             {hasLoaded ? (
+              //if data has loaded display the form
               <Form onSubmit={handleSubmit}>
                 <Form.Group>
                   <Form.Label>New password</Form.Label>
@@ -118,6 +125,7 @@ const UserPasswordForm = () => {
                 </button>
               </Form>
             ) : (
+              //if data has not loaded display the spinner
               <Asset spinner />
             )}
           </Container>

@@ -1,40 +1,40 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory, useParams } from "react-router-dom";
-
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-
 import { axiosReq } from "../../api/axiosDefaults";
-import {
-  useCurrentUser,
-  useSetCurrentUser,
-} from "../../contexts/CurrentUserContext";
-
+import { useCurrentUser, useSetCurrentUser } from "../../contexts/CurrentUserContext";
+import { useProfileData, useSetProfileData } from '../../contexts/ProfileDataContext';
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import Asset from "../../components/Asset";
-
 import { useErrorHandling } from './../../components/HandleErrors';
 import Alert from "../../components/Alert";
-
 import { handleInputChange } from '../../utils/utils';
+import { useRedirect } from "../../hooks/useRedirect";
 
 const ProfileEditForm = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
+  const profileData = useProfileData();
+  const setProfileData = useSetProfileData();
+
+  console.log(profileData)
+
+  // get profile id from url
   const { id } = useParams();
   const history = useHistory();
   const imageFile = useRef();
 
-  const [profileData, setProfileData] = useState({
+  const [profileInfo, setProfileInfo] = useState({
     name: "",
     description: "",
     image: "",
   });
-  const { name, description, image } = profileData;
+  const { name, description, image } = profileInfo;
 
   const [hasLoaded, setHasLoaded] = useState(false);
 
@@ -45,26 +45,26 @@ const ProfileEditForm = () => {
     { title: "Username", message: errors.image },
   ]
 
+
+  // only allow the owner to access this page
+  useRedirect('loggedOut')
   useEffect(() => {
-    const handleMount = async () => {
+    const handleMount = () => {
       if (currentUser?.profile_id?.toString() === id) {
-        try {
-          const { data } = await axiosReq.get(`/profiles/${id}/`);
-          const { name, description, image } = data;
-          setProfileData({ name, description, image });
-          setHasLoaded(true)
-        } catch (err) {
-          console.log(err);
-          history.push("/");
-        }
+        setHasLoaded(true);
       } else {
-        history.push("/");
+        history.push("/")
       }
     };
+    if (profileData !== null) {
+      handleMount();
+    }
+  }, [profileData, history]);
 
-    handleMount();
-  }, [currentUser, history, id]);
 
+
+
+  //submit form
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -77,10 +77,19 @@ const ProfileEditForm = () => {
 
     try {
       const { data } = await axiosReq.put(`/profiles/${id}/`, formData);
+      //Update current user data
       setCurrentUser((currentUser) => ({
         ...currentUser,
         profile_image: data.image,
       }));
+      // update the profile data
+      setProfileData((profileData) => ({
+        ...profileData,
+        name: name,
+        description: description,
+        image: image
+      }))
+      // go back to the previous page
       history.goBack();
     } catch (err) {
       console.log(err);
@@ -99,16 +108,16 @@ const ProfileEditForm = () => {
           type="text"
           name="name"
           value={name}
-          onChange={(event) => handleInputChange(event, profileData, setProfileData)}
+          onChange={(event) => handleInputChange(event, profileInfo, setProfileInfo)}
         />
       </Form.Group>
       <Form.Group>
         <Form.Label>Bio</Form.Label>
         <Form.Control
-         className={appStyles.TextArea}
+          className={appStyles.TextArea}
           as="textarea"
           value={description}
-          onChange={(event) => handleInputChange(event, profileData, setProfileData)}
+          onChange={(event) => handleInputChange(event, profileInfo, setProfileInfo)}
           name="description"
           rows={7}
         />
@@ -129,6 +138,7 @@ const ProfileEditForm = () => {
     <>
       <Alert type="warning" errors={allErrors} active={activeAlert} />
       {hasLoaded ? (
+        //if data has loaded display the form
         <Form onSubmit={handleSubmit}>
           <Row className="mx-0">
             <Col className="py-2 p-0 p-md-2 text-center" md={7} lg={6}>
@@ -154,8 +164,8 @@ const ProfileEditForm = () => {
                     accept="image/*"
                     onChange={(e) => {
                       if (e.target.files.length) {
-                        setProfileData({
-                          ...profileData,
+                        setProfileInfo({
+                          ...profileInfo,
                           image: URL.createObjectURL(e.target.files[0]),
                         });
                       }
@@ -171,6 +181,7 @@ const ProfileEditForm = () => {
           </Row>
         </Form>
       ) : (
+        //if data has not loaded display the spinner
         <Container>
           <Asset spinner />
         </Container>

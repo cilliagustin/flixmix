@@ -10,12 +10,17 @@ import ProfilePreviewCard from './ProfilePreviewCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { fetchMoreData } from '../../utils/utils';
 
+/**
+ * Display ratings
+ * can be fetched using or not a specific endpoint
+*/
 const ProfilesPreview = ({ message, query, searchFilter }) => {
     const currentUser = useCurrentUser()
     const profile_id = currentUser?.profile_id;
     const [profiles, setProfiles] = useState({ results: [] });
     const [hasLoaded, setHasLoaded] = useState(false);
     const pathname = useLocation();
+    //import filter data to create a specific endpoint if the user selected filter options
     const search = query !== "" ? `search=${query}` : ""
     const filter = profile_id && (
         searchFilter === "follower" ? (
@@ -25,9 +30,12 @@ const ProfilesPreview = ({ message, query, searchFilter }) => {
         ) : ""
     )
 
+    // fetch ratings from api
     useEffect(() => {
         const fetchData = async () => {
             try {
+                 // if the user applied filters an endpint using this will fetch the data. 
+                // Otherise all profiles will be fetched
                 const { data } = await axiosReq.get(`/profiles/?${filter}${search}`)
                 setProfiles(data)
                 setHasLoaded(true)
@@ -49,9 +57,11 @@ const ProfilesPreview = ({ message, query, searchFilter }) => {
         <>
             {hasLoaded ? (
                 <>
+                    {/* display the ammount of profiles fetched in the search */}
                     <span className={styles.Count}>{profiles.count} results</span>
                     {profiles.results.length ? (
                         <div className={styles.Container}>
+                            {/* display the ratings fetched with infinite scroll */}
                             <InfiniteScroll
                                 children={
                                     profiles.results.map((profile) => (
@@ -68,12 +78,14 @@ const ProfilesPreview = ({ message, query, searchFilter }) => {
                             />
                         </div>
                     ) : (
+                        // if there are no ratings in the requested search display a no results asset
                         <Container>
                             <Asset src={NoResults} message={message} />
                         </Container>
                     )}
                 </>
             ) : (
+                // display loader until rating data is fetched
                 <Asset spinner />
             )}
         </>

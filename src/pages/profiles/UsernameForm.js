@@ -16,6 +16,10 @@ import Alert from "../../components/Alert";
 import { useProfileData } from "../../contexts/ProfileDataContext";
 import { useRedirect } from "../../hooks/useRedirect";
 
+
+/**
+ * Display form to update username
+*/
 const UsernameForm = () => {
   const [username, setUsername] = useState("");
 
@@ -25,6 +29,7 @@ const UsernameForm = () => {
   ]
 
   const history = useHistory();
+  // get profile id from url
   const { id } = useParams();
 
   const currentUser = useCurrentUser();
@@ -34,34 +39,38 @@ const UsernameForm = () => {
   const [hasLoaded, setHasLoaded] = useState(false);
 
 
-    // only allow the owner to enter to this page
-    useRedirect('loggedOut')
-    useEffect(() => {
-        const handleMount = () => {
+  // only allow the owner to access this page
+  useRedirect('loggedOut')
+  useEffect(() => {
+    const handleMount = () => {
 
-            if(currentUser?.profile_id?.toString() === id){
-              setUsername(currentUser.username);
-              setHasLoaded(true);
-            } else {
-              history.push("/")
-            }
-        };
+      if (currentUser?.profile_id?.toString() === id) {
+        setUsername(currentUser.username);
+        setHasLoaded(true);
+      } else {
+        history.push("/")
+      }
+    };
 
-        if(profileData !== null){
-            handleMount();
-        }
-    }, [profileData, history]);
+    if (profileData !== null) {
+      handleMount();
+    }
+  }, [profileData, history]);
 
+
+  //submit form
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       await axiosRes.put("/dj-rest-auth/user/", {
         username,
       });
+      //Update current user data
       setCurrentUser((prevUser) => ({
         ...prevUser,
         username,
       }));
+      // go back to the previous page
       history.goBack();
     } catch (err) {
       console.log(err);
@@ -80,6 +89,7 @@ const UsernameForm = () => {
             className={appStyles.Content}
           >
             {hasLoaded ? (
+              //if data has loaded display the form
               <Form onSubmit={handleSubmit} className="my-2">
                 <Form.Group>
                   <Form.Label>Change username</Form.Label>
@@ -105,6 +115,7 @@ const UsernameForm = () => {
                 </button>
               </Form>
             ) : (
+              //if data has not loaded display the spinner
               <Asset spinner />
             )}
           </Container>
