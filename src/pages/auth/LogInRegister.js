@@ -9,6 +9,10 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { useSetCurrentUser } from '../../contexts/CurrentUserContext';
 import { useRedirect } from '../../hooks/useRedirect';
 
+
+/**
+ * Display log in / registration page
+ */
 const LogInRegister = () => {
   useRedirect('loggedIn')
 
