@@ -24,7 +24,7 @@ const ProfileListPreviewCard = (props) => {
             </div>
           ))}
         </div>
-        <Link to={`list/${id}`} className={styles.Title}>{title}</Link>
+        <Link to={`/list/${id}`} className={styles.Title}>{title}</Link>
         <p className={styles.Description}>{description}</p>
         <div className={styles.Details}>
           <i className="fa-regular fa-comment"></i>
