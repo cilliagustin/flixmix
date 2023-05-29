@@ -323,6 +323,12 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 - The log in/register and log out buttons are rendered conditionally according to the user logged status.
 - The profile avatar and username are rendered only when the user is logged in.
 
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/sidebar.png) |
+</details>
+
 ### Pages
 
 #### Home Page
@@ -332,11 +338,23 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 - Uses the RatingsPreview component to show the latest reviews added to the database
 - Uses the ListsPreview component to show the latest lists added to the database
 
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/responsiveness/home-desktop.png) |
+</details>
+
 #### Search Movies
 - The component fist has a search bar and a set of radio buttons and checkboxes. Clicking this alter states in the component and help to create a specific endpoint to look for a movie with very specific parameters
 - Movies can be searched by movie title, director, cast or release decade and filtered by previously seen movies, movies in the watchlist or movies uploaded by followed users.
 - The search bar can also be replaced by a dropdown option input to select a specific release decade.
 - The page uses the MoviesPreview component to display all movies based on the search the user makes. if the user does not specify parameters all movies will be fetched.
+
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/responsiveness/search-movie-desktop.png) |
+</details>
 
 #### Movie Page
 - Displays information of a specific movie: title, release year, genre, synopsis, director, main cast, movie poster and average rating as well as how many people have seen, add this movie to the watchlist, reviewed them or how many times this movie appears on lists.
@@ -344,10 +362,20 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 - A registered user can report a movie if they find an error so the admin can fix it (using the ReportMovie component)
 - A registered user can add a review of a movie.
 - all the reviews of the movie are displayed here.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/responsiveness/movie-page-desktop.png) |
+</details>
 
 #### Movie Create Form
 - In this form the user enters the movie information: title, release year, synopsis, director, main cast, genre and poster.
 - If the form is not submited correctly the handleErrors helper function and the Alert component display the error.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/responsiveness/movie-create-desktop.png) |
+</details>
 
 #### Movie Edit Form
 - In this form the admin can edit the movie information: title, release year, synopsis, director, main cast, genre and poster.
@@ -359,6 +387,11 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 - The component fist has a search bar and a set of radio buttons and a checkbox. Clicking this alter states in the component and help to create a specific endpoint to look for a review with very specific parameters.
 - Reviews can  be searched by movie title and review author and filtered by profiles the user follows
 - The page uses the RatingsPreview component to display all reviews based on the search the user makes. If the user does not specify parameters all reviews will be fetched.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/searchReview.png) |
+</details>
 
 #### Review Page
 - Originally named RatingPage to keep consistency with how the model was named on the API
@@ -366,23 +399,43 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 - If the user is the owner of the review they can modify it here or delete it.
 - A registered user can comment the review.
 - All comments for this review are displayed here
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/reviewPage.png) |
+</details>
 
 #### Search Lists
 - The component fist has a search bar and a set of radio buttons and checkboxes. Clicking this alter states in the component and help to create a specific endpoint to look for a list with very specific parameters
 - Lists can be searched by list title, movie title or list author and filtered by profiles the user follows.
 - The page uses the ListsPreview component to display all lists based on the search the user makes. If the user does not specify parameters all lists will be fetched.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/searchList.png) |
+</details>
 
 #### List Page
 - Displays information of a specific List: title, content as well as the movies posters.
 - If the user is the owner of the review they can modify it or delete it.
 - A registered user can comment the list.
 - All comments for this lists are displayed here
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/responsiveness/list-page-desktop.png) |
+</details>
 
 #### List Create Form
 - In this form the user enters the list information: title, and content.
 - An input lets you search a movie by its title and display them here. clicking on one of this movies will diplay them in a previous container (encapsulating all selected movies)
 - Clicking on one of the movies added to the selected movies container will remove them from the list.
 - If the form is not submited correctly the handleErrors helper function and the Alert component display the error.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/responsiveness/list-create-desktop.png) |
+</details>
 
 #### List Edit Form
 - In this form the admin or the owner can edit the list information: title and content.
@@ -396,30 +449,62 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 - The page uses the ProfilesPreview component to display all profiles based on the search the user makes. If the user does not specify parameters all profiles will be fetched.
 - A registed user will see a button thet allows them to follow or unfollow the user. This are rendered conditionally and will not appear on the same users profile card.
 
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/searchProfile.png)
+</details>
+
 #### Profile Page
 - Displays information of the profile: username, full name and bio as well as ammount of following profiles, followers, movies they have seen or added them to the watchlist, created movies, rated movies and lists created.
 - A registed user will see a button thet allows them to follow or unfollow the user. This are rendered conditionally and will not appear on the same users profile card.
 - All movies the user added, reviews the user wrote and lists the user created are displayed using infinite scroll and diaplyed horizontally.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/responsiveness/profile-page-desktop.png)
+</details>
+
 
 #### Profile Edit (information) Form
 - This page can only be accessed by that profile
 - In this form the user edits its information: profile image, full name or bio.
 - If the form is not submited correctly the handleErrors helper function and the Alert component display the error.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/editprofile.png)
+</details>
 
 #### Profile Edit (username) Form
 - This page can only be accessed by that profile
 - In this form the user edits its username
 - If the form is not submited correctly the handleErrors helper function and the Alert component display the error.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/editprofileusername.png)
+</details>
 
 #### Profile Edit (password) Form
 - This page can only be accessed by that profile
 - In this form the user edits its password
 - If the form is not submited correctly the handleErrors helper function and the Alert component display the error.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/editprofilepassword.png)
+</details>
 
 #### Search Reports Page
 - This page can only be accessed by the admin.
 - Here all movie reports are created, linking the movie and displaying the message the user made. 
 - If the Admin fixed the issue or decides there is no issue to solve they can close it from here
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/adminPanel.png)
+</details>
 
 #### Log Page
 - This page can only be accessed by an unnergistered user.
@@ -427,10 +512,20 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 - A register form that allows to create a username or password.
 - A Log in form that allows to access to the user using theirr credentials.
 - If any form is not submited correctly the handleErrors helper function and the Alert component display the error.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/responsiveness/log-desktop.png)
+</details>
 
 #### Error Page
 - Is displayed the user enters an invalid url.
 - Allows the user to go back to the previous page
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/errorPage.png)
+</details>
 
 ### Helper functions and components
 
@@ -441,19 +536,39 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 #### Seen
 - Allows registered users to mark a movie as seen.
 - If the movie is marked as in the watchlist it deleted this (since a movie can be seen and in the wathlist at the same time)
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/seen.png)
+</details>
 
 #### Watchlist
 - Allows registered users to mark a movie as watchlist.
 - If the movie is marked as seen it deleted this (since a movie can be seen and in the wathlist at the same time)
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/watchlist.png)
+</details>
 
 #### Comments
 - Allows registered users to comment either lists or reviews.
 - A user can delete or edit the comments they wrote.
 - The admin can also delete or edit any comment.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/comment.png)
+</details>
 
 #### Follow/Unfollow
 - Allows registered users to follow or unfollow other registered users.
 - This allows the users when looking for a  review or list to see only the ones created by users they follow. 
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/follow.png)
+</details>
 
 #### HandleErrors.js
 - Here different function manipulate the erros and changes the state of activeAlert Allowing the page to display the data in an aler module.
@@ -461,23 +576,53 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 #### Alert
 - Takes the data from the handleErrors and display it in a modal.
 - The modal closes itself in 5 seconds.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/alert.png)
+</details>
 
 #### Asset
 - Displays a spinner or a image and a message.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/asset.png)
+</details>
 
 #### Avatar
 - Displays the profile image with a link to that profile page.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/avatar.png)
+</details>
 
 #### HandleFullScreen.js
 - Here different function manipulate the clicked image to get their src and alt and displays them in a full screen container so the user when clicking a poster can open it in full screen.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/browsers/edge-full-screen-modal.png)
+</details>
 
 #### RateButtons.js
 - Allows a registered user to set the rating by clicking some star buttons.
 - This component is used when the user need to reaview a movie. 
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/starButton.png)
+</details>
 
 #### DisplayRating.js
 - Takes as parameter the average rating and displays it
 - The rating can be a float number and will diplay the star percentage. If the average rating is 4.5 and fifth star will be filled in half.
+<details>
+<summary>Screenshot</summary>
+
+![screenshot](documentation/screenshots/starDisplay.png)
+</details>
 
 #### UseScrollDirection.js
 - Used in the sidebar.
