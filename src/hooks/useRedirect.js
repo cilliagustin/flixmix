@@ -2,6 +2,9 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
+/**
+ * handles user status to authenticate registered users
+ */
 export const useRedirect = (userAuthStatus) => {
     const history = useHistory();
 
