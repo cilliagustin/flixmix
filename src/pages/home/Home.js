@@ -8,6 +8,9 @@ import RatingsPreview from '../ratings/RatingsPreview';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import ListsPreview from '../lists/ListsPreview';
 
+/**
+ * Display Home page
+*/
 const Home = () => {
   return (
     <>
@@ -26,6 +29,7 @@ const Home = () => {
                     <h2>Latest Movies added</h2>
                 </div>
                 <div className={styles.LatestMovies}>
+                    {/* display latest movies */}
                     <MoviesPreview message="No movies here yet" />
                     <Link className={styles.Link} to={'/search/movie/'}>View all movies <i className="fa-solid fa-arrow-right"></i></Link>
                 </div>
@@ -35,6 +39,7 @@ const Home = () => {
             <Col className={`${styles.Reviews} px-0`}>
                 <h2>Latest Reviews</h2>
                 <div className={styles.LatestReviews}>
+                    {/* display latest reviews */}
                     <RatingsPreview message="No ratings here yet" />
                     <Link className={styles.Link} to={'/search/review/'}>View all reviews <i className="fa-solid fa-arrow-right"></i></Link>
                 </div>
@@ -44,6 +49,7 @@ const Home = () => {
             <Col className={`${styles.Lists} px-0`}>
                 <h2>Latest Lists</h2>
                 <div className={styles.LatestLists}>
+                    {/* display latest lists */}
                     <ListsPreview message="No ratings here yet" />
                     <Link className={styles.Link} to={'/search/list/'}>View all lists <i className="fa-solid fa-arrow-right"></i></Link>
                 </div>
