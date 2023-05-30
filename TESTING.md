@@ -329,8 +329,8 @@ Due to this not really affecting the functionalities of the website were ignored
 </details>
 
 ## Lighthouse Audit
-All the pages that do not rquire validation were validated using LIghthouse Audit. This is because thoise that require validation on lighthouse audit are not able to be accessed and analized.
-The performance scroce was lowered because of the size of the images. But that is due that the user can enter a image for a movie and in some pages they are displayed in a small format and the Lighthouse audit does not find this as good practices.
+All the pages that do not rquire validation were validated using LIghthouse Audit. This is because those that require validation on lighthouse audit are not able to be accessed and analized.
+The performance score was lowered because of the size of the images. But that is due that the user can enter a image for a movie and in some pages they are displayed in a small format and the Lighthouse audit does not find this as good practices.
 
 | Page Audited |  Screenshot |
 | --- | --- |
@@ -347,7 +347,7 @@ The performance scroce was lowered because of the size of the images. But that i
 
 
 ## Responsiveness
-Here are comparissions of some of the different pages displayed in desktop mode and on mobile (this mas made using the chrome dev tools and setting the screen to a size of an Iphone SE)
+Here are comparissions of some of the different pages displayed in desktop mode and on mobile (this was made using the chrome dev tools and setting the screen to a size of an Iphone SE)
 
 ### Home Page
 <details>
@@ -425,7 +425,7 @@ Here are comparissions of some of the different pages displayed in desktop mode 
 
 ## Browser Compatibility
 
-All previous screenshots for the responsiveness section were made with google chrome. here are some screenshots taken with [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/) and [Microsoft Edge](https://www.microsoft.com/en-us/edge?form=MA13FJ&exp=e00)
+All previous screenshots for the responsiveness section were made with google chrome. Here are some screenshots taken with [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/) and [Microsoft Edge](https://www.microsoft.com/en-us/edge?form=MA13FJ&exp=e00)
 
 ### Mozilla Firefox
 

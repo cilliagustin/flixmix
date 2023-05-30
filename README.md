@@ -631,7 +631,7 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 
 ## Future Features
 
-Here are some features i wan´t able to implement yet but work well on the website:
+Here are some features i was not able to implement yet but work well on the website:
 - View all movies the user has seen or added to the watchlist on the profile page.
 - When clicking a cast member or a director will link to the search movie and filter movies based on that data
 - Users can modify the list movies order. Right now they are always ordered by the and cannot be changed yet.
@@ -670,8 +670,47 @@ For all testing, please refer to the [TESTING.md](TESTING.md) file.
 
 The live deployed application can be found deployed on [Heroku](https://agustin-cilli-flixmix.herokuapp.com/).
 
+#### Deployment Instructions
+The site was deployed to Heroku. The steps to deploy are as follows:
+1. Launch the gitpod workspace.
+2. Install ReactJS:
+```
+npx create-react-app . --use-npm
+npm start
+```
+2. Install the following packages using the command `npm install`:
+```
+react-bootstrap@1.6.3 bootstrap@4.6.0
+react-router-dom@5.3.0
+axios
+react-infinite-scroll-component
+msw --save-dev
+jwt-decode
+```
+3. Git add, commit, and push changes to gitpod.
+4. Create the project app on Heroku, and link the GitHub repository by navigating to the 'Deploy' tab.
 
-#### Cloning
+#### Connecting to the API:
+1. Navigated to the Heroku app of the project DRF-API, and under the Settings tab, added the following configvars:
+- Key: CLIENT_ORIGIN | Value: https://react-app-name.herokuapp.com
+- Key: CLIENT_ORIGIN_DEV | Value: https://gitpod-browser-link.ws-eu54.gitpod.io
+2. Check that the trailing slash `\` at the end of both links has been removed, and save the configvar pairs.
+3. Install the Axios package, & create supporting `axiosDefaults.js` as shown in [Moments Walkthrough](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+RA101+2021_T3/courseware/70a8c55db0504bbdb5bcc3bfcf580080/b398c39fcbef44ca8b23dbac5e7f6067/?child=first).
+
+#### Deploy to Heroku:
+1. In the `scripts` section of `package.json` in gitpod, added the following command:
+```
+"heroku-prebuild": "npm install -g serve",
+```
+2. Add Procfile to project root & populate with the following:
+```
+web: serve -s build
+```
+3. Repeat the steps of git add/commit/push.
+4. Deploy the project via the deploy button on Heroku.
+
+
+### Cloning
 
 You can clone the repository by following these steps:
 
@@ -691,7 +730,7 @@ Alternatively, if using Gitpod, you can click below to create your own workspace
 Please note that in order to directly open the project in Gitpod, you need to have the browser extension installed.
 A tutorial on how to do that can be found [here](https://www.gitpod.io/docs/configure/user-settings/browser-extension).
 
-#### Forking
+### Forking
 
 By forking the GitHub Repository, we make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original owner's repository.
 You can fork this repository by using the following steps:
